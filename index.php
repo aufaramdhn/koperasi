@@ -54,36 +54,36 @@ require_once "koneksi.php";
 
 <?php
 
-session_start();
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE email='$email'");
+// session_start();
+// if (isset($_POST['submit'])) {
+//     $email = $_POST['email'];
+//     $password = $_POST['password'];
+//     $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE email='$email'");
 
-    $row = mysqli_fetch_array($data);
+//     $row = mysqli_fetch_array($data);
 
-    if (mysqli_num_rows($data) == 1) {
+//     if (mysqli_num_rows($data) == 1) {
 
-        if ($password == $row['password']) {
-            $_SESSION['user'] = true;
-            $_SESSION['id'] = $row['id'];
-            $_SESSION['nama'] =  $row['nama'];
-            $_SESSION['email'] =  $row['email'];
-            $_SESSION['password'] =  $row['password'];
+//         if ($password == $row['password']) {
+//             $_SESSION['user'] = true;
+//             $_SESSION['id'] = $row['id'];
+//             $_SESSION['nama'] =  $row['nama'];
+//             $_SESSION['email'] =  $row['email'];
+//             $_SESSION['password'] =  $row['password'];
 
-            echo "
-            <script>
-            alert('Login Berhasil');
-            document.location.href = 'admin/index.php';
-            </script>
-            ";
-        } else {
-            echo "
-            <script>
-            alert('Login Gagal');
-            document.location.href = 'index.php';
-            </script>
-            ";
-        }
-    }
-}
+//             echo "
+//             <script>
+//             alert('Login Berhasil');
+//             document.location.href = 'admin/index.php';
+//             </script>
+//             ";
+//         } else {
+//             echo "
+//             <script>
+//             alert('Login Gagal');
+//             document.location.href = 'index.php';
+//             </script>
+//             ";
+//         }
+//     }
+// }
