@@ -20,7 +20,7 @@ require_once "koneksi.php";
     <div>
         <div class="row" style="background-color: #FFF7E9;">
             <div class="col">
-                <img src="assets/image/background-login.jpg" alt="background-login">
+                <img src="assets/img/background-login.jpg" alt="background-login">
             </div>
             <div class="col d-flex align-items-center">
                 <div class="container w-75">
@@ -35,6 +35,9 @@ require_once "koneksi.php";
                         <div class="mb-2">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-2 ">
+                            <small class="font-weight-bold">Anda Belum Mempunyai akun? <a class="text-danger text-blue mt-2" href="register/register.php">Buat Account</a></small>
                         </div>
                         <!-- <div class="mb-2 form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
