@@ -13,39 +13,38 @@ require_once "koneksi.php";
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/style/style.css">
+
 </head>
 
-<body>
-    <div>
-        <div class="row" style="background-color: #FFF7E9;">
-            <div class="col">
-                <img src="assets/img/background-login.jpg" alt="background-login">
-            </div>
-            <div class="col d-flex align-items-center">
-                <div class="container w-75">
-                    <form method="POST">
-                        <!-- <span class="fs-2"> -->
-                        <h2>Login</h2>
-                        <!-- </span> -->
-                        <div class="mb-2">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-2">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="mb-2 ">
-                            <small class="font-weight-bold">Anda Belum Mempunyai akun? <a class="text-danger text-blue mt-2" href="register/register.php">Buat Account</a></small>
-                        </div>
-                        <!-- <div class="mb-2 form-check">
+<body class="overflow-hidden">
+    <div class="row" style="background-color: #FFF7E9;">
+        <div class="col">
+            <img class="img-login" src="assets/img/background-login.jpg" alt="background-login">
+        </div>
+        <div class="col d-flex align-items-center">
+            <div class="container w-75">
+                <form method="POST">
+                    <!-- <span class="fs-2"> -->
+                    <h2>Login</h2>
+                    <!-- </span> -->
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-2 ">
+                        <small class="font-weight-bold">Anda Belum Mempunyai akun? <a class="text-danger text-blue mt-2" href="register/register.php">Buat Account</a></small>
+                    </div>
+                    <!-- <div class="mb-2 form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                         </div> -->
-                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
     </div>
@@ -72,7 +71,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['id'] = $row['id'];
             $_SESSION['nama'] =  $row['nama'];
             $_SESSION['email'] =  $row['email'];
-            $_SESSION['password'] =  $row['password'];
+            $_SESSION['level'] = $row['level'];
 
             echo "
             <script>
