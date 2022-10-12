@@ -1,50 +1,101 @@
-<?php
+<!doctype html>
+<html lang="en">
 
-require "../koneksi.php";
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.104.2">
+    <title>Dashboard Template · Bootstrap v5.2</title>
 
-?>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
 
-<?php
-session_start();
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
-if ($_SESSION['user'] == true) { ?>
+    <link href="../admin/dashboard.css" rel="stylesheet">
+</head>
 
-    <!DOCTYPE html>
-    <html lang="en">
+<body>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Koperasi</title>
-
-        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
-        <link rel="stylesheet" href="../admin/admin.css">
-    </head>
-
-    <body id="body-pd">
-
-
-        <header class="header" id="header">
-            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <div class="d-flex align-items-center">
-                <span class="me-3">Welcome Aufa Ramadhan</span>
-                <div class=" header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Koperasi</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="w-100 bg-dark"></div>
+        <div class="navbar-nav w-100 ms-h-auto">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="#">Sign out</a>
             </div>
-        </header>
-        <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
-                <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Koperasi</span> </a>
-                    <div class="nav_list"> <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a> <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a> <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> </div>
-                </div> <a href="logout.php" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-            </nav>
         </div>
+    </header>
 
-    <?php } else if ($_SESSION['user'] == false) {
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky sidebar-sticky">
+                    <ul class="nav flex-column fs-5">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">
+                                <span data-feather="home" class="align-text-bottom"></span>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file" class="align-text-bottom"></span>
+                                Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                                Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="users" class="align-text-bottom"></span>
+                                Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+                                Reports
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="layers" class="align-text-bottom"></span>
+                                Integrations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="layers" class="align-text-bottom"></span>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-
-    header("location:index.php?pesan=gagal");
-} ?>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <span data-feather="calendar" class="align-text-bottom"></span>
+                            This week
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
