@@ -1,8 +1,13 @@
 <?php include "../layout/header.php" ?>
 <div class="container-fluid pt-3">
     <div class="card">
-        <div class="card-header p-4">
-            <a href="" class="btn btn-success">Tambah Data</a>
+        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+            <span class="fs-2 fw-bold">
+                Simpanan
+            </span>
+            <div class="">
+                <a href="" class="btn btn-success">Tambah Data</a>
+            </div>
         </div>
         <div class="card-body px-3 pt-3">
             <div class="d-flex justify-content-end">

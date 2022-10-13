@@ -4,8 +4,6 @@
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
-<script src="../admin/dashboard.js"></script>
-
 <script src="../jquery.js"></script>
 
 <script>

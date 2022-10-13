@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
 
         if ($password == $row['password']) {
             $_SESSION['user'] = true;
-            $_SESSION['id'] = $row['id'];
+            $_SESSION['id_user'] = $row['id_user'];
             $_SESSION['nama'] =  $row['nama'];
             $_SESSION['email'] =  $row['email'];
             $_SESSION['level'] = $row['level'];
@@ -76,7 +76,7 @@ if (isset($_POST['submit'])) {
             echo "
             <script>
             alert('Login Berhasil');
-            document.location.href = 'admin/index.php';
+            document.location.href = 'views/index.php';
             </script>
             ";
         } else {

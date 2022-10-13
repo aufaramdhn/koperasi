@@ -234,33 +234,33 @@ session_start();
                     </a>
                     <div class="nav_list">
                         <?php if ($_SESSION['level'] == 'admin') : ?>
-                            <a href="#" class="nav_link active">
+                            <a class="nav_link" href="../views/index.php">
                                 <i class='bx bx-grid-alt nav_icon'></i>
                                 <span class="nav_name">Dashboard</span>
                             </a>
-                            <a href="#" class="nav_link">
+                            <a href="../views/user.php" class="nav_link">
                                 <i class='bx bx-user nav_icon'></i>
                                 <span class="nav_name">Users</span>
                             </a>
-                            <a href="../admin/simpanan.php" class="nav_link">
-                                <i class='bx bx-message-square-detail nav_icon'></i>
+                            <a href="../views/simpanan.php" class="nav_link">
+                                <i class='bx bx-wallet nav_icon'></i>
                                 <span class="nav_name">SImpanan</span>
                             </a>
-                            <a href="../admin/pinjaman.php" class="nav_link">
-                                <i class='bx bx-message-square-detail nav_icon'></i>
+                            <a href="../views/pinjaman.php" class="nav_link">
+                                <i class='bx bx-money-withdraw nav_icon'></i>
                                 <span class="nav_name">Pinjaman</span>
                             </a>
                         <?php else : ?>
-                            <a href="#" class="nav_link active">
+                            <a href="../views/index.php" class="nav_link">
                                 <i class='bx bx-grid-alt nav_icon'></i>
                                 <span class="nav_name">Dashboard</span>
                             </a>
-                            <a href="../admin/pinjaman.php" class="nav_link">
-                                <i class='bx bx-message-square-detail nav_icon'></i>
+                            <a href="../views/pinjaman.php" class="nav_link">
+                                <i class='bx bx-wallet nav_icon'></i>
                                 <span class="nav_name">SImpanan</span>
                             </a>
-                            <a href="../admin/pinjaman.php" class="nav_link">
-                                <i class='bx bx-message-square-detail nav_icon'></i>
+                            <a href="../views/pinjaman.php" class="nav_link">
+                                <i class='bx bx-money-withdraw nav_icon'></i>
                                 <span class="nav_name">Pinjaman</span>
                             </a>
                         <?php endif ?>
@@ -278,7 +278,7 @@ session_start();
                         </a> -->
                     </div>
                 </div>
-                <a href="../admin/logout.php" class="nav_link">
+                <a href="../views/logout.php" class="nav_link">
                     <i class='bx bx-log-out nav_icon'></i>
                     <span class="nav_name">SignOut</span>
                 </a>
