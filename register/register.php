@@ -3,7 +3,7 @@ require_once "../koneksi.php";
 $today = date("Y-m-d H:i:s")
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -26,9 +26,9 @@ $today = date("Y-m-d H:i:s")
             <div class="col d-flex align-items-center">
                 <div class="container w-75">
                     <form action="register-process.php" method="POST">
-                        <!-- <span class="fs-2"> -->
+                        <span class="fs-2"> 
                         <h2 class="mb-2">Register</h2>
-                        <!-- </span> -->
+                        < </span>
                         <div class="mb-2">
                             <label for="nama-lenkap" class="form-label">Nama Lengkap</label>
                             <input type="text" name="nama" class="form-control" id="nama-lengkap" aria-describedby="emailHelp">
@@ -41,7 +41,7 @@ $today = date("Y-m-d H:i:s")
                             <label for="password" class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="password">
                         </div>
-                        <div class="mb-2">
+                         <div class="mb-2">
                             <label for="c-password" class="form-label">Konfirmasi Password</label>
                             <input type="password" name="c_password" class="form-control" id="c-password">
                         </div>
@@ -51,10 +51,10 @@ $today = date("Y-m-d H:i:s")
                         <div class="mb-2">
                             <small class="font-weight-bold">Anda Sudah Mempunyai Akun? <a class="text-danger text-blue mt-2" href="../index.php">Login</a></small>
                         </div>
-                        <!-- <div class="mb-2 form-check">
+                         <div class="mb-2 form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                        </div> -->
+                        </div> 
                         <button type="submit" name="submit" class="btn btn-primary">Buat</button>
                     </form>
                 </div>
@@ -65,4 +65,8 @@ $today = date("Y-m-d H:i:s")
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
-</html>
+</html> -->
+
+<?php include "../layout/header.php" ?>
+
+<?php include "../layout/footer.php" ?>

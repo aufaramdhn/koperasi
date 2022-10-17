@@ -96,15 +96,15 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                         <input class="form-control mb-3 d-flex justify-content-end" type="text" placeholder="Cari Disini">
                     </div>
                 </div>
-                <table class="table table-responsive table-bordered table-striped">
+                <table class="table table-sm table-responsive table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Tempat, Tanggal Lahir</th>
-                            <th scope="col">No. Telepon</th>
-                            <th scope="col">Aksi</th>
+                            <th class="text-center" scope="col">Nama</th>
+                            <th class="text-center" scope="col">Email</th>
+                            <th class="text-center" scope="col">Tempat, Tanggal Lahir</th>
+                            <th class="text-center" scope="col">No. Telepon</th>
+                            <th class="text-center" scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,9 +116,13 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                                 <th><?= $no++; ?></th>
                                 <td><?= $user['nama'] ?></td>
                                 <td><?= $user['email']; ?></td>
-                                <td><?= $user['tgl_lahir']; ?></td>
-                                <td><?= $user['telp']; ?></td>
-                                <td>Aksi</td>
+                                <td class="text-center"><?= $user['tempat_lahir'] ?>, <?= $user['tgl_lahir']; ?></td>
+                                <td class="text-center"><?= $user['telp']; ?></td>
+                                <td class="text-center">
+                                    <a button class="btn btn-sm btn-info text-white"><i class='bx bx-edit'></i></a>
+                                    <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                    <a button class="btn btn-sm btn-danger"><i class='bx bx-trash'></i></a>
+                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>

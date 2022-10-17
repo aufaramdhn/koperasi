@@ -5,7 +5,6 @@ include "../koneksi.php";
 $name = $_POST['nama'];
 $email = $_POST['email'];
 $password1 = $_POST['password'];
-$password2 = $_POST['c_password'];
 $created_at = $_POST['created_at'];
 
 $result = mysqli_query($koneksi, "INSERT INTO tbl_user (nama,email,password,created_at) VALUES( '$name', '$email', '$password1', '$created_at')");
