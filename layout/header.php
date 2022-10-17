@@ -263,6 +263,10 @@ session_start();
                                 <i class='bx bx-money-withdraw nav_icon'></i>
                                 <span class="nav_name">Pinjaman</span>
                             </a>
+                            <a href="../views/profile.php" class="nav_link">
+                                <i class='bx bx-user nav_icon'></i>
+                                <span class="nav_name">Profil</span>
+                            </a>
                         <?php endif ?>
                         <!-- <a href="#" class="nav_link">
                             <i class='bx bx-bookmark nav_icon'></i>
@@ -285,4 +289,4 @@ session_start();
             </nav>
         </div>
         <!--Container Main start-->
-        <div class="height-100">
+        <div class="container-fluid">

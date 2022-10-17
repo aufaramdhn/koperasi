@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($data) == 1) {
 
         if ($password == $row['password']) {
-            $_SESSION['user'] = true;
+            // $_SESSION['user'] = true;
             $_SESSION['id_user'] = $row['id_user'];
             $_SESSION['nama'] =  $row['nama'];
             $_SESSION['email'] =  $row['email'];
