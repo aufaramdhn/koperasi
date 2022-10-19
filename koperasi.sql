@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Okt 2022 pada 16.18
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 8.1.6
+-- Waktu pembuatan: 19 Okt 2022 pada 12.49
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 8.0.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,6 +52,7 @@ CREATE TABLE `tbl_user` (
   `nama` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `tempat_lahir` varchar(100) NOT NULL,
   `tgl_lahir` varchar(100) NOT NULL,
   `jk` varchar(100) NOT NULL,
   `agama` varchar(100) NOT NULL,
@@ -66,9 +67,9 @@ CREATE TABLE `tbl_user` (
 -- Dumping data untuk tabel `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`id_user`, `nama`, `email`, `password`, `tgl_lahir`, `jk`, `agama`, `pekerjaan`, `telp`, `alamat`, `level`, `created_at`) VALUES
-(0, 'Mirza', 'mirza@gmail.com', '987', '', '', '', '', '', '', 'admin', '2022-10-12 14:04:22'),
-(1, 'Aufa Ramadhan', 'rama@gmail.com', '12345', '', '', '', '', '', '', 'user', '2022-10-12 14:04:25');
+INSERT INTO `tbl_user` (`id_user`, `nama`, `email`, `password`, `tempat_lahir`, `tgl_lahir`, `jk`, `agama`, `pekerjaan`, `telp`, `alamat`, `level`, `created_at`) VALUES
+(0, 'Mirza', 'mirza@gmail.com', '987', 'Bogor', '2004-08-11', '', '', '', '08912384123', '', 'admin', '2022-10-19 05:29:15'),
+(1, 'Aufa Ramadhan', 'rama@gmail.com', '12345', 'Jakarta', '2005-09-22', '', '', '', '09387123412', '', 'user', '2022-10-19 05:29:22');
 
 --
 -- Indexes for dumped tables

@@ -2,12 +2,19 @@
 
 include "../koneksi.php";
 
-$name = $_POST['nama'];
+$nama = $_POST['nama'];
 $email = $_POST['email'];
-$password1 = $_POST['password'];
+$password = $_POST['password'];
+$tempat_lahir = $_POST['tempat_lahir'];
+$tgl_lahir = $_POST['tgl_lahir'];
+$jk = $_POST['jk'];
+$agama = $_POST['agama'];
+$pekerjaan = $_POST['pekerjaan'];
+$telp = $_POST['telp'];
+$alamat = $_POST['alamat'];
 $created_at = $_POST['created_at'];
 
-$result = mysqli_query($koneksi, "INSERT INTO tbl_user (nama,email,password,created_at) VALUES( '$name', '$email', '$password1', '$created_at')");
+$result = mysqli_query($koneksi, "INSERT INTO tbl_user VALUES( '$nama', '$email', '$password', '$tempat_lahir', '$tgl_lahir', '$jk', '$agama', '$pekerjaan', '$telp', '$alamat', '$created_at')");
 if ($result > 0) {
     echo "<script>
     alert('Akun Anda Berhasil Di Buat');

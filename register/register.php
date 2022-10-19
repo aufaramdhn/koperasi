@@ -1,7 +1,113 @@
 <?php
 require_once "../koneksi.php";
-$today = date("Y-m-d H:i:s")
+date_default_timezone_set('Asia/jakarta');
+$today = date("Y-m-d H:i:s");
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Koperasi</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        .img-background {
+            background-image: url("../assets/img/background-login.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body class="img-background p-5">
+    <div class="container">
+        <div class="card">
+            <div class="card-header p-4 d-flex justify-content-between align-items-center">
+                <span class="fs-2 fw-bold">
+                    Register
+                </span>
+            </div>
+            <div class="card-body p-5">
+                <form action="register-process.php" method="POST">
+                    <div class="mb-3">
+                        <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
+                        <input type="text" name="nama" class="form-control" id="nama-lengkap">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" id="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input type="password" name="password" class="form-control" id="password">
+                            <label for="password" class="input-group-text"><i class="bi bi-eye-slash"></i></label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tempat" class="form-label">Tempat, Tanggal Lahir</label>
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="text" name="tempat_lahir" class="form-control" id="tempat">
+                            </div>
+                            <div class="col-8">
+                                <input type="date" name="tgl_lahir" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Jenis Kelamin</label>
+                        <select class="form-select" name="jk">
+                            <option selected>Open this select menu</option>
+                            <option>Laki-Laki</option>
+                            <option>Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Agama</label>
+                        <select class="form-select" name="agama">
+                            <option selected>Open this select menu</option>
+                            <option>Islam</option>
+                            <option>Kristen</option>
+                            <option>Hindu</option>
+                            <option>Buddha</option>
+                            <option>Protestan</option>
+                            <option>Konghucu</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pekerjaan" class="form-label">Pekerjaan</label>
+                        <input type="text" name="pekerjaan" class="form-control" id="pekerjaan">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telp" class="form-label">Telp</label>
+                        <input type="text" name="telp" class="form-control" id="telp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="alamat" class="form-label">Alamat</label>
+                        <input type="text" name="alamat" class="form-control" id="alamat">
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" name="created_at" class="form-control" id="created_at" value="<?= $today ?>">
+                    </div>
+                    <div class="mb-2">
+                        <small class="font-weight-bold">Sudah punya account? <a class="text-danger text-blue mt-2" href="../index.php">Login</a></small>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" name="btambah" class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/css/bootstrap.min.css"></script>
+</body>
+
+</html>
 
 <!-- <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +172,3 @@ $today = date("Y-m-d H:i:s")
 </body>
 
 </html> -->
-
-<?php include "../layout/header.php" ?>
-
-<?php include "../layout/footer.php" ?>
