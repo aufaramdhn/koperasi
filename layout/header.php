@@ -65,14 +65,14 @@ session_start();
                                 <i class='bx bx-money-withdraw nav_icon'></i>
                                 <span class="nav_name">Pinjaman</span>
                             </a>
-                        <?php elseif ($_SESSION['level'] == 'user') : ?>
+                        <?php else : ?>
                             <a href="../views/index.php" class="nav_link">
                                 <i class='bx bx-grid-alt nav_icon'></i>
                                 <span class="nav_name">Dashboard</span>
                             </a>
-                            <a href="../views/pinjaman.php" class="nav_link">
+                            <a href="../views/simpanan.php" class="nav_link">
                                 <i class='bx bx-wallet nav_icon'></i>
-                                <span class="nav_name">SImpanan</span>
+                                <span class="nav_name">Simpanan</span>
                             </a>
                             <a href="../views/pinjaman.php" class="nav_link">
                                 <i class='bx bx-money-withdraw nav_icon'></i>
@@ -82,24 +82,7 @@ session_start();
                                 <i class='bx bx-user nav_icon'></i>
                                 <span class="nav_name">Profil</span>
                             </a>
-                        <?php elseif (isset($_POST['register'])) : ?>
-                            <a href="../register/user.php" class="nav_link">
-                                <i class='bx bx-user nav_icon'></i>
-                                <span class="nav_name">Users</span>
-                            </a>
                         <?php endif ?>
-                        <!-- <a href="#" class="nav_link">
-                            <i class='bx bx-bookmark nav_icon'></i>
-                            <span class="nav_name">Bookmark</span>
-                        </a>
-                        <a href="#" class="nav_link">
-                            <i class='bx bx-folder nav_icon'></i>
-                            <span class="nav_name">Files</span>
-                        </a>
-                        <a href="#" class="nav_link">
-                            <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
-                            <span class="nav_name">Stats</span>
-                        </a> -->
                     </div>
                 </div>
                 <a href="../views/logout.php" class="nav_link">

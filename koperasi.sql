@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Okt 2022 pada 12.49
+-- Waktu pembuatan: 24 Okt 2022 pada 13.57
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.14
 
@@ -28,8 +28,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_pinjam` (
-  `id_pinjam` int(11) NOT NULL
+  `id_pinjam` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `jumlah_pinjam` varchar(100) NOT NULL,
+  `tgl_pinjam` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_pinjam`
+--
+
+INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tgl_pinjam`) VALUES
+(1, 1, '400000', '2022-10-24 06:11:59'),
+(2, 1, '500000', '2022-10-24 06:11:59'),
+(3, 0, '400000', '2022-10-24 06:13:18'),
+(4, 0, '400000', '2022-10-24 06:13:18');
 
 -- --------------------------------------------------------
 
@@ -38,8 +51,21 @@ CREATE TABLE `tbl_pinjam` (
 --
 
 CREATE TABLE `tbl_simpan` (
-  `id_simpan` int(11) NOT NULL
+  `id_simpan` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `jumlah_simpan` varchar(100) NOT NULL,
+  `tgl_simpan` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_simpan`
+--
+
+INSERT INTO `tbl_simpan` (`id_simpan`, `id_user`, `jumlah_simpan`, `tgl_simpan`) VALUES
+(1, 1, '400000', '2022-10-24 06:12:32'),
+(2, 1, '400000', '2022-10-24 06:12:32'),
+(3, 0, '300000', '2022-10-24 06:13:01'),
+(4, 0, '300000', '2022-10-24 06:13:01');
 
 -- --------------------------------------------------------
 
@@ -68,7 +94,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id_user`, `nama`, `email`, `password`, `tempat_lahir`, `tgl_lahir`, `jk`, `agama`, `pekerjaan`, `telp`, `alamat`, `level`, `created_at`) VALUES
-(0, 'Mirza', 'mirza@gmail.com', '987', 'Bogor', '2004-08-11', '', '', '', '08912384123', '', 'admin', '2022-10-19 05:29:15'),
+(0, 'Mirza El Fandi', 'mirza@gmail.com', '987', 'Bogor', '2004-08-11', '', '', '', '08912384123', '', 'admin', '2022-10-24 07:03:45'),
 (1, 'Aufa Ramadhan', 'rama@gmail.com', '12345', 'Jakarta', '2005-09-22', '', '', '', '09387123412', '', 'user', '2022-10-19 05:29:22');
 
 --
@@ -76,10 +102,40 @@ INSERT INTO `tbl_user` (`id_user`, `nama`, `email`, `password`, `tempat_lahir`, 
 --
 
 --
+-- Indeks untuk tabel `tbl_pinjam`
+--
+ALTER TABLE `tbl_pinjam`
+  ADD PRIMARY KEY (`id_pinjam`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indeks untuk tabel `tbl_simpan`
+--
+ALTER TABLE `tbl_simpan`
+  ADD PRIMARY KEY (`id_simpan`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indeks untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_pinjam`
+--
+ALTER TABLE `tbl_pinjam`
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_simpan`
+--
+ALTER TABLE `tbl_simpan`
+  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
