@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Okt 2022 pada 13.57
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 8.0.14
+-- Waktu pembuatan: 25 Okt 2022 pada 11.56
+-- Versi server: 10.4.25-MariaDB
+-- Versi PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,9 @@ INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tgl_pinjam`)
 (1, 1, '400000', '2022-10-24 06:11:59'),
 (2, 1, '500000', '2022-10-24 06:11:59'),
 (3, 0, '400000', '2022-10-24 06:13:18'),
-(4, 0, '400000', '2022-10-24 06:13:18');
+(4, 0, '400000', '2022-10-24 06:13:18'),
+(5, 1, '1500000', '2022-10-25 08:20:16'),
+(6, 1, '1250000', '2022-10-25 08:20:47');
 
 -- --------------------------------------------------------
 
@@ -62,10 +64,14 @@ CREATE TABLE `tbl_simpan` (
 --
 
 INSERT INTO `tbl_simpan` (`id_simpan`, `id_user`, `jumlah_simpan`, `tgl_simpan`) VALUES
-(1, 1, '400000', '2022-10-24 06:12:32'),
-(2, 1, '400000', '2022-10-24 06:12:32'),
-(3, 0, '300000', '2022-10-24 06:13:01'),
-(4, 0, '300000', '2022-10-24 06:13:01');
+(1, 1, '1000000', '2022-10-25 08:15:02'),
+(2, 1, '1000000', '2022-10-25 08:15:09'),
+(3, 1, '2000000', '2022-10-25 08:15:17'),
+(4, 1, '2000000', '2022-10-25 08:15:24'),
+(5, 1, '3000000', '2022-10-25 08:15:33'),
+(6, 1, '3000000', '2022-10-25 08:15:44'),
+(7, 1, '3000000', '2022-10-25 08:16:52'),
+(8, 1, '2500000', '2022-10-25 08:17:04');
 
 -- --------------------------------------------------------
 
@@ -129,13 +135,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_pinjam`
 --
 ALTER TABLE `tbl_pinjam`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_simpan`
 --
 ALTER TABLE `tbl_simpan`
-  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

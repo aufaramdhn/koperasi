@@ -32,7 +32,7 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
         <div class="card-body px-3 pt-3">
             <?php if (isset($_POST['btambah'])) : ?>
 
-                <form>
+                <form method="POST">
                     <div class="container">
                         <div class="mb-3">
                             <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
@@ -40,7 +40,7 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                         </div>
                         <div class="mb-3">
                             <label for="jumlah-pinjaman" class="form-label">Jumlah Pinjaman</label>
-                            <input type="number" min="0" max="10000000" class="form-control" id="jumlah-pinjaman">
+                            <input type="number" min="0" max="10000000" class="form-control" id="jumlah-pinjaman" name="jumlah">
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary" name="bpimpan">Pinjam</button>
@@ -59,10 +59,10 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Pinjaman</th>
-                            <th scope="col">Hari dan Tanggal</th>
-                            <th scope="col">Aksi</th>
+                            <th class="text-center" scope="col">Nama</th>
+                            <th class="text-center" scope="col">Pinjaman</th>
+                            <th class="text-center" scope="col">Hari dan Tanggal</th>
+                            <th class="text-center" scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,9 +74,12 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= $pinjam['nama'] ?></td>
-                                    <td><?= $pinjam['jumlah_pinjam'] ?></td>
-                                    <td><?= $pinjam['tgl_pinjam'] ?></td>
-                                    <td>aksi</td>
+                                    <td class="text-center"><?= $pinjam['jumlah_pinjam'] ?></td>
+                                    <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
+                                    <td class="text-center">
+                                        <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                        <a button class="btn btn-sm btn-danger"><i class='bx bx-trash'></i></a>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         <?php else : ?>
@@ -102,4 +105,20 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
         </div>
     </div>
 </div>
+<?php
+if (isset($_POST['bpimpan'])) {
+
+    $id = $_SESSION['id_user'];
+    $jumlah = $_POST['jumlah'];
+
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$jumlah', current_timestamp());");
+    if ($sql == true) {
+        echo "<script>alert('Data Anda Telah Berhasil Di Tambahkan, dan akan di konfirmasi oleh admin');</script>";
+        echo "<script>window.location=' pinjaman.php'</script>";
+    } else {
+        echo "<script>alert('Data Anda Gagal Ditambahkan');</script>";
+        echo "<script>window.location=' pinjaman.php'</script>";
+    }
+}
+?>
 <?php include "../layout/footer.php" ?>

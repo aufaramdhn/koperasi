@@ -2,9 +2,23 @@
 include "../layout/header.php";
 require "../koneksi.php";
 
-$id_pinjaman = $_SESSION['id_user'];
-$saldo_pinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user where tbl_pinjam.id_user = $id_pinjaman");
-// $data = mysqli_fetch_array($saldo_pinjaman);
+// Session ID
+$id = $_SESSION['id_user'];
+
+// Saldo Pinjaman
+$saldo_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user WHERE tbl_pinjam.id_user = $id");
+$saldo_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user");
+// Akhir Saldo Pinjaman
+
+// Saldo Simpanan
+$saldo_simpanan_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id");
+$saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user");
+// Akhir Saldo Simpanan
+
+// Semua Saldo
+$saldo_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id ");
+$saldo_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user");
+
 
 ?>
 <div class="container pt-5">
@@ -32,9 +46,14 @@ $saldo_pinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user
                         <div class="col-2 text-center">
                             <i class='bx bx-wallet fs-1'></i>
                         </div>
+                        <?php
+                        $total_simpanan_a = 0;
+                        while ($tampil_simpanan_a = mysqli_fetch_array($saldo_simpanan_a)) {
+                            $total_simpanan_a += $tampil_simpanan_a['jumlah_simpan'];
+                        } ?>
                         <div class="col-10 d-flex flex-column align-items-end">
                             <h5 class="card-title fw-bold">Saldo Simpanan</h5>
-                            <span class="fw-bold">Rp.0</span>
+                            <span class="fw-bold">Rp. <?= number_format($total_simpanan_a) ?></span>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -49,17 +68,14 @@ $saldo_pinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user
                             <i class='bx bx-money-withdraw fs-1'></i>
                         </div>
                         <?php
-                        $total = 0;
-                        while ($tampil = mysqli_fetch_array($saldo_pinjaman)) {
-                            $total += $tampil['jumlah_pinjam']; ?>
-                            <div class="col-10 d-flex flex-column align-items-end">
-                                <h5 class="card-title fw-bold">Saldo Pinjaman</h5>
-                                <span class="fw-bold">Rp. <?= $total ?> </span>
-                            </div>
-                        <?php
-
-                        }
-                        ?>
+                        $total_pinjaman_a = 0;
+                        while ($tampil_pinjaman_a = mysqli_fetch_array($saldo_pinjaman_a)) {
+                            $total_pinjaman_a += $tampil_pinjaman_a['jumlah_pinjam'];
+                        } ?>
+                        <div class="col-10 d-flex flex-column align-items-end">
+                            <h5 class="card-title fw-bold">Saldo Pinjaman</h5>
+                            <span class="fw-bold">Rp. <?= number_format($total_pinjaman_a) ?> </span>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <a class="text-decoration-none text-light fw-bold fs-6" href="../orders/index.php">View detail </a>
@@ -107,9 +123,14 @@ $saldo_pinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user
                         <div class="col-2 text-center">
                             <i class='bx bx-wallet fs-1'></i>
                         </div>
+                        <?php
+                        $total_simpanan_u = 0;
+                        while ($tampil_simpanan_u = mysqli_fetch_array($saldo_simpanan_u)) {
+                            $total_simpanan_u += $tampil_simpanan_u['jumlah_simpan'];
+                        } ?>
                         <div class="col-10 d-flex flex-column align-items-end">
                             <h5 class="card-title fw-bold">Saldo Simpanan</h5>
-                            <span class="fw-bold">Rp.0</span>
+                            <span class="fw-bold">Rp. <?= number_format($total_simpanan_u) ?></span>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -124,13 +145,13 @@ $saldo_pinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user
                             <i class='bx bx-money-withdraw fs-1'></i>
                         </div>
                         <?php
-                        $total = 0;
-                        while ($tampil = mysqli_fetch_array($saldo_pinjaman)) { ?>
-                        <?php $total += $tampil['jumlah_pinjam'];
+                        $tota_pinjaman_u = 0;
+                        while ($tampil_pinjaman_u = mysqli_fetch_array($saldo_pinjaman_u)) {
+                            $tota_pinjaman_u += $tampil_pinjaman_u['jumlah_pinjam'];
                         } ?>
                         <div class="col-10 d-flex flex-column align-items-end">
                             <h5 class="card-title fw-bold">Saldo Pinjaman</h5>
-                            <span class="fw-bold">Rp. <?= $total ?> </span>
+                            <span class="fw-bold">Rp. <?= number_format($tota_pinjaman_u) ?> </span>
                         </div>
                     </div>
                     <div class="card-footer">
