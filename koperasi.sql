@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Okt 2022 pada 11.56
+-- Waktu pembuatan: 26 Okt 2022 pada 11.54
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -31,20 +31,23 @@ CREATE TABLE `tbl_pinjam` (
   `id_pinjam` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `jumlah_pinjam` varchar(100) NOT NULL,
-  `tgl_pinjam` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `tempo_pinjam` varchar(11) NOT NULL,
+  `tgl_pinjam` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` varchar(100) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tbl_pinjam`
 --
 
-INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tgl_pinjam`) VALUES
-(1, 1, '400000', '2022-10-24 06:11:59'),
-(2, 1, '500000', '2022-10-24 06:11:59'),
-(3, 0, '400000', '2022-10-24 06:13:18'),
-(4, 0, '400000', '2022-10-24 06:13:18'),
-(5, 1, '1500000', '2022-10-25 08:20:16'),
-(6, 1, '1250000', '2022-10-25 08:20:47');
+INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tempo_pinjam`, `tgl_pinjam`, `status`) VALUES
+(1, 1, '400000', '', '2022-10-24 06:11:59', 'pending'),
+(2, 1, '500000', '', '2022-10-24 06:11:59', 'pending'),
+(3, 0, '400000', '', '2022-10-24 06:13:18', 'pending'),
+(4, 0, '400000', '', '2022-10-24 06:13:18', 'pending'),
+(5, 1, '1500000', '', '2022-10-25 08:20:16', 'pending'),
+(6, 1, '1250000', '', '2022-10-25 08:20:47', 'pending'),
+(7, 1, '1240000', '1 Bln', '2022-10-26 04:38:50', 'pending');
 
 -- --------------------------------------------------------
 
@@ -55,7 +58,7 @@ INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tgl_pinjam`)
 CREATE TABLE `tbl_simpan` (
   `id_simpan` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `jumlah_simpan` varchar(100) NOT NULL,
+  `jumlah_simpan` int(11) NOT NULL,
   `tgl_simpan` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -64,14 +67,18 @@ CREATE TABLE `tbl_simpan` (
 --
 
 INSERT INTO `tbl_simpan` (`id_simpan`, `id_user`, `jumlah_simpan`, `tgl_simpan`) VALUES
-(1, 1, '1000000', '2022-10-25 08:15:02'),
-(2, 1, '1000000', '2022-10-25 08:15:09'),
-(3, 1, '2000000', '2022-10-25 08:15:17'),
-(4, 1, '2000000', '2022-10-25 08:15:24'),
-(5, 1, '3000000', '2022-10-25 08:15:33'),
-(6, 1, '3000000', '2022-10-25 08:15:44'),
-(7, 1, '3000000', '2022-10-25 08:16:52'),
-(8, 1, '2500000', '2022-10-25 08:17:04');
+(1, 1, 1000000, '2022-01-01 08:15:02'),
+(2, 1, 1000000, '2022-02-01 08:15:09'),
+(3, 1, 2000000, '2022-03-01 08:15:17'),
+(4, 1, 2000000, '2022-04-01 08:15:24'),
+(5, 1, 3000000, '2022-05-01 08:15:33'),
+(6, 1, 3000000, '2022-06-01 08:15:44'),
+(7, 1, 3000000, '2022-07-01 08:16:52'),
+(8, 1, 2500000, '2022-08-01 08:17:04'),
+(9, 1, 4500000, '2022-09-01 00:39:16'),
+(10, 1, 5000000, '2022-10-01 00:39:16'),
+(11, 1, 5500000, '2022-11-01 00:40:05'),
+(12, 1, 3500000, '2022-12-01 00:40:27');
 
 -- --------------------------------------------------------
 
@@ -135,13 +142,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_pinjam`
 --
 ALTER TABLE `tbl_pinjam`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_simpan`
 --
 ALTER TABLE `tbl_simpan`
-  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

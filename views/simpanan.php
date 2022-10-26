@@ -55,7 +55,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                         <input class="form-control mb-3 d-flex justify-content-end" type="text" placeholder="Cari Disini">
                     </div>
                 </div>
-                <table class="table table-responsive table-bordered table-striped">
+                <table id="datatables" class="table table-responsive table-bordered table-striped">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -85,6 +85,8 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                         <?php else : ?>
                             <?php
                             $no = 1;
+                            date_default_timezone_set('Asia/jakarta');
+                            $today = date("Y-m-i H:i:s");
                             foreach ($tbl_simpanan_u as $simpan) {
                             ?>
                                 <tr>
