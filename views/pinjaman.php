@@ -29,7 +29,7 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                 </form>
             <?php endif ?>
         </div>
-        <div class="card-body px-3 pt-3">
+        <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
                 <form method="POST">
                     <div class="container">
@@ -56,33 +56,29 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                     </div>
                 </form>
             <?php else : ?>
-                <div class="d-flex justify-content-end">
-                    <div>
-                        <input class="form-control mb-3 d-flex justify-content-end" type="text" placeholder="Cari Disini">
-                    </div>
-                </div>
-                <table class="table table-responsive table-bordered table-striped">
-                    <thead>
+
+                <table id="example" class="table table-striped table-bordered">
+                    <thead class="table-dark">
                         <?php if ($_SESSION['level'] == 'admin') : ?>
                             <tr>
                                 <th scope="col">No</th>
-                                <th class="text-center" scope="col">Nama</th>
-                                <th class="text-center" scope="col">Pinjaman</th>
-                                <th class="text-center" scope="col">Tempo</th>
-                                <th class="text-center" scope="col">Tanggal Pinjam</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Pinjaman</th>
+                                <th scope="col">Tempo</th>
+                                <th scope="col">Tanggal Pinjam</th>
                                 <!-- <th class="text-center" scope="col">Tanggal Mulai</th>
                                 <th class="text-center" scope="col">Tanggal Selesai</th> -->
-                                <th class="text-center" scope="col">Status</th>
+                                <th scope="col">Status</th>
                                 <th class="text-center" scope="col">Aksi</th>
                             </tr>
                         <?php else : ?>
                             <tr>
                                 <th scope="col">No</th>
-                                <th class="text-center" scope="col">Nama</th>
-                                <th class="text-center" scope="col">Pinjaman</th>
-                                <th class="text-center" scope="col">tempo</th>
-                                <th class="text-center" scope="col">Hari dan Tanggal</th>
-                                <th class="text-center" scope="col">Aksi</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Pinjaman</th>
+                                <th scope="col">tempo</th>
+                                <th scope="col">Hari dan Tanggal</th>
+                                <th scope="col">Aksi</th>
                             </tr>
                         <?php endif ?>
                     </thead>
@@ -95,9 +91,9 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= $pinjam['nama'] ?></td>
-                                    <td class="text-center"><?= $pinjam['jumlah_pinjam'] ?></td>
-                                    <td class="text-center"><?= $pinjam['tempo_pinjam'] ?></td>
-                                    <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
+                                    <td><?= $pinjam['jumlah_pinjam'] ?></td>
+                                    <td><?= $pinjam['tempo_pinjam'] ?></td>
+                                    <td><?= $pinjam['tgl_pinjam'] ?></td>
                                     <!-- <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                     <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td> -->
                                     <td class="text-center">
@@ -133,18 +129,18 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= $pinjam['nama'] ?></td>
-                                    <td class="text-center"><?= $pinjam['jumlah_pinjam'] ?></td>
-                                    <td class="text-center"><?= $pinjam['tempo_pinjam'] ?></td>
-                                    <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
+                                    <td><?= $pinjam['jumlah_pinjam'] ?></td>
+                                    <td><?= $pinjam['tempo_pinjam'] ?></td>
+                                    <td><?= $pinjam['tgl_pinjam'] ?></td>
                                     <td class="text-center">
-                                        <a button class="btn btn-sm btn-info text-white fs-6" href="https://api.whatsapp.com/send?phone="><i class='bx bxs-edit'></i></a>
+                                        <a button class="btn btn-sm btn-info text-white" href="https://api.whatsapp.com/send?phone="><i class='bx bxs-edit'></i></a>
                                     </td>
                                 </tr>
                             <?php } ?>
                         <?php endif ?>
-                    <?php endif  ?>
                     </tbody>
                 </table>
+            <?php endif  ?>
         </div>
     </div>
 </div>

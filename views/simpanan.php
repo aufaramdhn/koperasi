@@ -12,7 +12,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 
 ?>
-<div class="container-fluid pt-3">
+<div class="container-fluid">
     <div class="card">
         <div class="card-header p-4 d-flex justify-content-between align-items-center">
             <?php if (isset($_POST['btambah'])) : ?>
@@ -32,7 +32,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                 </form>
             <?php endif ?>
         </div>
-        <div class="card-body px-3 pt-3">
+        <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
                 <form method="POST">
                     <div class="container">
@@ -50,13 +50,8 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                     </div>
                 </form>
             <?php else : ?>
-                <div class="d-flex justify-content-end">
-                    <div>
-                        <input class="form-control mb-3 d-flex justify-content-end" type="text" placeholder="Cari Disini">
-                    </div>
-                </div>
-                <table id="datatables" class="table table-responsive table-bordered table-striped">
-                    <thead>
+                <table id="example" class="table table-responsive table-bordered table-striped">
+                    <thead class="table-dark">
                         <tr>
                             <th scope="col">No</th>
                             <th class="text-center" scope="col">Nama</th>
@@ -100,15 +95,6 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                         <?php endif ?>
                     </tbody>
                 </table>
-                <nav class="mt-3 d-flex justify-content-end" aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
             <?php endif ?>
         </div>
     </div>
