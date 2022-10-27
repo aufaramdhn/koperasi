@@ -24,7 +24,7 @@ session_start();
 
     <link rel="stylesheet" href="../assets/css/datatables.min.css">
 
-    <script src="../node_modules/chart.js/dist/chart.js"></script>
+    <script src="../assets/script/chart.js"></script>
 
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->

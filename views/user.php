@@ -96,8 +96,8 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                         <input class="form-control mb-3 d-flex justify-content-end" type="text" placeholder="Cari Disini">
                     </div>
                 </div>
-                <table class="table table-sm table-responsive table-bordered">
-                    <thead>
+                <table id="example" class="table table-sm table-responsive table-bordered">
+                    <thead class="table-dark">
                         <tr>
                             <th scope="col">No</th>
                             <th class="text-center" scope="col">Nama</th>

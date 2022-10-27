@@ -22,7 +22,6 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                 <form method="POST">
                     <button href="" class="btn btn-danger" name="bkembali">Kembali</button>
                 </form>
-
             <?php else : ?>
                 <span class="fs-2 fw-bold">
                     Simpanan
@@ -51,17 +50,17 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                 </form>
             <?php else : ?>
                 <table id="example" class="table table-responsive table-bordered table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">No</th>
-                            <th class="text-center" scope="col">Nama</th>
-                            <th class="text-center" scope="col">Jumlah</th>
-                            <th class="text-center" scope="col">Hari dan Tanggal</th>
-                            <th class="text-center" scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if ($_SESSION['level'] == 'admin') : ?>
+                    <?php if ($_SESSION['level'] == 'admin') : ?>
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">No</th>
+                                <th class="text-center" scope="col">Nama</th>
+                                <th class="text-center" scope="col">Jumlah</th>
+                                <th class="text-center" scope="col">Hari dan Tanggal</th>
+                                <th class="text-center" scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <?php
                             $no = 1;
                             foreach ($tbl_simpanan_a as $simpan) {
@@ -77,7 +76,18 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                                     </td>
                                 </tr>
                             <?php } ?>
-                        <?php else : ?>
+                        </tbody>
+                    <?php else : ?>
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">No</th>
+                                <th class="text-center" scope="col">Nama</th>
+                                <th class="text-center" scope="col">Jumlah</th>
+                                <th class="text-center" scope="col">Hari dan Tanggal</th>
+                                <th class="text-center" scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <?php
                             $no = 1;
                             date_default_timezone_set('Asia/jakarta');
@@ -92,8 +102,8 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                                     <td>aksi</td>
                                 </tr>
                             <?php } ?>
-                        <?php endif ?>
-                    </tbody>
+                        </tbody>
+                    <?php endif ?>
                 </table>
             <?php endif ?>
         </div>
