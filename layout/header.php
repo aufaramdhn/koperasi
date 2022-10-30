@@ -72,6 +72,10 @@ session_start();
                                 <i class='bx bx-money-withdraw nav_icon'></i>
                                 <span class="nav_name">Pinjaman</span>
                             </a>
+                            <a href="../views/pengembalian_admin.php" class="nav_link">
+                                <i class='bx bx-money-withdraw nav_icon'></i>
+                                <span class="nav_name">Pengembalian</span>
+                            </a>
                         <?php else : ?>
                             <a href="../views/index.php" class="nav_link">
                                 <i class='bx bx-grid-alt nav_icon'></i>

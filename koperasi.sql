@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Okt 2022 pada 11.49
+-- Waktu pembuatan: 30 Okt 2022 pada 14.56
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -39,7 +39,9 @@ CREATE TABLE `konfirmasi_pinjam` (
 --
 
 INSERT INTO `konfirmasi_pinjam` (`id_konfirmasi_pinjam`, `id_pinjam`, `tgl_konfirmasi`, `expired`) VALUES
-(1, 1, '2022-10-23 14:08:45', '2022-10-24 09:08:45');
+(10, 27, '2022-10-30 12:45:00', '2022-11-30 00:00:00'),
+(11, 28, '2022-10-30 13:26:12', '2022-10-29 00:00:00'),
+(12, 29, '2022-10-30 13:26:14', '2022-09-30 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -49,10 +51,18 @@ INSERT INTO `konfirmasi_pinjam` (`id_konfirmasi_pinjam`, `id_pinjam`, `tgl_konfi
 
 CREATE TABLE `tbl_pengembalian` (
   `id_pengembalian` int(11) NOT NULL,
-  `id_konfirmasi_peminjaman` int(11) NOT NULL,
+  `id_konfirmasi_pinjam` int(11) NOT NULL,
   `jumlah_pengembalian` bigint(20) NOT NULL,
   `tgl_pengembalian` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_pengembalian`
+--
+
+INSERT INTO `tbl_pengembalian` (`id_pengembalian`, `id_konfirmasi_pinjam`, `jumlah_pengembalian`, `tgl_pengembalian`) VALUES
+(6, 10, 150000, '2022-10-30 18:56:05'),
+(7, 10, 150000, '2022-10-30 18:56:23');
 
 -- --------------------------------------------------------
 
@@ -64,7 +74,7 @@ CREATE TABLE `tbl_pinjam` (
   `id_pinjam` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `jumlah_pinjam` varchar(100) NOT NULL,
-  `tgl_pinjam` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `tgl_pinjam` datetime DEFAULT NULL,
   `status` varchar(100) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -73,13 +83,15 @@ CREATE TABLE `tbl_pinjam` (
 --
 
 INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tgl_pinjam`, `status`) VALUES
-(1, 1, '400000', '2022-10-24 06:11:59', 'pending'),
-(2, 1, '500000', '2022-10-24 06:11:59', 'pending'),
-(3, 0, '400000', '2022-10-24 06:13:18', 'pending'),
-(4, 0, '400000', '2022-10-24 06:13:18', 'pending'),
-(5, 1, '1500000', '2022-10-25 08:20:16', 'pending'),
-(6, 1, '1250000', '2022-10-25 08:20:47', 'pending'),
-(7, 1, '1240000', '2022-10-26 04:38:50', 'pending');
+(27, 1, '150000', '2022-10-29 19:45:31', 'konfirmasi'),
+(28, 1, '150000', '2022-10-30 13:23:49', 'konfirmasi'),
+(29, 1, '1500000', '2022-10-30 13:24:00', 'konfirmasi'),
+(30, 0, '120000', '2022-10-30 19:31:29', 'pending'),
+(31, 0, '123213', '2022-10-30 19:31:51', 'pending'),
+(32, 0, '1231412', '2022-10-30 19:32:26', 'pending'),
+(33, 1, '1231412', '2022-10-30 19:33:15', 'pending'),
+(34, 1, '1231412', '2022-10-30 19:33:15', 'pending'),
+(35, 1, '1555234', '2022-10-30 19:34:56', 'pending');
 
 -- --------------------------------------------------------
 
@@ -105,13 +117,7 @@ INSERT INTO `tbl_simpan` (`id_simpan`, `id_user`, `jumlah_simpan`, `tgl_simpan`)
 (4, 1, 2000000, '2022-04-01 08:15:24'),
 (5, 1, 3000000, '2022-05-01 08:15:33'),
 (6, 1, 3000000, '2022-06-01 08:15:44'),
-(7, 1, 3000000, '2022-07-01 08:16:52'),
-(8, 1, 2500000, '2022-08-01 08:17:04'),
-(9, 1, 4500000, '2022-09-01 00:39:16'),
-(10, 1, 5000000, '2022-10-01 00:39:16'),
-(11, 1, 5500000, '2022-11-01 00:40:05'),
-(12, 1, 3500000, '2022-12-01 00:40:27'),
-(13, 0, 1500000, '2022-10-27 03:30:56');
+(7, 1, 3000000, '2022-07-01 08:16:52');
 
 -- --------------------------------------------------------
 
@@ -140,8 +146,9 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id_user`, `nama`, `email`, `password`, `tempat_lahir`, `tgl_lahir`, `jk`, `agama`, `pekerjaan`, `telp`, `alamat`, `level`, `created_at`) VALUES
-(0, 'Mirza El Fandi', 'mirza@gmail.com', '987', 'Bogor', '2004-08-11', '', '', '', '08912384123', '', 'admin', '2022-10-24 07:03:45'),
-(1, 'Aufa Ramadhan', 'rama@gmail.com', '12345', 'Jakarta', '2005-09-22', '', '', '', '09387123412', '', 'user', '2022-10-19 05:29:22');
+(1, 'Mirza El Fandi', 'mirza@gmail.com', '987', 'Bogor', '2004-08-11', '', '', '', '08912384123', '', 'admin', '2022-10-24 07:03:45'),
+(2, 'Aufa Ramadhan', 'rama@gmail.com', '12345', 'Jakarta', '2005-09-22', '', '', '', '09387123412', '', 'user', '2022-10-19 05:29:22'),
+(3, 'Adi Saputra', 'adi@gmail.com', '123', '', '', '', '', '', '', '', 'user', '2022-10-30 13:05:55');
 
 --
 -- Indexes for dumped tables
@@ -159,7 +166,7 @@ ALTER TABLE `konfirmasi_pinjam`
 --
 ALTER TABLE `tbl_pengembalian`
   ADD PRIMARY KEY (`id_pengembalian`),
-  ADD KEY `id_konfirmasi_peminjaman` (`id_konfirmasi_peminjaman`);
+  ADD KEY `id_konfirmasi_peminjaman` (`id_konfirmasi_pinjam`);
 
 --
 -- Indeks untuk tabel `tbl_pinjam`
@@ -189,25 +196,31 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `konfirmasi_pinjam`
 --
 ALTER TABLE `konfirmasi_pinjam`
-  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pengembalian`
 --
 ALTER TABLE `tbl_pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pinjam`
 --
 ALTER TABLE `tbl_pinjam`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_simpan`
 --
 ALTER TABLE `tbl_simpan`
   MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
