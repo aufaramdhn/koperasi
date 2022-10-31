@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Okt 2022 pada 14.56
+-- Waktu pembuatan: 31 Okt 2022 pada 11.18
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -41,7 +41,9 @@ CREATE TABLE `konfirmasi_pinjam` (
 INSERT INTO `konfirmasi_pinjam` (`id_konfirmasi_pinjam`, `id_pinjam`, `tgl_konfirmasi`, `expired`) VALUES
 (10, 27, '2022-10-30 12:45:00', '2022-11-30 00:00:00'),
 (11, 28, '2022-10-30 13:26:12', '2022-10-29 00:00:00'),
-(12, 29, '2022-10-30 13:26:14', '2022-09-30 00:00:00');
+(12, 29, '2022-10-30 13:26:14', '2022-09-30 00:00:00'),
+(13, 36, '2022-10-31 08:27:25', '2022-09-30 08:27:25'),
+(14, 37, '2022-10-31 08:38:14', '2022-11-30 08:38:14');
 
 -- --------------------------------------------------------
 
@@ -62,7 +64,9 @@ CREATE TABLE `tbl_pengembalian` (
 
 INSERT INTO `tbl_pengembalian` (`id_pengembalian`, `id_konfirmasi_pinjam`, `jumlah_pengembalian`, `tgl_pengembalian`) VALUES
 (6, 10, 150000, '2022-10-30 18:56:05'),
-(7, 10, 150000, '2022-10-30 18:56:23');
+(7, 10, 150000, '2022-10-30 18:56:23'),
+(8, 14, 1500000, '2022-10-31 08:46:53'),
+(9, 14, 1500000, '2022-10-31 08:56:53');
 
 -- --------------------------------------------------------
 
@@ -91,7 +95,9 @@ INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tgl_pinjam`,
 (32, 0, '1231412', '2022-10-30 19:32:26', 'pending'),
 (33, 1, '1231412', '2022-10-30 19:33:15', 'pending'),
 (34, 1, '1231412', '2022-10-30 19:33:15', 'pending'),
-(35, 1, '1555234', '2022-10-30 19:34:56', 'pending');
+(35, 1, '1555234', '2022-10-30 19:34:56', 'pending'),
+(36, 3, '1500000', '2022-10-31 06:38:05', 'selesai'),
+(37, 3, '1500000', '2022-10-31 08:37:47', 'konfirmasi');
 
 -- --------------------------------------------------------
 
@@ -117,7 +123,8 @@ INSERT INTO `tbl_simpan` (`id_simpan`, `id_user`, `jumlah_simpan`, `tgl_simpan`)
 (4, 1, 2000000, '2022-04-01 08:15:24'),
 (5, 1, 3000000, '2022-05-01 08:15:33'),
 (6, 1, 3000000, '2022-06-01 08:15:44'),
-(7, 1, 3000000, '2022-07-01 08:16:52');
+(7, 1, 3000000, '2022-07-01 08:16:52'),
+(14, 3, 1500000, '2022-10-30 23:37:50');
 
 -- --------------------------------------------------------
 
@@ -196,25 +203,25 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `konfirmasi_pinjam`
 --
 ALTER TABLE `konfirmasi_pinjam`
-  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pengembalian`
 --
 ALTER TABLE `tbl_pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pinjam`
 --
 ALTER TABLE `tbl_pinjam`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_simpan`
 --
 ALTER TABLE `tbl_simpan`
-  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
