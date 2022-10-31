@@ -40,7 +40,7 @@ session_start();
             </div>
             <div class="d-flex align-items-center">
                 <span class="me-3">
-                    Welcome Aufa Ramadhan
+                    Welcome <?= $_SESSION['nama'] ?>
                 </span>
                 <div class="header_img">
                     <img src="https://i.imgur.com/hczKIze.jpg" alt="">
@@ -73,7 +73,7 @@ session_start();
                                 <span class="nav_name">Pinjaman</span>
                             </a>
                             <a href="../views/pengembalian_admin.php" class="nav_link">
-                                <i class='bx bx-money-withdraw nav_icon'></i>
+                                <i class='bx bx-money nav_icon'></i>
                                 <span class="nav_name">Pengembalian</span>
                             </a>
                         <?php else : ?>

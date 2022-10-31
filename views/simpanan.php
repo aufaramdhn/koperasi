@@ -6,13 +6,14 @@ $id_simpanan = $_SESSION['id_user'];
 
 $tbl_simpanan_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_simpanan ");
 $data_u = mysqli_fetch_array($tbl_simpanan_u);
+$cek = mysqli_num_rows($tbl_simpanan_u);
 
 $tbl_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan DESC");
 $data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 
 ?>
-<div class="container-fluid">
+<div class="container-fluid py-3">
     <div class="card">
         <div class="card-header p-4 d-flex justify-content-between align-items-center">
             <?php if (isset($_POST['btambah'])) : ?>
@@ -33,6 +34,13 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
         </div>
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
+                <?php
+                // if (($data_u['tempat_lahir'] and $data_u['tgl_lahir'] and $data_u['jk'] and $data_u['agama'] and $data_u['pekerjaan'] and $data_u['alamat']) == '') : 
+                ?>
+                <!-- <span>Maaf Data Diri Anda Belum Lengkap</span> -->
+                <?php
+                // else : 
+                ?>
                 <form method="POST">
                     <div class="container">
                         <div class="mb-3">
@@ -48,6 +56,9 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                         </div>
                     </div>
                 </form>
+                <?php
+                // endif 
+                ?>
             <?php else : ?>
                 <table id="example" class="table table-responsive table-bordered table-striped">
                     <?php if ($_SESSION['level'] == 'admin') : ?>
@@ -68,7 +79,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= $simpan['nama'] ?></td>
-                                    <td class="text-center"><?= $simpan['jumlah_simpan'] ?></td>
+                                    <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
                                     <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
                                     <td class="text-center">
                                         <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
@@ -78,31 +89,37 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                             <?php } ?>
                         </tbody>
                     <?php else : ?>
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col">No</th>
-                                <th class="text-center" scope="col">Nama</th>
-                                <th class="text-center" scope="col">Jumlah</th>
-                                <th class="text-center" scope="col">Hari dan Tanggal</th>
-                                <th class="text-center" scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            date_default_timezone_set('Asia/jakarta');
-                            $today = date("Y-m-i H:i:s");
-                            foreach ($tbl_simpanan_u as $simpan) {
-                            ?>
+                        <?php if ($cek > 0) : ?>
+                            <thead class="table-dark">
                                 <tr>
-                                    <td><?= $no++ ?></td>
-                                    <td><?= $simpan['nama'] ?></td>
-                                    <td><?= $simpan['jumlah_simpan'] ?></td>
-                                    <td><?= $simpan['tgl_simpan'] ?></td>
-                                    <td>aksi</td>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Jumlah</th>
+                                    <th scope="col">Hari dan Tanggal</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
-                            <?php } ?>
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                date_default_timezone_set('Asia/jakarta');
+                                $today = date("Y-m-i H:i:s");
+                                foreach ($tbl_simpanan_u as $simpan) {
+                                ?>
+                                    <tr>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= $simpan['nama'] ?></td>
+                                        <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
+                                        <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
+                                        <td>aksi</td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        <?php else : ?>
+                            <div class="text-center">
+                                <span class="fw-bold text-uppercase fs-3">Maaf Anda Blm Punya Pinjaman</span>
+                            </div>
+                        <?php endif ?>
                     <?php endif ?>
                 </table>
             <?php endif ?>

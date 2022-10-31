@@ -21,8 +21,8 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Pinjaman</th>
-                        <th scope="col">Tanggal Pinjam</th>
+                        <th scope="col">Pengembalian</th>
+                        <th scope="col">Tanggal Pengembalian</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>

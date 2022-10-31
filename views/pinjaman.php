@@ -21,7 +21,7 @@ $cek = mysqli_num_rows($querySimpan);
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
 $confirmArray = mysqli_fetch_array($confirmQuery);
 ?>
-<div class="container-fluid pt-3">
+<div class="container-fluid py-3">
     <div class="card">
         <div class="card-header p-4 d-flex justify-content-between align-items-center">
             <?php if (isset($_POST['btambah'])) : ?>
@@ -92,7 +92,7 @@ $confirmArray = mysqli_fetch_array($confirmQuery);
                             foreach ($tbl_pinjaman_a as $pinjam) {
                             ?>
                                 <tr>
-                                    <td class="text-end"><?= $no++ ?></td>
+                                    <td><?= $no++ ?></td>
                                     <td><?= $pinjam['nama'] ?></td>
                                     <td class="text-center"><?= $pinjam['jumlah_pinjam'] ?></td>
                                     <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
@@ -142,7 +142,7 @@ $confirmArray = mysqli_fetch_array($confirmQuery);
                                 foreach ($tbl_pinjaman_u as $pinjam) {
                                 ?>
                                     <tr>
-                                        <td class="text-end"><?= $no++ ?></td>
+                                        <td><?= $no++ ?></td>
                                         <td><?= $pinjam['nama'] ?></td>
                                         <td class="text-center"><?= $pinjam['jumlah_pinjam'] ?></td>
                                         <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
