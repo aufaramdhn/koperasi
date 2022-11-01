@@ -5,6 +5,13 @@ require("../koneksi.php");
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
 
+if (isset($_GET['id_pengembalian'])) {
+    $id = $_GET['id_pengembalian'];
+    $sql = mysqli_query($koneksi, "DELETE FROM tbl_pengembalian WHERE id_pengembalian= '$id'");
+
+    header("Location: pengembalian_admin.php");
+}
+
 
 if (isset($_POST['bpengembalian'])) {
 

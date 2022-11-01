@@ -14,10 +14,6 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 ?>
 <div class="container-fluid py-3">
-    <button id="delte">
-        Click Me!!?
-    </button>
-
     <div class="card">
         <div class="card-header p-4 d-flex justify-content-between align-items-center">
             <?php if (isset($_POST['btambah'])) : ?>
@@ -38,9 +34,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
         </div>
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
-                <?php if (($data_u['tempat_lahir'] and $data_u['tgl_lahir'] and $data_u['jk'] and $data_u['agama'] and $data_u['pekerjaan'] and $data_u['alamat']) == '') : ?>
-                    <span>Maaf Data Diri Anda Belum Lengkap</span>
-                <?php else : ?>
+                <?php if ($_SESSION['admin'] = 'admin') : ?>
                     <form method="POST">
                         <div class="container">
                             <div class="mb-3">
@@ -56,9 +50,29 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                             </div>
                         </div>
                     </form>
+                <?php else : ?>
+                    <?php if (($data_u['tempat_lahir'] and $data_u['tgl_lahir'] and $data_u['jk'] and $data_u['agama'] and $data_u['pekerjaan'] and $data_u['alamat']) == '') : ?>
+                        <span>Maaf Data Diri Anda Belum Lengkap</span>
+                    <?php else : ?>
+                        <form method="POST">
+                            <div class="container">
+                                <div class="mb-3">
+                                    <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="jumlah-pinjaman" class="form-label">Jumlah Sinjaman</label>
+                                    <input type="number" min="0" max="10000000" class="form-control" name="jumlah" id="jumlah-pinjaman">
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary" name="bsimpan">Sinjam</button>
+                                </div>
+                            </div>
+                        </form>
+                    <?php endif ?>
                 <?php endif ?>
             <?php else : ?>
-                <table id="example" class="table table-responsive table-bordered table-striped">
+                <table id="example" class="table table-responsive table-bordered table-striped d-md-block d-lg-table overflow-auto">
                     <?php if ($_SESSION['level'] == 'admin') : ?>
                         <thead class="table-dark">
                             <tr>
@@ -80,13 +94,8 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                                     <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
                                     <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
                                     <td class="text-center">
-                                        <div class="d-flex justify-content-center">
-                                            <a button class="btn btn-sm btn-success me-1" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
-                                            <form action="simpanan_proses.php" method="POST">
-                                                <input type="hidden" name="id_simpan" value="<?= $simpan['id_simpan'] ?>">
-                                                <button name="bhapus" class="btn btn-sm btn-danger"><i class='bx bx-trash'></i></button>
-                                            </form>
-                                        </div>
+                                        <a button class="btn btn-sm btn-success me-1" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                        <a button class="btn btn-delete btn-sm btn-danger" href="simpanan_proses.php?id_simpan=<?= $simpan['id_simpan'] ?>"><i class='bx bx-trash'></i></a>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -120,7 +129,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                             </tbody>
                         <?php else : ?>
                             <div class="text-center">
-                                <span class="fw-bold text-uppercase fs-3">Maaf Anda Blm Punya Pinjaman</span>
+                                <span class="fw-bold text-uppercase fs-3">Maaf Anda Blm Punya Sinjaman</span>
                             </div>
                         <?php endif ?>
                     <?php endif ?>

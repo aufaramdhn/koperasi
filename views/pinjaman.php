@@ -74,7 +74,7 @@ $confirmArray = mysqli_fetch_array($confirmQuery);
                     </div>
                 <?php endif ?>
             <?php else : ?>
-                <table id="example" class="table table-striped table-bordered">
+                <table id="example" class="table table-striped table-bordered d-md-block d-lg-table overflow-sm-auto">
                     <?php if ($_SESSION['level'] == 'admin') : ?>
                         <thead class="table-dark">
                             <tr>
@@ -119,7 +119,7 @@ $confirmArray = mysqli_fetch_array($confirmQuery);
                                     </td>
                                     <td class="text-center">
                                         <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
-                                        <a button class="btn btn-sm btn-danger"><i class='bx bx-trash'></i></a>
+                                        <a button class="btn btn-delete btn-sm btn-danger" href="pinjaman_proses.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>"><i class='bx bx-trash'></i></a>
                                     </td>
                                 </tr>
                             <?php } ?>

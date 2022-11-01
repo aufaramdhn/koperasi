@@ -92,7 +92,7 @@ session_start();
                     <?php endif ?>
                 </div>
             </div>
-            <a href="../views/logout.php" class="nav_link">
+            <a href="../views/logout.php" class="nav_link btn-logout">
                 <i class='bx bx-log-out nav_icon'></i>
                 <span class="nav_name">SignOut</span>
             </a>

@@ -96,7 +96,7 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                         <input class="form-control mb-3 d-flex justify-content-end" type="text" placeholder="Cari Disini">
                     </div>
                 </div>
-                <table id="example" class="table table-sm table-responsive table-bordered">
+                <table id="example" class="table table-sm table-responsive table-bordered d-md-block d-lg-table overflow-auto">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">No</th>
@@ -121,7 +121,7 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                                 <td class="text-center">
                                     <a button class="btn btn-sm btn-info text-white"><i class='bx bx-edit'></i></a>
                                     <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
-                                    <a button class="btn btn-sm btn-danger"><i class='bx bx-trash'></i></a>
+                                    <a button class="btn btn-delete btn-sm btn-danger" href="user_proses.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-trash'></i></a>
                                 </td>
                             </tr>
                         <?php } ?>
