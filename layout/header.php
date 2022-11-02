@@ -60,7 +60,7 @@ session_start();
                             <i class='bx bx-user nav_icon'></i>
                             <span class="nav_name">Users</span>
                         </a>
-                        <a href="../views/simpanan.php" class="nav_link">
+                        <a href="../views/simpanan_admin.php" class="nav_link">
                             <i class='bx bx-wallet nav_icon'></i>
                             <span class="nav_name">SImpanan</span>
                         </a>
@@ -77,7 +77,7 @@ session_start();
                             <i class='bx bx-grid-alt nav_icon'></i>
                             <span class="nav_name">Dashboard</span>
                         </a>
-                        <a href="../views/simpanan.php" class="nav_link">
+                        <a href="../views/simpanan_user.php" class="nav_link">
                             <i class='bx bx-wallet nav_icon'></i>
                             <span class="nav_name">Simpanan</span>
                         </a>

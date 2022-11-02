@@ -17,13 +17,16 @@ if (isset($_POST['bpengembalian'])) {
 
     $id_konfirmasi = $_POST['id_konfirmasi_pinjam'];
     $jumlah = $_POST['jumlah'];
+    $denda = $_POST['denda'];
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$jumlah', '$today');");
+    $total = $jumlah + $denda;
+
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$total', '$today');");
     if ($sql == true) {
         echo "<script>alert('Data Anda Telah Berhasil Di Tambahkan, dan akan di konfirmasi oleh admin');</script>";
-        echo "<script>window.location=' pinjaman.php'</script>";
+        echo "<script>window.location=' pengembalian_user.php'</script>";
     } else {
         echo "<script>alert('Data Anda Gagal Ditambahkan');</script>";
-        echo "<script>window.location=' pinjaman.php'</script>";
+        echo "<script>window.location=' pengembalian_user.php'</script>";
     }
 }

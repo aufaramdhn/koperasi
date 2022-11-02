@@ -20,6 +20,13 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
 
 ?>
 
+<!-- Alert -->
+<?php if (isset($_SESSION['info'])) : ?>
+    <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
+<?php
+    unset($_SESSION['info']);
+endif;
+?>
 
 <div class="container pt-5">
     <?php if ($_SESSION['level'] == 'admin') : ?>

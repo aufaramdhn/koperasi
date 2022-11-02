@@ -18,6 +18,14 @@ require_once "koneksi.php";
 </head>
 
 <body class="overflow-hidden">
+    <!-- Alert -->
+    <?php if (isset($_SESSION['info'])) : ?>
+        <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
+    <?php
+        unset($_SESSION['info']);
+    endif;
+    ?>
+
     <div class="row" style="background-color: #FFF7E9;">
         <div class="col">
             <img class="img-login" src="assets/img/background-login.jpg" alt="background-login">
@@ -50,6 +58,30 @@ require_once "koneksi.php";
     </div>
 
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/script/jquery.js"></script>
+
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="assets/js/sweetalert.js"></script>
+
+    <script src="assets/script/alert.js"></script>
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/script/jquery.js"></script>
+
+    <script src="assets/script/sidebar.js"></script>
+
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="assets/js/datatables.min.js"></script>
+
+    <script src="assets/js/custom.js"></script>
+
+    <script src="assets/js/sweetalert.js"></script>
+
+    <script src="assets/script/alert.js"></script>
 </body>
 
 </html>
@@ -72,20 +104,11 @@ if (isset($_POST['submit'])) {
             $_SESSION['nama'] =  $row['nama'];
             $_SESSION['email'] =  $row['email'];
             $_SESSION['level'] = $row['level'];
-
-            echo "
-            <script>
-            alert('Login Berhasil');
-            document.location.href = 'views/index.php';
-            </script>
-            ";
+            $_SESSION['info'] = "Berhasil";
+            header("Location: views/index.php");
         } else {
-            echo "
-            <script>
-            alert('Login Gagal');
-            document.location.href = 'index.php';
-            </script>
-            ";
+            $_SESSION['info'] = 'Kosong';
+            header("Location: index.php");
         }
     }
 }
