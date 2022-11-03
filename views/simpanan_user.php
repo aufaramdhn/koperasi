@@ -40,13 +40,15 @@ endif;
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
                 <?php if (($data_u['tempat_lahir'] and $data_u['tgl_lahir'] and $data_u['jk'] and $data_u['agama'] and $data_u['pekerjaan'] and $data_u['alamat']) == '') : ?>
-                    <span>Maaf Data Diri Anda Belum Lengkap</span>
+                    <div class="text-center">
+                        <span class="fw-bold text-uppercase fs-3">Maaf Data Diri Anda Belum Lengkap, harap isi data diri anda <a href="profile.php">disini</a></span>
+                    </div>
                 <?php else : ?>
                     <form action="simpanan_proses.php" method="POST">
                         <div class="container">
                             <div class="mb-3">
                                 <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['id_user'] ?>" disabled>
+                                <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
                             </div>
                             <div class="mb-3">
                                 <label for="jumlah-pinjaman" class="form-label">Jumlah Sinjaman</label>
@@ -60,37 +62,31 @@ endif;
                 <?php endif ?>
             <?php else : ?>
                 <table id="example" class="table table-responsive table-bordered table-striped d-md-block d-lg-table overflow-auto">
-                    <?php if ($cek > 0) : ?>
-                        <thead class="table-dark">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Jumlah</th>
+                            <th scope="col">Hari dan Tanggal</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        date_default_timezone_set('Asia/jakarta');
+                        $today = date("Y-m-i H:i:s");
+                        foreach ($tbl_simpanan_u as $simpan) {
+                        ?>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Jumlah</th>
-                                <th scope="col">Hari dan Tanggal</th>
-                                <th scope="col">Aksi</th>
+                                <td><?= $no++ ?></td>
+                                <td><?= $simpan['nama'] ?></td>
+                                <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
+                                <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
+                                <td>aksi</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            date_default_timezone_set('Asia/jakarta');
-                            $today = date("Y-m-i H:i:s");
-                            foreach ($tbl_simpanan_u as $simpan) {
-                            ?>
-                                <tr>
-                                    <td><?= $no++ ?></td>
-                                    <td><?= $simpan['nama'] ?></td>
-                                    <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
-                                    <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
-                                    <td>aksi</td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    <?php else : ?>
-                        <div class="text-center">
-                            <span class="fw-bold text-uppercase fs-3">Maaf Anda Blm Punya Sinjaman</span>
-                        </div>
-                    <?php endif ?>
+                        <?php } ?>
+                    </tbody>
                 </table>
             <?php endif ?>
         </div>

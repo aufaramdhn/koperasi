@@ -18,7 +18,7 @@ $confirmArray = mysqli_fetch_array($confirmQuery);
                 Pengembalian
             </span>
             <form method="POST">
-                <a type="submit" href="pinjaman.php" class="btn btn-danger">Kembali</a>
+                <a type="submit" href="pinjaman_user.php" class="btn btn-danger">Kembali</a>
             </form>
         </div>
         <div class="card-body">
@@ -36,7 +36,7 @@ $confirmArray = mysqli_fetch_array($confirmQuery);
                     <?php if ($today  >= $confirmArray['expired']) : ?>
                         <div class="mb-3">
                             <label for="jumlah-denda" class="form-label">Anda Dikenakan Denda</label>
-                            <input type="number" class="form-control" id="jumlah-denda" name="denda" value="200000" disabled>
+                            <input type="number" class="form-control" id="jumlah-denda" name="denda" value="200000">
                         </div>
                     <?php endif ?>
                     <div class="d-flex justify-content-end">

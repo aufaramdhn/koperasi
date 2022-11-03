@@ -13,7 +13,6 @@ session_start();
     <meta name="generator" content="Hugo 0.104.2">
     <title>Koperasi</title>
 
-
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../admin/dashboard.css" rel="stylesheet">
@@ -25,7 +24,6 @@ session_start();
     <link rel="stylesheet" href="../assets/css/datatables.min.css">
 
     <script src="../assets/script/chart.js"></script>
-
 </head>
 
 
@@ -62,9 +60,9 @@ session_start();
                         </a>
                         <a href="../views/simpanan_admin.php" class="nav_link">
                             <i class='bx bx-wallet nav_icon'></i>
-                            <span class="nav_name">SImpanan</span>
+                            <span class="nav_name">Simpanan</span>
                         </a>
-                        <a href="../views/pinjaman.php" class="nav_link">
+                        <a href="../views/pinjaman_admin.php" class="nav_link">
                             <i class='bx bx-money-withdraw nav_icon'></i>
                             <span class="nav_name">Pinjaman</span>
                         </a>
@@ -81,7 +79,7 @@ session_start();
                             <i class='bx bx-wallet nav_icon'></i>
                             <span class="nav_name">Simpanan</span>
                         </a>
-                        <a href="../views/pinjaman.php" class="nav_link">
+                        <a href="../views/pinjaman_user.php" class="nav_link">
                             <i class='bx bx-money-withdraw nav_icon'></i>
                             <span class="nav_name">Pinjaman</span>
                         </a>

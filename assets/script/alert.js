@@ -7,7 +7,6 @@ $(".btn-delete").on("click", function (e) {
     text: "Record will be deleted?",
     type: "warning",
     icon: "warning",
-    timer: 1500,
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
@@ -59,15 +58,37 @@ if (notifikasi == "Disimpan") {
   Swal.fire({
     position: "center",
     icon: "warning",
-    title: "Username atau password anda kosong",
+    title: "Warning",
+    text: "Username atau password anda salah",
     showConfirmButton: false,
-    timer: 1500,
+    timer: 2000,
   });
 } else if (notifikasi == "Berhasil") {
   Swal.fire({
     icon: "success",
     title: "Anda berhasil login",
     text: "Selamat datang diwebsite koperasi kami",
+    showConfirmButton: false,
+    timer: 1500,
+  });
+} else if (notifikasi == "Konfirmasi") {
+  Swal.fire({
+    icon: "success",
+    title: "Data telah dikonfirmasi",
+    showConfirmButton: false,
+    timer: 1500,
+  });
+} else if (notifikasi == "Tolak") {
+  Swal.fire({
+    icon: "error",
+    title: "Data telah ditolak",
+    showConfirmButton: false,
+    timer: 1500,
+  });
+} else if (notifikasi == "Selesai") {
+  Swal.fire({
+    icon: "success",
+    title: "Data telah selesai",
     showConfirmButton: false,
     timer: 1500,
   });

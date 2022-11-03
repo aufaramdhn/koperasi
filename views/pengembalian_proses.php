@@ -24,9 +24,9 @@ if (isset($_POST['bpengembalian'])) {
     $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$total', '$today');");
     if ($sql == true) {
         echo "<script>alert('Data Anda Telah Berhasil Di Tambahkan, dan akan di konfirmasi oleh admin');</script>";
-        echo "<script>window.location=' pengembalian_user.php'</script>";
+        echo "<script>window.location=' pinjaman_user.php'</script>";
     } else {
         echo "<script>alert('Data Anda Gagal Ditambahkan');</script>";
-        echo "<script>window.location=' pengembalian_user.php'</script>";
+        echo "<script>window.location=' pinjaman_user.php'</script>";
     }
 }

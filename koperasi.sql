@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Nov 2022 pada 14.05
+-- Waktu pembuatan: 03 Nov 2022 pada 10.51
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -39,11 +39,9 @@ CREATE TABLE `konfirmasi_pinjam` (
 --
 
 INSERT INTO `konfirmasi_pinjam` (`id_konfirmasi_pinjam`, `id_pinjam`, `tgl_konfirmasi`, `expired`) VALUES
-(10, 27, '2022-10-30 12:45:00', '2022-11-30 00:00:00'),
-(11, 28, '2022-10-30 13:26:12', '2022-10-29 00:00:00'),
-(12, 29, '2022-10-30 13:26:14', '2022-09-30 00:00:00'),
-(13, 36, '2022-10-31 08:27:25', '2022-09-30 08:27:25'),
-(14, 37, '2022-10-31 08:38:14', '2022-11-30 08:38:14');
+(1, 1, '2022-11-03 12:32:14', '2022-11-01 12:32:14'),
+(2, 3, '2022-11-03 15:07:11', '2022-12-03 15:07:11'),
+(3, 5, '2022-11-03 15:08:22', '2022-12-03 15:08:22');
 
 -- --------------------------------------------------------
 
@@ -57,6 +55,13 @@ CREATE TABLE `tbl_pengembalian` (
   `jumlah_pengembalian` bigint(20) NOT NULL,
   `tgl_pengembalian` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_pengembalian`
+--
+
+INSERT INTO `tbl_pengembalian` (`id_pengembalian`, `id_konfirmasi_pinjam`, `jumlah_pengembalian`, `tgl_pengembalian`) VALUES
+(3, 1, 2200000, '2022-11-03 12:41:05');
 
 -- --------------------------------------------------------
 
@@ -77,9 +82,12 @@ CREATE TABLE `tbl_pinjam` (
 --
 
 INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tgl_pinjam`, `status`) VALUES
-(30, 0, '120000', '2022-10-30 19:31:29', 'pending'),
-(31, 0, '123213', '2022-10-30 19:31:51', 'pending'),
-(32, 0, '1231412', '2022-10-30 19:32:26', 'pending');
+(1, 2, '2000000', '2022-11-03 12:31:35', 'selesai'),
+(2, 2, '1500000', '2022-11-03 15:01:22', 'tolak'),
+(3, 2, '1500000', '2022-11-03 15:07:04', 'selesai'),
+(4, 2, '1500000', '2022-11-03 15:07:17', 'tolak'),
+(5, 2, '1500000', '2022-11-03 15:08:13', 'selesai'),
+(6, 2, '2300000', '2022-11-03 15:08:30', 'tolak');
 
 -- --------------------------------------------------------
 
@@ -99,39 +107,10 @@ CREATE TABLE `tbl_simpan` (
 --
 
 INSERT INTO `tbl_simpan` (`id_simpan`, `id_user`, `jumlah_simpan`, `tgl_simpan`) VALUES
-(45, 1, 150000, '2022-11-02 12:29:17'),
-(46, 0, 1500000, '2022-11-02 12:32:15'),
-(47, 0, 150000, '2022-11-02 12:32:28'),
-(48, 0, 1231231, '2022-11-02 12:33:11'),
-(49, 0, 1231313, '2022-11-02 12:33:14'),
-(50, 0, 1599999, '2022-11-02 12:33:42'),
-(51, 0, 1500000, '2022-11-02 12:34:10'),
-(52, 0, 1500000, '2022-11-02 12:34:16'),
-(53, 0, 1500000, '2022-11-02 12:34:24'),
-(54, 0, 1400000, '2022-11-02 12:34:59'),
-(55, 0, 150000, '2022-11-02 12:35:36'),
-(56, 0, 1509000, '2022-11-02 12:36:59'),
-(57, 0, 1423123, '2022-11-02 12:37:14'),
-(58, 0, 150000, '2022-11-02 12:42:17'),
-(59, 0, 150000, '2022-11-02 12:42:38'),
-(60, 0, 150000, '2022-11-02 12:42:47'),
-(61, 3, 1500000, '2022-11-02 12:44:42'),
-(62, 3, 1500000, '2022-11-02 12:44:47'),
-(63, 3, 1500000, '2022-11-02 12:45:03'),
-(64, 1, 0, '2022-11-02 12:45:23'),
-(65, 1, 150000, '2022-11-02 12:45:28'),
-(66, 1, 150000, '2022-11-02 12:45:46'),
-(67, 3, 0, '2022-11-02 12:47:40'),
-(68, 1, 0, '2022-11-02 12:47:44'),
-(69, 0, 150000, '2022-11-02 12:52:44'),
-(70, 0, 150000, '2022-11-02 12:53:17'),
-(71, 0, 150000, '2022-11-02 12:53:40'),
-(72, 0, 1500000, '2022-11-02 12:54:31'),
-(73, 0, 1600000, '2022-11-02 12:54:45'),
-(74, 0, 1600000, '2022-11-02 12:55:58'),
-(75, 0, 14, '2022-11-02 12:57:20'),
-(76, 0, 14, '2022-11-02 12:57:52'),
-(77, 0, 14, '2022-11-02 12:58:08');
+(1, 2, 1500000, '2022-11-03 03:34:53'),
+(3, 2, 1500000, '2022-11-03 05:54:53'),
+(6, 2, 2000000, '2022-11-03 05:55:30'),
+(7, 2, 1500000, '2022-11-03 07:58:36');
 
 -- --------------------------------------------------------
 
@@ -145,7 +124,7 @@ CREATE TABLE `tbl_user` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `tempat_lahir` varchar(100) NOT NULL,
-  `tgl_lahir` varchar(100) NOT NULL,
+  `tgl_lahir` date NOT NULL,
   `jk` varchar(100) NOT NULL,
   `agama` varchar(100) NOT NULL,
   `pekerjaan` varchar(100) NOT NULL,
@@ -160,8 +139,8 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id_user`, `nama`, `email`, `password`, `tempat_lahir`, `tgl_lahir`, `jk`, `agama`, `pekerjaan`, `telp`, `alamat`, `level`, `created_at`) VALUES
-(1, 'Mirza El Fandi', 'mirza@gmail.com', '987', 'Bogor', '2004-08-11', 'LK', 'islam', 'CEO', '08912384123', 'AAA', 'admin', '2022-11-01 03:17:23'),
-(3, 'Adi Saputra', 'adi@gmail.com', '123', 'Bogor', '2005-03-11', 'LAKIK', 'islam', 'CEO', '08123948123', 'GBJ', 'user', '2022-10-31 23:31:23');
+(1, 'Aufa Ramadhan', 'aufa@gmail.com', '123', 'Bogor', '2004-11-08', 'Laki', 'Islam', 'CEO', '081398057408', 'GBJ', 'admin', '2022-11-03 03:22:36'),
+(2, 'User', 'user@gmail.com', '123', 'Bogor', '2004-11-08', 'Laki', 'Islam', 'CEO', '081398057408', 'GBJ', 'user', '2022-11-03 05:29:34');
 
 --
 -- Indexes for dumped tables
@@ -209,31 +188,31 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `konfirmasi_pinjam`
 --
 ALTER TABLE `konfirmasi_pinjam`
-  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pengembalian`
 --
 ALTER TABLE `tbl_pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pinjam`
 --
 ALTER TABLE `tbl_pinjam`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_simpan`
 --
 ALTER TABLE `tbl_simpan`
-  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

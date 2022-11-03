@@ -91,11 +91,6 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                     </div>
                 </form>
             <?php else : ?>
-                <div class="d-flex justify-content-end">
-                    <div>
-                        <input class="form-control mb-3 d-flex justify-content-end" type="text" placeholder="Cari Disini">
-                    </div>
-                </div>
                 <table id="example" class="table table-sm table-responsive table-bordered d-md-block d-lg-table overflow-auto">
                     <thead class="table-dark">
                         <tr>
@@ -127,15 +122,6 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                         <?php } ?>
                     </tbody>
                 </table>
-                <nav class="mt-3 d-flex justify-content-end" aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
             <?php endif ?>
         </div>
     </div>

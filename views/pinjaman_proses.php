@@ -15,13 +15,11 @@ if (isset($_POST['konfirmasi'])) {
     $select = "UPDATE tbl_pinjam SET status = 'konfirmasi' WHERE id_pinjam = '$id'";
     $result_select = mysqli_query($koneksi, $select);
 
-    $confirm = "INSERT INTO konfirmasi_pinjam VALUES ('','$id','$today','$expired   ')";
+    $confirm = "INSERT INTO konfirmasi_pinjam VALUES ('','$id','$today','$expired')";
     $result_confirm = mysqli_query($koneksi, $confirm);
 
-    echo '<script type = "text/javascript">';
-    echo 'alert("Pesanan Telah Di Konfirmasi");';
-    echo 'window.location.href = "pinjaman.php"';
-    echo '</script>';
+    $_SESSION['info'] = 'Konfirmasi';
+    header("Location: pinjaman_admin.php");
 }
 
 if (isset($_POST['tolak'])) {
@@ -30,10 +28,8 @@ if (isset($_POST['tolak'])) {
     $select = "UPDATE tbl_pinjam SET status = 'tolak' WHERE id_pinjam = '$id'";
     $result = mysqli_query($koneksi, $select);
 
-    echo '<script type = "text/javascript">';
-    echo 'alert("Pesanan Di Tolak");';
-    echo 'window.location.href = "pinjaman.php"';
-    echo '</script>';
+    $_SESSION['info'] = 'Tolak';
+    header("Location: pinjaman_admin.php");
 }
 
 if (isset($_POST['selesai'])) {
@@ -42,13 +38,28 @@ if (isset($_POST['selesai'])) {
     $select = "UPDATE tbl_pinjam SET status = 'selesai' WHERE id_pinjam = '$id'";
     $result = mysqli_query($koneksi, $select);
 
-    echo '<script type = "text/javascript">';
-    echo 'alert("Pesanan Sudah Selesai");';
-    echo 'window.location.href = "pinjaman.php"';
-    echo '</script>';
+    $_SESSION['info'] = 'Selesai';
+    header("Location: pinjaman_admin.php");
 }
 
-if (isset($_POST['bpinjam'])) {
+if (isset($_POST['bpinjamadmin'])) {
+
+    $id = $_POST['nama'];
+    $jumlah = $_POST['jumlah'];
+    $tgl_pinjam = $_POST['tgl_pinjam'];
+
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$jumlah', '$tgl_pinjam', 'pending');");
+    if ($sql == true) {
+
+        $_SESSION['info'] = 'Disimpan';
+        header("Location: pinjaman_admin.php");
+    } else {
+        $_SESSION['info'] = 'Gagal';
+        header("Location: pinjaman_admin.php");
+    }
+}
+
+if (isset($_POST['bpinjamuser'])) {
 
     $id = $_SESSION['id_user'];
     $jumlah = $_POST['jumlah'];
@@ -56,11 +67,12 @@ if (isset($_POST['bpinjam'])) {
 
     $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$jumlah', '$tgl_pinjam', 'pending');");
     if ($sql == true) {
-        echo "<script>alert('Data Anda Telah Berhasil Di Tambahkan, dan akan di konfirmasi oleh admin');</script>";
-        echo "<script>window.location=' pinjaman.php'</script>";
+
+        $_SESSION['info'] = 'Disimpan';
+        header("Location: pinjaman_user.php");
     } else {
-        echo "<script>alert('Data Anda Gagal Ditambahkan');</script>";
-        echo "<script>window.location=' pinjaman.php'</script>";
+        $_SESSION['info'] = 'Gagal';
+        header("Location: pinjaman_user.php");
     }
 }
 
