@@ -31,12 +31,12 @@ $confirmArray = mysqli_fetch_array($confirmQuery);
                     </div>
                     <div class="mb-3">
                         <label for="jumlah-pinjaman" class="form-label">Jumlah Pengembalian</label>
-                        <input type="number" class="form-control" id="jumlah-pinjaman" name="jumlah" value="<?= $confirmArray['jumlah_pinjam'] ?>">
+                        <input type="number" class="form-control" id="jumlah-pinjaman" name="jumlah" value="<?= $confirmArray['jumlah_pinjam'] ?>" readonly>
                     </div>
                     <?php if ($today  >= $confirmArray['expired']) : ?>
                         <div class="mb-3">
-                            <label for="jumlah-denda" class="form-label">Anda Dikenakan Denda</label>
-                            <input type="number" class="form-control" id="jumlah-denda" name="denda" value="200000">
+                            <label for="jumlah-denda" class="form-label">Anda Dikenakan Denda, karena melebihi waktu yang di tentukan</label>
+                            <input type="number" class="form-control" id="jumlah-denda" name="denda" value="200000" readonly>
                         </div>
                     <?php endif ?>
                     <div class="d-flex justify-content-end">

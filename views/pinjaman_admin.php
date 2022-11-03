@@ -102,9 +102,11 @@ endif;
                                 <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status'] == 'konfirmasi') { ?>
+                                        <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
+                                    <?php } else if ($pinjam['status'] == 'pengembalian') { ?>
                                         <div class="d-flex justify-content-center align-items-center">
                                             <div class="me-1">
-                                                <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
+                                                <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pengembalian</span>
                                             </div>
                                             <form action="pinjaman_proses.php" method="POST">
                                                 <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">

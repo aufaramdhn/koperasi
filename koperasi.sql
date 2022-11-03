@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Nov 2022 pada 10.51
+-- Waktu pembuatan: 03 Nov 2022 pada 14.18
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -41,7 +41,8 @@ CREATE TABLE `konfirmasi_pinjam` (
 INSERT INTO `konfirmasi_pinjam` (`id_konfirmasi_pinjam`, `id_pinjam`, `tgl_konfirmasi`, `expired`) VALUES
 (1, 1, '2022-11-03 12:32:14', '2022-11-01 12:32:14'),
 (2, 3, '2022-11-03 15:07:11', '2022-12-03 15:07:11'),
-(3, 5, '2022-11-03 15:08:22', '2022-12-03 15:08:22');
+(3, 5, '2022-11-03 15:08:22', '2022-12-03 15:08:22'),
+(4, 7, '2022-11-03 19:51:12', '2022-11-03 19:51:12');
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,12 @@ CREATE TABLE `tbl_pengembalian` (
 --
 
 INSERT INTO `tbl_pengembalian` (`id_pengembalian`, `id_konfirmasi_pinjam`, `jumlah_pengembalian`, `tgl_pengembalian`) VALUES
-(3, 1, 2200000, '2022-11-03 12:41:05');
+(3, 1, 2200000, '2022-11-03 12:41:05'),
+(4, 4, 1700000, '2022-11-03 19:59:16'),
+(5, 4, 1700000, '2022-11-03 20:02:09'),
+(6, 4, 1700000, '2022-11-03 20:02:43'),
+(7, 4, 1700000, '2022-11-03 20:03:19'),
+(8, 4, 1700000, '2022-11-03 20:03:32');
 
 -- --------------------------------------------------------
 
@@ -82,12 +88,8 @@ CREATE TABLE `tbl_pinjam` (
 --
 
 INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tgl_pinjam`, `status`) VALUES
-(1, 2, '2000000', '2022-11-03 12:31:35', 'selesai'),
-(2, 2, '1500000', '2022-11-03 15:01:22', 'tolak'),
-(3, 2, '1500000', '2022-11-03 15:07:04', 'selesai'),
-(4, 2, '1500000', '2022-11-03 15:07:17', 'tolak'),
-(5, 2, '1500000', '2022-11-03 15:08:13', 'selesai'),
-(6, 2, '2300000', '2022-11-03 15:08:30', 'tolak');
+(2, 2, '1500000', '2022-11-03 15:01:22', 'selesai'),
+(7, 2, '1500000', '2022-11-03 19:51:01', 'konfirmasi');
 
 -- --------------------------------------------------------
 
@@ -188,19 +190,19 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `konfirmasi_pinjam`
 --
 ALTER TABLE `konfirmasi_pinjam`
-  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pengembalian`
 --
 ALTER TABLE `tbl_pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pinjam`
 --
 ALTER TABLE `tbl_pinjam`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_simpan`

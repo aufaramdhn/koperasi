@@ -30,58 +30,58 @@ $data    = mysqli_fetch_array($profile);
                     <div class="mb-3 row">
                         <label for="nama-lengkap" class="col-sm-2 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nama-lengkap" value="<?= $data['nama'] ?>">
+                            <input type="text" class="form-control" id="nama-lengkap" name="nama" value="<?= $data['nama'] ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="email" value="<?= $data['email'] ?>">
+                            <input type="text" class="form-control" id="email" name="email" value="<?= $data['email'] ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="password" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" value="<?= $data['password'] ?>">
+                            <input type="password" class="form-control" id="password" name="password" value="<?= $data['password'] ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">Tempat, Tanggal Lahir</label>
                         <div class="col-2">
-                            <input type="text" class="form-control" value="<?= $data['tempat_lahir'] ?>">
+                            <input type="text" class="form-control" name="tempat" value="<?= $data['tempat_lahir'] ?>">
                         </div>
                         <div class="col-8">
-                            <input type="date" class="form-control" value="<?= $data['tgl_lahir'] ?>">
+                            <input type="date" class="form-control" name="tgl" value="<?= $data['tgl_lahir'] ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="jenis-kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="jenis-kelamin" value="<?= $data['jk'] ?>">
+                            <input type="text" class="form-control" id="jenis-kelamin" name="jk" value="<?= $data['jk'] ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="agama" class="col-sm-2 col-form-label">Agama</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="agama" value="<?= $data['agama'] ?>">
+                            <input type="text" class="form-control" id="agama" name="agama" value="<?= $data['agama'] ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="pekerjaan" value="<?= $data['pekerjaan'] ?>">
+                            <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" value="<?= $data['pekerjaan'] ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="no-telepon" class="col-sm-2 col-form-label">No. Telepon</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="no-telepon" value="<?= $data['telp'] ?>">
+                            <input type="text" class="form-control" id="no-telepon" name="telp" value="<?= $data['telp'] ?>">
                         </div>
                     </div>
                     <div class="mb-4 row">
                         <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" rows="3" id="alamat" value="<?= $data['alamat'] ?>">
+                            <input type="text" class="form-control" rows="3" name="alamat" id="alamat" value="<?= $data['alamat'] ?>">
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">

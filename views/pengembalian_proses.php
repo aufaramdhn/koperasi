@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require("../koneksi.php");
 
 date_default_timezone_set('Asia/jakarta');
@@ -15,11 +17,15 @@ if (isset($_GET['id_pengembalian'])) {
 
 if (isset($_POST['bpengembalian'])) {
 
+    $id = $_SESSION['id_user'];
     $id_konfirmasi = $_POST['id_konfirmasi_pinjam'];
     $jumlah = $_POST['jumlah'];
     $denda = $_POST['denda'];
 
     $total = $jumlah + $denda;
+
+    $select = "UPDATE tbl_pinjam SET status = 'pengembalian' WHERE id_pinjam = '$id'";
+    $result_select = mysqli_query($koneksi, $select);
 
     $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$total', '$today');");
     if ($sql == true) {

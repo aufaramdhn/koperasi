@@ -110,6 +110,8 @@ endif;
                                         <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
                                     <?php } else if ($pinjam['status'] == 'tolak') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
+                                    <?php } else if ($pinjam['status'] == 'pengembalian') { ?>
+                                        <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pengembalian</span>
                                     <?php } else if ($pinjam['status'] == 'selesai') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Selesai</span>
                                     <?php } else if ($pinjam['status'] == 'pending') { ?>

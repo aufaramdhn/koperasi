@@ -80,5 +80,5 @@ if (isset($_GET['id_pinjam'])) {
     $id = $_GET['id_pinjam'];
     $sql = mysqli_query($koneksi, "DELETE FROM tbl_pinjam WHERE id_pinjam= '$id'");
 
-    header("Location: pinjaman.php");
+    header("Location: pinjaman_admin.php");
 }
