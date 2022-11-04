@@ -32,6 +32,16 @@ if (isset($_POST['tolak'])) {
     header("Location: pinjaman_admin.php");
 }
 
+if (isset($_POST['pengembalian'])) {
+    $id = $_POST['id_pinjam'];
+
+    $select = "UPDATE tbl_pinjam SET status = 'pengembalian' WHERE id_pinjam = '$id'";
+    $result = mysqli_query($koneksi, $select);
+
+    $_SESSION['info'] = 'Disimpan';
+    header("Location: pinjaman_admin.php");
+}
+
 if (isset($_POST['selesai'])) {
     $id = $_POST['id_pinjam'];
 

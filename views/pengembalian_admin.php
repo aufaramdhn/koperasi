@@ -5,8 +5,6 @@ include "../koneksi.php";
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
 
-
-
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam)");
 
 ?>

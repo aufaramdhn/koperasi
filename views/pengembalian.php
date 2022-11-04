@@ -27,6 +27,8 @@ $confirmArray = mysqli_fetch_array($confirmQuery);
                     <div class="mb-3">
                         <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
                         <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
+                        <input type="hidden" name="id_pinjam" value="<?= $confirmArray['id_pinjam'] ?>">
+                        <input type="hidden" name="pengembalian" value="pengembaiian">
                         <input type="hidden" class="form-control" name="id_konfirmasi_pinjam" value="<?= $confirmArray['id_konfirmasi_pinjam'] ?>">
                     </div>
                     <div class="mb-3">
