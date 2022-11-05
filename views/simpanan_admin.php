@@ -2,6 +2,8 @@
 include "../layout/header.php";
 include "../koneksi.php";
 
+$active = 'simpanan';
+
 $id_simpanan = $_SESSION['id_user'];
 
 $tbl_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan DESC");

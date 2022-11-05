@@ -2,6 +2,8 @@
 include "../layout/header.php";
 include "../koneksi.php";
 
+$active = 'pinjaman';
+
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
 $expires = date("2022-10-30 12:42:00");

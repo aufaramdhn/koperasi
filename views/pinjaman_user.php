@@ -120,11 +120,12 @@ endif;
                                 </td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status'] == "konfirmasi") : ?>
+                                        <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white"><i class='bx bxs-edit'></i></a>
                                         <form method="POST">
                                             <a type="submit" href="pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-success text-white">Pengembalian</a>
                                         </form>
                                     <?php else : ?>
-                                        -
+                                        <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white"><i class='bx bxs-edit'></i></a>
                                     <?php endif ?>
                                 </td>
                             </tr>
