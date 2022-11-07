@@ -4,10 +4,10 @@ include "../koneksi.php";
 
 $id_simpanan = $_SESSION['id_user'];
 
-$tbl_simpanan_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_simpanan ");
-$data_u = mysqli_fetch_array($tbl_simpanan_u);
+$tbl_user = $koneksi->query("SELECT * FROM tbl_user Where id_user = $id_simpanan");
+$tbl_simpanan_u = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = $id_simpanan");
+$data_u = mysqli_fetch_array($tbl_user);
 $cek = mysqli_num_rows($tbl_simpanan_u);
-
 ?>
 
 <!-- Alert -->
@@ -39,11 +39,15 @@ endif;
         </div>
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
-                <?php if (($data_u['tempat_lahir'] and $data_u['tgl_lahir'] and $data_u['jk'] and $data_u['agama'] and $data_u['pekerjaan'] and $data_u['alamat']) == '') : ?>
+                <?php
+                if (empty($data_u['tempat_lahir'])) :
+                ?>
                     <div class="text-center">
                         <span class="fw-bold text-uppercase fs-3">Maaf Data Diri Anda Belum Lengkap, harap isi data diri anda <a href="profile.php">disini</a></span>
                     </div>
-                <?php else : ?>
+                <?php
+                else :
+                ?>
                     <form action="simpanan_proses.php" method="POST">
                         <div class="container">
                             <div class="mb-3">
@@ -59,7 +63,9 @@ endif;
                             </div>
                         </div>
                     </form>
-                <?php endif ?>
+                <?php
+                endif
+                ?>
             <?php else : ?>
                 <table id="example" class="table table-responsive table-bordered table-striped d-md-block d-lg-table overflow-auto">
                     <thead class="table-dark">

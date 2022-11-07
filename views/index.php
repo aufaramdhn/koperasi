@@ -1,9 +1,7 @@
-<!-- Header -->
-<?php include "../layout/header.php"; ?>
-
-<!-- Koneksi -->
 <?php
+$active = "dashboard";
 require "../koneksi.php";
+include "../layout/header.php";
 
 // Session ID
 $id = $_SESSION['id_user'];

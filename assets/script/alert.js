@@ -3,8 +3,8 @@ $(".btn-delete").on("click", function (e) {
   const href = $(this).attr("href");
 
   Swal.fire({
-    title: "Are you sure?",
-    text: "Record will be deleted?",
+    title: "Apakah kamu yakin?",
+    text: "Data ini akan di hapus?",
     type: "warning",
     icon: "warning",
     showCancelButton: true,
@@ -13,7 +13,14 @@ $(".btn-delete").on("click", function (e) {
     confirmButtonText: "Delete Records",
   }).then((result) => {
     if (result.value) {
-      document.location.href = href;
+      Swal.fire({
+        icon: "success",
+        title: "Data berhasil di hapus",
+        showConfirmButton: false,
+      });
+      setTimeout(function () {
+        document.location.href = href;
+      }, 1200);
     }
   });
 });

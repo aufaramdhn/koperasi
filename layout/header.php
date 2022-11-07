@@ -51,7 +51,7 @@ include "../config.php";
                 </a>
                 <div class="nav_list">
                     <?php if ($_SESSION['level'] == 'admin') : ?>
-                        <a class="nav_link active" href="<?php echo $config; ?>views/index.php">
+                        <a class="nav_link <?= $active == 'dashboard' ? 'active' : '' ?>" href="<?php echo $config; ?>views/index.php">
                             <i class='bx bx-grid-alt nav_icon'></i>
                             <span class="nav_name">Dashboard</span>
                         </a>

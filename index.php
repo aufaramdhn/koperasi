@@ -44,7 +44,7 @@ session_start();
                     </div>
                     <div class="mb-2">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" required>
                     </div>
                     <div class="mb-2 ">
                         <small class="font-weight-bold">Anda Belum Mempunyai akun? <a class="text-danger text-blue mt-2" href="register/register.php">Buat Account</a></small>

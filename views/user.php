@@ -1,8 +1,8 @@
 <?php
 require "../koneksi.php";
+$active = 'user';
 include "../layout/header.php";
 
-$active = 'user';
 
 $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
 
