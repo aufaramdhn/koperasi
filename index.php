@@ -1,5 +1,5 @@
 <?php
-require_once "koneksi.php";
+require_once "apps/koneksi.php";
 session_start();
 ?>
 

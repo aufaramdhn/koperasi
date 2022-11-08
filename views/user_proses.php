@@ -1,6 +1,6 @@
 <?php
 
-require("../koneksi.php");
+require("../apps/koneksi.php");
 
 if (isset($_GET['id_user'])) {
     $id = $_GET['id_user'];

@@ -1,6 +1,5 @@
 <?php
 $active = "dashboard";
-require "../koneksi.php";
 include "../layout/header.php";
 
 // Session ID

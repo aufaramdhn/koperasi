@@ -1,5 +1,5 @@
 <?php
-require "../koneksi.php";
+require "../apps/koneksi.php";
 
 // Chart
 $chart = mysqli_query($koneksi, "SELECT MONTHNAME(tgl_simpan) as monthname, SUM(jumlah_simpan) as jumlah FROM tbl_simpan GROUP BY monthname ORDER BY tgl_simpan");

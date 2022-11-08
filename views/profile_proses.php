@@ -2,9 +2,11 @@
 
 session_start();
 
-include("../koneksi.php");
+$id_user = $_SESSION['id_user'];
 
-if (isset($_POST['editprofile'])) {
+include("../apps/koneksi.php");
+
+if (isset($_POST['bsimpan'])) {
     $nama = $_POST['nama'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -15,14 +17,15 @@ if (isset($_POST['editprofile'])) {
     $pekerjaan = $_POST['pekerjaan'];
     $telp = $_POST['telp'];
     $alamat = $_POST['alamat'];
+    $created_at = $_POST['created_at'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO tbl_user VALUES (NULL, '$nama', '$email', '$password' , '$tempat', '$tgl', '$jk', '$agama', '$pekerjaan', '$telp', '$alamat',)");
+    $query = mysqli_query($koneksi, "INSERT INTO tbl_user VALUES ('$nama', '$email', '$password', '$tempat', '$tgl', '$jk', '$agama', '$pekerjaan', '$telp', '$alamat', 'user', '$created_at') WHERE id_user = $id_user");
 
     if ($query == true) {
         $_SESSION['info'] = 'Disimpan';
-        header("Location: pinjaman_admin.php");
+        header("Location: profile.php");
     } else {
         $_SESSION['info'] = 'Gagal';
-        header("Location: pinjaman_admin.php");
+        header("Location: profile.php");
     }
 }

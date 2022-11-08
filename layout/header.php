@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "../koneksi.php";
-include "../config.php";
+include "../apps/koneksi.php";
+include "../apps/config.php";
 ?>
 
 <!doctype html>
@@ -52,7 +52,7 @@ include "../config.php";
                 </a>
                 <div class="nav_list">
                     <?php if ($_SESSION['level'] == 'admin') : ?>
-                        <a class="nav_link <?= $active == 'dashboard' ? 'active' : '' ?>" href="<?php echo $config; ?>views/index.php">
+                        <a href="<?php echo $config; ?>views/index.php" class="nav_link <?= $active == 'dashboard' ? 'active' : '' ?>">
                             <i class='bx bx-grid-alt nav_icon'></i>
                             <span class="nav_name">Dashboard</span>
                         </a>
@@ -73,19 +73,19 @@ include "../config.php";
                             <span class="nav_name">Pengembalian</span>
                         </a>
                     <?php else : ?>
-                        <a href="<?php echo $config; ?>views/index.php" class="nav_link">
-                            <i class='bx bx-grid-alt nav_icon'></i>
+                        <a href="<?php echo $config; ?>views/index.php" class="nav_link <?= $active == 'dashboard' ? 'active' : '' ?>">
+                            <i class='bx bx-grid-alt nav_icon '></i>
                             <span class="nav_name">Dashboard</span>
                         </a>
-                        <a href="<?php echo $config; ?>views/simpanan_user.php" class="nav_link">
+                        <a href="<?php echo $config; ?>views/simpanan_user.php" class="nav_link <?= $active == 'simpanan' ? 'active' : '' ?>">
                             <i class='bx bx-wallet nav_icon'></i>
                             <span class="nav_name">Simpanan</span>
                         </a>
-                        <a href="<?php echo $config; ?>views/pinjaman_user.php" class="nav_link">
+                        <a href="<?php echo $config; ?>views/pinjaman_user.php" class="nav_link <?= $active == 'pinjaman' ? 'active' : '' ?>">
                             <i class='bx bx-money-withdraw nav_icon'></i>
                             <span class="nav_name">Pinjaman</span>
                         </a>
-                        <a href="<?php echo $config; ?>views/profile.php" class="nav_link">
+                        <a href="<?php echo $config; ?>views/profile.php" class="nav_link <?= $active == 'profile' ? 'active' : '' ?>">
                             <i class='bx bx-user nav_icon'></i>
                             <span class="nav_name">Profil</span>
                         </a>

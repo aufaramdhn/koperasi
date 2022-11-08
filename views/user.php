@@ -1,5 +1,4 @@
 <?php
-require "../koneksi.php";
 $active = 'user';
 include "../layout/header.php";
 

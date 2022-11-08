@@ -1,6 +1,6 @@
 <?php
 
-include("../koneksi.php");
+include("../apps/koneksi.php");
 
 session_start();
 

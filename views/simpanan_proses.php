@@ -2,7 +2,7 @@
 
 session_start();
 
-require("../koneksi.php");
+require("../apps/koneksi.php");
 
 if (isset($_GET['id_simpan'])) {
     $id = $_GET['id_simpan'];
