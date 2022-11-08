@@ -1,6 +1,6 @@
 <?php
+$active = "pinjaman";
 include "../layout/header.php";
-include "../koneksi.php";
 
 $active = 'pinjaman';
 
@@ -56,7 +56,7 @@ endif;
         </div>
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
-                <form action="pinjaman_proses.php" method="POST">
+                <form id="formD" action="pinjaman_proses.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
                         <div class="mb-3">
                             <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
@@ -69,8 +69,24 @@ endif;
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="jumlah-pinjaman" class="form-label">Jumlah Pinjaman</label>
-                            <input type="number" min="0" max="10000000" class="form-control" id="jumlah-pinjaman" name="jumlah">
+                            <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
+                            <input type="number" min="0" max="10000000" class="form-control" id="jumlah" name="jumlah" value="" onchange="total()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="bunga" class="form-label">Bunga</label>
+                            <input type="number" class="form-control" id="bunga" name="bunga" value="" onchange="total()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="riba" class="form-label">Riba</label>
+                            <input type="number" class="form-control" id="riba" name="riba" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="total" class="form-label">Total</label>
+                            <input type="number" class="form-control" id="total_harga" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="perbulan" class="form-label">Bayar per bulan</label>
+                            <input type="number" class="form-control" id="perbulan" readonly>
                         </div>
                         <div class="mb-3 d-none">
                             <input type="datetime" class="form-control" name="tgl_pinjam" value="<?= $today ?>">
@@ -100,7 +116,7 @@ endif;
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $pinjam['nama'] ?></td>
-                                <td class="text-center"><?= $pinjam['jumlah_pinjam'] ?></td>
+                                <td class="text-center">Rp. <?= number_format($pinjam['jumlah_pinjam'], '0', '.', '.') ?></td>
                                 <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status'] == 'konfirmasi') { ?>
@@ -139,4 +155,20 @@ endif;
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function total() {
+        var jumlah = parseInt(document.getElementById('jumlah').value);
+        var bunga = parseInt(document.getElementById('bunga').value);
+        let subtotal = parseInt((bunga / 10) * jumlah);
+        let grand_total = parseInt(jumlah + subtotal);
+        let perbulan = parseInt(grand_total / bunga)
+
+        $('#riba').html(subtotal)
+        document.querySelector('#riba').value = subtotal;
+        $('#total_harga').html(grand_total)
+        document.querySelector('#total_harga').value = grand_total;
+        $('#perbulan').html(perbulan)
+        document.querySelector('#perbulan').value = perbulan;
+    }
+</script>
 <?php include "../layout/footer.php" ?>

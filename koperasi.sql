@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Nov 2022 pada 12.20
+-- Waktu pembuatan: 08 Nov 2022 pada 10.50
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -97,7 +97,15 @@ CREATE TABLE `tbl_pinjam` (
 --
 
 INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `jumlah_pinjam`, `tgl_pinjam`, `status`) VALUES
-(11, 2, '1000000', '2022-11-07 16:07:30', 'selesai');
+(11, 2, '1000000', '2022-11-07 16:07:30', 'selesai'),
+(12, 1, '1500000', '2022-11-08 08:46:49', 'pending'),
+(13, 1, '1000000', '2022-11-08 12:40:11', 'pending'),
+(14, 1, '30000', '2022-11-08 12:48:32', 'pending'),
+(15, 1, '1010000', '2022-11-08 15:14:31', 'pending'),
+(16, 1, '1010000', '2022-11-08 15:16:08', 'pending'),
+(17, 1, '1100000', '2022-11-08 15:16:54', 'pending'),
+(18, 2, '1200000', '2022-11-08 15:18:20', 'pending'),
+(19, 1, '2200000', '2022-11-08 15:18:57', 'pending');
 
 -- --------------------------------------------------------
 
@@ -211,7 +219,7 @@ ALTER TABLE `tbl_pengembalian`
 -- AUTO_INCREMENT untuk tabel `tbl_pinjam`
 --
 ALTER TABLE `tbl_pinjam`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_simpan`

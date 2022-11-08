@@ -1,8 +1,8 @@
 <?php
+$active = 'simpanan';
 include "../layout/header.php";
 include "../koneksi.php";
 
-$active = 'simpanan';
 
 $id_simpanan = $_SESSION['id_user'];
 
