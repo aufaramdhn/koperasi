@@ -2,8 +2,6 @@
 $active = "pinjaman";
 include "../layout/header.php";
 
-$active = 'pinjaman';
-
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
 $expires = date("2022-10-30 12:42:00");
@@ -18,6 +16,11 @@ $cek = mysqli_num_rows($querySimpan);
 
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
 $confirmArray = mysqli_fetch_array($confirmQuery);
+
+$id_bunga = 0;
+$bunga = "";
+$bulan = "";
+$queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 ?>
 
 <!-- Alert -->
@@ -69,24 +72,40 @@ endif;
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
-                            <input type="number" min="0" max="10000000" class="form-control" id="jumlah" name="jumlah" value="" onchange="total()">
+                            <label for="bunga" class="form-label">Tempo Bulan</label>
+                            <select type="text" class="form-select" id="bunga" name="bunga" required>
+                                <option hidden>
+                                    <-- Pilih Bulan -->
+                                </option>
+                                <?php $no = 1;
+                                foreach ($queryBulan as $pay) {
+                                    if ($bulan == $pay['id_bunga']) {
+                                        $selected = 'selected';
+                                    } else {
+                                        $selected = '';
+                                    }
+                                ?>
+                                    <option value="<?= $pay['bunga'] ?>" <?= $selected ?>> <?= $pay['bulan'] ?> Bulan</option>
+                                <?php } ?>
+                            </select>
+                            <div class="form-text fst-italic">* Silahkan Pilih Tempo Bulan Terlebih Dahulu</div>
                         </div>
                         <div class="mb-3">
-                            <label for="bunga" class="form-label">Bunga</label>
-                            <input type="number" class="form-control" id="bunga" name="bunga" value="" onchange="total()">
+                            <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
+                            <input type="number" min="0" max="10000000" class="form-control" id="jumlah" name="jumlah" value="" onchange="total()">
+                            <div class="form-text fst-italic">* Harap Masukan Tempo Bulan Terlebih Dahulu, Lalu Masukkan Jumlah Pinjaman Yang Anda Inginkan</div>
                         </div>
                         <div class="mb-3">
                             <label for="riba" class="form-label">Riba</label>
-                            <input type="number" class="form-control" id="riba" name="riba" readonly>
+                            <span name="riba" id="riba" class="form-control input">0</span>
                         </div>
                         <div class="mb-3">
-                            <label for="total" class="form-label">Total</label>
-                            <input type="number" class="form-control" id="total_harga" readonly>
+                            <label for="total" class="form-label">Total Pinjaman</label>
+                            <span name="total" id="total_harga" class="form-control input">0</span>
                         </div>
                         <div class="mb-3">
                             <label for="perbulan" class="form-label">Bayar per bulan</label>
-                            <input type="number" class="form-control" id="perbulan" readonly>
+                            <input type="number" class="form-control" id="perbulan" value="0" readonly>
                         </div>
                         <div class="mb-3 d-none">
                             <input type="datetime" class="form-control" name="tgl_pinjam" value="<?= $today ?>">
@@ -138,6 +157,7 @@ endif;
                                     <?php } else if ($pinjam['status'] == 'pending') { ?>
                                         <form action="pinjaman_proses.php" method="POST">
                                             <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
+                                            <input type="hidden" name="id_bunga" value="<?= $pinjam['id_bunga'] ?>">
                                             <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
                                             <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
                                         </form>
@@ -170,5 +190,32 @@ endif;
         $('#perbulan').html(perbulan)
         document.querySelector('#perbulan').value = perbulan;
     }
+</script>
+<script>
+    $(document).ready(function() {
+        $("#bunga").click(function() {
+            $.ajax({
+                url: 'bunga.php',
+                type: 'post',
+                data: {
+                    id_bunga: $("#bunga").val()
+                },
+                dataType: "JSON",
+                success: function(data) {
+                    // $(".form-group").show();
+                    $("#riba").text(data.riba);
+                    // $("#total_harga").text(data.total_harga);
+                    // let subtotal = parseInt("<?= $subtotal ?>")
+                    var jumlah = parseInt(document.getElementById('jumlah').value);
+                    let riba = parseInt($('span[name="riba"]').html());
+                    let subtotal = parseInt((riba / 10) * jumlah);
+                    let total_harga = parseInt(jumlah + subtotal);
+
+                    $('#total_harga').html(total_harga)
+                    document.querySelector('#total_harga').value = total_harga
+                }
+            });
+        });
+    });
 </script>
 <?php include "../layout/footer.php" ?>

@@ -6,17 +6,34 @@ require("../apps/koneksi.php");
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
-$expires = strtotime('+30 days', strtotime($today));
-$expired = date('Y-m-d H:i:s', $expires);
+
 
 if (isset($_POST['konfirmasi'])) {
     $id = $_POST['id_pinjam'];
-
+    if ($_POST['id_bunga'] == '1') {
+        $expires = strtotime('+30 days', strtotime($today));
+        $expired = date('Y-m-d H:i:s', $expires);
+        $confirm = "INSERT INTO konfirmasi_pinjam VALUES ('','$id','$today','$expired')";
+        $result_confirm = mysqli_query($koneksi, $confirm);
+    } else if ($_POST['id_bunga'] == '3') {
+        $expires = strtotime('+90 days', strtotime($today));
+        $expired = date('Y-m-d H:i:s', $expires);
+        $confirm = "INSERT INTO konfirmasi_pinjam VALUES ('','$id','$today','$expired')";
+        $result_confirm = mysqli_query($koneksi, $confirm);
+    } else if ($_POST['id_bunga'] == '6') {
+        $expires = strtotime('+180 days', strtotime($today));
+        $expired = date('Y-m-d H:i:s', $expires);
+        $confirm = "INSERT INTO konfirmasi_pinjam VALUES ('','$id','$today','$expired')";
+        $result_confirm = mysqli_query($koneksi, $confirm);
+    } else if ($_POST['id_bunga'] == '12') {
+        $expires = strtotime('+365 days', strtotime($today));
+        $expired = date('Y-m-d H:i:s', $expires);
+        $confirm = "INSERT INTO konfirmasi_pinjam VALUES ('','$id','$today','$expired')";
+        $result_confirm = mysqli_query($koneksi, $confirm);
+    }
     $select = "UPDATE tbl_pinjam SET status = 'konfirmasi' WHERE id_pinjam = '$id'";
     $result_select = mysqli_query($koneksi, $select);
 
-    $confirm = "INSERT INTO konfirmasi_pinjam VALUES ('','$id','$today','$expired')";
-    $result_confirm = mysqli_query($koneksi, $confirm);
 
     $_SESSION['info'] = 'Konfirmasi';
     header("Location: pinjaman_admin.php");
@@ -53,15 +70,14 @@ if (isset($_POST['selesai'])) {
 }
 
 if (isset($_POST['bpinjamadmin'])) {
-
     $id = $_POST['nama'];
+    $bunga = $_POST['bunga'];
     $jumlah = $_POST['jumlah'];
     $tgl_pinjam = $_POST['tgl_pinjam'];
-    $bunga = $_POST['bunga'];
     $total = ($bunga / 10) * $jumlah;
     $grand_total = $jumlah + $total;
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$grand_total', '$tgl_pinjam', 'pending');");
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$bunga', '$grand_total', '$tgl_pinjam', 'pending');");
     if ($sql == true) {
 
         $_SESSION['info'] = 'Disimpan';

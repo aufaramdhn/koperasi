@@ -90,6 +90,7 @@ endif;
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Pinjaman</th>
+                            <th scope="col">Tempo Bulan</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Status</th>
                             <th scope="col">Aksi</th>
@@ -104,6 +105,7 @@ endif;
                                 <td><?= $no++ ?></td>
                                 <td><?= $pinjam['nama'] ?></td>
                                 <td class="text-center"><?= $pinjam['jumlah_pinjam'] ?></td>
+                                <td class="text-center"><?= $pinjam['id_bunga'] ?> Bulan</td>
                                 <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status'] == 'konfirmasi') { ?>
@@ -120,10 +122,12 @@ endif;
                                 </td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status'] == "konfirmasi") : ?>
-                                        <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white"><i class='bx bxs-edit'></i></a>
-                                        <form method="POST">
-                                            <a type="submit" href="pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-success text-white">Pengembalian</a>
-                                        </form>
+                                        <div class="d-flex justify-content-center">
+                                            <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white me-2"><i class='bx bxs-edit'></i></a>
+                                            <form method="POST">
+                                                <a type="submit" href="pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-success text-white">Pengembalian</a>
+                                            </form>
+                                        </div>
                                     <?php else : ?>
                                         <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white"><i class='bx bxs-edit'></i></a>
                                     <?php endif ?>
