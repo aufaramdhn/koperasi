@@ -21,6 +21,10 @@ $id_bunga = 0;
 $bunga = "";
 $bulan = "";
 $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
+
+$total = 0;
+$total += $data_a['jumlah_pinjam'];
+var_dump($total)
 ?>
 
 <!-- Alert -->
@@ -92,7 +96,7 @@ endif;
                         </div>
                         <div class="mb-3">
                             <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
-                            <input type="number" min="0" max="10000000" class="form-control" id="jumlah" name="jumlah" value="" onchange="total()">
+                            <input type="number" min="0" max="<?= $total ?>" class="form-control" id="jumlah" name="jumlah" value="" onchange="total()">
                             <div class="form-text fst-italic">* Harap Masukan Tempo Bulan Terlebih Dahulu, Lalu Masukkan Jumlah Pinjaman Yang Anda Inginkan</div>
                         </div>
                         <div class="mb-3">
@@ -175,6 +179,7 @@ endif;
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <script type="text/javascript">
     function total() {
         var jumlah = parseInt(document.getElementById('jumlah').value);
