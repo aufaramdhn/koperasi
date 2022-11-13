@@ -24,7 +24,6 @@ $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 
 $total = 0;
 $total += $data_a['jumlah_pinjam'];
-var_dump($total)
 ?>
 
 <!-- Alert -->
@@ -63,7 +62,7 @@ endif;
         </div>
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
-                <form id="formD" action="pinjaman_proses.php" method="POST" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="container">
                         <div class="mb-3">
                             <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
@@ -76,36 +75,36 @@ endif;
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
+                            <input type="number" class="form-control" name="jumlah" id="jumlah">
+                            <!-- <div class="form-text fst-italic">* Harap Masukan Tempo Bulan Terlebih Dahulu, Lalu Masukkan Jumlah Pinjaman Yang Anda Inginkan</div> -->
+                        </div>
+                        <div class="mb-3">
                             <label for="bunga" class="form-label">Tempo Bulan</label>
-                            <select type="text" class="form-select" id="bunga" name="bunga" required>
+                            <select class="form-select" name="method" id="method">
                                 <option hidden>
-                                    <-- Pilih Bulan -->
+                                    -- Pilih Bulan --
                                 </option>
                                 <?php $no = 1;
                                 foreach ($queryBulan as $pay) {
-                                    if ($bulan == $pay['id_bunga']) {
+                                    if ($payment == $pay['id_bunga']) {
                                         $selected = 'selected';
                                     } else {
                                         $selected = '';
                                     }
                                 ?>
-                                    <option value="<?= $pay['bunga'] ?>" <?= $selected ?>> <?= $pay['bulan'] ?> Bulan</option>
+                                    <option value="<?= $pay['id_bunga'] ?>" <?= $selected ?>> <?= $pay['bulan'] ?> Bulan</option>
                                 <?php } ?>
                             </select>
-                            <div class="form-text fst-italic">* Silahkan Pilih Tempo Bulan Terlebih Dahulu</div>
                         </div>
-                        <div class="mb-3">
-                            <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
-                            <input type="number" min="0" max="<?= $total ?>" class="form-control" id="jumlah" name="jumlah" value="" onchange="total()">
-                            <div class="form-text fst-italic">* Harap Masukan Tempo Bulan Terlebih Dahulu, Lalu Masukkan Jumlah Pinjaman Yang Anda Inginkan</div>
-                        </div>
+                        <span name="bunga" id="bunga" class="d-none"></span>
                         <div class="mb-3">
                             <label for="riba" class="form-label">Riba</label>
-                            <span name="riba" id="riba" class="form-control input">0</span>
+                            <span name="riba" id="subtotal" class="form-control input">0</span>
                         </div>
                         <div class="mb-3">
                             <label for="total" class="form-label">Total Pinjaman</label>
-                            <span name="total" id="total_harga" class="form-control input">0</span>
+                            <span id="total" class="form-control">0</span>
                         </div>
                         <div class="mb-3">
                             <label for="perbulan" class="form-label">Bayar per bulan</label>
@@ -179,48 +178,35 @@ endif;
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-<script type="text/javascript">
-    function total() {
-        var jumlah = parseInt(document.getElementById('jumlah').value);
-        var bunga = parseInt(document.getElementById('bunga').value);
-        let subtotal = parseInt((bunga / 10) * jumlah);
-        let grand_total = parseInt(jumlah + subtotal);
-        let perbulan = parseInt(grand_total / bunga)
-
-        $('#riba').html(subtotal)
-        document.querySelector('#riba').value = subtotal;
-        $('#total_harga').html(grand_total)
-        document.querySelector('#total_harga').value = grand_total;
-        $('#perbulan').html(perbulan)
-        document.querySelector('#perbulan').value = perbulan;
-    }
-</script>
+<?php include "../layout/footer.php" ?>
 <script>
     $(document).ready(function() {
-        $("#bunga").click(function() {
+        $("#method").click(function() {
             $.ajax({
                 url: 'bunga.php',
                 type: 'post',
                 data: {
-                    id_bunga: $("#bunga").val()
+                    id_bunga: $("#method").val()
                 },
                 dataType: "JSON",
                 success: function(data) {
-                    // $(".form-group").show();
-                    $("#riba").text(data.riba);
-                    // $("#total_harga").text(data.total_harga);
-                    // let subtotal = parseInt("<?= $subtotal ?>")
+                    $(".form-group").show();
+                    // $("#fee").text(data.fee);
+                    $("#bunga").text(data.bunga);
                     var jumlah = parseInt(document.getElementById('jumlah').value);
-                    let riba = parseInt($('span[name="riba"]').html());
-                    let subtotal = parseInt((riba / 10) * jumlah);
-                    let total_harga = parseInt(jumlah + subtotal);
+                    let bunga = parseInt($('span[name="bunga"]').html())
+                    let subtotal = (bunga / 10) * jumlah
+                    let total = parseInt(jumlah + subtotal)
+                    let perbulan = parseInt(total / bunga)
 
-                    $('#total_harga').html(total_harga)
-                    document.querySelector('#total_harga').value = total_harga
+                    $('#subtotal').html(subtotal)
+                    document.querySelector('#subtotal').value = subtotal
+                    $('#perbulan').html(perbulan)
+                    document.querySelector('#perbulan').value = perbulan
+                    $('#total').html(total)
+                    document.querySelector('#total').value = total
                 }
             });
         });
     });
 </script>
-<?php include "../layout/footer.php" ?>
