@@ -62,7 +62,7 @@ endif;
         </div>
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="pinjaman_proses.php" method="post" enctype="multipart/form-data">
                     <div class="container">
                         <div class="mb-3">
                             <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
@@ -80,8 +80,8 @@ endif;
                             <!-- <div class="form-text fst-italic">* Harap Masukan Tempo Bulan Terlebih Dahulu, Lalu Masukkan Jumlah Pinjaman Yang Anda Inginkan</div> -->
                         </div>
                         <div class="mb-3">
-                            <label for="bunga" class="form-label">Tempo Bulan</label>
-                            <select class="form-select" name="method" id="method">
+                            <label for="selectBulan" class="form-label">Tempo Bulan</label>
+                            <select class="form-select" name="selectBulan" id="selectBulan">
                                 <option hidden>
                                     -- Pilih Bulan --
                                 </option>
@@ -98,6 +98,8 @@ endif;
                             </select>
                         </div>
                         <span name="bunga" id="bunga" class="d-none"></span>
+                        <input type="number" id="valueBunga" name="valueBunga">
+                        <span name="bulan" id="bulan" class="d-none"></span>
                         <div class="mb-3">
                             <label for="riba" class="form-label">Riba</label>
                             <span name="riba" id="subtotal" class="form-control input">0</span>
@@ -119,7 +121,7 @@ endif;
                     </div>
                 </form>
             <?php else : ?>
-                <table id="example" class="table table-striped table-bordered d-md-block d-lg-table overflow-sm-auto">
+                <table id="example" class="table table-sm table-striped table-bordered d-md-block d-lg-table overflow-sm-auto">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">No</th>
@@ -181,24 +183,28 @@ endif;
 <?php include "../layout/footer.php" ?>
 <script>
     $(document).ready(function() {
-        $("#method").click(function() {
+        $("#selectBulan").click(function() {
             $.ajax({
                 url: 'bunga.php',
                 type: 'post',
                 data: {
-                    id_bunga: $("#method").val()
+                    id_bunga: $("#selectBulan").val()
                 },
                 dataType: "JSON",
                 success: function(data) {
                     $(".form-group").show();
                     // $("#fee").text(data.fee);
                     $("#bunga").text(data.bunga);
+                    $("#bulan").text(data.bulan);
                     var jumlah = parseInt(document.getElementById('jumlah').value);
                     let bunga = parseInt($('span[name="bunga"]').html())
+                    let bulan = parseInt($('span[name="bulan"]').html())
                     let subtotal = (bunga / 10) * jumlah
                     let total = parseInt(jumlah + subtotal)
-                    let perbulan = parseInt(total / bunga)
+                    let perbulan = parseInt(total / bulan)
 
+                    $('#valueBunga').html(bunga)
+                    document.querySelector('#valueBunga').value = bunga
                     $('#subtotal').html(subtotal)
                     document.querySelector('#subtotal').value = subtotal
                     $('#perbulan').html(perbulan)

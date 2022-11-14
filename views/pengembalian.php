@@ -50,7 +50,7 @@ $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['id_bunga'];
                     </div>
                     <div class="mb-3">
                         <label for="jumlah-pinjaman" class="form-label">Jumlah Pengembalian</label>
-                        <input type="number" class="form-control" id="jumlah-pinjaman" name="jumlah" value="<?= $total_bayar ?>" readonly>
+                        <input type="number" class="form-control" id="jumlah-pinjaman" name="jumlah" value="<?= round($total_bayar) ?>" readonly>
                     </div>
                     <?php if ($expired1  >= $expired) : ?>
                         <div class="mb-3">

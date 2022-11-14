@@ -85,6 +85,10 @@ include "../apps/config.php";
                             <i class='bx bx-money-withdraw nav_icon'></i>
                             <span class="nav_name">Pinjaman</span>
                         </a>
+                        <a href="<?php echo $config; ?>views/pengembalian_user.php" class="nav_link <?= $active == 'pengembalian' ? 'active' : '' ?>">
+                            <i class='bx bx-money nav_icon'></i>
+                            <span class="nav_name">Pengembalian</span>
+                        </a>
                         <a href="<?php echo $config; ?>views/profile.php" class="nav_link <?= $active == 'profile' ? 'active' : '' ?>">
                             <i class='bx bx-user nav_icon'></i>
                             <span class="nav_name">Profil</span>

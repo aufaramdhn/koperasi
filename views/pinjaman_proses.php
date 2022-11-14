@@ -31,6 +31,8 @@ if (isset($_POST['konfirmasi'])) {
         $confirm = "INSERT INTO konfirmasi_pinjam VALUES ('','$id','$today','$expired')";
         $result_confirm = mysqli_query($koneksi, $confirm);
     }
+    $konfirmasi = "UPDATE tbl_pinjam SET tgl_pinjam = '$today' WHERE id_pinjam = '$id'";
+    $result_select = mysqli_query($koneksi, $konfirmasi);
     $select = "UPDATE tbl_pinjam SET status = 'konfirmasi' WHERE id_pinjam = '$id'";
     $result_select = mysqli_query($koneksi, $select);
 
@@ -71,13 +73,14 @@ if (isset($_POST['selesai'])) {
 
 if (isset($_POST['bpinjamadmin'])) {
     $id = $_POST['nama'];
-    $bunga = $_POST['bunga'];
+    $id_bunga = $_POST['selectBulan'];
+    $bunga = $_POST['valueBunga'];
     $jumlah = $_POST['jumlah'];
     $tgl_pinjam = $_POST['tgl_pinjam'];
     $total = ($bunga / 10) * $jumlah;
     $grand_total = $jumlah + $total;
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$bunga', '$grand_total', '$tgl_pinjam', 'pending');");
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bulan', '$grand_total', '$tgl_pinjam', 'pending');");
     if ($sql == true) {
 
         $_SESSION['info'] = 'Disimpan';
@@ -91,10 +94,14 @@ if (isset($_POST['bpinjamadmin'])) {
 if (isset($_POST['bpinjamuser'])) {
 
     $id = $_SESSION['id_user'];
+    $id_bunga = $_POST['selectBulan'];
+    $bunga = $_POST['valueBunga'];
     $jumlah = $_POST['jumlah'];
     $tgl_pinjam = $_POST['tgl_pinjam'];
+    $total = ($bunga / 10) * $jumlah;
+    $grand_total = $jumlah + $total;
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$jumlah', '$tgl_pinjam', 'pending');");
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bunga','$grand_total', '$tgl_pinjam', 'pending');");
     if ($sql == true) {
 
         $_SESSION['info'] = 'Disimpan';

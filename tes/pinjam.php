@@ -33,6 +33,10 @@ $BulanQuery = $koneksi->query("SELECT * FROM tbl_bunga");
                             <th>Bunga</th>
                             <td><span name="bunga" id="bunga" class="form-control"></span></td>
                         </tr>
+                        <tr>
+                            <th>Bulan</th>
+                            <td><span name="bulan" id="bulan" class="form-control"></span></td>
+                        </tr>
                     </thead>
                 </table>
         </div>
@@ -57,8 +61,7 @@ $BulanQuery = $koneksi->query("SELECT * FROM tbl_bunga");
     <button class="btn btn-outline-success" name="konfirmasi">Konfirmasi Pesanan</button>
     </form>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+<?php include '../layout/footer.php'; ?>
 <script>
     $(document).ready(function() {
         $("#method").click(function() {
@@ -73,8 +76,10 @@ $BulanQuery = $koneksi->query("SELECT * FROM tbl_bunga");
                     $(".form-group").show();
                     // $("#fee").text(data.fee);
                     $("#bunga").text(data.bunga);
+                    $("#bulan").text(data.bulan);
                     var jumlah = parseInt(document.getElementById('jumlah').value);
                     let bunga = parseInt($('span[name="bunga"]').html())
+                    let bulan = parseInt($('span[name="bulan"]').html())
                     let subtotal = jumlah - (bunga / 10) * jumlah
                     let total = (jumlah + subtotal)
 
@@ -85,4 +90,3 @@ $BulanQuery = $koneksi->query("SELECT * FROM tbl_bunga");
         });
     });
 </script>
-<?php include '../layout/footer.php'; ?>

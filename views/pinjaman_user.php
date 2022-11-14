@@ -11,7 +11,7 @@ $id_pinjaman = $_SESSION['id_user'];
 $tbl_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user ORDER BY tgl_pinjam DESC");
 $data_a = mysqli_fetch_array($tbl_pinjaman_a);
 
-$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) where tbl_pinjam.id_user = $id_pinjaman ");
+$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) where tbl_pinjam.id_user = $id_pinjaman ORDER BY tgl_pinjam DESC");
 $data_u = mysqli_fetch_array($tbl_pinjaman_u);
 $cek_pinjam = mysqli_num_rows($tbl_pinjaman_u);
 
@@ -20,6 +20,11 @@ $cek = mysqli_num_rows($querySimpan);
 
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
 $confirmArray = mysqli_fetch_array($confirmQuery);
+
+$id_bunga = 0;
+$bunga = "";
+$bulan = "";
+$queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 ?>
 
 <!-- Alert -->
@@ -59,15 +64,48 @@ endif;
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
                 <?php if ($cek > 0) : ?>
-                    <form action="pinjaman_proses.php" method="POST">
+                    <form action="pinjaman_proses.php" method="POST" enctype="multipart/form-data">
                         <div class="container">
                             <div class="mb-3">
                                 <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
                                 <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
                             </div>
                             <div class="mb-3">
-                                <label for="jumlah-pinjaman" class="form-label">Jumlah Pinjaman</label>
-                                <input type="number" min="0" max="10000000" class="form-control" id="jumlah-pinjaman" name="jumlah">
+                                <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
+                                <input type="number" min="0" max="10000000" class="form-control" id="jumlah" name="jumlah">
+                            </div>
+                            <div class="mb-3">
+                                <label for="selectBulan" class="form-label">Tempo Bulan</label>
+                                <select class="form-select" name="selectBulan" id="selectBulan">
+                                    <option hidden>
+                                        -- Pilih Bulan --
+                                    </option>
+                                    <?php $no = 1;
+                                    foreach ($queryBulan as $pay) {
+                                        if ($payment == $pay['id_bunga']) {
+                                            $selected = 'selected';
+                                        } else {
+                                            $selected = '';
+                                        }
+                                    ?>
+                                        <option value="<?= $pay['id_bunga'] ?>" <?= $selected ?>> <?= $pay['bulan'] ?> Bulan</option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <span name="bunga" id="bunga" class="d-none"></span>
+                            <input type="hidden" id="valueBunga" name="valueBunga">
+                            <span name="bulan" id="bulan" class="d-none"></span>
+                            <div class="mb-3">
+                                <label for="riba" class="form-label">Riba</label>
+                                <span name="riba" id="subtotal" class="form-control input">0</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="total" class="form-label">Total Pinjaman</label>
+                                <span id="total" class="form-control">0</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="perbulan" class="form-label">Bayar per bulan</label>
+                                <input type="number" class="form-control" id="perbulan" value="0" readonly>
                             </div>
                             <div class="mb-3 d-none">
                                 <input type="datetime" class="form-control" name="tgl_pinjam" value="<?= $today ?>">
@@ -141,3 +179,38 @@ endif;
     </div>
 </div>
 <?php include "../layout/footer.php" ?>
+<script>
+    $(document).ready(function() {
+        $("#selectBulan").click(function() {
+            $.ajax({
+                url: 'bunga.php',
+                type: 'post',
+                data: {
+                    id_bunga: $("#selectBulan").val()
+                },
+                dataType: "JSON",
+                success: function(data) {
+                    $(".form-group").show();
+                    // $("#fee").text(data.fee);
+                    $("#bunga").text(data.bunga);
+                    $("#bulan").text(data.bulan);
+                    var jumlah = parseInt(document.getElementById('jumlah').value);
+                    let bunga = parseInt($('span[name="bunga"]').html())
+                    let bulan = parseInt($('span[name="bulan"]').html())
+                    let subtotal = (bunga / 10) * jumlah
+                    let total = parseInt(jumlah + subtotal)
+                    let perbulan = parseInt(total / bulan)
+
+                    $('#valueBunga').html(bunga)
+                    document.querySelector('#valueBunga').value = bunga
+                    $('#subtotal').html(subtotal)
+                    document.querySelector('#subtotal').value = subtotal
+                    $('#perbulan').html(perbulan)
+                    document.querySelector('#perbulan').value = perbulan
+                    $('#total').html(total)
+                    document.querySelector('#total').value = total
+                }
+            });
+        });
+    });
+</script>
