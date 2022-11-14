@@ -15,16 +15,31 @@ $tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user
 $data_u = mysqli_fetch_array($tbl_pinjaman_u);
 $cek_pinjam = mysqli_num_rows($tbl_pinjaman_u);
 
-$querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_pinjaman ");
+$querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_pinjaman");
+$limit = mysqli_fetch_array($querySimpan);
 $cek = mysqli_num_rows($querySimpan);
 
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
 $confirmArray = mysqli_fetch_array($confirmQuery);
 
+// bunga
 $id_bunga = 0;
 $bunga = "";
 $bulan = "";
 $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
+
+// limit pinjaman
+$limitQuery = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan LIMIT 1");
+$limit = mysqli_fetch_array($limitQuery);
+$total = 0;
+$total += $limit['jumlah_simpan'];
+$grand_total = 65 / 100 * $total;
+
+$total_1 = 0;
+$total_1 += $data_u['riba'];
+
+var_dump($grand_total + $total_1)
+
 ?>
 
 <!-- Alert -->
@@ -72,7 +87,11 @@ endif;
                             </div>
                             <div class="mb-3">
                                 <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
-                                <input type="number" min="0" max="10000000" class="form-control" id="jumlah" name="jumlah">
+                                <?php if ($cek_pinjam > 0) : ?>
+                                    <input type="number" min="0" max="<?= $grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah">
+                                <?php else : ?>
+                                    <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah">
+                                <?php endif ?>
                             </div>
                             <div class="mb-3">
                                 <label for="selectBulan" class="form-label">Tempo Bulan</label>

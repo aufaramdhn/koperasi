@@ -98,10 +98,11 @@ if (isset($_POST['bpinjamuser'])) {
     $bunga = $_POST['valueBunga'];
     $jumlah = $_POST['jumlah'];
     $tgl_pinjam = $_POST['tgl_pinjam'];
+
     $total = ($bunga / 10) * $jumlah;
     $grand_total = $jumlah + $total;
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bunga','$grand_total', '$tgl_pinjam', 'pending');");
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bunga', '$grand_total', '$total', '$tgl_pinjam', 'pending');");
     if ($sql == true) {
 
         $_SESSION['info'] = 'Disimpan';

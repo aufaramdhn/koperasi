@@ -11,19 +11,20 @@ $id_pinjaman = $_SESSION['id_user'];
 $tbl_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user ORDER BY tgl_pinjam DESC");
 $data_a = mysqli_fetch_array($tbl_pinjaman_a);
 
-$querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_pinjaman ");
+$querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_pinjaman");
 $cek = mysqli_num_rows($querySimpan);
 
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
 $confirmArray = mysqli_fetch_array($confirmQuery);
 
+$today = date("Y-m-d H:i:s");
+$expires = strtotime('+30 days', strtotime($confirmArray['tgl_konfirmasi']));
+$expired = date('Y-m-d H:i:s', $expires);
+
 $id_bunga = 0;
 $bunga = "";
 $bulan = "";
 $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
-
-$total = 0;
-$total += $data_a['jumlah_pinjam'];
 ?>
 
 <!-- Alert -->
@@ -80,8 +81,8 @@ endif;
                             <!-- <div class="form-text fst-italic">* Harap Masukan Tempo Bulan Terlebih Dahulu, Lalu Masukkan Jumlah Pinjaman Yang Anda Inginkan</div> -->
                         </div>
                         <div class="mb-3">
-                            <label for="selectBulan" class="form-label">Tempo Bulan</label>
-                            <select class="form-select" name="selectBulan" id="selectBulan">
+                            <label for="bunga" class="form-label">Tempo Bulan</label>
+                            <select class="form-select" name="method" id="method">
                                 <option hidden>
                                     -- Pilih Bulan --
                                 </option>
@@ -98,8 +99,6 @@ endif;
                             </select>
                         </div>
                         <span name="bunga" id="bunga" class="d-none"></span>
-                        <input type="number" id="valueBunga" name="valueBunga">
-                        <span name="bulan" id="bulan" class="d-none"></span>
                         <div class="mb-3">
                             <label for="riba" class="form-label">Riba</label>
                             <span name="riba" id="subtotal" class="form-control input">0</span>
@@ -121,7 +120,7 @@ endif;
                     </div>
                 </form>
             <?php else : ?>
-                <table id="example" class="table table-sm table-striped table-bordered d-md-block d-lg-table overflow-sm-auto">
+                <table id="example" class="table table-striped table-bordered d-md-block d-lg-table overflow-sm-auto">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">No</th>
@@ -170,6 +169,13 @@ endif;
                                 </td>
                                 <td class="text-center">
                                     <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                    <?php
+                                    // if ($pinjam['tgl_konfirmasi'] >= $expired) : 
+                                    ?>
+                                    <!-- <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a> -->
+                                    <?php
+                                    // endif 
+                                    ?>
                                     <a button class="btn btn-delete btn-sm btn-danger" href="pinjaman_proses.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>"><i class='bx bx-trash'></i></a>
                                 </td>
                             </tr>
@@ -183,28 +189,24 @@ endif;
 <?php include "../layout/footer.php" ?>
 <script>
     $(document).ready(function() {
-        $("#selectBulan").click(function() {
+        $("#method").click(function() {
             $.ajax({
                 url: 'bunga.php',
                 type: 'post',
                 data: {
-                    id_bunga: $("#selectBulan").val()
+                    id_bunga: $("#method").val()
                 },
                 dataType: "JSON",
                 success: function(data) {
                     $(".form-group").show();
                     // $("#fee").text(data.fee);
                     $("#bunga").text(data.bunga);
-                    $("#bulan").text(data.bulan);
                     var jumlah = parseInt(document.getElementById('jumlah').value);
                     let bunga = parseInt($('span[name="bunga"]').html())
-                    let bulan = parseInt($('span[name="bulan"]').html())
                     let subtotal = (bunga / 10) * jumlah
                     let total = parseInt(jumlah + subtotal)
-                    let perbulan = parseInt(total / bulan)
+                    let perbulan = parseInt(total / bunga)
 
-                    $('#valueBunga').html(bunga)
-                    document.querySelector('#valueBunga').value = bunga
                     $('#subtotal').html(subtotal)
                     document.querySelector('#subtotal').value = subtotal
                     $('#perbulan').html(perbulan)
