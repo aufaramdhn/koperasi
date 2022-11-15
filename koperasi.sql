@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Nov 2022 pada 10.13
+-- Waktu pembuatan: 15 Nov 2022 pada 14.39
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -64,8 +64,8 @@ CREATE TABLE `tbl_bunga` (
 INSERT INTO `tbl_bunga` (`id_bunga`, `bunga`, `bulan`) VALUES
 (1, 1, 1),
 (2, 3, 3),
-(3, 6, 6),
-(4, 12, 12);
+(3, 8, 6),
+(4, 14, 12);
 
 -- --------------------------------------------------------
 
@@ -80,23 +80,6 @@ CREATE TABLE `tbl_pengembalian` (
   `tgl_pengembalian` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tbl_pengembalian`
---
-
-INSERT INTO `tbl_pengembalian` (`id_pengembalian`, `id_konfirmasi_pinjam`, `jumlah_pengembalian`, `tgl_pengembalian`) VALUES
-(3, 1, 2200000, '2022-11-03 12:41:05'),
-(25, 4, 1700000, '2022-11-04 06:52:44'),
-(26, 4, 1500000, '2022-11-04 06:52:44'),
-(35, 4, 1700000, '2022-11-04 10:20:21'),
-(36, 4, 1500000, '2022-11-04 10:20:21'),
-(37, 4, 1700000, '2022-11-04 10:22:11'),
-(39, 4, 1700000, '2022-11-04 10:30:12'),
-(40, 4, 1500000, '2022-11-04 10:30:12'),
-(41, 6, 1500000, '2022-11-04 10:41:25'),
-(42, 7, 500000, '2022-11-05 12:12:43'),
-(43, 8, 1000000, '2022-11-07 16:09:16');
-
 -- --------------------------------------------------------
 
 --
@@ -108,23 +91,10 @@ CREATE TABLE `tbl_pinjam` (
   `id_user` int(11) NOT NULL,
   `id_bunga` int(11) NOT NULL,
   `jumlah_pinjam` varchar(100) NOT NULL,
+  `riba` int(11) NOT NULL,
   `tgl_pinjam` datetime DEFAULT NULL,
   `status` varchar(100) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tbl_pinjam`
---
-
-INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `id_bunga`, `jumlah_pinjam`, `tgl_pinjam`, `status`) VALUES
-(20, 1, 0, '1100000', '2022-11-09 09:19:53', 'pending'),
-(21, 1, 0, '1400000', '2022-11-09 09:52:06', 'pending'),
-(22, 1, 1, '1100000', '2022-11-09 10:08:11', 'pending'),
-(23, 2, 6, '1600000', '2022-11-09 10:15:48', 'konfirmasi'),
-(24, 1, 12, '2200000', '2022-11-09 10:24:57', 'konfirmasi'),
-(25, 2, 6, '1600000', '2022-11-09 10:28:03', 'konfirmasi'),
-(26, 1, 12, '2200000', '2022-11-09 11:06:01', 'konfirmasi'),
-(27, 2, 12, '2200000', '2022-11-09 11:08:34', 'konfirmasi');
 
 -- --------------------------------------------------------
 
@@ -138,6 +108,16 @@ CREATE TABLE `tbl_simpan` (
   `jumlah_simpan` int(11) NOT NULL,
   `tgl_simpan` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_simpan`
+--
+
+INSERT INTO `tbl_simpan` (`id_simpan`, `id_user`, `jumlah_simpan`, `tgl_simpan`) VALUES
+(1, 2, 1000000, '2022-11-15 13:24:33'),
+(2, 2, 1000000, '2022-11-15 13:24:38'),
+(3, 2, 1000000, '2022-11-15 13:24:44'),
+(4, 2, 1000000, '2022-11-15 13:39:45');
 
 -- --------------------------------------------------------
 
@@ -167,7 +147,7 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`id_user`, `nama`, `email`, `password`, `tempat_lahir`, `tgl_lahir`, `jk`, `agama`, `pekerjaan`, `telp`, `alamat`, `level`, `created_at`) VALUES
 (1, 'Aufa Ramadhan', 'aufa@gmail.com', '123', 'Bogor', '2004-11-08', 'Laki', 'Islam', 'CEO', '081398057408', 'GBJ', 'admin', '2022-11-03 03:22:36'),
-(2, 'User', 'user@gmail.com', '123', 'Bogor', '1899-12-31', 'Laki', 'Islam', 'CEO', '081398057408', 'GBJ', 'user', '2022-11-07 08:27:07');
+(2, 'Aninda Fitri Litasni', 'aninda@gmail.com', '123', 'Bogor', '2005-08-09', 'Perempuan', 'Islam', 'CEO', '081398057408', 'Cicadas', 'user', '2022-11-15 13:09:29');
 
 --
 -- Indexes for dumped tables
@@ -234,19 +214,19 @@ ALTER TABLE `tbl_bunga`
 -- AUTO_INCREMENT untuk tabel `tbl_pengembalian`
 --
 ALTER TABLE `tbl_pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pinjam`
 --
 ALTER TABLE `tbl_pinjam`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_simpan`
 --
 ALTER TABLE `tbl_simpan`
-  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_simpan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`

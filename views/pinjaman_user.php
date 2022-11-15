@@ -8,12 +8,12 @@ $expires = date("2022-10-30 12:42:00");
 
 $id_pinjaman = $_SESSION['id_user'];
 
-$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) where tbl_pinjam.id_user = $id_pinjaman ORDER BY tgl_pinjam DESC");
+$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) WHERE tbl_pinjam.id_user = $id_pinjaman ORDER BY tgl_pinjam DESC");
 $data_u = mysqli_fetch_array($tbl_pinjaman_u);
 $cek_pinjam = mysqli_num_rows($tbl_pinjaman_u);
 
 $querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_pinjaman");
-$limit = mysqli_fetch_array($querySimpan);
+// $limit = mysqli_fetch_array($querySimpan);
 $cek = mysqli_num_rows($querySimpan);
 
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
@@ -26,15 +26,17 @@ $bulan = "";
 $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 
 // limit pinjaman
-$limitQuery = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user");
-$limit = mysqli_fetch_array($limitQuery);
+$limitQuery = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan DESC");
+$limit1 = mysqli_fetch_array($limitQuery);
+
 
 if (empty($limit['jumlah_simpan'])) {
     $total = 0;
-} else {
-    $total = 0;
-    $total += $limit['jumlah_simpan'];
-    $grand_total = 25 / 100 * $total;
+}
+$total = 0;
+while ($total_simpan = mysqli_fetch_array($querySimpan)) {
+    $total += $total_simpan['jumlah_simpan'];
+    $grand_total = $total * 25 / 100;
 }
 
 $queryPinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) where tbl_pinjam.id_user = $id_pinjaman");
@@ -42,7 +44,7 @@ $total_1 = 0;
 while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
     $total_1 += $total_tampil['riba'];
 }
-var_dump($total_1);
+var_dump($grand_total);
 
 ?>
 
@@ -92,14 +94,14 @@ endif;
                             <div class="mb-3">
                                 <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
                                 <?php if ($cek_pinjam > 0) : ?>
-                                    <input type="number" min="0" max="<?= (int)$grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah">
+                                    <input type="number" min="0" max="<?= (int)$grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php else : ?>
-                                    <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah">
+                                    <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php endif ?>
                             </div>
                             <div class="mb-3">
                                 <label for="selectBulan" class="form-label">Tempo Bulan</label>
-                                <select class="form-select" name="selectBulan" id="selectBulan">
+                                <select class="form-select" name="selectBulan" id="selectBulan" required>
                                     <option hidden>
                                         -- Pilih Bulan --
                                     </option>
