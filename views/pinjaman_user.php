@@ -8,9 +8,6 @@ $expires = date("2022-10-30 12:42:00");
 
 $id_pinjaman = $_SESSION['id_user'];
 
-$tbl_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user ORDER BY tgl_pinjam DESC");
-$data_a = mysqli_fetch_array($tbl_pinjaman_a);
-
 $tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) where tbl_pinjam.id_user = $id_pinjaman ORDER BY tgl_pinjam DESC");
 $data_u = mysqli_fetch_array($tbl_pinjaman_u);
 $cek_pinjam = mysqli_num_rows($tbl_pinjaman_u);
@@ -29,16 +26,23 @@ $bulan = "";
 $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 
 // limit pinjaman
-$limitQuery = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan LIMIT 1");
+$limitQuery = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user");
 $limit = mysqli_fetch_array($limitQuery);
-$total = 0;
-$total += $limit['jumlah_simpan'];
-$grand_total = 65 / 100 * $total;
 
+if (empty($limit['jumlah_simpan'])) {
+    $total = 0;
+} else {
+    $total = 0;
+    $total += $limit['jumlah_simpan'];
+    $grand_total = 25 / 100 * $total;
+}
+
+$queryPinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) where tbl_pinjam.id_user = $id_pinjaman");
 $total_1 = 0;
-$total_1 += $data_u['riba'];
-
-var_dump($grand_total + $total_1)
+while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
+    $total_1 += $total_tampil['riba'];
+}
+var_dump($total_1);
 
 ?>
 
@@ -88,7 +92,7 @@ endif;
                             <div class="mb-3">
                                 <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
                                 <?php if ($cek_pinjam > 0) : ?>
-                                    <input type="number" min="0" max="<?= $grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah">
+                                    <input type="number" min="0" max="<?= (int)$grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah">
                                 <?php else : ?>
                                     <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah">
                                 <?php endif ?>

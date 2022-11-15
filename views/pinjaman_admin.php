@@ -17,14 +17,14 @@ $cek = mysqli_num_rows($querySimpan);
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
 $confirmArray = mysqli_fetch_array($confirmQuery);
 
-$today = date("Y-m-d H:i:s");
-$expires = strtotime('+30 days', strtotime($confirmArray['tgl_konfirmasi']));
-$expired = date('Y-m-d H:i:s', $expires);
+// $today = date("Y-m-d H:i:s");
+// $expires = strtotime('+30 days', strtotime($confirmArray['tgl_konfirmasi']));
+// $expired = date('Y-m-d H:i:s', $expires);
 
-$id_bunga = 0;
-$bunga = "";
-$bulan = "";
-$queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
+// $id_bunga = 0;
+// $bunga = "";
+// $bulan = "";
+// $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 ?>
 
 <!-- Alert -->
