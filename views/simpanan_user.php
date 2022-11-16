@@ -76,7 +76,7 @@ endif;
                             <th scope="col">Nama</th>
                             <th scope="col">Jumlah</th>
                             <th scope="col">Hari dan Tanggal</th>
-                            <th scope="col">Aksi</th>
+                            <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,7 +91,7 @@ endif;
                                 <td><?= $simpan['nama'] ?></td>
                                 <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
                                 <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
-                                <td>aksi</td>
+                                <td class="text-center">-</td>
                             </tr>
                         <?php } ?>
                     </tbody>

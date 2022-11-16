@@ -44,7 +44,6 @@ $total_1 = 0;
 while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
     $total_1 += $total_tampil['riba'];
 }
-var_dump($grand_total + $total_1);
 
 ?>
 
