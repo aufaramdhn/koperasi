@@ -3,11 +3,12 @@ include "../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
 
-
 $id = $_GET['id_pinjam'];
 
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_pinjam.id_pinjam=$id");
 $confirmArray = mysqli_fetch_array($confirmQuery);
+
+$today = date("Y-m-d H:i:s");
 
 $today = date("Y-m-d H:i:s");
 $expires = strtotime('+30 days', strtotime($confirmArray['tgl_konfirmasi']));
@@ -26,6 +27,8 @@ $expires3 = strtotime('+21 days', strtotime($today3));
 $expired3 = date('Y-m-d H:i:s', $expires3);
 
 $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['id_bunga'];
+
+var_dump($confirmArray);
 
 ?>
 <div class="container-fluid pt-3">
@@ -52,22 +55,30 @@ $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['id_bunga'];
                         <label for="jumlah-pinjaman" class="form-label">Jumlah Pengembalian</label>
                         <input type="number" class="form-control" id="jumlah-pinjaman" name="jumlah" value="<?= round($total_bayar) ?>" readonly>
                     </div>
-                    <?php if ($expired1  >= $expired) : ?>
+                    <?php
+                    if ($expired1  >= $expired) :
+                    ?>
                         <div class="mb-3">
                             <label for="jumlah-denda" class="form-label">Denda</label>
                             <input type="number" class="form-control" id="jumlah-denda" name="denda" value="20000" readonly>
                         </div>
-                    <?php elseif ($expired2  >= $expired) : ?>
+                    <?php
+                    elseif ($expired2  >= $expired) :
+                    ?>
                         <div class="mb-3">
                             <label for="jumlah-denda" class="form-label">Denda</label>
                             <input type="number" class="form-control" id="jumlah-denda" name="denda" value="50000" readonly>
                         </div>
-                    <?php elseif ($expired3  >= $expired) : ?>
+                    <?php
+                    elseif ($expired3  >= $expired) :
+                    ?>
                         <div class="mb-3">
                             <label for="jumlah-denda" class="form-label">Denda</label>
                             <input type="number" class="form-control" id="jumlah-denda" name="denda" value="100000" readonly>
                         </div>
-                    <?php endif ?>
+                    <?php
+                    endif
+                    ?>
                     <div class="mb-3">
                         <label for="tanggal-bayar" class="form-label">Tanggal Bayar</label>
                         <input type="datetime" class="form-control" id="tanggal-bayar" name="tanggal_bayar" value="<?= $today ?>" readonly>

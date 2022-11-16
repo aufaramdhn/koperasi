@@ -99,7 +99,7 @@ if (isset($_POST['bpinjamuser'])) {
     $jumlah = $_POST['jumlah'];
     $tgl_pinjam = $_POST['tgl_pinjam'];
 
-    $total = ($bunga / 10) * $jumlah;
+    $total = $jumlah * ($bunga / 10);
     $grand_total = $jumlah + $total;
 
     $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bunga', '$grand_total', '$total', '$tgl_pinjam', 'pending');");

@@ -8,7 +8,7 @@ $expires = date("2022-10-30 12:42:00");
 
 $id_pinjaman = $_SESSION['id_user'];
 
-$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) WHERE tbl_pinjam.id_user = $id_pinjaman ORDER BY tgl_pinjam DESC");
+$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_user = $id_pinjaman ORDER BY tgl_pinjam DESC");
 $data_u = mysqli_fetch_array($tbl_pinjaman_u);
 $cek_pinjam = mysqli_num_rows($tbl_pinjaman_u);
 
@@ -44,7 +44,7 @@ $total_1 = 0;
 while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
     $total_1 += $total_tampil['riba'];
 }
-var_dump($grand_total);
+var_dump($grand_total + $total_1);
 
 ?>
 
@@ -94,10 +94,11 @@ endif;
                             <div class="mb-3">
                                 <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
                                 <?php if ($cek_pinjam > 0) : ?>
-                                    <input type="number" min="0" max="<?= (int)$grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah" required>
+                                    <input type="number" min="0" max="<?= $grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php else : ?>
                                     <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php endif ?>
+                                <div class="form-text fst-italic">* Harap masukan nominal terlebih dahulu, setelah itu pilih tempo bulan yang anda inginkan</div>
                             </div>
                             <div class="mb-3">
                                 <label for="selectBulan" class="form-label">Tempo Bulan</label>
@@ -116,6 +117,7 @@ endif;
                                         <option value="<?= $pay['id_bunga'] ?>" <?= $selected ?>> <?= $pay['bulan'] ?> Bulan</option>
                                     <?php } ?>
                                 </select>
+                                <div class="form-text fst-italic">* Harap masukan tempo bulan yang anda inginkan</div>
                             </div>
                             <span name="bunga" id="bunga" class="d-none"></span>
                             <input type="hidden" id="valueBunga" name="valueBunga">
@@ -168,7 +170,7 @@ endif;
                                 <td><?= $no++ ?></td>
                                 <td><?= $pinjam['nama'] ?></td>
                                 <td class="text-center"><?= $pinjam['jumlah_pinjam'] ?></td>
-                                <td class="text-center"><?= $pinjam['id_bunga'] ?> Bulan</td>
+                                <td class="text-center"><?= $pinjam['bulan'] ?> Bulan</td>
                                 <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status'] == 'konfirmasi') { ?>
@@ -222,7 +224,7 @@ endif;
                     var jumlah = parseInt(document.getElementById('jumlah').value);
                     let bunga = parseInt($('span[name="bunga"]').html())
                     let bulan = parseInt($('span[name="bulan"]').html())
-                    let subtotal = (bunga / 10) * jumlah
+                    let subtotal = parseInt(jumlah * (bunga / 10))
                     let total = parseInt(jumlah + subtotal)
                     let perbulan = parseInt(total / bulan)
 
