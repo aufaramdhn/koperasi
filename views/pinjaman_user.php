@@ -90,7 +90,7 @@ endif;
                                 <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
                                 <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3 has-validation">
                                 <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
                                 <?php if ($cek_pinjam > 0) : ?>
                                     <input type="number" min="0" max="<?= $grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah" required>
@@ -98,11 +98,14 @@ endif;
                                     <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php endif ?>
                                 <div class="form-text fst-italic">* Harap masukan nominal terlebih dahulu, setelah itu pilih tempo bulan yang anda inginkan</div>
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="selectBulan" class="form-label">Tempo Bulan</label>
                                 <select class="form-select" name="selectBulan" id="selectBulan" required>
-                                    <option hidden>
+                                    <option disabled>
                                         -- Pilih Bulan --
                                     </option>
                                     <?php $no = 1;

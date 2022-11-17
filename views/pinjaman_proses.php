@@ -36,7 +36,6 @@ if (isset($_POST['konfirmasi'])) {
     $select = "UPDATE tbl_pinjam SET status = 'konfirmasi' WHERE id_pinjam = '$id'";
     $result_select = mysqli_query($koneksi, $select);
 
-
     $_SESSION['info'] = 'Konfirmasi';
     header("Location: pinjaman_admin.php");
 }

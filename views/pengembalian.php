@@ -28,7 +28,7 @@ $expired3 = date('Y-m-d H:i:s', $expires3);
 
 $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['id_bunga'];
 
-var_dump($confirmArray);
+var_dump($total_bayar);
 
 ?>
 <div class="container-fluid pt-3">

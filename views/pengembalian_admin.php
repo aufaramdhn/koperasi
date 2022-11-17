@@ -38,11 +38,22 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                             <td class="text-end"><?= $no++ ?></td>
                             <td><?= $kembali['nama'] ?></td>
                             <td class="text-center"><?= $kembali['jumlah_pengembalian'] ?></td>
-                            <td class="text-center"><?= $kembali['tgl_pengembalian'] ?></td>
                             <td class="text-center"><?= $kembali['id_bunga'] ?> Bulan</td>
                             <td class="text-center"><?= $kembali['tgl_pengembalian'] ?></td>
                             <td class="text-center">
-                                <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Lunas</span>
+                                <?php if ($kembali['status'] == "pengembalian") : ?>
+                                    <form action="pinjaman_proses.php" method="POST">
+                                        <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
+                                        <input type="hidden" name="id_bunga" value="<?= $pinjam['id_bunga'] ?>">
+                                        <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
+                                        <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
+                                    </form>
+                                <?php elseif ($kembali['status'] == "konfirmasi") : ?>
+                                    <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Lunas</span>
+                                <?php endif  ?>
+                            </td>
+                            <td class="text-center">
+                                -
                             </td>
                             <!-- <td class="text-center">
                                 <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
