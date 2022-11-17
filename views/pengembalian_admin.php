@@ -42,9 +42,9 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                             <td class="text-center"><?= $kembali['tgl_pengembalian'] ?></td>
                             <td class="text-center">
                                 <?php if ($kembali['status'] == "pengembalian") : ?>
-                                    <form action="pinjaman_proses.php" method="POST">
-                                        <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
-                                        <input type="hidden" name="id_bunga" value="<?= $pinjam['id_bunga'] ?>">
+                                    <form action="pengembalian_proses.php" method="POST">
+                                        <input type="hidden" name="id_pinjam" value="<?= $kembali['id_pinjam'] ?>">
+                                        <!-- <input type="hidden" name="id_bunga" value="<?= $pinjam['id_bunga'] ?>"> -->
                                         <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
                                         <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
                                     </form>

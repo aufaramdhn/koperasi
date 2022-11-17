@@ -28,8 +28,6 @@ $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 // limit pinjaman
 $limitQuery = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan DESC");
 $limit1 = mysqli_fetch_array($limitQuery);
-
-
 if (empty($limit['jumlah_simpan'])) {
     $total = 0;
 }
@@ -38,13 +36,15 @@ while ($total_simpan = mysqli_fetch_array($querySimpan)) {
     $total += $total_simpan['jumlah_simpan'];
     $grand_total = $total * 25 / 100;
 }
-
 $queryPinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) where tbl_pinjam.id_user = $id_pinjaman");
 $total_1 = 0;
 while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
     $total_1 += $total_tampil['riba'];
 }
 
+// Limit Pengembalian
+$expires = strtotime('+0 days', strtotime($confirmArray['tgl_konfirmasi']));
+$expired = date('Y-m-d H:i:s', $expires);
 ?>
 
 <!-- Alert -->
@@ -53,6 +53,9 @@ while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
 <?php
     unset($_SESSION['info']);
 endif;
+
+var_dump($confirmArray['tgl_konfirmasi']);
+var_dump($expired);
 ?>
 
 <div class="container-fluid py-3">
@@ -188,7 +191,7 @@ endif;
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php if ($pinjam['status'] == "konfirmasi") : ?>
+                                    <?php if (($pinjam['status'] == "konfirmasi") and ($confirmArray['tgl_konfirmasi'] >= $expired)) : ?>
                                         <div class="d-flex justify-content-center">
                                             <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white me-2"><i class='bx bxs-edit'></i></a>
                                             <form method="POST">

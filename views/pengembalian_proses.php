@@ -53,3 +53,13 @@ if (isset($_POST['bpengembalian'])) {
         echo "<script>window.location=' pinjaman_user.php'</script>";
     }
 }
+
+if (isset($_POST['konfirmasi'])) {
+    $id = $_POST['id_pinjam'];
+    $konfirmasi = "UPDATE konfirmasi_pinjam SET tgl_konfirmasi = '$today' WHERE id_pinjam = '$id'";
+    $result_select = mysqli_query($koneksi, $konfirmasi);
+    $select = "UPDATE tbl_pinjam SET status = 'konfirmasi' WHERE id_pinjam = '$id'";
+    $result_select = mysqli_query($koneksi, $select);
+    $_SESSION['info'] = 'Konfirmasi';
+    header("Location: pinjaman_admin.php");
+}

@@ -5,7 +5,7 @@ date_default_timezone_set('Asia/jakarta');
 
 $id = $_GET['id_pinjam'];
 
-$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_pinjam.id_pinjam=$id");
+$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_pinjam) WHERE tbl_pinjam.id_pinjam=$id");
 $confirmArray = mysqli_fetch_array($confirmQuery);
 
 $today = date("Y-m-d H:i:s");
@@ -26,9 +26,7 @@ $today3 = date("Y-m-d H:i:s");
 $expires3 = strtotime('+21 days', strtotime($today3));
 $expired3 = date('Y-m-d H:i:s', $expires3);
 
-$total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['id_bunga'];
-
-var_dump($total_bayar);
+$total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
 
 ?>
 <div class="container-fluid pt-3">
