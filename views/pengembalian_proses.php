@@ -28,7 +28,7 @@ if (isset($_POST['bpengembalian'])) {
 
         $total = $jumlah + $denda;
 
-        $select = "UPDATE tbl_pinjam SET status = 'pengembalian' WHERE id_pinjam = '$id'";
+        $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
         $result = mysqli_query($koneksi, $select);
 
         $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$total', '$today');");
@@ -41,7 +41,7 @@ if (isset($_POST['bpengembalian'])) {
         }
     }
 
-    $select = "UPDATE tbl_pinjam SET status = 'pengembalian' WHERE id_pinjam = '$id'";
+    $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
     $result = mysqli_query($koneksi, $select);
 
     $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$jumlah', '$today');");
@@ -58,7 +58,7 @@ if (isset($_POST['konfirmasi'])) {
     $id = $_POST['id_pinjam'];
     $konfirmasi = "UPDATE konfirmasi_pinjam SET tgl_konfirmasi = '$today' WHERE id_pinjam = '$id'";
     $result_select = mysqli_query($koneksi, $konfirmasi);
-    $select = "UPDATE tbl_pinjam SET status = 'konfirmasi' WHERE id_pinjam = '$id'";
+    $select = "UPDATE tbl_pinjam SET status_pinjam = 'konfirmasi' WHERE id_pinjam = '$id'";
     $result_select = mysqli_query($koneksi, $select);
     $_SESSION['info'] = 'Konfirmasi';
     header("Location: pinjaman_admin.php");

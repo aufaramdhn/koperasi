@@ -178,20 +178,20 @@ var_dump($expired);
                                 <td class="text-center"><?= $pinjam['bulan'] ?> Bulan</td>
                                 <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                 <td class="text-center">
-                                    <?php if ($pinjam['status'] == 'konfirmasi') { ?>
+                                    <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
-                                    <?php } else if ($pinjam['status'] == 'tolak') { ?>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
-                                    <?php } else if ($pinjam['status'] == 'pengembalian') { ?>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pengembalian</span>
-                                    <?php } else if ($pinjam['status'] == 'selesai') { ?>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Selesai</span>
-                                    <?php } else if ($pinjam['status'] == 'pending') { ?>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pending</span>
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php if (($pinjam['status'] == "konfirmasi") and ($confirmArray['tgl_konfirmasi'] >= $expired)) : ?>
+                                    <?php if (($pinjam['status_pinjam'] == "konfirmasi") and ($confirmArray['tgl_konfirmasi'] >= $expired)) : ?>
                                         <div class="d-flex justify-content-center">
                                             <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white me-2"><i class='bx bxs-edit'></i></a>
                                             <form method="POST">

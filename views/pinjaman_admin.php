@@ -11,6 +11,9 @@ $id_pinjaman = $_SESSION['id_user'];
 $tbl_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user ORDER BY tgl_pinjam DESC");
 $data_a = mysqli_fetch_array($tbl_pinjaman_a);
 
+// $tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_user = tbl_user.id_user ORDER BY tgl_pinjam DESC");
+// $cek_pinjam = mysqli_num_rows($tbl_pinjaman_u);
+
 $querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_pinjaman");
 $cek = mysqli_num_rows($querySimpan);
 
@@ -21,10 +24,26 @@ $confirmArray = mysqli_fetch_array($confirmQuery);
 // $expires = strtotime('+30 days', strtotime($confirmArray['tgl_konfirmasi']));
 // $expired = date('Y-m-d H:i:s', $expires);
 
-// $id_bunga = 0;
-// $bunga = "";
-// $bulan = "";
-// $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
+$id_bunga = 0;
+$bunga = "";
+$bulan = "";
+$queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
+
+// $limitQuery = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan DESC");
+// $limit1 = mysqli_fetch_array($limitQuery);
+// if (empty($limit['jumlah_simpan'])) {
+//     $total = 0;
+// }
+// $total = 0;
+// while ($total_simpan = mysqli_fetch_array($querySimpan)) {
+//     $total += $total_simpan['jumlah_simpan'];
+//     $grand_total = $total * 25 / 100;
+// }
+// $queryPinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) where tbl_pinjam.id_user = tbl_user.id_user");
+// $total_1 = 0;
+// while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
+//     $total_1 += $total_tampil['riba'];
+// }
 ?>
 
 <!-- Alert -->
@@ -78,12 +97,23 @@ endif;
                         <div class="mb-3">
                             <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
                             <input type="number" class="form-control" name="jumlah" id="jumlah">
-                            <!-- <div class="form-text fst-italic">* Harap Masukan Tempo Bulan Terlebih Dahulu, Lalu Masukkan Jumlah Pinjaman Yang Anda Inginkan</div> -->
                         </div>
+                        <!-- <div class="mb-3 has-validation">
+                            <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
+                            <?php if ($cek_pinjam > 0) : ?>
+                                <input type="number" min="0" max="<?= $grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah" required>
+                            <?php else : ?>
+                                <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah" required>
+                            <?php endif ?>
+                            <div class="form-text fst-italic">* Harap masukan nominal terlebih dahulu, setelah itu pilih tempo bulan yang anda inginkan</div>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div> -->
                         <div class="mb-3">
-                            <label for="bunga" class="form-label">Tempo Bulan</label>
-                            <select class="form-select" name="method" id="method">
-                                <option hidden>
+                            <label for="selectBulan" class="form-label">Tempo Bulan</label>
+                            <select class="form-select" name="selectBulan" id="selectBulan" required>
+                                <option disabled>
                                     -- Pilih Bulan --
                                 </option>
                                 <?php $no = 1;
@@ -97,8 +127,11 @@ endif;
                                     <option value="<?= $pay['id_bunga'] ?>" <?= $selected ?>> <?= $pay['bulan'] ?> Bulan</option>
                                 <?php } ?>
                             </select>
+                            <div class="form-text fst-italic">* Harap masukan tempo bulan yang anda inginkan</div>
                         </div>
                         <span name="bunga" id="bunga" class="d-none"></span>
+                        <input type="hidden" id="valueBunga" name="valueBunga">
+                        <span name="bulan" id="bulan" class="d-none"></span>
                         <div class="mb-3">
                             <label for="riba" class="form-label">Riba</label>
                             <span name="riba" id="subtotal" class="form-control input">0</span>
@@ -117,6 +150,25 @@ endif;
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary" name="bpinjamadmin">Pinjam</button>
                         </div>
+                        <!-- <span name="bunga" id="bunga" class="d-none"></span>
+                        <div class="mb-3">
+                            <label for="riba" class="form-label">Riba</label>
+                            <span name="riba" id="subtotal" class="form-control input">0</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="total" class="form-label">Total Pinjaman</label>
+                            <span id="total" class="form-control">0</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="perbulan" class="form-label">Bayar per bulan</label>
+                            <input type="number" class="form-control" id="perbulan" value="0" readonly>
+                        </div>
+                        <div class="mb-3 d-none">
+                            <input type="datetime" class="form-control" name="tgl_pinjam" value="<?= $today ?>">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary" name="bpinjamadmin">Pinjam</button>
+                        </div> -->
                     </div>
                 </form>
             <?php else : ?>
@@ -142,9 +194,9 @@ endif;
                                 <td class="text-center">Rp. <?= number_format($pinjam['jumlah_pinjam'], '0', '.', '.') ?></td>
                                 <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                 <td class="text-center">
-                                    <?php if ($pinjam['status'] == 'konfirmasi') { ?>
+                                    <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
-                                    <?php } else if ($pinjam['status'] == 'pengembalian') { ?>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
                                         <div class="d-flex justify-content-center align-items-center">
                                             <div class="me-1">
                                                 <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pengembalian</span>
@@ -154,11 +206,11 @@ endif;
                                                 <input class="btn btn-sm btn-success" type="submit" name="selesai" value="selesai">
                                             </form>
                                         </div>
-                                    <?php } else if ($pinjam['status'] == 'tolak') { ?>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
-                                    <?php } else if ($pinjam['status'] == 'selesai') { ?>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
                                         <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Selesai</span>
-                                    <?php } else if ($pinjam['status'] == 'pending') { ?>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
                                         <form action="pinjaman_proses.php" method="POST">
                                             <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
                                             <input type="hidden" name="id_bunga" value="<?= $pinjam['id_bunga'] ?>">
@@ -189,24 +241,28 @@ endif;
 <?php include "../layout/footer.php" ?>
 <script>
     $(document).ready(function() {
-        $("#method").click(function() {
+        $("#selectBulan").click(function() {
             $.ajax({
                 url: 'bunga.php',
                 type: 'post',
                 data: {
-                    id_bunga: $("#method").val()
+                    id_bunga: $("#selectBulan").val()
                 },
                 dataType: "JSON",
                 success: function(data) {
                     $(".form-group").show();
                     // $("#fee").text(data.fee);
                     $("#bunga").text(data.bunga);
+                    $("#bulan").text(data.bulan);
                     var jumlah = parseInt(document.getElementById('jumlah').value);
                     let bunga = parseInt($('span[name="bunga"]').html())
-                    let subtotal = (bunga / 10) * jumlah
+                    let bulan = parseInt($('span[name="bulan"]').html())
+                    let subtotal = parseInt(jumlah * (bunga / 10))
                     let total = parseInt(jumlah + subtotal)
-                    let perbulan = parseInt(total / bunga)
+                    let perbulan = parseInt(total / bulan)
 
+                    $('#valueBunga').html(bunga)
+                    document.querySelector('#valueBunga').value = bunga
                     $('#subtotal').html(subtotal)
                     document.querySelector('#subtotal').value = subtotal
                     $('#perbulan').html(perbulan)

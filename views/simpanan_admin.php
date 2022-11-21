@@ -68,6 +68,7 @@ endif;
                             <th class="text-center" scope="col">Nama</th>
                             <th class="text-center" scope="col">Jumlah</th>
                             <th class="text-center" scope="col">Hari dan Tanggal</th>
+                            <th class="text-center" scope="col">Status</th>
                             <th class="text-center" scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -81,6 +82,7 @@ endif;
                                 <td><?= $simpan['nama'] ?></td>
                                 <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
                                 <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
+                                <td class="text-center"><?= $simpan['status_simpan'] ?></td>
                                 <td class="text-center">
                                     <a button class="btn btn-sm btn-success me-1" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
                                     <a button class="btn btn-delete btn-sm btn-danger" href="simpanan_proses.php?id_simpan=<?= $simpan['id_simpan'] ?>"><i class='bx bx-trash'></i></a>

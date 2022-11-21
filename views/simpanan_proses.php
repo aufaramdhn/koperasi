@@ -16,7 +16,7 @@ if (isset($_POST['bsimpanadmin'])) {
     $id = $_POST['nama'];
     $jumlah = $_POST['jumlah'];
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$jumlah', current_timestamp());");
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$jumlah', current_timestamp(), 'pending');");
     if ($sql == true) {
         $_SESSION['info'] = 'Disimpan';
         echo "<script>window.location=' simpanan_admin.php'</script>";
@@ -31,7 +31,7 @@ if (isset($_POST['bUser'])) {
     $id = $_SESSION['id_user'];
     $jumlah = $_POST['jumlah'];
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$jumlah', current_timestamp());");
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$jumlah', current_timestamp(), 'pending');");
     if ($sql == true) {
         $_SESSION['info'] = 'Disimpan';
         echo "<script>window.location=' simpanan_user.php'</script>";

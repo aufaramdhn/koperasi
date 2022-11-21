@@ -33,7 +33,7 @@ if (isset($_POST['konfirmasi'])) {
     }
     $konfirmasi = "UPDATE tbl_pinjam SET tgl_pinjam = '$today' WHERE id_pinjam = '$id'";
     $result_select = mysqli_query($koneksi, $konfirmasi);
-    $select = "UPDATE tbl_pinjam SET status = 'konfirmasi' WHERE id_pinjam = '$id'";
+    $select = "UPDATE tbl_pinjam SET status_pinjam = 'konfirmasi' WHERE id_pinjam = '$id'";
     $result_select = mysqli_query($koneksi, $select);
 
     $_SESSION['info'] = 'Konfirmasi';
@@ -43,7 +43,7 @@ if (isset($_POST['konfirmasi'])) {
 if (isset($_POST['tolak'])) {
     $id = $_POST['id_pinjam'];
 
-    $select = "UPDATE tbl_pinjam SET status = 'tolak' WHERE id_pinjam = '$id'";
+    $select = "UPDATE tbl_pinjam SET status_pinjam = 'tolak' WHERE id_pinjam = '$id'";
     $result = mysqli_query($koneksi, $select);
 
     $_SESSION['info'] = 'Tolak';
@@ -53,7 +53,7 @@ if (isset($_POST['tolak'])) {
 if (isset($_POST['pengembalian'])) {
     $id = $_POST['id_pinjam'];
 
-    $select = "UPDATE tbl_pinjam SET status = 'pengembalian' WHERE id_pinjam = '$id'";
+    $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
     $result = mysqli_query($koneksi, $select);
 
     $_SESSION['info'] = 'Disimpan';
@@ -63,7 +63,7 @@ if (isset($_POST['pengembalian'])) {
 if (isset($_POST['selesai'])) {
     $id = $_POST['id_pinjam'];
 
-    $select = "UPDATE tbl_pinjam SET status = 'selesai' WHERE id_pinjam = '$id'";
+    $select = "UPDATE tbl_pinjam SET status_pinjam = 'selesai' WHERE id_pinjam = '$id'";
     $result = mysqli_query($koneksi, $select);
 
     $_SESSION['info'] = 'Selesai';
@@ -76,10 +76,11 @@ if (isset($_POST['bpinjamadmin'])) {
     $bunga = $_POST['valueBunga'];
     $jumlah = $_POST['jumlah'];
     $tgl_pinjam = $_POST['tgl_pinjam'];
-    $total = ($bunga / 10) * $jumlah;
+
+    $total = $jumlah * ($bunga / 10);
     $grand_total = $jumlah + $total;
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bulan', '$grand_total', '$tgl_pinjam', 'pending');");
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bulan', '$grand_total', '$total', '$tgl_pinjam', 'pending');");
     if ($sql == true) {
 
         $_SESSION['info'] = 'Disimpan';
