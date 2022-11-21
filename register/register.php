@@ -1,115 +1,9 @@
 <?php
-require_once "../koneksi.php";
-date_default_timezone_set('Asia/jakarta');
-$today = date("Y-m-d H:i:s");
+require_once "../apps/koneksi.php";
+session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | Koperasi</title>
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <style>
-        .img-background {
-            background-image: url("../assets/img/background-login.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-    </style>
-</head>
-
-<body class="img-background p-5">
-    <div class="container">
-        <div class="card">
-            <div class="card-header p-4 d-flex justify-content-between align-items-center">
-                <span class="fs-2 fw-bold">
-                    Register
-                </span>
-            </div>
-            <div class="card-body p-5">
-                <form action="register-process.php" method="POST">
-                    <div class="mb-3">
-                        <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
-                        <input type="text" name="nama" class="form-control" id="nama-lengkap">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" id="email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <div class="input-group">
-                            <input type="password" name="password" class="form-control" id="password">
-                            <label for="password" class="input-group-text"><i class="bi bi-eye-slash"></i></label>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tempat" class="form-label">Tempat, Tanggal Lahir</label>
-                        <div class="row">
-                            <div class="col-4">
-                                <input type="text" name="tempat_lahir" class="form-control" id="tempat">
-                            </div>
-                            <div class="col-8">
-                                <input type="date" name="tgl_lahir" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Jenis Kelamin</label>
-                        <select class="form-select" name="jk">
-                            <option selected>Open this select menu</option>
-                            <option>Laki-Laki</option>
-                            <option>Perempuan</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Agama</label>
-                        <select class="form-select" name="agama">
-                            <option selected>Open this select menu</option>
-                            <option>Islam</option>
-                            <option>Kristen</option>
-                            <option>Hindu</option>
-                            <option>Buddha</option>
-                            <option>Protestan</option>
-                            <option>Konghucu</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="pekerjaan" class="form-label">Pekerjaan</label>
-                        <input type="text" name="pekerjaan" class="form-control" id="pekerjaan">
-                    </div>
-                    <div class="mb-3">
-                        <label for="telp" class="form-label">Telp</label>
-                        <input type="text" name="telp" class="form-control" id="telp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="alamat" class="form-label">Alamat</label>
-                        <input type="text" name="alamat" class="form-control" id="alamat">
-                    </div>
-                    <div class="mb-3">
-                        <input type="hidden" name="created_at" class="form-control" id="created_at" value="<?= $today ?>">
-                    </div>
-                    <div class="mb-2">
-                        <small class="font-weight-bold">Sudah punya account? <a class="text-danger text-blue mt-2" href="../index.php">Login</a></small>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" name="btambah" class="btn btn-primary">Tambah</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script src="../assets/css/bootstrap.min.css"></script>
-</body>
-
-</html>
-
-<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -120,55 +14,80 @@ $today = date("Y-m-d H:i:s");
 
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../assets/style/style.css">
+
 </head>
 
-<body>
-    <div>
-        <div class="row" style="background-color: #FFF7E9;">
-            <div class="col">
-                <img src="../assets/img/background-login.jpg" alt="background-login">
-            </div>
-            <div class="col d-flex align-items-center">
-                <div class="container w-75">
-                    <form action="register-process.php" method="POST">
-                        <span class="fs-2"> 
-                        <h2 class="mb-2">Register</h2>
-                        < </span>
-                        <div class="mb-2">
-                            <label for="nama-lenkap" class="form-label">Nama Lengkap</label>
-                            <input type="text" name="nama" class="form-control" id="nama-lengkap" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-2">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-2">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="password">
-                        </div>
-                         <div class="mb-2">
-                            <label for="c-password" class="form-label">Konfirmasi Password</label>
-                            <input type="password" name="c_password" class="form-control" id="c-password">
-                        </div>
-                        <div class="mb-2">
-                            <input type="hidden" name="created_at" value="<?= $today ?>" class="form-control">
-                        </div>
-                        <div class="mb-2">
-                            <small class="font-weight-bold">Anda Sudah Mempunyai Akun? <a class="text-danger text-blue mt-2" href="../index.php">Login</a></small>
-                        </div>
-                         <div class="mb-2 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                        </div> 
-                        <button type="submit" name="submit" class="btn btn-primary">Buat</button>
-                    </form>
-                </div>
+<body class="overflow-hidden">
+    <!-- Alert -->
+    <?php if (isset($_SESSION['info'])) : ?>
+        <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
+    <?php
+        session_destroy();
+    // unset($_SESSION['info']);
+    endif;
+    ?>
+
+    <div class="row">
+        <div class="col-6" style="background-color: #FFE6E7; height: 100vh;">
+            <!-- <img class="img-login" src="assets/img/background-login.jpg" alt="background-login"> -->
+        </div>
+        <div class="col-6 d-flex align-items-center">
+            <div class="container w-75">
+                <form action="auth/login_proses.php" method="POST">
+                    <h2 class="fw-bold text-center">Register</h2>
+                    <small class="d-flex justify-content-center mb-3">Create an Account</small>
+                    <!-- <div style="border-bottom: 4px solid; margin-bottom: 1rem; border-color: #D5EBFF; width: 20%;"></div> -->
+                    <div class="mb-3">
+                        <label for="inputNama" class="form-label">Nama Lengkap</label>
+                        <input type="text" name="nama" class="form-control" id="inputNama" placeholder="Masukan Nama Lengkap Anda" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Masukan Email Anda" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Masukan Password Anda" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputNotelp" class="form-label">No Telepon</label>
+                        <input type="text" name="notelp" class="form-control" id="inputNotelp" placeholder="Masukan No Telepon Anda" required>
+                    </div>
+                    <div class="mb-2">
+                        <button type="submit" name="submit" class="btn w-100 text-white pt-2 pb-2" style="background-color: #1B1C30;">Create An Account</button>
+                    </div>
+                    <small class="font-weight-bold">Anda Sudah Mempunyai akun? <a class="mt-2" style="color: #6A5BE2;" href="../index.php">Masuk disini</a></small>
+                </form>
             </div>
         </div>
     </div>
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../assets/script/jquery.js"></script>
+
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="../assets/js/sweetalert.js"></script>
+
+    <script src="../assets/script/alert.js"></script>
+
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../assets/script/jquery.js"></script>
+
+    <script src="../assets/script/sidebar.js"></script>
+
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="../assets/js/datatables.min.js"></script>
+
+    <script src="../assets/js/custom.js"></script>
+
+    <script src="../assets/js/sweetalert.js"></script>
+
+    <script src="../assets/script/alert.js"></script>
 </body>
 
-</html> -->
+</html>

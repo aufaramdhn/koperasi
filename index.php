@@ -28,33 +28,30 @@ session_start();
     endif;
     ?>
 
-    <div class="row" style="background-color: #FFF7E9;">
-        <div class="col">
-            <img class="img-login" src="assets/img/background-login.jpg" alt="background-login">
-        </div>
-        <div class="col d-flex align-items-center">
+    <div class="row">
+        <div class="col-6 d-flex align-items-center">
             <div class="container w-75">
                 <form action="auth/login_proses.php" method="POST">
-                    <!-- <span class="fs-2"> -->
-                    <h2>Login</h2>
-                    <!-- </span> -->
-                    <div class="mb-2">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <h2 class="fw-bold text-center mb-4">Login</h2>
+                    <!-- <div style="border-bottom: 4px solid; margin-bottom: 1rem; border-color: #D5EBFF; width: 20%;"></div> -->
+                    <div class="mb-4">
+                        <label for="inputEmail" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Masukan Email Anda" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Masukan Password Anda" required>
                     </div>
                     <div class="mb-2">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" required>
+                        <button type="submit" name="submit" class="btn w-100 text-white pt-2 pb-2" style="background-color: #1B1C30;">Login</button>
                     </div>
-                    <div class="mb-2 ">
-                        <small class="font-weight-bold">Anda Belum Mempunyai akun? <a class="text-danger text-blue mt-2" href="register/register.php">Buat Account</a></small>
-                    </div>
-                    <!-- <div class="mb-2 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                        </div> -->
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    <small class="font-weight-bold">Anda Belum Mempunyai akun? <a class="mt-2" style="color: #6A5BE2;" href="register/register.php">Buat Akun</a></small>
                 </form>
+            </div>
+        </div>
+        <div class="col-6" style="background-color: #D5EBFF; height: 100vh;">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <!-- <img class="img-login" src="assets/img/3081783.jpg" alt="background-login" width="500"> -->
             </div>
         </div>
     </div>
