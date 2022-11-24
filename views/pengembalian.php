@@ -5,13 +5,14 @@ date_default_timezone_set('Asia/jakarta');
 
 $id = $_GET['id_pinjam'];
 
-$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_pinjam) WHERE tbl_pinjam.id_pinjam=$id");
+$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) JOIN tbl_pengembalian ON (tbl_pengembalian.id_konfirmasi_pinjam=konfirmasi_pinjam.id_konfirmasi_pinjam) WHERE tbl_pinjam.id_pinjam=$id");
 $confirmArray = mysqli_fetch_array($confirmQuery);
+$confirmRows = mysqli_num_rows($confirmQuery);
 
 $today = date("Y-m-d H:i:s");
 
 $today = date("Y-m-d H:i:s");
-$expires = strtotime('+30 days', strtotime($confirmArray['tgl_konfirmasi']));
+$expires = strtotime('+15 days', strtotime($confirmArray['tgl_konfirmasi']));
 $expired = date('Y-m-d H:i:s', $expires);
 
 $today1 = date("Y-m-d H:i:s");
@@ -27,6 +28,13 @@ $expires3 = strtotime('+21 days', strtotime($today3));
 $expired3 = date('Y-m-d H:i:s', $expires3);
 
 $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
+// var_dump($confirmRows);
+// $no = $confirmRows;
+// if ($confirmRows > 0) {
+//     $no_loop = $no++;
+// } else {
+//     $no_loop = $no;
+// }
 
 ?>
 <div class="container-fluid pt-3">
@@ -52,6 +60,14 @@ $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
                     <div class="mb-3">
                         <label for="jumlah-pinjaman" class="form-label">Jumlah Pengembalian</label>
                         <input type="number" class="form-control" id="jumlah-pinjaman" name="jumlah" value="<?= round($total_bayar) ?>" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pengembalian_ke" class="form-label">Pengembalian Ke</label>
+                        <?php if ($confirmRows > 0) : ?>
+                            <input type="number" class="form-control" id="pengembalian_ke" name="pengembalian_ke" value="<?= $confirmRows + 1 ?>" readonly>
+                        <?php else : ?>
+                            <input type="number" class="form-control" id="pengembalian_ke" name="pengembalian_ke" value="<?= $confirmRows ?>" readonly>
+                        <?php endif; ?>
                     </div>
                     <?php
                     if ($expired1  >= $expired) :

@@ -1,6 +1,9 @@
 <?php
-require_once "../apps/koneksi.php";
+include_once("../apps/koneksi.php");
 session_start();
+
+date_default_timezone_set('Asia/jakarta');
+$today = date("Y-m-d H:i:s");
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +37,7 @@ session_start();
         </div>
         <div class="col-6 d-flex align-items-center">
             <div class="container w-75">
-                <form action="auth/login_proses.php" method="POST">
+                <form action="register-process.php" method="POST">
                     <h2 class="fw-bold text-center">Register</h2>
                     <small class="d-flex justify-content-center mb-3">Create an Account</small>
                     <!-- <div style="border-bottom: 4px solid; margin-bottom: 1rem; border-color: #D5EBFF; width: 20%;"></div> -->
@@ -54,6 +57,7 @@ session_start();
                         <label for="inputNotelp" class="form-label">No Telepon</label>
                         <input type="text" name="notelp" class="form-control" id="inputNotelp" placeholder="Masukan No Telepon Anda" required>
                     </div>
+                    <input type="datetime" class="d-none" name="created_at" value="<?= $today ?>">
                     <div class="mb-2">
                         <button type="submit" name="submit" class="btn w-100 text-white pt-2 pb-2" style="background-color: #1B1C30;">Create An Account</button>
                     </div>

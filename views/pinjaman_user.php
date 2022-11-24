@@ -43,8 +43,10 @@ while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
 }
 
 // Limit Pengembalian
-$expires = strtotime('+0 days', strtotime($confirmArray['tgl_konfirmasi']));
-$expired = date('Y-m-d H:i:s', $expires);
+if (isset($confirmArray['tgl_konfirmasi'])) {
+    $expires = strtotime('+0 days', strtotime($confirmArray['tgl_konfirmasi']));
+    $expired = date('Y-m-d H:i:s', $expires);
+}
 ?>
 
 <!-- Alert -->
@@ -53,9 +55,6 @@ $expired = date('Y-m-d H:i:s', $expires);
 <?php
     unset($_SESSION['info']);
 endif;
-
-var_dump($confirmArray['tgl_konfirmasi']);
-var_dump($expired);
 ?>
 
 <div class="container-fluid py-3">

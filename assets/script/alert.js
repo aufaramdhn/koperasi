@@ -40,7 +40,14 @@ $(".btn-logout").on("click", function (e) {
     confirmButtonText: "Logout",
   }).then((result) => {
     if (result.value) {
-      document.location.href = href;
+      Swal.fire({
+        icon: "success",
+        title: "Anda berhasil logout",
+        showConfirmButton: false,
+      });
+      setTimeout(function () {
+        document.location.href = href;
+      }, 1200);
     }
   });
 });
@@ -96,6 +103,20 @@ if (notifikasi == "Disimpan") {
   Swal.fire({
     icon: "success",
     title: "Data telah selesai",
+    showConfirmButton: false,
+    timer: 1500,
+  });
+} else if (notifikasi == "berhasil di buat") {
+  Swal.fire({
+    icon: "success",
+    title: "Akun Berhasil di buat",
+    showConfirmButton: false,
+    timer: 1500,
+  });
+} else if (notifikasi == "email sudah di gunakan") {
+  Swal.fire({
+    icon: "error",
+    title: "Email sudah di gunakan",
     showConfirmButton: false,
     timer: 1500,
   });

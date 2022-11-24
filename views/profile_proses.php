@@ -2,11 +2,10 @@
 
 session_start();
 
-$id_user = $_SESSION['id_user'];
-
 include("../apps/koneksi.php");
 
 if (isset($_POST['bsimpan'])) {
+    $id_user = $_POST['id_user'];
     $nama = $_POST['nama'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -17,9 +16,8 @@ if (isset($_POST['bsimpan'])) {
     $pekerjaan = $_POST['pekerjaan'];
     $telp = $_POST['telp'];
     $alamat = $_POST['alamat'];
-    $created_at = $_POST['created_at'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO tbl_user VALUES ('$nama', '$email', '$password', '$tempat', '$tgl', '$jk', '$agama', '$pekerjaan', '$telp', '$alamat', 'user', '$created_at') WHERE id_user = $id_user");
+    $query = mysqli_query($koneksi, "UPDATE tbl_user SET nama='$nama',email='$email', password='$password', tempat_lahir='$tempat', tgl_lahir='$tgl', jk='$jk', agama='$agama', pekerjaan='$pekerjaan', telp='$telp', alamat='$alamat', level='user' WHERE id_user = $id_user");
 
     if ($query == true) {
         $_SESSION['info'] = 'Disimpan';

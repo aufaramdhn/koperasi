@@ -38,7 +38,7 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                             <td class="text-end"><?= $no++ ?></td>
                             <td><?= $kembali['nama'] ?></td>
                             <td class="text-center">Rp. <?= number_format($kembali['jumlah_pengembalian'], '0', '.', '.') ?></td>
-                            <td class="text-center">1</td>
+                            <td class="text-center"><?= $kembali['pengembalian_ke'] ?></td>
                             <td class="text-center"><?= $kembali['id_bunga'] ?> Bulan</td>
                             <td class="text-center"><?= $kembali['tgl_pengembalian'] ?></td>
                             <td class="text-center">

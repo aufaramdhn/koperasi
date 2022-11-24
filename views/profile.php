@@ -7,6 +7,13 @@ $id = $_SESSION['id_user'];
 $profile = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE id_user = '$id'");
 $data    = mysqli_fetch_array($profile);
 
+var_dump($data['id_user'])
+?>
+<?php if (isset($_SESSION['info'])) : ?>
+    <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
+<?php
+    unset($_SESSION['info']);
+endif;
 ?>
 <div class="container-fluid py-5">
     <div class="card">
@@ -17,7 +24,7 @@ $data    = mysqli_fetch_array($profile);
         </div>
         <div class="card-body pe-5 ps-3 py-5 row">
             <?php if (isset($_POST['bedit'])) : ?>
-                <form action="profile_proses.php" method="post">
+                <form action="profile_proses.php" method="post" enctype="multipart/form-data">
                     <div class="row pe-5 ps-3 py-5">
                         <div class="d-flex justify-content-xs-center flex-column align-items-center col-3 mb-5">
                             <div class="mb-3">
@@ -29,6 +36,7 @@ $data    = mysqli_fetch_array($profile);
                             </div>
                         </div>
                         <div class="col-9">
+                            <input type="hidden" name="id_user" value="<?= $data['id_user']; ?>">
                             <div class="mb-3 row">
                                 <label for="nama-lengkap" class="col-sm-2 col-form-label">Nama Lengkap</label>
                                 <div class="col-sm-10">
@@ -86,7 +94,6 @@ $data    = mysqli_fetch_array($profile);
                                     <input type="text" class="form-control" rows="3" name="alamat" id="alamat" value="<?= $data['alamat'] ?>">
                                 </div>
                             </div>
-                            <input type="hidden" class="form-control" rows="3" name="created" value="<?= $data['created_at'] ?>">
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-danger text-white me-2" name="bkembali">Kembali</button>
                                 <button type="submit" class="btn btn-success" name="bsimpan">Simpan</button>
