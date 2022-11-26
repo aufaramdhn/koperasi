@@ -31,9 +31,7 @@ if (isset($_POST['konfirmasi'])) {
         $confirm = "INSERT INTO konfirmasi_pinjam VALUES ('','$id','$today','$expired')";
         $result_confirm = mysqli_query($koneksi, $confirm);
     }
-    $konfirmasi = "UPDATE tbl_pinjam SET tgl_pinjam = '$today' WHERE id_pinjam = '$id'";
-    $result_select = mysqli_query($koneksi, $konfirmasi);
-    $select = "UPDATE tbl_pinjam SET status_pinjam = 'konfirmasi' WHERE id_pinjam = '$id'";
+    $select = "UPDATE tbl_pinjam SET tgl_pinjam = '$today', status_pinjam = 'konfirmasi' WHERE id_pinjam = '$id'";
     $result_select = mysqli_query($koneksi, $select);
 
     $_SESSION['info'] = 'Konfirmasi';
@@ -70,26 +68,26 @@ if (isset($_POST['selesai'])) {
     header("Location: pinjaman_admin.php");
 }
 
-if (isset($_POST['bpinjamadmin'])) {
-    $id = $_POST['nama'];
-    $id_bunga = $_POST['selectBulan'];
-    $bunga = $_POST['valueBunga'];
-    $jumlah = $_POST['jumlah'];
-    $tgl_pinjam = $_POST['tgl_pinjam'];
+// if (isset($_POST['bpinjamadmin'])) {
+//     $id = $_POST['nama'];
+//     $id_bunga = $_POST['selectBulan'];
+//     $bunga = $_POST['valueBunga'];
+//     $jumlah = $_POST['jumlah'];
+//     $tgl_pinjam = $_POST['tgl_pinjam'];
 
-    $total = $jumlah * ($bunga / 10);
-    $grand_total = $jumlah + $total;
+//     $total = $jumlah * ($bunga / 10);
+//     $grand_total = $jumlah + $total;
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bulan', '$grand_total', '$total', '$tgl_pinjam', 'pending');");
-    if ($sql == true) {
+//     $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bulan', '$grand_total', '$total', '$tgl_pinjam', 'pending');");
+//     if ($sql == true) {
 
-        $_SESSION['info'] = 'Disimpan';
-        header("Location: pinjaman_admin.php");
-    } else {
-        $_SESSION['info'] = 'Gagal';
-        header("Location: pinjaman_admin.php");
-    }
-}
+//         $_SESSION['info'] = 'Disimpan';
+//         header("Location: pinjaman_admin.php");
+//     } else {
+//         $_SESSION['info'] = 'Gagal';
+//         header("Location: pinjaman_admin.php");
+//     }
+// }
 
 if (isset($_POST['bpinjamuser'])) {
 
