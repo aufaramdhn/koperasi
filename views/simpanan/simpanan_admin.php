@@ -1,6 +1,6 @@
 <?php
 $active = 'simpanan';
-include "../layout/header.php";
+include "../../layout/header.php";
 
 
 $id_simpanan = $_SESSION['id_user'];
@@ -37,7 +37,7 @@ $tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_simpa
                             <td><?= $simpan['nama'] ?></td>
                             <td class="text-center">Rp. <?= number_format($simpan['total_simpan'], '0', '.', '.') ?></td>
                             <td class="text-center">
-                                <a href="detail_simpanan.php?id_user=<?= $simpan['id_user'] ?>">Lihat Selengkapnya</a>
+                                <a class="fw-bold text-uppercase" href="detail_simpanan.php?id_user=<?= $simpan['id_user'] ?>">Lihat Selengkapnya</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -46,4 +46,4 @@ $tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_simpa
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

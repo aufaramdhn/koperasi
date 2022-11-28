@@ -1,6 +1,6 @@
 <?php
 $active = 'simpanan';
-include "../layout/header.php";
+include "../../layout/header.php";
 
 
 $id_user = $_GET['id_user'];
@@ -25,6 +25,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                         <th scope="col">No</th>
                         <th class="text-center" scope="col">Nama</th>
                         <th class="text-center" scope="col">Jumlah</th>
+                        <th class="text-center" scope="col">Status</th>
                         <th class="text-center" scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -40,6 +41,19 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                             <td><?= $simpan['nama'] ?></td>
                             <td class="text-center">Rp. <?= number_format($total, '0', '.', '.') ?></td>
                             <td class="text-center">
+                                <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
+                                    <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
+                                <?php } else if ($simpan['status_simpan'] == 'tolak') { ?>
+                                    <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
+                                <?php } else if ($simpan['status_simpan'] == 'pending') { ?>
+                                    <form action="simpanan_proses.php" method="POST">
+                                        <input type="hidden" name="id_simpan" value="<?= $simpan['id_simpan'] ?>">
+                                        <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
+                                        <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
+                                    </form>
+                                <?php } ?>
+                            </td>
+                            <td class="text-center">
                                 <a button class="btn btn-sm btn-success me-1" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
                                 <a button class="btn btn-delete btn-sm btn-danger" href="simpanan_proses.php?id_simpan=<?= $simpan['id_simpan'] ?>"><i class='bx bx-trash'></i></a>
                             </td>
@@ -50,4 +64,4 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

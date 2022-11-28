@@ -1,6 +1,6 @@
 <?php
 $active = "pinjaman";
-include "../layout/header.php";
+include "../../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
@@ -8,14 +8,15 @@ $expires = date("2022-10-30 12:42:00");
 
 $id_pinjaman = $_SESSION['id_user'];
 
+// Cek pinjam
 $tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_user = $id_pinjaman ORDER BY tgl_pinjam DESC");
-$data_u = mysqli_fetch_array($tbl_pinjaman_u);
 $cek_pinjam = mysqli_num_rows($tbl_pinjaman_u);
 
-$querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_pinjaman");
-// $limit = mysqli_fetch_array($querySimpan);
+// Query Simpanan
+$querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.status_simpan = 'konfirmasi' AND tbl_simpan.id_user = $id_pinjaman");
 $cek = mysqli_num_rows($querySimpan);
 
+// Query konfirmasi
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
 $confirmArray = mysqli_fetch_array($confirmQuery);
 
@@ -28,15 +29,21 @@ $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 // limit pinjaman
 $limitQuery = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan DESC");
 $limit1 = mysqli_fetch_array($limitQuery);
+
+// Cek limit
 if (empty($limit['jumlah_simpan'])) {
     $total = 0;
 }
+
+// Perulangan limit simpan
 $total = 0;
 while ($total_simpan = mysqli_fetch_array($querySimpan)) {
     $total += $total_simpan['jumlah_simpan'];
     $grand_total = $total * 25 / 100;
 }
-$queryPinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) where tbl_pinjam.id_user = $id_pinjaman");
+
+// Perulangan limit pinjam
+$queryPinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) WHERE tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.id_user = $id_pinjaman");
 $total_1 = 0;
 while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
     $total_1 += $total_tampil['riba'];
@@ -47,6 +54,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
     $expires = strtotime('+0 days', strtotime($confirmArray['tgl_konfirmasi']));
     $expired = date('Y-m-d H:i:s', $expires);
 }
+
 ?>
 
 <div class="container-fluid py-3">
@@ -85,13 +93,14 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                 <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
                             </div>
                             <div class="mb-3 has-validation">
-                                <label for="jumlah" class="form-label">Jumlah Pinjaman</label>
                                 <?php if ($cek_pinjam > 0) : ?>
+                                    <label for="jumlah" class="form-label">Jumlah Pinjaman <small class="form-text fst-italic">* (Maks Pinjaman <?= $grand_total + $total_1 ?>)</small></label>
                                     <input type="number" min="0" max="<?= $grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php else : ?>
+                                    <label for="jumlah" class="form-label">Jumlah Pinjaman <small class="form-text fst-italic">* (Maks Pinjaman <?= $grand_total ?>)</small></label>
                                     <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php endif ?>
-                                <div class="form-text fst-italic">* Harap masukan nominal terlebih dahulu, setelah itu pilih tempo bulan yang anda inginkan</div>
+                                <small class="form-text fst-italic">* Harap masukan nominal terlebih dahulu, setelah itu pilih tempo bulan yang anda inginkan</small>
                                 <div class="invalid-feedback">
                                     Please choose a username.
                                 </div>
@@ -113,7 +122,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                         <option value="<?= $pay['id_bunga'] ?>" <?= $selected ?>> <?= $pay['bulan'] ?> Bulan</option>
                                     <?php } ?>
                                 </select>
-                                <div class="form-text fst-italic">* Harap masukan tempo bulan yang anda inginkan</div>
+                                <small class="form-text fst-italic">* Harap masukan tempo bulan yang anda inginkan</small>
                             </div>
                             <span name="bunga" id="bunga" class="d-none"></span>
                             <input type="hidden" id="valueBunga" name="valueBunga">
@@ -186,11 +195,11 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                         <div class="d-flex justify-content-center">
                                             <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white me-2"><i class='bx bxs-edit'></i></a>
                                             <form method="POST">
-                                                <a type="submit" href="pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-success text-white">Pengembalian</a>
+                                                <a type="submit" href="../pengembalian/pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-success text-white">Pengembalian</a>
                                             </form>
                                         </div>
                                     <?php else : ?>
-                                        <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white"><i class='bx bxs-edit'></i></a>
+                                        <a type="submit" href="../pengembalian/detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white"><i class='bx bxs-edit'></i></a>
                                     <?php endif ?>
                                 </td>
                             </tr>
@@ -201,7 +210,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>
 <script>
     $(document).ready(function() {
         $("#selectBulan").click(function() {

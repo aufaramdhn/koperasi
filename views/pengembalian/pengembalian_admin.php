@@ -1,11 +1,12 @@
 <?php
 $active = 'pengembalian';
-include "../layout/header.php";
+include "../../layout/header.php";
+
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
 
-$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam) WHERE tbl_user.id_user = '$_SESSION[id_user]'");
+$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam)");
 
 ?>
 <div class="container-fluid pt-3">
@@ -16,7 +17,7 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
             </span>
         </div>
         <div class="card-body">
-            <table id="example" class="table table-sm table-striped table-bordered d-md-block d-lg-table overflow-auto">
+            <table id="example" class="table table-striped table-bordered  d-md-block d-lg-table overflow-auto">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">No</th>
@@ -34,10 +35,10 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                         <tr>
                             <td class="text-end"><?= $no++ ?></td>
                             <td><?= $kembali['nama'] ?></td>
-                            <td class="text-center">Rp. <?= number_format($kembali['jumlah_pengembalian'], '0', '.', '.') ?></td>
+                            <td class="text-center"><?= $kembali['jumlah_pengembalian'] ?></td>
                             <td class="text-center"><?= $kembali['id_bunga'] ?> Bulan</td>
                             <td class="text-center">
-                                <a href="detail_pengembalian_user.php?id_user=<?= $kembali['id_user'] ?>">Lihat Selengkapnya</a>
+                                <a class="fw-bold text-uppercase" href="detail_pengembalian_admin.php?id_user=<?= $kembali['id_user'] ?>">Lihat Selengkapnya</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -46,4 +47,4 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

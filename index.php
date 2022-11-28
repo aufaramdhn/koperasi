@@ -1,5 +1,6 @@
 <?php
-require_once "apps/koneksi.php";
+require_once("apps/config.php");
+require_once("apps/koneksi.php");
 session_start();
 ?>
 
@@ -12,9 +13,9 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Koperasi</title>
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $config; ?>assets/bootstrap/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="<?php echo $config; ?>assets/style/style.css">
 
 </head>
 
@@ -54,13 +55,13 @@ session_start();
         </div>
     </div>
 
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo $config; ?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/script/jquery.js"></script>
+    <script src="<?php echo $config; ?>assets/script/jquery.js"></script>
 
-    <script src="assets/script/sweetalert.js"></script>
+    <script src="<?php echo $config; ?>assets/script/sweetalert.js"></script>
 
-    <script src="assets/script/alert.js"></script>
+    <script src="<?php echo $config; ?>assets/script/alert.js"></script>
 </body>
 
 </html>

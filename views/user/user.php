@@ -1,6 +1,6 @@
 <?php
 $active = 'user';
-include "../layout/header.php";
+include "../../layout/header.php";
 
 
 $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
@@ -128,4 +128,4 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
     </div>
 </div>
 
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

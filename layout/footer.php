@@ -1,6 +1,6 @@
 </div>
 
-<script src="<?php echo $config; ?>assets/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo $config; ?>assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script src="<?php echo $config; ?>assets/script/jquery.js"></script>
 

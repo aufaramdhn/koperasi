@@ -1,6 +1,6 @@
 <?php
 $active = "pinjaman";
-include "../layout/header.php";
+include "../../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
@@ -39,7 +39,7 @@ $pinjamanArray = mysqli_fetch_array($queryPinjaman);
                             <td><?= $pinjam['nama'] ?></td>
                             <td class="text-center">Rp. <?= number_format($pinjam['total_pinjam'], '0', '.', '.') ?></td>
                             <td class="text-center">
-                                <a href="detail_pinjaman.php?id_user=<?= $pinjam['id_user'] ?>">Lihat Selengkapnya</a>
+                                <a class="fw-bold text-uppercase" href="detail_pinjaman.php?id_user=<?= $pinjam['id_user'] ?>">Lihat Selengkapnya</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -48,4 +48,4 @@ $pinjamanArray = mysqli_fetch_array($queryPinjaman);
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

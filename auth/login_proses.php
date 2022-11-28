@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['email'] =  $row['email'];
             $_SESSION['level'] = $row['level'];
             $_SESSION['info'] = "Berhasil";
-            header("Location: ../views/index.php");
+            header("Location: ../views/dashboard/index.php");
         } else {
             $_SESSION['info'] = 'Kosong';
             header("Location: ../index.php");

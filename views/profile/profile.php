@@ -1,13 +1,11 @@
 <?php
 
 $active = "profile";
-include "../layout/header.php";
+include "../../layout/header.php";
 
 $id = $_SESSION['id_user'];
 $profile = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE id_user = '$id'");
 $data    = mysqli_fetch_array($profile);
-
-var_dump($data['id_user'])
 ?>
 <div class="container-fluid py-5">
     <div class="card">
@@ -173,4 +171,4 @@ var_dump($data['id_user'])
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

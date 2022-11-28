@@ -1,5 +1,5 @@
 <?php
-include '../apps/koneksi.php';
+include '../../apps/koneksi.php';
 
 $id_bunga = $_POST['id_bunga'];
 

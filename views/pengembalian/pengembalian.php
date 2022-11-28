@@ -1,5 +1,5 @@
 <?php
-include "../layout/header.php";
+include "../../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
 
@@ -9,13 +9,13 @@ $id_user = $_SESSION['id_user'];
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_pinjam='$id'");
 $confirmArray = mysqli_fetch_array($confirmQuery);
 
-$pQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam) JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_pinjam.id_user = '$id_user' ORDER BY tgl_pengembalian DESC LIMIT 1");
+$pQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam) JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_pinjam.id_pinjam = '$id_user' ORDER BY tgl_pengembalian DESC LIMIT 1");
 $pArray = mysqli_fetch_array($pQuery);
 $pRows = mysqli_num_rows($pQuery);
 
 $today = date("Y-m-d H:i:s");
 
-$expires = strtotime('+0 days', strtotime($confirmArray['tgl_konfirmasi']));
+$expires = strtotime('+30 days', strtotime($confirmArray['tgl_konfirmasi']));
 $expired = date('Y-m-d H:i:s', $expires);
 
 $expires1 = strtotime('+7 days', strtotime($today));
@@ -36,7 +36,7 @@ $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
                 Pengembalian
             </span>
             <form method="POST">
-                <a type="submit" href="pinjaman_user.php" class="btn btn-danger">Kembali</a>
+                <a type="submit" href="../pinjaman/pinjaman_user.php" class="btn btn-danger">Kembali</a>
             </form>
         </div>
         <div class="card-body">
@@ -99,4 +99,4 @@ $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

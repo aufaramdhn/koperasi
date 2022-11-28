@@ -1,6 +1,6 @@
 <?php
 $active = 'pengembalian';
-include "../layout/header.php";
+include ".././layout/header.php";
 
 
 date_default_timezone_set('Asia/jakarta');
@@ -15,6 +15,7 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
             <span class="fs-2 fw-bold">
                 Pengembalian
             </span>
+            <a href="pengembalian_admin.php" class="btn btn-danger">Kembali</a>
         </div>
         <div class="card-body">
             <table id="example" class="table table-striped table-bordered  d-md-block d-lg-table overflow-auto">
@@ -68,4 +69,4 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

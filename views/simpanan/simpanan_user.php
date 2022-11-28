@@ -1,7 +1,7 @@
 <?php
 
 $active = "simpanan";
-include "../layout/header.php";
+include "../../layout/header.php";
 
 
 $id_simpanan = $_SESSION['id_user'];
@@ -83,7 +83,15 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                                 <td><?= $simpan['nama'] ?></td>
                                 <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
                                 <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
-                                <td class="text-center">-</td>
+                                <td class="text-center">
+                                    <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
+                                        <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
+                                    <?php } else if ($simpan['status_simpan'] == 'tolak') { ?>
+                                        <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
+                                    <?php } else if ($simpan['status_simpan'] == 'pending') { ?>
+                                        <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">Pending</span>
+                                    <?php } ?>
+                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -92,4 +100,4 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

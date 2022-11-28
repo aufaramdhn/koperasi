@@ -2,7 +2,7 @@
 
 session_start();
 
-require("../apps/koneksi.php");
+require("../../apps/koneksi.php");
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");

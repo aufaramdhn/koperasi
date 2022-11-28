@@ -2,7 +2,7 @@
 
 session_start();
 
-include("../apps/koneksi.php");
+include("../../apps/koneksi.php");
 
 if (isset($_POST['bsimpan'])) {
     $id_user = $_POST['id_user'];

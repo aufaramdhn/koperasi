@@ -2,7 +2,7 @@
 
 session_start();
 
-require("../apps/koneksi.php");
+require("../../apps/koneksi.php");
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
@@ -31,10 +31,10 @@ if (isset($_POST['bpengembalian'])) {
         $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$total', '$pengembalian_ke', '$today', 'pengembalian');");
         if ($sql == true) {
             $_SESSION['info'] = 'Disimpan';
-            echo "<script>window.location=' pinjaman_user.php'</script>";
+            header("Location: ../pinjaman/pinjaman_user.php");
         } else {
             $_SESSION['info'] = 'Gagal';
-            echo "<script>window.location=' pinjaman_user.php'</script>";
+            header("Location: ../pinjaman/pinjaman_user.php");
         }
     } else {
         $id = $_POST['id_pinjam'];
@@ -48,10 +48,10 @@ if (isset($_POST['bpengembalian'])) {
         $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$jumlah', '$pengembalian_ke', '$today', 'pengembalian');");
         if ($sql == true) {
             $_SESSION['info'] = 'Disimpan';
-            echo "<script>window.location=' pinjaman_user.php'</script>";
+            header("Location: ../pinjaman/pinjaman_user.php");
         } else {
             $_SESSION['info'] = 'Gagal';
-            echo "<script>window.location=' pinjaman_user.php'</script>";
+            header("Location: ../pinjaman/pinjaman_user.php");
         }
     }
 }
@@ -65,5 +65,5 @@ if (isset($_POST['konfirmasi'])) {
     $result_select = mysqli_query($koneksi, $select_pinjam);
     $result_select = mysqli_query($koneksi, $select_pengembalian);
     $_SESSION['info'] = 'Konfirmasi';
-    header("Location: pinjaman_admin.php");
+    header("Location: ../pinjaman/pinjaman_admin.php");
 }

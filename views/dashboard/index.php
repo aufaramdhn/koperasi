@@ -1,17 +1,17 @@
 <?php
 $active = "dashboard";
-include "../layout/header.php";
+include "../../layout/header.php";
 
 // Session ID
 $id = $_SESSION['id_user'];
 
 // Saldo Pinjaman
-$saldo_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user WHERE tbl_pinjam.id_user = $id");
+$saldo_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user WHERE tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.id_user = $id");
 $saldo_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user");
 // Akhir Saldo Pinjaman
 
 // Saldo Simpanan
-$saldo_simpanan_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id");
+$saldo_simpanan_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.status_simpan = 'konfirmasi' AND tbl_simpan.id_user = $id");
 $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user");
 // Akhir Saldo Simpanan
 
@@ -177,9 +177,9 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
 
 <!-- Chart -->
 <?php if ($_SESSION['level'] == 'admin') {
-    include "../components/chart.php";
+    include "../../components/chart.php";
 }
 ?>
 
 <!-- Footer -->
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>

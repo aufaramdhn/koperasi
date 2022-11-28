@@ -1,6 +1,6 @@
 <?php
 $active = "pinjaman";
-include "../layout/header.php";
+include "../../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
@@ -86,4 +86,4 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
         </div>
     </div>
 </div>
-<?php include "../layout/footer.php" ?>
+<?php include "../../layout/footer.php" ?>
