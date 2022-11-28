@@ -8,34 +8,13 @@ $expires = date("2022-10-30 12:42:00");
 
 $id_pinjaman = $_SESSION['id_user'];
 
-$tbl_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user ORDER BY tgl_pinjam DESC");
-$data_a = mysqli_fetch_array($tbl_pinjaman_a);
-
-// SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user WHERE tbl_pinjam.id_user = tbl_user.id_user
-
-$querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = $id_pinjaman");
-$cek = mysqli_num_rows($querySimpan);
-
-$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
-$confirmArray = mysqli_fetch_array($confirmQuery);
-
-$id_bunga = 0;
-$bunga = "";
-$bulan = "";
-$queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
-?>
-
-<!-- Alert -->
-<?php if (isset($_SESSION['info'])) : ?>
-    <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
-<?php
-    unset($_SESSION['info']);
-endif;
+$queryPinjaman = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_pinjam) AS total_pinjam FROM tbl_pinjam LEFT JOIN tbl_user USING(id_user) GROUP BY id_user");
+$pinjamanArray = mysqli_fetch_array($queryPinjaman);
 ?>
 
 <div class="container-fluid py-3">
     <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+        <div class="card-header p-4 d-flex justify-content-between align-items-center" style="background-color: #fff;">
             <span class="fs-2 fw-bold">
                 Pinjaman
             </span>
@@ -47,57 +26,20 @@ endif;
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Pinjaman</th>
-                        <th scope="col">Tanggal Pinjam</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $no = 1;
-                    foreach ($tbl_pinjaman_a as $pinjam) {
+                    foreach ($queryPinjaman as $pinjam) {
                     ?>
                         <tr>
                             <td><?= $no++ ?></td>
                             <td><?= $pinjam['nama'] ?></td>
-                            <td class="text-center">Rp. <?= number_format($pinjam['jumlah_pinjam'], '0', '.', '.') ?></td>
-                            <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
+                            <td class="text-center">Rp. <?= number_format($pinjam['total_pinjam'], '0', '.', '.') ?></td>
                             <td class="text-center">
-                                <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
-                                    <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
-                                <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <div class="me-1">
-                                            <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pengembalian</span>
-                                        </div>
-                                        <form action="pinjaman_proses.php" method="POST">
-                                            <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
-                                            <input class="btn btn-sm btn-success" type="submit" name="selesai" value="selesai">
-                                        </form>
-                                    </div>
-                                <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
-                                    <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
-                                <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
-                                    <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Selesai</span>
-                                <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
-                                    <form action="pinjaman_proses.php" method="POST">
-                                        <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
-                                        <input type="hidden" name="id_bunga" value="<?= $pinjam['id_bunga'] ?>">
-                                        <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
-                                        <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
-                                    </form>
-                                <?php } ?>
-                            </td>
-                            <td class="text-center">
-                                <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
-                                <?php
-                                // if ($pinjam['tgl_konfirmasi'] >= $expired) : 
-                                ?>
-                                <!-- <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a> -->
-                                <?php
-                                // endif 
-                                ?>
-                                <a button class="btn btn-delete btn-sm btn-danger" href="pinjaman_proses.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>"><i class='bx bx-trash'></i></a>
+                                <a href="detail_pinjaman.php?id_user=<?= $pinjam['id_user'] ?>">Lihat Selengkapnya</a>
                             </td>
                         </tr>
                     <?php } ?>

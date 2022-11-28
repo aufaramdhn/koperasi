@@ -3,10 +3,10 @@ $active = 'simpanan';
 include "../layout/header.php";
 
 
-$id_simpanan = $_SESSION['id_user'];
+$id_user = $_GET['id_user'];
 
-$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_simpan) AS total_simpan FROM tbl_simpan LEFT JOIN tbl_user USING(id_user) GROUP BY id_user");
-// $data_a = mysqli_fetch_array($tbl_simpanan_a);
+$tbl_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = '$id_user'");
+$data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 ?>
 
@@ -16,6 +16,7 @@ $tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_simpa
             <span class="fs-2 fw-bold">
                 Simpanan
             </span>
+            <a href="simpanan_admin.php" class="btn btn-danger">Kembali</a>
         </div>
         <div class="card-body">
             <table id="example" class="table table-responsive table-bordered table-striped d-md-block d-lg-table overflow-auto">
@@ -31,13 +32,16 @@ $tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_simpa
                     <?php
                     $no = 1;
                     foreach ($tbl_simpanan_a as $simpan) {
+                        $total = 0;
+                        $total += $simpan['jumlah_simpan'];
                     ?>
                         <tr>
                             <td><?= $no++ ?></td>
                             <td><?= $simpan['nama'] ?></td>
-                            <td class="text-center">Rp. <?= number_format($simpan['total_simpan'], '0', '.', '.') ?></td>
+                            <td class="text-center">Rp. <?= number_format($total, '0', '.', '.') ?></td>
                             <td class="text-center">
-                                <a href="detail_simpanan.php?id_user=<?= $simpan['id_user'] ?>">Lihat Selengkapnya</a>
+                                <a button class="btn btn-sm btn-success me-1" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                <a button class="btn btn-delete btn-sm btn-danger" href="simpanan_proses.php?id_simpan=<?= $simpan['id_simpan'] ?>"><i class='bx bx-trash'></i></a>
                             </td>
                         </tr>
                     <?php } ?>

@@ -4,13 +4,18 @@ include "../layout/header.php";
 date_default_timezone_set('Asia/jakarta');
 
 $id = $_GET['id_pinjam'];
+$id_user = $_SESSION['id_user'];
 
-$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_pinjam=$id");
+$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_pinjam='$id'");
 $confirmArray = mysqli_fetch_array($confirmQuery);
+
+$pQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam) JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_pinjam.id_user = '$id_user' ORDER BY tgl_pengembalian DESC LIMIT 1");
+$pArray = mysqli_fetch_array($pQuery);
+$pRows = mysqli_num_rows($pQuery);
 
 $today = date("Y-m-d H:i:s");
 
-$expires = strtotime('+15 days', strtotime($confirmArray['tgl_konfirmasi']));
+$expires = strtotime('+0 days', strtotime($confirmArray['tgl_konfirmasi']));
 $expired = date('Y-m-d H:i:s', $expires);
 
 $expires1 = strtotime('+7 days', strtotime($today));
@@ -23,8 +28,6 @@ $expires3 = strtotime('+21 days', strtotime($today));
 $expired3 = date('Y-m-d H:i:s', $expires3);
 
 $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
-
-// var_dump($confirmArray['tgl_konfirmasi'])
 ?>
 <div class="container-fluid pt-3">
     <div class="card">
@@ -51,10 +54,15 @@ $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
                         <input type="number" class="form-control" id="jumlah-pinjaman" name="jumlah" value="<?= round($total_bayar) ?>" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="pengembalian_ke" class="form-label">Pengembalian Ke</label>
-                        <input type="number" class="form-control" id="pengembalian_ke" name="pengembalian_ke" value="" readonly>
-
+                        <?php if ($pRows > 0) : ?>
+                            <label for="pengembalian_ke" class="form-label">Pengembalian Ke</label>
+                            <input type="number" class="form-control" id="pengembalian_ke" name="pengembalian_ke" value="<?= $pArray['pengembalian_ke'] + 1 ?>" readonly>
+                        <?php else : ?>
+                            <label for="pengembalian_ke" class="form-label">Pengembalian Ke</label>
+                            <input type="number" class="form-control" id="pengembalian_ke" name="pengembalian_ke" value="1" readonly>
+                        <?php endif ?>
                     </div>
+
                     <?php
                     if ($expired1  >= $expired) :
                     ?>

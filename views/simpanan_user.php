@@ -12,14 +12,6 @@ $data_u = mysqli_fetch_array($tbl_user);
 $cek = mysqli_num_rows($tbl_simpanan_u);
 ?>
 
-<!-- Alert -->
-<?php if (isset($_SESSION['info'])) : ?>
-    <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
-<?php
-    unset($_SESSION['info']);
-endif;
-?>
-
 <div class="container-fluid py-3">
     <div class="card">
         <div class="card-header p-4 d-flex justify-content-between align-items-center">

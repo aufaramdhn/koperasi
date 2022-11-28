@@ -9,12 +9,6 @@ $data    = mysqli_fetch_array($profile);
 
 var_dump($data['id_user'])
 ?>
-<?php if (isset($_SESSION['info'])) : ?>
-    <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
-<?php
-    unset($_SESSION['info']);
-endif;
-?>
 <div class="container-fluid py-5">
     <div class="card">
         <div class="card-header p-4 d-flex justify-content-between align-items-center">

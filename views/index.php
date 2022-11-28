@@ -17,18 +17,10 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
 
 ?>
 
-<!-- Alert -->
-<?php if (isset($_SESSION['info'])) : ?>
-    <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
-<?php
-    unset($_SESSION['info']);
-endif;
-?>
-
 <div class="container pt-5">
     <?php if ($_SESSION['level'] == 'admin') : ?>
-        <div class="row">
-            <div class="col-md-3 mb-sm-2">
+        <div class="row d-flex justify-content-center">
+            <!-- <div class="col-md-3 mb-sm-2">
                 <div class="card bg-info text-white" style="width: 18rem;">
                     <div class="card-body  row d-flex align-items-center">
                         <div class="col-2 text-center">
@@ -41,6 +33,22 @@ endif;
                     </div>
                     <div class="card-footer">
                         <a class="text-decoration-none text-light fw-bold fs-6" href="../products/index.php">View detail </a>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-md-3">
+                <div class="card bg-danger text-white" style="width: 18rem;">
+                    <div class="card-body row d-flex align-items-center">
+                        <div class="col-2 text-center">
+                            <i class='bx bx-credit-card fs-1'></i>
+                        </div>
+                        <div class="col-10 d-flex flex-column align-items-end">
+                            <h5 class="card-title fw-bold">User</h5>
+                            <span class="fw-bold">0</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a class="text-decoration-none text-light fw-bold fs-6" href="../user/index.php">View detail </a>
                     </div>
                 </div>
             </div>
@@ -86,26 +94,10 @@ endif;
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-danger text-white" style="width: 18rem;">
-                    <div class="card-body row d-flex align-items-center">
-                        <div class="col-2 text-center">
-                            <i class='bx bx-credit-card fs-1'></i>
-                        </div>
-                        <div class="col-10 d-flex flex-column align-items-end">
-                            <h5 class="card-title fw-bold">User</h5>
-                            <span class="fw-bold">0</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a class="text-decoration-none text-light fw-bold fs-6" href="../user/index.php">View detail </a>
-                    </div>
-                </div>
-            </div>
         </div>
     <?php else : ?>
-        <div class="row">
-            <div class="col-md-3 mb-sm-2">
+        <div class="row d-flex justify-content-center">
+            <!-- <div class="col-md-3 mb-sm-2">
                 <div class="card bg-info text-white" style="width: 18rem;">
                     <div class="card-body  row d-flex align-items-center">
                         <div class="col-2 text-center">
@@ -120,7 +112,7 @@ endif;
                         <a class="text-decoration-none text-light fw-bold fs-6" href="../products/index.php">View detail </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="col-md-3 mb-sm-2">
                 <div class="card bg-success text-white" style="width: 18rem;">
                     <div class="card-body  row d-flex align-items-center">
@@ -163,7 +155,7 @@ endif;
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <div class="card bg-danger text-white" style="width: 18rem;">
                     <div class="card-body row d-flex align-items-center">
                         <div class="col-2 text-center">
@@ -178,7 +170,7 @@ endif;
                         <a class="text-decoration-none text-light fw-bold fs-6" href="../user/index.php">View detail </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     <?php endif ?>
 </div>

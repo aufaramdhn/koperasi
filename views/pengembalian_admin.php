@@ -23,10 +23,7 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Jumlah</th>
-                        <th scope="col">Pengembalian Ke</th>
                         <th scope="col">Tempo Bulan</th>
-                        <th scope="col">Tanggal Pengembalian</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -39,28 +36,10 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                             <td class="text-end"><?= $no++ ?></td>
                             <td><?= $kembali['nama'] ?></td>
                             <td class="text-center"><?= $kembali['jumlah_pengembalian'] ?></td>
-                            <td class="text-center"><?= $kembali['pengembalian_ke'] ?></td>
                             <td class="text-center"><?= $kembali['id_bunga'] ?> Bulan</td>
-                            <td class="text-center"><?= $kembali['tgl_pengembalian'] ?></td>
                             <td class="text-center">
-                                <?php if ($kembali['status_pengembalian'] == "pengembalian") : ?>
-                                    <form action="pengembalian_proses.php" method="POST">
-                                        <input type="hidden" name="id_pinjam" value="<?= $kembali['id_pinjam'] ?>">
-                                        <input type="hidden" name="id_pengembalian" value="<?= $kembali['id_pengembalian'] ?>">
-                                        <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
-                                        <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
-                                    </form>
-                                <?php elseif ($kembali['status_pengembalian'] == "konfirmasi") : ?>
-                                    <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Lunas</span>
-                                <?php endif  ?>
+                                <a href="detail_pengembalian_admin.php?id_user=<?= $kembali['id_user'] ?>">Lihat Selengkapnya</a>
                             </td>
-                            <td class="text-center">
-                                -
-                            </td>
-                            <!-- <td class="text-center">
-                                <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
-                                <a button class="btn btn-delete btn-sm btn-danger" href="pengembalian_proses.php?id_pengembalian=<?= $kembali['id_pengembalian'] ?>"><i class='bx bx-trash'></i></a>
-                            </td> -->
                         </tr>
                     <?php } ?>
                 </tbody>

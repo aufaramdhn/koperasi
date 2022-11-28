@@ -1,95 +1,88 @@
 <?php
+$active = "pinjaman";
 include "../layout/header.php";
 
-// date_default_timezone_set('Asia/jakarta');
-// $today = date("Y-m-d H:i:s");
-// $expires = date("2022-10-30 12:42:00");
+date_default_timezone_set('Asia/jakarta');
+$today = date("Y-m-d H:i:s");
+$expires = date("2022-10-30 12:42:00");
 
-$id_pinjaman = $_SESSION['id_user'];
+$id_user = $_GET['id_user'];
 
-$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$id_pinjaman");
-$confirmArray = mysqli_fetch_array($confirmQuery);
-?>
-
-<!-- Alert -->
-<?php if (isset($_SESSION['info'])) : ?>
-    <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
-<?php
-    unset($_SESSION['info']);
-endif;
+$tbl_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_user = '$id_user' ORDER BY tgl_pinjam DESC");
+$data_a = mysqli_fetch_array($tbl_pinjaman_a);
 ?>
 
 <div class="container-fluid py-3">
     <div class="card">
         <div class="card-header p-4 d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
-                Detail Pinjaman
+                Pinjaman
             </span>
-            <a class="btn btn-danger" href="pinjaman_user.php">Kembali</a>
+            <a href="pinjaman_admin.php" class="btn btn-danger">Kembali</a>
         </div>
         <div class="card-body">
-            <div class="row py-4 px-5">
-                <div class="col bg-primary text-light text-center rounded-start p-3">
-                    <span class="fs-4 fw-bold text-uppercase">Pinjaman</span>
-                    <div class="border-bottom border-3 mt-2 mb-4"></div>
-                    <div class="px-4">
-                        <div class="mb-3 row">
-                            <label class="col-sm-4 col-form-label">Nama</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" value="<?= $confirmArray['nama'] ?>" readonly>
-                            </div>
-                        </div>
-                        <div class=" mb-3 row">
-                            <label class="col-sm-4 col-form-label">Jumlah</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" value="<?= $confirmArray['jumlah_pinjam'] ?>">
-                            </div>
-                        </div>
-                        <div class=" mb-3 row">
-                            <label class="col-sm-4 col-form-label">Tanggal Pinjam</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" value="<?= $confirmArray['tgl_pinjam'] ?>">
-                            </div>
-                        </div>
-                        <div class=" mb-3 row">
-                            <label class="col-sm-4 col-form-label">Status</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" value="<?= $confirmArray['status'] ?>">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col bg-info text-light text-center rounded-end p-3">
-                    <span class="fs-4 fw-bold text-uppercase">Tanggal Konfirmasi</span>
-                    <div class="border-bottom border-3 mt-2 mb-4"></div>
-                    <div class="px-4">
-                        <div class="mb-3 row">
-                            <label class="col-sm-4 col-form-label">Nama</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" value="<?= $confirmArray['nama'] ?>" readonly>
-                            </div>
-                        </div>
-                        <div class=" mb-3 row">
-                            <label class="col-sm-4 col-form-label">Jumlah</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" value="<?= $confirmArray['jumlah_pinjam'] ?>">
-                            </div>
-                        </div>
-                        <div class=" mb-3 row">
-                            <label class="col-sm-4 col-form-label">Tanggal Pinjam</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" value="<?= $confirmArray['tgl_konfirmasi'] ?>">
-                            </div>
-                        </div>
-                        <div class=" mb-3 row">
-                            <label class="col-sm-4 col-form-label">Status</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" value="<?= $confirmArray['expired'] ?>">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <table id="example" class="table table-striped table-bordered d-md-block d-lg-table overflow-sm-auto">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Pinjaman</th>
+                        <th scope="col">Tanggal Pinjam</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    foreach ($tbl_pinjaman_a as $pinjam) {
+                    ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $pinjam['nama'] ?></td>
+                            <td class="text-center">Rp. <?= number_format($pinjam['jumlah_pinjam'], '0', '.', '.') ?></td>
+                            <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
+                            <td class="text-center">
+                                <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
+                                    <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
+                                <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="me-1">
+                                            <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pengembalian</span>
+                                        </div>
+                                        <form action="pinjaman_proses.php" method="POST">
+                                            <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
+                                            <input class="btn btn-sm btn-success" type="submit" name="selesai" value="selesai">
+                                        </form>
+                                    </div>
+                                <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
+                                    <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
+                                <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
+                                    <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Selesai</span>
+                                <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
+                                    <form action="pinjaman_proses.php" method="POST">
+                                        <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
+                                        <input type="hidden" name="id_bunga" value="<?= $pinjam['bulan'] ?>">
+                                        <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
+                                        <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
+                                    </form>
+                                <?php } ?>
+                            </td>
+                            <td class="text-center">
+                                <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                <?php
+                                // if ($pinjam['tgl_konfirmasi'] >= $expired) : 
+                                ?>
+                                <!-- <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a> -->
+                                <?php
+                                // endif 
+                                ?>
+                                <a button class="btn btn-delete btn-sm btn-danger" href="pinjaman_proses.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>"><i class='bx bx-trash'></i></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -14,12 +14,7 @@ if (isset($_GET['id_pengembalian'])) {
     header("Location: pengembalian_admin.php");
 }
 
-
 if (isset($_POST['bpengembalian'])) {
-    $id = $_POST['id_pinjam'];
-    $id_konfirmasi = $_POST['id_konfirmasi_pinjam'];
-    $jumlah = $_POST['jumlah'];
-    $pengembalian_ke = $_POST['pengembalian_ke'];
 
     if (isset($_POST['denda'])) {
         $id = $_POST['id_pinjam'];
@@ -41,18 +36,23 @@ if (isset($_POST['bpengembalian'])) {
             $_SESSION['info'] = 'Gagal';
             echo "<script>window.location=' pinjaman_user.php'</script>";
         }
-    }
-
-    $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
-    $result = mysqli_query($koneksi, $select);
-
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$jumlah', '$pengembalian_ke', '$today', 'pengembalian');");
-    if ($sql == true) {
-        $_SESSION['info'] = 'Disimpan';
-        echo "<script>window.location=' pinjaman_user.php'</script>";
     } else {
-        $_SESSION['info'] = 'Gagal';
-        echo "<script>window.location=' pinjaman_user.php'</script>";
+        $id = $_POST['id_pinjam'];
+        $id_konfirmasi = $_POST['id_konfirmasi_pinjam'];
+        $jumlah = $_POST['jumlah'];
+        $pengembalian_ke = $_POST['pengembalian_ke'];
+
+        $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
+        $result = mysqli_query($koneksi, $select);
+
+        $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$jumlah', '$pengembalian_ke', '$today', 'pengembalian');");
+        if ($sql == true) {
+            $_SESSION['info'] = 'Disimpan';
+            echo "<script>window.location=' pinjaman_user.php'</script>";
+        } else {
+            $_SESSION['info'] = 'Gagal';
+            echo "<script>window.location=' pinjaman_user.php'</script>";
+        }
     }
 }
 

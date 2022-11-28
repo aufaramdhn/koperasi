@@ -71,25 +71,7 @@ $today = date("Y-m-d H:i:s");
 
     <script src="../assets/script/jquery.js"></script>
 
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
-
-    <script src="../assets/js/sweetalert.js"></script>
-
-    <script src="../assets/script/alert.js"></script>
-
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-    <script src="../assets/script/jquery.js"></script>
-
-    <script src="../assets/script/sidebar.js"></script>
-
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
-
-    <script src="../assets/js/datatables.min.js"></script>
-
-    <script src="../assets/js/custom.js"></script>
-
-    <script src="../assets/js/sweetalert.js"></script>
+    <script src="../assets/script/sweetalert.js"></script>
 
     <script src="../assets/script/alert.js"></script>
 </body>

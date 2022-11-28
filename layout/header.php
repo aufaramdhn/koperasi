@@ -104,3 +104,11 @@ include "../apps/config.php";
     </div>
     <!--Container Main start-->
     <div class="container-fluid">
+
+        <!-- Alert -->
+        <?php if (isset($_SESSION['info'])) : ?>
+            <div class="info-data" data-infodata="<?php echo $_SESSION['info']; ?>"></div>
+        <?php
+            unset($_SESSION['info']);
+        endif;
+        ?>
