@@ -30,8 +30,12 @@ if (isset($_POST['bUser'])) {
 
     $id = $_SESSION['id_user'];
     $jumlah = $_POST['jumlah'];
+    $folder = '../../assets/bukti/';
+    $bukti = $_FILES['bukti']['name'];
+    $source = $_FILES['bukti']['tmp_name'];
+    $upload = move_uploaded_file($source, $folder . $bukti);
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$jumlah', current_timestamp(), 'pending');");
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$jumlah', '$bukti', current_timestamp(), 'pending');");
     if ($sql == true) {
         $_SESSION['info'] = 'Disimpan';
         header("Location: simpanan_user.php");

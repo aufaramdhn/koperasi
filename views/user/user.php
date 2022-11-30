@@ -1,5 +1,6 @@
 <?php
 $active = 'user';
+$title = "User | Koperasi";
 include "../../layout/header.php";
 
 

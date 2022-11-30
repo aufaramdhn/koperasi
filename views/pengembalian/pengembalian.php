@@ -1,4 +1,6 @@
 <?php
+$active = 'pengembalian';
+$title = "Pengembalian | Koperasi";
 include "../../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
@@ -87,6 +89,10 @@ $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
                     <?php
                     endif
                     ?>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Bukti Pembayaran</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
                     <div class="mb-3">
                         <label for="tanggal-bayar" class="form-label">Tanggal Bayar</label>
                         <input type="datetime" class="form-control" id="tanggal-bayar" name="tanggal_bayar" value="<?= $today ?>" readonly>

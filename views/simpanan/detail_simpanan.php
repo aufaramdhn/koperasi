@@ -1,5 +1,6 @@
 <?php
 $active = 'simpanan';
+$title = "Simpanan | Koperasi";
 include "../../layout/header.php";
 
 

@@ -1,6 +1,7 @@
 <?php
 
 $active = "simpanan";
+$title = "Simpanan | Koperasi";
 include "../../layout/header.php";
 
 
@@ -42,7 +43,7 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                 <?php
                 else :
                 ?>
-                    <form action="simpanan_proses.php" method="POST">
+                    <form action="simpanan_proses.php" method="POST" enctype="multipart/form-data">
                         <div class="container">
                             <div class="mb-3">
                                 <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
@@ -51,6 +52,10 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                             <div class="mb-3">
                                 <label for="jumlah-pinjaman" class="form-label">Jumlah Sinjaman</label>
                                 <input type="number" min="0" max="10000000" class="form-control" name="jumlah" id="jumlah-pinjaman">
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Bukti Pembayaran</label>
+                                <input class="form-control" name="bukti" type="file" id="formFile">
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button id="btn-tambah" type="submit" class="btn btn-primary" name="bUser">Sinjam</button>

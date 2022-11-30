@@ -1,7 +1,7 @@
 <?php
 $active = 'pengembalian';
-include ".././layout/header.php";
-
+$title = "Pengembalian | Koperasi";
+include "../../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
@@ -56,12 +56,9 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                                 <?php endif  ?>
                             </td>
                             <td class="text-center">
-                                -
-                            </td>
-                            <!-- <td class="text-center">
                                 <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
                                 <a button class="btn btn-delete btn-sm btn-danger" href="pengembalian_proses.php?id_pengembalian=<?= $kembali['id_pengembalian'] ?>"><i class='bx bx-trash'></i></a>
-                            </td> -->
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>

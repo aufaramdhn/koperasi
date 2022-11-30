@@ -1,6 +1,7 @@
 <?php
 
 $active = "profile";
+$title = "Profile | Koperasi";
 include "../../layout/header.php";
 
 $id = $_SESSION['id_user'];

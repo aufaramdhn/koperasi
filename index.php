@@ -51,6 +51,7 @@ session_start();
         </div>
         <div class="col-6" style="background-color: #D5EBFF; height: 100vh;">
             <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="assets/images/bg-login.png">
             </div>
         </div>
     </div>

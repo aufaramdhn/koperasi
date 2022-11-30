@@ -1,5 +1,6 @@
 <?php
 $active = "dashboard";
+$title = "Dashboard | Koperasi";
 include "../../layout/header.php";
 
 // Session ID

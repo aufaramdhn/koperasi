@@ -13,7 +13,7 @@ include "../../apps/config.php";
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Koperasi</title>
+    <title><?= $title ?></title>
 
     <link href="<?php echo $config; ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,9 +21,9 @@ include "../../apps/config.php";
 
     <link rel="stylesheet" href="<?php echo $config; ?>assets/styles/sidebar.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
     <link rel="stylesheet" href="<?php echo $config; ?>assets/styles/datatables.min.css">
+
+    <link rel="stylesheet" href="<?php echo $config; ?>assets/boxicons/css/boxicons.css">
 
     <script src="<?php echo $config; ?>assets/script/chart.js"></script>
 </head>

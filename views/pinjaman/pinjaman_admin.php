@@ -1,5 +1,6 @@
 <?php
 $active = "pinjaman";
+$title = "Pinjaman | Koperasi";
 include "../../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
