@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Nov 2022 pada 15.31
+-- Waktu pembuatan: 01 Des 2022 pada 11.44
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -39,8 +39,7 @@ CREATE TABLE `konfirmasi_pinjam` (
 --
 
 INSERT INTO `konfirmasi_pinjam` (`id_konfirmasi_pinjam`, `id_pinjam`, `tgl_konfirmasi`, `expired`) VALUES
-(1, 1, '2022-11-28 19:27:51', '2023-11-28 19:27:51'),
-(2, 2, '2022-11-28 19:34:35', '2022-12-28 19:34:35');
+(1, 1, '2022-12-01 10:28:11', '2023-05-30 06:50:00');
 
 -- --------------------------------------------------------
 
@@ -75,17 +74,20 @@ CREATE TABLE `tbl_pengembalian` (
   `id_konfirmasi_pinjam` int(11) NOT NULL,
   `jumlah_pengembalian` bigint(20) NOT NULL,
   `pengembalian_ke` int(11) NOT NULL,
+  `bukti_pengembalian` longtext NOT NULL,
   `tgl_pengembalian` datetime NOT NULL,
-  `status_pengembalian` varchar(25) DEFAULT 'pending'
+  `status_pengembalian` varchar(25) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tbl_pengembalian`
 --
 
-INSERT INTO `tbl_pengembalian` (`id_pengembalian`, `id_konfirmasi_pinjam`, `jumlah_pengembalian`, `pengembalian_ke`, `tgl_pengembalian`, `status_pengembalian`) VALUES
-(1, 1, 200000, 1, '2022-11-28 19:29:22', 'pengembalian'),
-(2, 2, 1100000, 1, '2022-11-28 19:38:16', 'pengembalian');
+INSERT INTO `tbl_pengembalian` (`id_pengembalian`, `id_konfirmasi_pinjam`, `jumlah_pengembalian`, `pengembalian_ke`, `bukti_pengembalian`, `tgl_pengembalian`, `status_pengembalian`) VALUES
+(1, 1, 300000, 1, '', '2022-12-01 06:50:37', 'konfirmasi'),
+(2, 1, 300000, 1, '', '2022-12-01 06:53:18', 'konfirmasi'),
+(3, 1, 300000, 1, '21d2a2a1-e325-4c01-b500-595cc91cec6c_169.jpg', '2022-12-01 06:54:37', 'konfirmasi'),
+(4, 1, 300000, 2, '', '2022-12-01 10:25:25', 'konfirmasi');
 
 -- --------------------------------------------------------
 
@@ -108,8 +110,7 @@ CREATE TABLE `tbl_pinjam` (
 --
 
 INSERT INTO `tbl_pinjam` (`id_pinjam`, `id_user`, `id_bunga`, `jumlah_pinjam`, `riba`, `tgl_pinjam`, `status_pinjam`) VALUES
-(1, 2, 4, '2400000', 1400000, '2022-11-28 19:27:51', 'pengembalian'),
-(2, 2, 1, '1100000', 100000, '2022-11-28 19:34:35', 'pengembalian');
+(1, 2, 3, '1800000', 800000, '2022-12-01 06:50:00', 'konfirmasi');
 
 -- --------------------------------------------------------
 
@@ -121,6 +122,7 @@ CREATE TABLE `tbl_simpan` (
   `id_simpan` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `jumlah_simpan` int(11) NOT NULL,
+  `bukti_simpan` longtext NOT NULL,
   `tgl_simpan` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `status_simpan` varchar(25) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -129,11 +131,11 @@ CREATE TABLE `tbl_simpan` (
 -- Dumping data untuk tabel `tbl_simpan`
 --
 
-INSERT INTO `tbl_simpan` (`id_simpan`, `id_user`, `jumlah_simpan`, `tgl_simpan`, `status_simpan`) VALUES
-(1, 2, 1000000, '2022-11-28 12:26:39', 'konfirmasi'),
-(2, 2, 1000000, '2022-11-28 12:26:42', 'konfirmasi'),
-(3, 2, 1000000, '2022-11-28 12:26:53', 'konfirmasi'),
-(4, 2, 1000000, '2022-11-28 12:27:01', 'konfirmasi');
+INSERT INTO `tbl_simpan` (`id_simpan`, `id_user`, `jumlah_simpan`, `bukti_simpan`, `tgl_simpan`, `status_simpan`) VALUES
+(1, 2, 1000000, 'koperasi.sql', '2022-11-30 23:44:56', 'konfirmasi'),
+(2, 2, 1000000, 'Jobsheet_Praktek_RPL_XII.pdf', '2022-11-30 23:45:00', 'konfirmasi'),
+(3, 2, 1000000, 'Basis_Data_Aufa_Ramadhan_XIIRPL.doc', '2022-11-30 23:45:03', 'konfirmasi'),
+(4, 2, 1000000, 'Beige and Black Simple & Modern Project Timeline Presentation (1).pptx', '2022-11-30 23:45:08', 'konfirmasi');
 
 -- --------------------------------------------------------
 
@@ -162,8 +164,10 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`id_user`, `nama`, `email`, `password`, `tempat_lahir`, `tgl_lahir`, `jk`, `agama`, `pekerjaan`, `telp`, `alamat`, `level`, `created_at`) VALUES
-(1, 'Aufa Ramadhan', 'aufa@gmail.com', '123', '', '0000-00-00', '', '', '', '081398057408', '', 'admin', '2022-11-28 12:23:40'),
-(2, 'Aninda Fitri Litasni', 'aninda@gmail.com', '123', 'Bogor', '2022-11-28', 'Perempuan', 'Islam', 'CEO', '081398057408', 'Cicadas', 'user', '2022-11-28 12:24:19');
+(1, 'Aufa Ramadhan', 'aufa@gmail.com', '123', '', '0000-00-00', '', '', '', '081398057408', '', 'admin', '2022-11-28 06:02:31'),
+(2, 'Aninda Fitri Litasni', 'aninda@gmail.com', '123', 'Bogor', '2022-11-28', 'Perempuan', 'Islam', 'CEO', '081398057408', 'Cicadas', 'user', '2022-11-28 06:03:22'),
+(3, 'Adi Saputra', 'adi@gmail.com', '123', '', '0000-00-00', '', '', '', '08912834123', '', 'user', '2022-11-28 05:49:24'),
+(4, 'Albert Enstein', 'albert@gmail.com', '123', '', '0000-00-00', '', '', '', '08972314234', '', 'user', '2022-11-28 05:50:21');
 
 --
 -- Indexes for dumped tables
@@ -218,7 +222,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `konfirmasi_pinjam`
 --
 ALTER TABLE `konfirmasi_pinjam`
-  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_konfirmasi_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_bunga`
@@ -230,13 +234,13 @@ ALTER TABLE `tbl_bunga`
 -- AUTO_INCREMENT untuk tabel `tbl_pengembalian`
 --
 ALTER TABLE `tbl_pengembalian`
-  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pengembalian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pinjam`
 --
 ALTER TABLE `tbl_pinjam`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_simpan`
@@ -248,7 +252,7 @@ ALTER TABLE `tbl_simpan`
 -- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

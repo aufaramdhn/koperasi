@@ -35,7 +35,7 @@ $confirmQuery = mysqli_query($koneksi, "SELECT *, SUM(jumlah_pengembalian) AS to
                         <tr>
                             <td class="text-end"><?= $no++ ?></td>
                             <td><?= $kembali['nama'] ?></td>
-                            <td class="text-center"><?= $kembali['jumlah_pinjam'] ?></td>
+                            <td class="text-center">Rp. <?= number_format($kembali['jumlah_pinjam'], '0', '.', '.') ?></td>
                             <td class="text-center"><?= $kembali['id_bunga'] ?> Bulan</td>
                             <td class="text-center">
                                 <a class="fw-bold text-uppercase" href="detail_pengembalian_admin.php?id_user=<?= $kembali['id_user'] ?>">Lihat Selengkapnya</a>

@@ -34,14 +34,15 @@ $today = date("Y-m-d H:i:s");
 
     <div class="row">
         <div class="col-6" style="background-color: #FFE6E7; height: 100vh;">
-            <!-- <img class="img-login" src="assets/img/background-login.jpg" alt="background-login"> -->
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="../assets/images/undraw_term_sheet_re_ju7s.svg" width="600">
+            </div>
         </div>
         <div class="col-6 d-flex align-items-center">
             <div class="container w-75">
                 <form action="register-process.php" method="POST">
                     <h2 class="fw-bold text-center">Register</h2>
                     <small class="d-flex justify-content-center mb-3">Create an Account</small>
-                    <!-- <div style="border-bottom: 4px solid; margin-bottom: 1rem; border-color: #D5EBFF; width: 20%;"></div> -->
                     <div class="mb-3">
                         <label for="inputNama" class="form-label">Nama Lengkap</label>
                         <input type="text" name="nama" class="form-control" id="inputNama" placeholder="Masukan Nama Lengkap Anda" required>

@@ -30,7 +30,8 @@ $confirmQuery = mysqli_query($koneksi, "SELECT *, SUM(jumlah_pengembalian) AS to
                 <tbody>
                     <?php
                     $no = 1;
-                    foreach ($confirmQuery as $kembali) {
+                    // if (mysqli_num_rows($cek) > 1) :
+                    foreach ($confirmQuery as $kembali) :
                     ?>
                         <tr>
                             <td class="text-end"><?= $no++ ?></td>
@@ -41,7 +42,10 @@ $confirmQuery = mysqli_query($koneksi, "SELECT *, SUM(jumlah_pengembalian) AS to
                                 <a class="fw-bold text-uppercase" href="detail_pengembalian_user.php?id_pinjam=<?= $kembali['id_pinjam'] ?>">Lihat Selengkapnya</a>
                             </td>
                         </tr>
-                    <?php } ?>
+                    <?php
+                    endforeach;
+                    // endif;
+                    ?>
                 </tbody>
             </table>
         </div>

@@ -22,13 +22,16 @@ if (isset($_POST['bpengembalian'])) {
         $jumlah = $_POST['jumlah'];
         $denda = $_POST['denda'];
         $pengembalian_ke = $_POST['pengembalian_ke'];
-
+        $folder = '../../assets/bukti_pengembalian/';
+        $bukti = $_FILES['bukti']['name'];
+        $source = $_FILES['bukti']['tmp_name'];
+        $upload = move_uploaded_file($source, $folder . $bukti);
         $total = $jumlah + $denda;
 
         $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
         $result = mysqli_query($koneksi, $select);
 
-        $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$total', '$pengembalian_ke', '$today', 'pending');");
+        $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$total', '$pengembalian_ke', '$bukti', '$today', 'pending');");
         if ($sql == true) {
             $_SESSION['info'] = 'Disimpan';
             header("Location: ../pinjaman/pinjaman_user.php");
@@ -41,11 +44,15 @@ if (isset($_POST['bpengembalian'])) {
         $id_konfirmasi = $_POST['id_konfirmasi_pinjam'];
         $jumlah = $_POST['jumlah'];
         $pengembalian_ke = $_POST['pengembalian_ke'];
+        $folder = '../../assets/bukti_pengembalian/';
+        $bukti = $_FILES['bukti']['name'];
+        $source = $_FILES['bukti']['tmp_name'];
+        $upload = move_uploaded_file($source, $folder . $bukti);
 
         $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
         $result = mysqli_query($koneksi, $select);
 
-        $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$jumlah', '$pengembalian_ke', '$today', 'pending');");
+        $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$jumlah', '$pengembalian_ke', '$bukti', '$today', 'pending');");
         if ($sql == true) {
             $_SESSION['info'] = 'Disimpan';
             header("Location: ../pinjaman/pinjaman_user.php");

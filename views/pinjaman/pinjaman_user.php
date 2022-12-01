@@ -133,7 +133,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                 <span name="riba" id="subtotal" class="form-control input">0</span>
                             </div>
                             <div class="mb-3">
-                                <label for="total" class="form-label">Total Pinjaman</label>
+                                <label for="total" class="form-label">Pinjaman yang harus di bayar</label>
                                 <span id="total" class="form-control">0</span>
                             </div>
                             <div class="mb-3">

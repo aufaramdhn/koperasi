@@ -30,7 +30,7 @@ if (isset($_POST['bUser'])) {
 
     $id = $_SESSION['id_user'];
     $jumlah = $_POST['jumlah'];
-    $folder = '../../assets/bukti/';
+    $folder = '../../assets/bukti_simpan/';
     $bukti = $_FILES['bukti']['name'];
     $source = $_FILES['bukti']['tmp_name'];
     $upload = move_uploaded_file($source, $folder . $bukti);

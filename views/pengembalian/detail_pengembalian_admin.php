@@ -39,12 +39,12 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                         <tr>
                             <td class="text-end"><?= $no++ ?></td>
                             <td><?= $kembali['nama'] ?></td>
-                            <td class="text-center"><?= $kembali['jumlah_pengembalian'] ?></td>
+                            <td class="text-center">Rp. <?= number_format($kembali['jumlah_pengembalian'], '0', '.', '.') ?></td>
                             <td class="text-center"><?= $kembali['pengembalian_ke'] ?></td>
                             <td class="text-center"><?= $kembali['id_bunga'] ?> Bulan</td>
                             <td class="text-center"><?= $kembali['tgl_pengembalian'] ?></td>
                             <td class="text-center">
-                                <?php if ($kembali['status_pengembalian'] == "pengembalian") : ?>
+                                <?php if ($kembali['status_pengembalian'] == "pending") : ?>
                                     <form action="pengembalian_proses.php" method="POST">
                                         <input type="hidden" name="id_pinjam" value="<?= $kembali['id_pinjam'] ?>">
                                         <input type="hidden" name="id_pengembalian" value="<?= $kembali['id_pengembalian'] ?>">
