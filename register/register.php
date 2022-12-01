@@ -33,9 +33,9 @@ $today = date("Y-m-d H:i:s");
     ?>
 
     <div class="row">
-        <div class="col-6" style="background-color: #FFE6E7; height: 100vh;">
+        <div class="col-6" style="background-color: #FFCAD4; height: 100vh;">
             <div class="d-flex justify-content-center align-items-center h-100">
-                <img src="../assets/images/undraw_term_sheet_re_ju7s.svg" width="600">
+                <img src="../assets/images/undraw_online_collaboration_re_bkpm.svg" width="600">
             </div>
         </div>
         <div class="col-6 d-flex align-items-center">

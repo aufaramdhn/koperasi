@@ -52,7 +52,7 @@ session_start();
         <div class="col-6" style="background-color: #D5EBFF; height: 100vh;">
             <div class="d-flex justify-content-center align-items-center h-100">
                 <!-- <img src="assets/images/bg-login.png"> -->
-                <img src="assets/images/undraw_access_account_re_8spm.svg" width="400">
+                <img src="assets/images/undraw_access_account_re_8spm.svg" width="500">
             </div>
         </div>
     </div>
