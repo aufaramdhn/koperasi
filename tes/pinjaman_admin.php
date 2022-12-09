@@ -31,9 +31,9 @@ $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 endif;
 ?>
 
-<div class="container-fluid py-3">
+<div class="py-3 container-fluid">
     <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+        <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <?php if (isset($_POST['btambah'])) : ?>
                 <span class="fs-2 fw-bold">
                     Tambah Pinjaman
@@ -141,11 +141,11 @@ endif;
                                 <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
+                                        <span class="px-2 border-2 rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
                                         <div class="d-flex justify-content-center align-items-center">
                                             <div class="me-1">
-                                                <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pengembalian</span>
+                                                <span class="px-2 border-2 rounded text-uppercase fw-bold border-warning text-warning fs-6">pengembalian</span>
                                             </div>
                                             <form action="pinjaman_proses.php" method="POST">
                                                 <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
@@ -153,9 +153,9 @@ endif;
                                             </form>
                                         </div>
                                     <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
+                                        <span class="px-2 border-2 rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Selesai</span>
+                                        <span class="px-2 border-2 rounded text-uppercase fw-bold border-success text-success fs-6">Selesai</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
                                         <form action="pinjaman_proses.php" method="POST">
                                             <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
