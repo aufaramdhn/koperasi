@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/styles/output.css" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="../assets/boxicons/css/boxicons.css" />
+  </head>
+
+  <body>
+    <div class="relative flex min-h-screen">
+      <!-- Sidebar -->
+      <div
+        class="absolute inset-y-0 left-0 w-64 px-2 py-4 space-y-6 transition duration-200 ease-in-out transform -translate-x-full bg-cyan-600 text-cyan-100 md:relative md:-translate-x-0"
+      >
+        <a href="" class="flex items-center px-4 space-x-2">
+          <i class="text-3xl bx bx-layer"></i>
+          <span class="text-2xl font-extrabold text-white">Koperasi</span>
+        </a>
+        <nav>
+          <a
+            href=""
+            class="flex items-center px-4 py-3 space-x-2 rounded hover:bg-cyan-800 hover: text-cyan-300 group"
+          >
+            <i class="bx bx-grid-alt nav_icon"></i>
+            <span class="text-white group-hover:text-cyan-300">
+              Dashboard
+            </span>
+          </a>
+          <a href="" class="flex items-center px-4 py-3 space-x-2">
+            <i class="bx bx-wallet nav_icon"></i>
+            <span class="text-white"> Simpanan </span>
+          </a>
+          <a href="" class="flex items-center px-4 py-3 space-x-2">
+            <i class="bx bx-money-withdraw nav_icon"></i>
+            <span class="text-white"> Pinjaman </span>
+          </a>
+          <a href="" class="flex items-center px-4 py-3 space-x-2">
+            <i class="bx bx-money nav_icon"></i>
+            <span class="text-white"> Pengembalian </span>
+          </a>
+          <a href="" class="flex items-center px-4 py-3 space-x-2">
+            <i class="bx bx-user nav_icon"></i>
+            <span class="text-white"> Profile </span>
+          </a>
+        </nav>
+      </div>
+      <!-- Main content -->
+      <div class="flex-1">
+        <!-- Header -->
+        <div
+          class="flex items-center justify-between px-2 py-4 bg-white shadow"
+        >
+          <button class="toggle" id="toggle">
+            <i class="text-3xl bx bx-menu"></i>
+          </button>
+          <span class="me-3"> Welcome </span>
+        </div>
+        <!-- Content -->
+        <div class="p-8 font-extrabold text-cyan-700">Content</div>
+      </div>
+    </div>
+  </body>
+</html>

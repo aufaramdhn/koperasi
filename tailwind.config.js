@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./**/**/*.{js,php,html}"],
+  content: ["./tes/*.{js,php,html}"],
   theme: {
     container: {
       center: true,
