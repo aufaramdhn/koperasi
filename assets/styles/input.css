@@ -20,4 +20,7 @@
   .form-control-register {
     @apply p-2 border shadow-sm rounded-md focus:outline-none border-slate-300 placeholder-slate-400 focus:border-[#5D69BE] transition ease-in-out focus:ring-1 focus:ring-[#5D69BE];
   }
+  .active {
+    @apply bg-red-400;
+  }
 }

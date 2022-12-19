@@ -13,9 +13,9 @@ $data_u = mysqli_fetch_array($tbl_user);
 $cek = mysqli_num_rows($tbl_simpanan_u);
 ?>
 
-<div class="container-fluid py-3">
+<div class="py-3 container-fluid">
     <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+        <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <?php if (isset($_POST['btambah'])) : ?>
                 <span class="fs-2 fw-bold">
                     Tambah Simpanan
@@ -66,7 +66,7 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                 endif
                 ?>
             <?php else : ?>
-                <table id="example" class="table table-responsive table-bordered table-striped d-md-block d-lg-table overflow-auto">
+                <table id="example" class="table">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">No</th>
@@ -90,11 +90,11 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                                 <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
                                 <td class="text-center">
                                     <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
+                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
                                     <?php } else if ($simpan['status_simpan'] == 'tolak') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
+                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
                                     <?php } else if ($simpan['status_simpan'] == 'pending') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">Pending</span>
+                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
                                     <?php } ?>
                                 </td>
                             </tr>

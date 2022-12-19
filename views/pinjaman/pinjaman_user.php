@@ -58,9 +58,9 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
 
 ?>
 
-<div class="container-fluid py-3">
+<div class="py-3 container-fluid">
     <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+        <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <?php if (isset($_POST['btambah'])) : ?>
                 <span class="fs-2 fw-bold">
                     Tambah Pinjaman
@@ -109,7 +109,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                             <div class="mb-3">
                                 <label for="selectBulan" class="form-label">Tempo Bulan</label>
                                 <select class="form-select" name="selectBulan" id="selectBulan" required>
-                                    <option disabled>
+                                    <option value="" hidden>
                                         -- Pilih Bulan --
                                     </option>
                                     <?php $no = 1;
@@ -180,27 +180,27 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                 <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
+                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
+                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pengembalian</span>
+                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-warning text-warning fs-6">pengembalian</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Selesai</span>
+                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-success text-success fs-6">Selesai</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
-                                        <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pending</span>
+                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-warning text-warning fs-6">pending</span>
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
                                     <?php if (($pinjam['status_pinjam'] == "konfirmasi") and ($confirmArray['tgl_konfirmasi'] >= $expired)) : ?>
                                         <div class="d-flex justify-content-center">
-                                            <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white me-2"><i class='bx bxs-edit'></i></a>
+                                            <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2"><i class='bx bxs-edit'></i></a>
                                             <form method="POST">
-                                                <a type="submit" href="../pengembalian/pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-success text-white">Pengembalian</a>
+                                                <a type="submit" href="../pengembalian/pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-success">Pengembalian</a>
                                             </form>
                                         </div>
                                     <?php else : ?>
-                                        <a type="submit" href="../pengembalian/detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="btn btn-sm btn-info text-white"><i class='bx bxs-edit'></i></a>
+                                        <a type="submit" href="../pengembalian/detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info"><i class='bx bxs-edit'></i></a>
                                     <?php endif ?>
                                 </td>
                             </tr>

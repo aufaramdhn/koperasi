@@ -6,15 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../assets/styles/output.css" />
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="../assets/boxicons/css/boxicons.css" />
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"
+    ></script>
   </head>
 
   <body>
-    <div class="relative flex min-h-screen">
-      <!-- Sidebar -->
+    <!-- main container -->
+    <div class="relative w-screen h-screen bg-slate-800">
+      <!-- sidebar -->
+      <div class="absolute left-0 flex flex-col w-20 h-screen p-4 bg-slate-300">
+        <!-- logo section -->
+        <div class="flex flex-row items-center w-full h-10">
+          <!-- circle logo -->
+          <div
+            class="grid w-10 h-10 mr-2 overflow-hidden font-bold rounded-full place-items-center bg-slate-800 text-slate-200"
+          >
+            <h1>AR</h1>
+          </div>
+          <!-- logo text -->
+          <h3>Code Now</h3>
+        </div>
+      </div>
+    </div>
+    <!-- <div x-data="{ sidebarOpen = true }" class="relative flex min-h-screen">
+      Sidebar
       <div
-        class="absolute inset-y-0 left-0 w-64 px-2 py-4 space-y-6 transition duration-200 ease-in-out transform -translate-x-full bg-cyan-600 text-cyan-100 md:relative md:-translate-x-0"
+        class="relative inset-y-0 left-0 w-64 px-2 py-4 space-y-6 transform bg-cyan-600 text-cyan-100 -translate-x-0"
+        :class="{'absolute inset-y-0 left-0 w-32 px-2 py-4 space-y-6 transform -translate-x-full': !sidebarOpen}"
       >
         <a href="" class="flex items-center px-4 space-x-2">
           <i class="text-3xl bx bx-layer"></i>
@@ -23,45 +44,63 @@
         <nav>
           <a
             href=""
-            class="flex items-center px-4 py-3 space-x-2 rounded hover:bg-cyan-800 hover: text-cyan-300 group"
+            class="flex items-center px-4 py-3 space-x-2 rounded hover:bg-cyan-800 hover:text-cyan-300 group"
           >
-            <i class="bx bx-grid-alt nav_icon"></i>
-            <span class="text-white group-hover:text-cyan-300">
-              Dashboard
-            </span>
+            <i class="bx bx-grid-alt"></i>
+            <span class="text-white group-hover:text-cyan-300">Dashboard</span>
           </a>
-          <a href="" class="flex items-center px-4 py-3 space-x-2">
-            <i class="bx bx-wallet nav_icon"></i>
-            <span class="text-white"> Simpanan </span>
+          <a
+            href=""
+            class="flex items-center px-4 py-3 space-x-2 rounded hover:bg-cyan-800 hover:text-cyan-300 group"
+          >
+            <i class="bx bx-wallet"></i>
+            <span class="text-white group-hover:text-cyan-300">Simpanan</span>
           </a>
-          <a href="" class="flex items-center px-4 py-3 space-x-2">
-            <i class="bx bx-money-withdraw nav_icon"></i>
-            <span class="text-white"> Pinjaman </span>
+          <a
+            href=""
+            class="flex items-center px-4 py-3 space-x-2 rounded hover:bg-cyan-800 hover:text-cyan-300 group"
+          >
+            <i class="bx bx-money-withdraw"></i>
+            <span class="text-white group-hover:text-cyan-300">Pinjaman</span>
           </a>
-          <a href="" class="flex items-center px-4 py-3 space-x-2">
-            <i class="bx bx-money nav_icon"></i>
-            <span class="text-white"> Pengembalian </span>
+          <a
+            href=""
+            class="flex items-center px-4 py-3 space-x-2 rounded hover:bg-cyan-800 hover:text-cyan-300 group"
+          >
+            <i class="bx bx-money"></i>
+            <span class="text-white group-hover:text-cyan-300"
+              >Pengembalian</span
+            >
           </a>
-          <a href="" class="flex items-center px-4 py-3 space-x-2">
-            <i class="bx bx-user nav_icon"></i>
-            <span class="text-white"> Profile </span>
+          <a
+            href=""
+            class="flex items-center px-4 py-3 space-x-2 rounded hover:bg-cyan-800 hover:text-cyan-300 group"
+          >
+            <i class="bx bx-user"></i>
+            <span class="text-white group-hover:text-cyan-300">Profile</span>
           </a>
         </nav>
       </div>
-      <!-- Main content -->
+      Main content 
       <div class="flex-1">
-        <!-- Header -->
+        Header 
         <div
           class="flex items-center justify-between px-2 py-4 bg-white shadow"
         >
-          <button class="toggle" id="toggle">
+          <button class="toggle" @click="sidebarOpen = !sidebarOpen">
             <i class="text-3xl bx bx-menu"></i>
           </button>
           <span class="me-3"> Welcome </span>
         </div>
-        <!-- Content -->
-        <div class="p-8 font-extrabold text-cyan-700">Content</div>
+        Content
+        <div class="p-6 content text-cyan-400">
+          <div class="ml-4 d-flex flex-column">
+            <span class="d-flex flex-column">
+              <h4 class="font-weight-bold" x-text="price"></h4>
+            </span>
+          </div>
+        </div>
       </div>
-    </div>
+    </div> -->
   </body>
 </html>

@@ -72,8 +72,8 @@ $today = date("Y-m-d H:i:s");
         <div class="flex items-center w-10/12 bg-white shadow-lg rounded-2xl">
             <!-- Image -->
             <div class="md:block hidden w-1/2 rounded-tl-2xl rounded-bl-2xl bg-[#FFCAD4]">
-                <div class="flex items-center justify-center">
-                    <img src="<?php echo $config; ?>assets/images/undraw_online_collaboration_re_bkpm.svg" class="py-32 md:w-11/12" />
+                <div class="flex items-center justify-center py-36">
+                    <img src="<?php echo $config; ?>assets/images/undraw_online_collaboration_re_bkpm.svg" class="w-11/12" />
                 </div>
             </div>
             <!-- Form -->
