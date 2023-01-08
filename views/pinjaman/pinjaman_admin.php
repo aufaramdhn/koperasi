@@ -13,10 +13,10 @@ $queryPinjaman = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_pinjam
 $pinjamanArray = mysqli_fetch_array($queryPinjaman);
 ?>
 
-<div class="container-fluid py-3">
+<div class="py-3 container-fluid">
     <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center" style="background-color: #fff;">
-            <span class="fs-2 fw-bold">
+        <div class="p-4 card-header d-flex justify-content-between align-items-center">
+            <span class=" fs-2 fw-bold">
                 Pinjaman
             </span>
         </div>

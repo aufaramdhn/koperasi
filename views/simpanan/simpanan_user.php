@@ -7,8 +7,8 @@ include "../../layout/header.php";
 
 $id_simpanan = $_SESSION['id_user'];
 
-$tbl_user = $koneksi->query("SELECT * FROM tbl_user Where id_user = $id_simpanan");
-$tbl_simpanan_u = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = $id_simpanan");
+$tbl_user = $koneksi->query("SELECT * FROM tbl_user Where id_user = '$id_simpanan'");
+$tbl_simpanan_u = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id_simpanan'");
 $data_u = mysqli_fetch_array($tbl_user);
 $cek = mysqli_num_rows($tbl_simpanan_u);
 ?>
@@ -27,9 +27,16 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                 <span class="fs-2 fw-bold">
                     Simpanan
                 </span>
-                <form method="POST">
-                    <button href="" class="btn btn-success" name="btambah">Tambah Simpanan</button>
-                </form>
+                <?php if ($cek > 0) : ?>
+                    <form method="POST">
+                        <button href="" class="btn btn-success" name="btambah">Tambah Simpanan</button>
+                        <a class="text-white btn btn-info" href="tarik_simpanan.php">Penarikan Simpanan</a>
+                    </form>
+                <?php else : ?>
+                    <form method="POST">
+                        <button href="" class="btn btn-success" name="btambah">Tambah Simpanan</button>
+                    </form>
+                <?php endif ?>
             <?php endif ?>
         </div>
         <div class="card-body">
