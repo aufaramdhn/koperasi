@@ -9,13 +9,13 @@ $expires = date("2022-10-30 12:42:00");
 
 $id_user = $_GET['id_user'];
 
-$tbl_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_user = '$id_user' ORDER BY tgl_pinjam DESC");
+$tbl_pinjaman_a = mysqli_query($koneksi, "SELECT id_pinjam, nama, jumlah_pinjam, bulan, tgl_pinjam, status_pinjam FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_user = '$id_user' ORDER BY tgl_pinjam DESC");
 $data_a = mysqli_fetch_array($tbl_pinjaman_a);
 ?>
 
-<div class="container-fluid py-3">
+<div class="py-3 container-fluid">
     <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+        <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
                 Pinjaman
             </span>
@@ -28,6 +28,7 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Pinjaman</th>
+                        <th scope="col">Tenor Bulan</th>
                         <th scope="col">Tanggal Pinjam</th>
                         <th scope="col">Status</th>
                         <th scope="col">Aksi</th>
@@ -42,14 +43,15 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                             <td><?= $no++ ?></td>
                             <td><?= $pinjam['nama'] ?></td>
                             <td class="text-center">Rp. <?= number_format($pinjam['jumlah_pinjam'], '0', '.', '.') ?></td>
+                            <td class="text-center"><?= $pinjam['bulan'] ?> Bulan</td>
                             <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                             <td class="text-center">
                                 <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
-                                    <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Konfirmasi</span>
+                                    <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
                                 <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="me-1">
-                                            <span class="border text-uppercase fw-bold border-2 border-warning rounded text-warning px-2 fs-6">pengembalian</span>
+                                            <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">pengembalian</span>
                                         </div>
                                         <form action="pinjaman_proses.php" method="POST">
                                             <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
@@ -57,9 +59,9 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                                         </form>
                                     </div>
                                 <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
-                                    <span class="border text-uppercase fw-bold border-2 border-danger rounded text-danger px-2 fs-6">Tolak</span>
+                                    <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
                                 <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
-                                    <span class="border text-uppercase fw-bold border-2 border-success rounded text-success px-2 fs-6">Selesai</span>
+                                    <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Selesai</span>
                                 <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
                                     <form action="pinjaman_proses.php" method="POST">
                                         <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">

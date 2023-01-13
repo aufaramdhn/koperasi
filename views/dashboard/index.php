@@ -7,14 +7,16 @@ include "../../layout/header.php";
 $id = $_SESSION['id_user'];
 
 // Saldo Pinjaman
-$saldo_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user WHERE tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.id_user = $id");
+$saldo_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user WHERE (tbl_pinjam.id_user = '$id' OR tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.status_pinjam = 'pengembalian' AND tbl_pinjam.status_pinjam = 'selesai')");
 $saldo_pinjaman_a = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user");
 // Akhir Saldo Pinjaman
 
 // Saldo Simpanan
-$saldo_simpanan_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.status_simpan = 'konfirmasi' AND tbl_simpan.id_user = $id");
+$saldo_simpanan_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.status_simpan = 'konfirmasi'  AND tbl_simpan.id_user = '$id'");
 $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user");
 // Akhir Saldo Simpanan
+
+$user = mysqli_num_rows($koneksi->query("SELECT * FROM tbl_user"));
 
 ?>
 
@@ -22,9 +24,9 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
     <?php if ($_SESSION['level'] == 'admin') : ?>
         <div class="row d-flex justify-content-center">
             <!-- <div class="col-md-3 mb-sm-2">
-                <div class="card bg-info text-white" style="width: 18rem;">
-                    <div class="card-body  row d-flex align-items-center">
-                        <div class="col-2 text-center">
+                <div class="text-white card bg-info" style="width: 18rem;">
+                    <div class="card-body row d-flex align-items-center">
+                        <div class="text-center col-2">
                             <i class='bx bx-user fs-1'></i>
                         </div>
                         <div class="col-10 d-flex flex-column align-items-end">
@@ -38,14 +40,14 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
                 </div>
             </div> -->
             <div class="col-md-3">
-                <div class="card bg-danger text-white" style="width: 18rem;">
+                <div class="text-white card bg-danger" style="width: 18rem;">
                     <div class="card-body row d-flex align-items-center">
-                        <div class="col-2 text-center">
+                        <div class="text-center col-2">
                             <i class='bx bx-credit-card fs-1'></i>
                         </div>
                         <div class="col-10 d-flex flex-column align-items-end">
                             <h5 class="card-title fw-bold">User</h5>
-                            <span class="fw-bold">0</span>
+                            <span class="fw-bold"><?= $user ?></span>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -54,9 +56,9 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
                 </div>
             </div>
             <div class="col-md-3 mb-sm-2">
-                <div class="card bg-success text-white" style="width: 18rem;">
-                    <div class="card-body  row d-flex align-items-center">
-                        <div class="col-2 text-center">
+                <div class="text-white card bg-success" style="width: 18rem;">
+                    <div class="card-body row d-flex align-items-center">
+                        <div class="text-center col-2">
                             <i class='bx bx-wallet fs-1'></i>
                         </div>
                         <?php
@@ -75,9 +77,9 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
                 </div>
             </div>
             <div class="col-md-3 mb-sm-2">
-                <div class="card bg-warning text-white" style="width: 18rem;">
+                <div class="text-white card bg-warning" style="width: 18rem;">
                     <div class="card-body row d-flex align-items-center">
-                        <div class="col-2 text-center">
+                        <div class="text-center col-2">
                             <i class='bx bx-money-withdraw fs-1'></i>
                         </div>
                         <?php
@@ -99,9 +101,9 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
     <?php else : ?>
         <div class="row d-flex justify-content-center">
             <!-- <div class="col-md-3 mb-sm-2">
-                <div class="card bg-info text-white" style="width: 18rem;">
-                    <div class="card-body  row d-flex align-items-center">
-                        <div class="col-2 text-center">
+                <div class="text-white card bg-info" style="width: 18rem;">
+                    <div class="card-body row d-flex align-items-center">
+                        <div class="text-center col-2">
                             <i class='bx bx-user fs-1'></i>
                         </div>
                         <div class="col-10 d-flex flex-column align-items-end">
@@ -115,9 +117,9 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
                 </div>
             </div> -->
             <div class="col-md-3 mb-sm-2">
-                <div class="card bg-success text-white" style="width: 18rem;">
-                    <div class="card-body  row d-flex align-items-center">
-                        <div class="col-2 text-center">
+                <div class="text-white card bg-success" style="width: 18rem;">
+                    <div class="card-body row d-flex align-items-center">
+                        <div class="text-center col-2">
                             <i class='bx bx-wallet fs-1'></i>
                         </div>
                         <?php
@@ -136,9 +138,9 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
                 </div>
             </div>
             <div class="col-md-3 mb-sm-2">
-                <div class="card bg-warning text-white" style="width: 18rem;">
+                <div class="text-white card bg-warning" style="width: 18rem;">
                     <div class="card-body row d-flex align-items-center">
-                        <div class="col-2 text-center">
+                        <div class="text-center col-2">
                             <i class='bx bx-money-withdraw fs-1'></i>
                         </div>
                         <?php
@@ -157,9 +159,9 @@ $saldo_simpanan_a = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_us
                 </div>
             </div>
             <!-- <div class="col-md-3">
-                <div class="card bg-danger text-white" style="width: 18rem;">
+                <div class="text-white card bg-danger" style="width: 18rem;">
                     <div class="card-body row d-flex align-items-center">
-                        <div class="col-2 text-center">
+                        <div class="text-center col-2">
                             <i class='bx bx-credit-card fs-1'></i>
                         </div>
                         <div class="col-10 d-flex flex-column align-items-end">

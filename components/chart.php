@@ -11,15 +11,17 @@ foreach ($chart as $data) {
 
 
 ?>
-<div class="container p-5 w-100">
-    <canvas id="myChart"></canvas>
+<div class="w-100">
+    <div class="p-5 card">
+        <canvas id="myChart"></canvas>
+    </div>
 </div>
 <script>
     const labels = <?= json_encode($month) ?>;
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Keuangan Tahunan',
+            label: 'Saldo Simpanan',
             data: <?= json_encode($jumlah) ?>,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

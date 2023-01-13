@@ -22,43 +22,91 @@ if (isset($_POST['bpengembalian'])) {
         $jumlah = $_POST['jumlah'];
         $denda = $_POST['denda'];
         $pengembalian_ke = $_POST['pengembalian_ke'];
-        $folder = '../../assets/bukti_pengembalian/';
-        $bukti = $_FILES['bukti']['name'];
-        $source = $_FILES['bukti']['tmp_name'];
-        $upload = move_uploaded_file($source, $folder . $bukti);
         $total = $jumlah + $denda;
 
-        $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
-        $result = mysqli_query($koneksi, $select);
+        $ekstensi_diperbolehkan = array('png', 'jpg');
+        $bukti = $_FILES['bukti']['name'];
 
-        $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$total', '$pengembalian_ke', '$bukti', '$today', 'pending');");
-        if ($sql == true) {
-            $_SESSION['info'] = 'Disimpan';
-            header("Location: ../pinjaman/pinjaman_user.php");
+        $x = explode('.', $new_img);
+        $ekstensi = strtolower(end($x));
+        $ukuran = $_FILES['bukti']['size'];
+        $file_tmp = $_FILES['bukti']['tmp_name'];
+
+        $folder = '../../assets/bukti_pengembalian/';
+
+        if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+            //boleh upload file
+            //uji jika ukuran file dibawah 1mb
+            if ($ukuran < 1044070) {
+                //jika ukuran sesuai
+                //PINDAHKAN FILE YANG DI UPLOAD KE FOLDER FILE aplikasi
+                move_uploaded_file($file_tmp, $folder . $bukti);
+
+                //simpan data ke dalam database
+                $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
+                $result = mysqli_query($koneksi, $select);
+                $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$total', '$pengembalian_ke', '$bukti', '$today', 'pending');");
+                if ($sql) {
+                    $_SESSION['info'] = 'Disimpan';
+                    echo "<script>document.location='pengembalian_user.php'</script>";
+                } else {
+                    $_SESSION['info'] = 'Gagal';
+                    echo "<script>document.location='pengembalian_user.php'</script>";
+                }
+            } else {
+                //ukuran tidak sesuai
+                $_SESSION['info'] = "ukuran";
+                echo "<script>document.location='pengembalian_user.php'</script>";
+            }
         } else {
-            $_SESSION['info'] = 'Gagal';
-            header("Location: ../pinjaman/pinjaman_user.php");
+            //ektensi file yang di upload tidak sesuai
+            $_SESSION['info'] = "format";
+            echo "<script>document.location='pengembalian_user.php'</script>";
         }
     } else {
         $id = $_POST['id_pinjam'];
         $id_konfirmasi = $_POST['id_konfirmasi_pinjam'];
         $jumlah = $_POST['jumlah'];
         $pengembalian_ke = $_POST['pengembalian_ke'];
-        $folder = '../../assets/bukti_pengembalian/';
+
+        $ekstensi_diperbolehkan = array('png', 'jpg');
         $bukti = $_FILES['bukti']['name'];
-        $source = $_FILES['bukti']['tmp_name'];
-        $upload = move_uploaded_file($source, $folder . $bukti);
 
-        $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
-        $result = mysqli_query($koneksi, $select);
+        $x = explode('.', $bukti);
+        $ekstensi = strtolower(end($x));
+        $ukuran = $_FILES['bukti']['size'];
+        $file_tmp = $_FILES['bukti']['tmp_name'];
 
-        $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$jumlah', '$pengembalian_ke', '$bukti', '$today', 'pending');");
-        if ($sql == true) {
-            $_SESSION['info'] = 'Disimpan';
-            header("Location: ../pinjaman/pinjaman_user.php");
+        $folder = '../../assets/bukti_pengembalian/';
+
+        if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+            //boleh upload file
+            //uji jika ukuran file dibawah 1mb
+            if ($ukuran < 1044070) {
+                //jika ukuran sesuai
+                //PINDAHKAN FILE YANG DI UPLOAD KE FOLDER FILE aplikasi
+                move_uploaded_file($file_tmp, $folder . $bukti);
+
+                //simpan data ke dalam database
+                $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
+                $result = mysqli_query($koneksi, $select);
+                $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$jumlah', '$pengembalian_ke', '$bukti', '$today', 'pending');");
+                if ($sql) {
+                    $_SESSION['info'] = 'Disimpan';
+                    echo "<script>document.location='pengembalian_user.php'</script>";
+                } else {
+                    $_SESSION['info'] = 'Gagal';
+                    echo "<script>document.location='pengembalian_user.php'</script>";
+                }
+            } else {
+                //ukuran tidak sesuai
+                $_SESSION['info'] = "ukuran";
+                echo "<script>document.location='pengembalian_user.php'</script>";
+            }
         } else {
-            $_SESSION['info'] = 'Gagal';
-            header("Location: ../pinjaman/pinjaman_user.php");
+            //ektensi file yang di upload tidak sesuai
+            $_SESSION['info'] = "format";
+            echo "<script>document.location='pengembalian_user.php'</script>";
         }
     }
 }

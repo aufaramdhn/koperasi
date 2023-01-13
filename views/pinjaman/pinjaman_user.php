@@ -7,18 +7,20 @@ date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
 $expires = date("2022-10-30 12:42:00");
 
-$id_pinjaman = $_SESSION['id_user'];
+$id_user = $_SESSION['id_user'];
 
 // Cek pinjam
-$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_user = $id_pinjaman ORDER BY tgl_pinjam DESC");
+$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT nama, jumlah_pinjam, status_pinjam, bulan, tbl_pinjam.id_pinjam, tgl_pinjam FROM tbl_pinjam JOIN tbl_user USING(id_user) JOIN tbl_bunga USING(id_bunga) WHERE tbl_pinjam.id_user = '$id_user' GROUP BY tbl_pinjam.id_pinjam");
+
+
 $cek_pinjam = mysqli_num_rows($tbl_pinjaman_u);
 
 // Query Simpanan
-$querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.status_simpan = 'konfirmasi' AND tbl_simpan.id_user = $id_pinjaman");
+$querySimpan = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.status_simpan = 'konfirmasi' AND tbl_simpan.id_user = '$id_user'");
 $cek = mysqli_num_rows($querySimpan);
 
 // Query konfirmasi
-$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user=$_SESSION[id_user]");
+$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user = '$id_user'");
 $confirmArray = mysqli_fetch_array($confirmQuery);
 
 // bunga
@@ -28,7 +30,7 @@ $bulan = "";
 $queryBulan = $koneksi->query("SELECT * FROM tbl_bunga");
 
 // limit pinjaman
-$limitQuery = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan DESC");
+$limitQuery = mysqli_query($koneksi, "SELECT jumlah_simpan FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user ORDER BY tgl_simpan DESC");
 $limit1 = mysqli_fetch_array($limitQuery);
 
 // Cek limit
@@ -44,7 +46,7 @@ while ($total_simpan = mysqli_fetch_array($querySimpan)) {
 }
 
 // Perulangan limit pinjam
-$queryPinjaman = mysqli_query($koneksi, "SELECT * FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) WHERE tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.id_user = $id_pinjaman");
+$queryPinjaman = mysqli_query($koneksi, "SELECT jumlah_pinjam, status_pinjam, riba FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) WHERE tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.status_pinjam = 'pengembalian' AND tbl_pinjam.status_pinjam = 'selesai' OR tbl_pinjam.id_user = '$id_user'");
 $total_1 = 0;
 while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
     $total_1 += $total_tampil['riba'];
@@ -57,7 +59,6 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
 }
 
 ?>
-
 <div class="py-3 container-fluid">
     <div class="card">
         <div class="p-4 card-header d-flex justify-content-between align-items-center">
@@ -171,6 +172,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                         <?php
                         $no = 1;
                         foreach ($tbl_pinjaman_u as $pinjam) {
+                            // $sisa_tenor = $pinjam['bulan'] -;
                         ?>
                             <tr>
                                 <td><?= $no++ ?></td>
@@ -180,19 +182,20 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                 <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
-                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
-                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
-                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-warning text-warning fs-6">pengembalian</span>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">pengembalian</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
-                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-success text-success fs-6">Selesai</span>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Selesai</span>
                                     <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
-                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-warning text-warning fs-6">pending</span>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">pending</span>
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php if (($pinjam['status_pinjam'] == "konfirmasi") and ($confirmArray['tgl_konfirmasi'] >= $expired)) : ?>
+                                    <?php
+                                    if (($confirmArray['tgl_konfirmasi'] >= $expired)) : ?>
                                         <div class="d-flex justify-content-center">
                                             <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2"><i class='bx bxs-edit'></i></a>
                                             <form method="POST">
@@ -200,7 +203,8 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                             </form>
                                         </div>
                                     <?php else : ?>
-                                        <a type="submit" href="../pengembalian/detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info"><i class='bx bxs-edit'></i></a>
+                                        ---
+                                        <!-- <a type="submit" href="../pengembalian/detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info"><i class='bx bxs-edit'></i></a> -->
                                     <?php endif ?>
                                 </td>
                             </tr>

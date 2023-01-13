@@ -35,7 +35,7 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                         <input type="number" min="0" max="10000000" class="form-control" name="jumlah" id="jumlah-pinjaman">
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button id="btn-tambah" type="submit" class="btn btn-primary" name="bUser">Sinjam</button>
+                        <button id="btn-tambah" type="submit" class="btn btn-primary" name="bUser">Simpan</button>
                     </div>
                 </div>
             </form>

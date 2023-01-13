@@ -2,6 +2,9 @@
 session_start();
 include "../../apps/koneksi.php";
 include "../../apps/config.php";
+$id_user = $_SESSION['id_user'];
+$queryUser = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE id_user = '$id_user'");
+$user = mysqli_fetch_array($queryUser);
 ?>
 
 <!doctype html>
@@ -40,7 +43,11 @@ include "../../apps/config.php";
                 Welcome <?= $_SESSION['nama'] ?>
             </span>
             <div class="header_img">
-                <img src="https://i.imgur.com/hczKIze.jpg" alt="">
+                <?php if (empty($data['img'])) { ?>
+                    <img src="<?php echo $config; ?>assets/profile/person-circle.svg" alt="">
+                <?php } else { ?>
+                    <img src="<?php echo $config; ?>assets/profile/<?= $user['img'] ?>" alt="">
+                <?php } ?>
             </div>
         </div>
     </header>

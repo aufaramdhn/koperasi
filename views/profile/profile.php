@@ -8,23 +8,30 @@ $id = $_SESSION['id_user'];
 $profile = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE id_user = '$id'");
 $data    = mysqli_fetch_array($profile);
 ?>
-<div class="container-fluid py-5">
+<div class="py-5 container-fluid">
     <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+        <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
                 Profile
             </span>
         </div>
-        <div class="card-body pe-5 ps-3 py-5 row">
+        <div class="py-5 card-body pe-5 ps-3 row">
             <?php if (isset($_POST['bedit'])) : ?>
                 <form action="profile_proses.php" method="post" enctype="multipart/form-data">
-                    <div class="row pe-5 ps-3 py-5">
-                        <div class="d-flex justify-content-xs-center flex-column align-items-center col-3 mb-5">
+                    <div class="py-5 row pe-5 ps-3">
+                        <div class="mb-5 d-flex justify-content-xs-center flex-column align-items-center col-3">
+                            <?php if (empty($data['img'])) { ?>
+                                <div class="mb-3">
+                                    <img src="../../assets/images/person-circle.svg" width="200" alt="">
+                                </div>
+                            <?php } else { ?>
+                                <div class="mb-3">
+                                    <img src="../../assets/profile/<?= $data['img'] ?>" width="200" alt="">
+                                </div>
+                            <?php } ?>
                             <div class="mb-3">
-                                <img src="../assets/person-circle.svg" width="200" alt="">
-                            </div>
-                            <div class="mb-3">
-                                <input class="form-control d-none" name="img" type="file" id="img">
+                                <input class="form-control d-none" name="img_new" type="file" id="img">
+                                <input class="form-control d-none" name="img_old" type="text" value="<?= $data['img'] ?>">
                                 <label class="btn btn-primary" for="img">Kirim Foto</label>
                             </div>
                         </div>
@@ -88,21 +95,23 @@ $data    = mysqli_fetch_array($profile);
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-danger text-white me-2" name="bkembali">Kembali</button>
+                                <button type="submit" class="text-white btn btn-danger me-2" name="bkembali">Kembali</button>
                                 <button type="submit" class="btn btn-success" name="bsimpan">Simpan</button>
                             </div>
                         </div>
                     </div>
                 </form>
             <?php else : ?>
-                <div class="d-flex justify-content-xs-center flex-column align-items-center col-3 mb-5">
-                    <div class="mb-3">
-                        <img src="../assets/person-circle.svg" width="200" alt="">
-                    </div>
-                    <div class="mb-3">
-                        <input class="form-control d-none" name="img" type="file" id="img">
-                        <label class="btn btn-primary" for="img">Kirim Foto</label>
-                    </div>
+                <div class="mb-5 d-flex justify-content-xs-center flex-column align-items-center col-3">
+                    <?php if (empty($data['img'])) { ?>
+                        <div class="mb-3">
+                            <img src="../../assets/images/person-circle.svg" width="200" alt="">
+                        </div>
+                    <?php } else { ?>
+                        <div class="mb-3">
+                            <img src="../../assets/profile/<?= $data['img'] ?>" width="200" alt="">
+                        </div>
+                    <?php } ?>
                 </div>
                 <div class="col-9">
                     <div class="mb-3 row">
@@ -164,7 +173,7 @@ $data    = mysqli_fetch_array($profile);
                     </div>
                     <div class="d-flex justify-content-end">
                         <form action="" method="post">
-                            <button type="submit" class="btn btn-warning text-white" name="bedit">Edit</button>
+                            <button type="submit" class="text-white btn btn-warning" name="bedit">Edit</button>
                         </form>
                     </div>
                 </div>

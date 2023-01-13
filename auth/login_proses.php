@@ -19,6 +19,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['nama'] =  $row['nama'];
             $_SESSION['email'] =  $row['email'];
             $_SESSION['level'] = $row['level'];
+            $_SESSION['img'] = $row['img'];
             $_SESSION['info'] = "Berhasil";
             header("Location: ../views/dashboard/index.php");
         } else {

@@ -4,6 +4,9 @@ $active = "simpanan";
 $title = "Simpanan | Koperasi";
 include "../../layout/header.php";
 
+date_default_timezone_set('Asia/jakarta');
+$today = date("Y-m-i H:i:s");
+
 
 $id_simpanan = $_SESSION['id_user'];
 
@@ -86,8 +89,6 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                     <tbody>
                         <?php
                         $no = 1;
-                        date_default_timezone_set('Asia/jakarta');
-                        $today = date("Y-m-i H:i:s");
                         foreach ($tbl_simpanan_u as $simpan) {
                         ?>
                             <tr>
@@ -97,11 +98,11 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                                 <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
                                 <td class="text-center">
                                     <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
-                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
                                     <?php } else if ($simpan['status_simpan'] == 'tolak') { ?>
-                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
                                     <?php } else if ($simpan['status_simpan'] == 'pending') { ?>
-                                        <span class="px-2 border border-2 rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
                                     <?php } ?>
                                 </td>
                             </tr>

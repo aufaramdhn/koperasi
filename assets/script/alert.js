@@ -120,4 +120,20 @@ if (notifikasi == "Disimpan") {
     showConfirmButton: false,
     timer: 1500,
   });
+} else if (notifikasi == "ukuran") {
+  Swal.fire({
+    icon: "error",
+    title: "Gagal",
+    text: "Ukuran file terlalu besar, maks 1mb",
+    showConfirmButton: false,
+    timer: 1500,
+  });
+} else if (notifikasi == "format") {
+  Swal.fire({
+    icon: "error",
+    title: "Gagal",
+    text: "Format file tidak sesuai, format file harus png dan jpg",
+    showConfirmButton: false,
+    timer: 1500,
+  });
 }

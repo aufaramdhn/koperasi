@@ -73,7 +73,7 @@ $today = date("Y-m-d H:i:s");
             <!-- Image -->
             <div class="md:block hidden w-1/2 rounded-tl-2xl rounded-bl-2xl bg-[#FFCAD4]">
                 <div class="flex items-center justify-center py-36">
-                    <img src="<?php echo $config; ?>assets/images/undraw_online_collaboration_re_bkpm.svg" class="w-11/12" />
+                    <img src="<?php echo $config; ?>assets/images/undraw_online_collaboration_re_bkpm.svg" class="w-11/12 py-24" />
                 </div>
             </div>
             <!-- Form -->
