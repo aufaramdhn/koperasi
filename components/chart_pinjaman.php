@@ -1,8 +1,7 @@
 <?php
-require "../../apps/koneksi.php";
 
 // Chart
-$chart = mysqli_query($koneksi, "SELECT MONTHNAME(tgl_simpan) as monthname, SUM(jumlah_simpan) as jumlah FROM tbl_simpan GROUP BY monthname ORDER BY tgl_simpan");
+$chart = mysqli_query($koneksi, "SELECT MONTHNAME(tgl_pinjam) as monthname, SUM(jumlah_pinjam) as jumlah FROM tbl_pinjam GROUP BY monthname ORDER BY tgl_pinjam");
 
 foreach ($chart as $data) {
     $month[] = $data['monthname'];
@@ -12,8 +11,8 @@ foreach ($chart as $data) {
 
 ?>
 <div class="w-100">
-    <div class="p-5 card">
-        <canvas id="myChart"></canvas>
+    <div class="p-2 card">
+        <canvas id="chartPinjaman"></canvas>
     </div>
 </div>
 <script>
@@ -21,7 +20,7 @@ foreach ($chart as $data) {
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Saldo Simpanan',
+            label: 'Saldo Pinjaman',
             data: <?= json_encode($jumlah) ?>,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -57,7 +56,7 @@ foreach ($chart as $data) {
     };
 
     const myChart = new Chart(
-        document.getElementById('myChart'),
+        document.getElementById('chartPinjaman'),
         config
     );
 </script>

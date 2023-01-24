@@ -15,10 +15,10 @@ $data    = mysqli_fetch_array($profile);
                 Profile
             </span>
         </div>
-        <div class="py-5 card-body pe-5 ps-3 row">
+        <div class="py-5 card-body pe-5 row">
             <?php if (isset($_POST['bedit'])) : ?>
                 <form action="profile_proses.php" method="post" enctype="multipart/form-data">
-                    <div class="py-5 row pe-5 ps-3">
+                    <div class="py-5 row ps-3">
                         <div class="mb-5 d-flex justify-content-xs-center flex-column align-items-center col-3">
                             <?php if (empty($data['img'])) { ?>
                                 <div class="mb-3">

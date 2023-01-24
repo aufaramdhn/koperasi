@@ -40,7 +40,8 @@ $user = mysqli_fetch_array($queryUser);
         </div>
         <div class="d-flex align-items-center">
             <span class="me-3">
-                Welcome <?= $_SESSION['nama'] ?>
+                
+                Welcome <?= $user['nama'] ?>
             </span>
             <div class="header_img">
                 <?php if (empty($data['img'])) { ?>

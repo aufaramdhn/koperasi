@@ -156,7 +156,6 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                 <?php endif ?>
             <?php else : ?>
                 <table id="example" class="table table-striped table-bordered d-md-block d-lg-table overflow-sm-auto">
-
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">No</th>
