@@ -29,6 +29,14 @@ $user = mysqli_fetch_array($queryUser);
     <link rel="stylesheet" href="<?php echo $config; ?>assets/boxicons/css/boxicons.css">
 
     <script src="<?php echo $config; ?>assets/script/chart.js"></script>
+    <style>
+        @media print {
+            .header,
+            .print{
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 
