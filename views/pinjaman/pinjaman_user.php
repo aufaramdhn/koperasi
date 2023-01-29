@@ -94,7 +94,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                 <label for="nama-lengkap" class="form-label">Nama Lengkap</label>
                                 <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
                             </div>
-                            <div class="mb-3 has-validation">
+                            <div class="mb-2">
                                 <?php if ($cek_pinjam > 0) : ?>
                                     <label for="jumlah" class="form-label">Jumlah Pinjaman <small class="form-text fst-italic">* (Maks Pinjaman <?= $grand_total + $total_1 ?>)</small></label>
                                     <input type="number" min="0" max="<?= $grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah" required>
@@ -103,11 +103,8 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                     <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php endif ?>
                                 <small class="form-text fst-italic">* Harap masukan nominal terlebih dahulu, setelah itu pilih tempo bulan yang anda inginkan</small>
-                                <div class="invalid-feedback">
-                                    Please choose a username.
-                                </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <label for="selectBulan" class="form-label">Tempo Bulan</label>
                                 <select class="form-select" name="selectBulan" id="selectBulan" required>
                                     <option value="" hidden>
@@ -155,8 +152,8 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                     </div>
                 <?php endif ?>
             <?php else : ?>
-                <table id="example" class="table table-striped table-bordered d-md-block d-lg-table overflow-sm-auto">
-                    <thead class="table-dark">
+                <table id="example" class="table table-bordered">
+                    <thead>
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
@@ -193,8 +190,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php
-                                    if (($confirmArray['tgl_konfirmasi'] >= $expired)) : ?>
+                                    <?php if (isset($confirmArray['tgl_konfirmasi']) >= isset($expired) and $pinjam['status_pinjam'] == 'konfirmasi') : ?>
                                         <div class="d-flex justify-content-center">
                                             <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2"><i class='bx bxs-edit'></i></a>
                                             <form method="POST">
@@ -202,8 +198,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                             </form>
                                         </div>
                                     <?php else : ?>
-                                        ---
-                                        <!-- <a type="submit" href="../pengembalian/detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info"><i class='bx bxs-edit'></i></a> -->
+                                        <a type="submit" href="" class="text-white btn btn-sm btn-info"><i class='bx bxs-edit'></i></a>
                                     <?php endif ?>
                                 </td>
                             </tr>

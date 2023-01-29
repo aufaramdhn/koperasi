@@ -11,24 +11,10 @@ if (isset($_GET['id_simpan'])) {
     header("Location: simpanan_admin.php");
 }
 
-// if (isset($_POST['bsimpanadmin'])) {
-
-//     $id = $_POST['nama'];
-//     $jumlah = $_POST['jumlah'];
-
-//     $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$jumlah', current_timestamp(), 'pending');");
-//     if ($sql == true) {
-//         $_SESSION['info'] = 'Disimpan';
-//         echo "<script>window.location=' simpanan_admin.php'</script>";
-//     } else {
-//         $_SESSION['info'] = 'Gagal';
-//         echo "<script>window.location=' simpanan_admin.php'</script>";
-//     }
-// }
-
 if (isset($_POST['bUser'])) {
 
     $id = $_SESSION['id_user'];
+    $id_pembayaran = $_SESSION['id_pembayaran'];
     $jumlah = $_POST['jumlah'];
 
     $ekstensi_diperbolehkan = array('png', 'jpg');
@@ -50,7 +36,7 @@ if (isset($_POST['bUser'])) {
             move_uploaded_file($file_tmp, $folder . $bukti);
 
             //simpan data ke dalam database
-            $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$jumlah', '$bukti', current_timestamp(), 'pending');");
+            $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$id_pembayaran', '$jumlah', '$bukti', current_timestamp(), 'pending');");
             if ($sql) {
                 $_SESSION['info'] = 'Disimpan';
                 echo "<script>document.location='simpanan_user.php'</script>";

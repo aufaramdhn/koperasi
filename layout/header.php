@@ -69,7 +69,7 @@ $user = mysqli_fetch_array($queryUser);
                 </a>
                 <div class="nav_list">
                     <?php if ($_SESSION['level'] == 'admin') : ?>
-                        <a href="<?php echo $config; ?>views/dashboard/index.php" class="nav_link <?= $active == 'dashboard' ? 'active' : '' ?>">
+                        <a href="<?php echo $config; ?>views/dashboard/dashboard_admin.php" class="nav_link <?= $active == 'dashboard' ? 'active' : '' ?>">
                             <i class='bx bx-grid-alt nav_icon'></i>
                             <span class="nav_name">Dashboard</span>
                         </a>
@@ -90,7 +90,7 @@ $user = mysqli_fetch_array($queryUser);
                             <span class="nav_name">Pengembalian</span>
                         </a>
                     <?php else : ?>
-                        <a href="<?php echo $config; ?>views/dashboard/index.php" class="nav_link <?= $active == 'dashboard' ? 'active' : '' ?>">
+                        <a href="<?php echo $config; ?>views/dashboard/dashboard_user.php" class="nav_link <?= $active == 'dashboard' ? 'active' : '' ?>">
                             <i class='bx bx-grid-alt nav_icon '></i>
                             <span class="nav_name">Dashboard</span>
                         </a>

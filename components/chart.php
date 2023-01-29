@@ -1,27 +1,12 @@
-<?php
-
-// Chart
-$chart_pinjaman = mysqli_query($koneksi, "SELECT MONTHNAME(tgl_pinjam) as monthname, SUM(jumlah_pinjam) as jumlah FROM tbl_pinjam GROUP BY monthname ORDER BY tgl_pinjam");
-
-foreach ($chart_pinjaman as $data_pinjaman) {
-    $month_pinjaman[] = $data_pinjaman['monthname'];
-    $jumlah_pinjaman[] = $data_pinjaman['jumlah'];
-}
-
-
-?>
-<div class="w-100">
-    <div class="p-2 card">
-        <canvas id="chartPinjaman"></canvas>
-    </div>
-</div>
 <script>
-    const labelsPinjaman = <?= json_encode($month_pinjaman) ?>;
-    const dataPinjaman = {
-        labels: labelsPinjaman,
+    const labels = Utils.months({
+        count: 7
+    });
+    const data = {
+        labels: labels,
         datasets: [{
-            label: 'Saldo Pinjaman',
-            data: <?= json_encode($jumlah_pinjaman) ?>,
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(255, 159, 64, 0.2)',
@@ -43,9 +28,9 @@ foreach ($chart_pinjaman as $data_pinjaman) {
             borderWidth: 1
         }]
     };
-    const configPinjaman = {
+    const config = {
         type: 'bar',
-        data: dataPinjaman,
+        data: data,
         options: {
             scales: {
                 y: {
@@ -54,9 +39,8 @@ foreach ($chart_pinjaman as $data_pinjaman) {
             }
         },
     };
-
-    const chartPinjaman = new Chart(
-        document.getElementById('chartPinjaman'),
-        configPinjaman
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
     );
 </script>
