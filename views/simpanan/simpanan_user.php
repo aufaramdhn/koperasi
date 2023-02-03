@@ -17,7 +17,7 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
 ?>
 
 <div class="py-3 container-fluid">
-    <div class="card">
+    <div class="shadow card">
         <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <?php if (isset($_POST['btambah'])) : ?>
                 <span class="fs-2 fw-bold">
@@ -76,14 +76,14 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                 endif
                 ?>
             <?php else : ?>
-                <table id="example" class="table">
-                    <thead class="table-dark">
+                <table id="example" class="table table-sm table-responsive table-bordered">
+                    <thead>
                         <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Jumlah</th>
-                            <th scope="col">Hari dan Tanggal</th>
-                            <th scope="col">Status</th>
+                            <th style="width: 4%;" scope="col">No</th>
+                            <th class="text-center" scope="col">Nama</th>
+                            <th class="text-center" scope="col">Jumlah</th>
+                            <th class="text-center" scope="col">Hari dan Tanggal</th>
+                            <th class="text-center" scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,7 +92,7 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                         foreach ($tbl_simpanan_u as $simpan) {
                         ?>
                             <tr>
-                                <td><?= $no++ ?></td>
+                                <td class="text-end"><?= $no++ ?></td>
                                 <td><?= $simpan['nama'] ?></td>
                                 <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
                                 <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>

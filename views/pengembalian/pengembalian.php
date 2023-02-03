@@ -31,9 +31,9 @@ $expired3 = date('Y-m-d H:i:s', $expires3);
 
 $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
 ?>
-<div class="container-fluid pt-3">
-    <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+<div class="pt-3 container-fluid">
+    <div class="shadow card">
+        <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
                 Pengembalian
             </span>

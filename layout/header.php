@@ -20,8 +20,6 @@ $user = mysqli_fetch_array($queryUser);
 
     <link href="<?php echo $config; ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="<?php echo $config; ?>admin/dashboard.css" rel="stylesheet">
-
     <link rel="stylesheet" href="<?php echo $config; ?>assets/styles/sidebar.css">
 
     <link rel="stylesheet" href="<?php echo $config; ?>assets/styles/datatables.min.css">
@@ -29,12 +27,21 @@ $user = mysqli_fetch_array($queryUser);
     <link rel="stylesheet" href="<?php echo $config; ?>assets/boxicons/css/boxicons.css">
 
     <script src="<?php echo $config; ?>assets/script/chart.js"></script>
+
+    <script src="<?php echo $config; ?>assets/boxicons/dist/boxicons.js"></script>
+
     <style>
         @media print {
+
             .header,
-            .print{
+            .print {
                 display: none;
             }
+        }
+
+        .view_more:hover {
+            transform: scale(1.05);
+            transition: all 0.3s ease-in-out;
         }
     </style>
 </head>
@@ -48,7 +55,6 @@ $user = mysqli_fetch_array($queryUser);
         </div>
         <div class="d-flex align-items-center">
             <span class="me-3">
-                
                 Welcome <?= $user['nama'] ?>
             </span>
             <div class="header_img">
@@ -64,7 +70,7 @@ $user = mysqli_fetch_array($queryUser);
         <nav class="nav">
             <div>
                 <a href="#" class="nav_logo">
-                    <i class='bx bx-layer nav_logo-icon'></i>
+                    <img src="<?php echo $config; ?>assets/images/koperasi.png" alt="" width="25px" height="25px">
                     <span class="nav_logo-name">Koperasi</span>
                 </a>
                 <div class="nav_list">

@@ -14,8 +14,6 @@
 
 <script src="<?php echo $config; ?>assets/script/alert.js"></script>
 
-<script src="<?php echo $config; ?>assets/dist/boxicons.js"></script>
-
 </body>
 
 </html>

@@ -11,21 +11,21 @@ $tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_simpa
 
 ?>
 
-<div class="container-fluid py-3">
-    <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+<div class="py-3 container-fluid">
+    <div class="shadow card">
+        <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
                 Simpanan
             </span>
         </div>
         <div class="card-body">
-            <table id="example" class="table table-responsive table-bordered table-striped d-md-block d-lg-table overflow-auto">
-                <thead class="table-dark">
+            <table id="example" class="table table-sm table-responsive table-bordered">
+                <thead>
                     <tr>
-                        <th scope="col">No</th>
+                        <th style="width: 4%;" scope="col">No</th>
                         <th class="text-center" scope="col">Nama</th>
                         <th class="text-center" scope="col">Jumlah</th>
-                        <th class="text-center" scope="col">Aksi</th>
+                        <th class="text-center" style="width: 20%;" scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,11 +34,11 @@ $tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_simpa
                     foreach ($tbl_simpanan_a as $simpan) {
                     ?>
                         <tr>
-                            <td><?= $no++ ?></td>
+                            <td class="text-end"><?= $no++ ?></td>
                             <td><?= $simpan['nama'] ?></td>
                             <td class="text-center">Rp. <?= number_format($simpan['total_simpan'], '0', '.', '.') ?></td>
                             <td class="text-center">
-                                <a class="fw-bold text-uppercase" href="detail_simpanan.php?id_user=<?= $simpan['id_user'] ?>">Lihat Selengkapnya</a>
+                                <a class="rounded btn-sm btn fw-bold text-uppercase btn-outline-primary view_more" href="detail_simpanan.php?id_user=<?= $simpan['id_user'] ?>">Lihat Selengkapnya</a>
                             </td>
                         </tr>
                     <?php } ?>

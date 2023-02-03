@@ -62,6 +62,19 @@ $user = mysqli_num_rows($koneksi->query("SELECT nama FROM tbl_user"));
                 </div>
             </div>
         </div>
+        <!-- <div class="col-md-3 mb-sm-2">
+            <div class="p-4 shadow card">
+                <div class="d-flex align-items-center">
+                    <div class="">
+                        <h1>4</h1>
+                    </div>
+                    <div class="">
+                        <h5 class="card-title fw-bold">Saldo Pinjaman</h5>
+                        <span class="fw-bold">Rp. <?= number_format($tota_pinjaman_u) ?> </span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     </div>
 </div>
 

@@ -7,24 +7,24 @@ include "../../layout/header.php";
 $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
 
 ?>
-<div class="container-fluid pt-3">
+<div class="pt-3 container-fluid">
     <div class="card">
-        <div class="card-header p-4 d-flex justify-content-between align-items-center">
+        <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
                 Users
             </span>
             <?php if (isset($_POST['btambah'])) : ?>
                 <form method="POST">
-                    <button href="" class="btn btn-danger text-white" type="submit" name="bbatal">Kembali</button>
-                    <!-- <button href="" class="btn btn-warning text-white" type="submit" name="btambah" disabled>Tambah Data</button> -->
+                    <button href="" class="text-white btn btn-danger" type="submit" name="bbatal">Kembali</button>
+                    <!-- <button href="" class="text-white btn btn-warning" type="submit" name="btambah" disabled>Tambah Data</button> -->
                 </form>
             <?php else : ?>
                 <form method="POST">
-                    <button href="" class="btn btn-success text-white" type="submit" name="btambah">Tambah Data</button>
+                    <button href="" class="text-white btn btn-success" type="submit" name="btambah">Tambah Data</button>
                 </form>
             <?php endif ?>
         </div>
-        <div class="card-body px-3 pt-3">
+        <div class="px-3 pt-3 card-body">
             <?php if (isset($_POST['btambah'])) : ?>
                 <form>
                     <div class="row">
@@ -93,8 +93,8 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                     </div>
                 </form>
             <?php else : ?>
-                <table id="example" class="table table-sm table-responsive table-bordered d-md-block d-lg-table overflow-auto">
-                    <thead class="table-dark">
+                <table id="example" class="table table-sm table-responsive table-bordered">
+                    <thead>
                         <tr>
                             <th scope="col">No</th>
                             <th class="text-center" scope="col">Nama</th>
@@ -110,13 +110,13 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                         foreach ($users as $user) {
                         ?>
                             <tr>
-                                <th><?= $no++; ?></th>
+                                <td><?= $no++; ?></td>
                                 <td><?= $user['nama'] ?></td>
                                 <td><?= $user['email']; ?></td>
                                 <td class="text-center"><?= $user['tempat_lahir'] ?>, <?= $user['tgl_lahir']; ?></td>
                                 <td class="text-center"><?= $user['telp']; ?></td>
                                 <td class="text-center">
-                                    <a button class="btn btn-sm btn-info text-white" href="profile.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-edit'></i></a>
+                                    <a button class="text-white btn btn-sm btn-info" href="profile.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-edit'></i></a>
                                     <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
                                     <a button class="btn btn-delete btn-sm btn-danger" href="user_proses.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-trash'></i></a>
                                 </td>

@@ -1,11 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
-
 :root {
   --header-height: 3rem;
   --nav-width: 68px;
-  --first-color: #4723d9;
+  --first-color: #20262E;
   --first-color-light: #afa5d9;
-  --white-color: #f7f6fb;
+  --white-color: #DDDDDD;
   --body-font: "Nunito", sans-serif;
   --normal-font-size: 1rem;
   --z-fixed: 100;
@@ -24,6 +22,7 @@ body {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   transition: 0.5s;
+  background-color: #F5F5F5;
 }
 
 a {
@@ -140,7 +139,6 @@ a {
   left: 0;
   width: 2px;
   height: 32px;
-  background-color: var(--white-color);
 }
 
 .height-100 {

@@ -6,11 +6,11 @@ include "../../layout/header.php";
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
 
-$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_pinjam = '$_GET[id_pinjam]'");
+$confirmQuery = mysqli_query($koneksi, "SELECT *, DATE_FORMAT(tgl_pengembalian, '%d %M %Y - %H:%i:%s') as tgl FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_pinjam = '$_GET[id_pinjam]'");
 
 ?>
 <div class="pt-3 container-fluid">
-    <div class="card">
+    <div class="shadow card">
         <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
                 Pengembalian
@@ -18,17 +18,17 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
             <a href="pengembalian_admin.php" class="btn btn-danger">Kembali</a>
         </div>
         <div class="card-body">
-            <table id="example" class="table overflow-auto table-striped table-bordered d-md-block d-lg-table">
-                <thead class="table-dark">
+            <table id="example" class="table table-sm table-bordered">
+                <thead>
                     <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Jumlah</th>
-                        <th scope="col">Pengembalian Ke</th>
-                        <th scope="col">Tanggal Pengembalian</th>
-                        <th scope="col">Bukti</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Aksi</th>
+                        <th style="width: 4%;" scope="col">No</th>
+                        <th class="text-center" scope="col">Nama</th>
+                        <th class="text-center" scope="col">Jumlah</th>
+                        <th class="text-center" scope="col">Pengembalian Ke</th>
+                        <th class="text-center" scope="col">Tanggal Pengembalian</th>
+                        <th class="text-center" scope="col">Bukti</th>
+                        <th class="text-center" scope="col">Status</th>
+                        <th class="text-center" scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,7 +41,7 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                             <td><?= $kembali['nama'] ?></td>
                             <td class="text-center">Rp. <?= number_format($kembali['jumlah_pengembalian'], '0', '.', '.') ?></td>
                             <td class="text-center"><?= $kembali['pengembalian_ke'] ?></td>
-                            <td class="text-center"><?= $kembali['tgl_pengembalian'] ?></td>
+                            <td class="text-center"><?= $kembali['tgl'] ?></td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#bimg<?= $no ?>">
                                     <i class='bx bx-show'></i>
@@ -73,7 +73,7 @@ $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="../../assets/bukti_pengembalian/<?= $kembali['bukti_pengembalian'] ?>" alt="">
+                                        <img src="../../assets/bukti_pengembalian/<?= $kembali['bukti_pengembalian'] ?>" class="w-100" alt="">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

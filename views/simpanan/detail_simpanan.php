@@ -6,13 +6,13 @@ include "../../layout/header.php";
 
 $id_user = $_GET['id_user'];
 
-$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_simpan, nama, jumlah_simpan, status_simpan FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = '$id_user'");
+$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_simpan, nama, jumlah_simpan, status_simpan, DATE_FORMAT(tgl_simpan, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = '$id_user'");
 $data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 ?>
 
 <div class="py-3 container-fluid">
-    <div class="card">
+    <div class="shadow card">
         <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
                 Simpanan
@@ -20,12 +20,13 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
             <a href="simpanan_admin.php" class="btn btn-danger">Kembali</a>
         </div>
         <div class="card-body">
-            <table id="example" class="table overflow-auto table-responsive table-bordered table-striped d-md-block d-lg-table">
-                <thead class="table-dark">
+            <table id="example" class="table table-responsive table-bordered table-sm">
+                <thead>
                     <tr>
                         <th scope="col">No</th>
                         <th class="text-center" scope="col">Nama</th>
                         <th class="text-center" scope="col">Jumlah</th>
+                        <th class="text-center" scope="col">Tanggal Simpan</th>
                         <th class="text-center" scope="col">Status</th>
                         <th class="text-center" scope="col">Aksi</th>
                     </tr>
@@ -41,6 +42,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                             <td><?= $no++ ?></td>
                             <td><?= $simpan['nama'] ?></td>
                             <td class="text-center">Rp. <?= number_format($total, '0', '.', '.') ?></td>
+                            <td class="text-center"><?= $simpan['tgl'] ?></td>
                             <td class="text-center">
                                 <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
                                     <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>

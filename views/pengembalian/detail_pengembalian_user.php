@@ -10,7 +10,7 @@ $confirmQuery = mysqli_query($koneksi, "SELECT *, DATE_FORMAT(tgl_pengembalian, 
 
 ?>
 <div class="pt-3 container-fluid">
-    <div class="card">
+    <div class="shadow card">
         <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
                 Pengembalian
@@ -21,12 +21,12 @@ $confirmQuery = mysqli_query($koneksi, "SELECT *, DATE_FORMAT(tgl_pengembalian, 
             <table id="example" class="table table-sm table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Jumlah Pengembalian</th>
-                        <th scope="col">Pengembalian Ke</th>
-                        <th scope="col">Tanggal Pengembalian</th>
-                        <th scope="col">Status</th>
+                        <th style="width: 4%;" scope="col">No</th>
+                        <th class="text-center" scope="col">Nama</th>
+                        <th class="text-center" scope="col">Jumlah Pengembalian</th>
+                        <th class="text-center" scope="col">Pengembalian Ke</th>
+                        <th class="text-center" scope="col">Tanggal Pengembalian</th>
+                        <th class="text-center" scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>

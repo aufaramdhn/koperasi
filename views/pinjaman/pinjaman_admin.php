@@ -14,20 +14,20 @@ $pinjamanArray = mysqli_fetch_array($queryPinjaman);
 ?>
 
 <div class="py-3 container-fluid">
-    <div class="card">
+    <div class="shadow card">
         <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class=" fs-2 fw-bold">
                 Pinjaman
             </span>
         </div>
         <div class="card-body">
-            <table id="example" class="table table-striped table-bordered d-md-block d-lg-table overflow-sm-auto">
-                <thead class="table-dark">
+            <table id="example" class="table table-sm table-bordered">
+                <thead>
                     <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Pinjaman</th>
-                        <th scope="col">Aksi</th>
+                        <th style="width: 4%;" scope="col">No</th>
+                        <th class="text-center" scope="col">Nama</th>
+                        <th class="text-center" scope="col">Pinjaman</th>
+                        <th class="text-center" style="width: 20%;" scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,11 +36,11 @@ $pinjamanArray = mysqli_fetch_array($queryPinjaman);
                     foreach ($queryPinjaman as $pinjam) {
                     ?>
                         <tr>
-                            <td><?= $no++ ?></td>
+                            <td class="text-end"><?= $no++ ?></td>
                             <td><?= $pinjam['nama'] ?></td>
                             <td class="text-center">Rp. <?= number_format($pinjam['total_pinjam'], '0', '.', '.') ?></td>
                             <td class="text-center">
-                                <a class="fw-bold text-uppercase" href="detail_pinjaman.php?id_user=<?= $pinjam['id_user'] ?>">Lihat Selengkapnya</a>
+                                <a class="rounded btn-sm btn fw-bold text-uppercase btn-outline-primary view_more" href="detail_pinjaman.php?id_user=<?= $pinjam['id_user'] ?>">Lihat Selengkapnya</a>
                             </td>
                         </tr>
                     <?php } ?>
