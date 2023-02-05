@@ -56,6 +56,31 @@ if (isset($_POST['bUser'])) {
     }
 }
 
+if (isset($_POST['tarik_simpanan'])) {
+
+    $id = $_SESSION['id_user'];
+    $jumlah = $_POST['jumlah'];
+
+    $sql = mysqli_query($koneksi, "INSERT INTO tbl_ambil_simpan VALUES (NULL, '$id', '$jumlah', 'pending', current_timestamp());");
+    if ($sql) {
+        $_SESSION['info'] = 'Disimpan';
+        echo "<script>document.location='tarik_simpanan_user.php'</script>";
+    } else {
+        $_SESSION['info'] = 'Gagal';
+        echo "<script>document.location='tarik_simpanan_user.php'</script>";
+    }
+}
+
+
+if (isset($_POST['konfirmasi_tarik'])) {
+    $id = $_POST['id_ambil'];
+
+    $select = "UPDATE tbl_ambil_simpan SET status_ambil = 'konfirmasi' WHERE id_ambil_simpan = '$id'";
+    $result_select = mysqli_query($koneksi, $select);
+
+    $_SESSION['info'] = 'Konfirmasi';
+    header("Location: tarik_simpanan_admin.php");
+}
 
 if (isset($_POST['konfirmasi'])) {
     $id = $_POST['id_simpan'];
@@ -65,6 +90,16 @@ if (isset($_POST['konfirmasi'])) {
 
     $_SESSION['info'] = 'Konfirmasi';
     header("Location: simpanan_admin.php");
+}
+
+if (isset($_POST['tolak_tarik'])) {
+    $id = $_POST['id_ambil'];
+
+    $select = "UPDATE tbl_ambil_simpan SET status_ambil = 'tolak' WHERE id_ambil_simpan = '$id'";
+    $result = mysqli_query($koneksi, $select);
+
+    $_SESSION['info'] = 'Tolak';
+    header("Location: tarik_simpanan_admin.php");
 }
 
 if (isset($_POST['tolak'])) {

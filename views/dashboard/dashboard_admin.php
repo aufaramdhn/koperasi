@@ -24,9 +24,9 @@ $user = mysqli_num_rows($koneksi->query("SELECT nama FROM tbl_user"));
 
 ?>
 
-<div class="container pt-5">
-    <div class="mb-3 row d-flex justify-content-center">
-        <div class="col-md-3">
+<div class="pt-5 container-fluid">
+    <div class="d-flex">
+        <div class="col-md-4">
             <div class="text-white card bg-danger" style="width: 18rem;">
                 <div class="card-body row d-flex align-items-center">
                     <div class="text-center col-2">
@@ -42,7 +42,7 @@ $user = mysqli_num_rows($koneksi->query("SELECT nama FROM tbl_user"));
                 </div>
             </div>
         </div>
-        <div class="col-md-3 mb-sm-2">
+        <div class="col-md-4 mb-sm-2">
             <div class="text-white card bg-success" style="width: 18rem;">
                 <div class="card-body row d-flex align-items-center">
                     <div class="text-center col-2">
@@ -63,7 +63,7 @@ $user = mysqli_num_rows($koneksi->query("SELECT nama FROM tbl_user"));
                 </div>
             </div>
         </div>
-        <div class="col-md-3 mb-sm-2">
+        <div class="col-md-4 mb-sm-2">
             <div class="text-white card bg-warning" style="width: 18rem;">
                 <div class="card-body row d-flex align-items-center">
                     <div class="text-center col-2">

@@ -93,37 +93,39 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                     </div>
                 </form>
             <?php else : ?>
-                <table id="example" class="table table-sm table-responsive table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th class="text-center" scope="col">Nama</th>
-                            <th class="text-center" scope="col">Email</th>
-                            <th class="text-center" scope="col">Tempat, Tanggal Lahir</th>
-                            <th class="text-center" scope="col">No. Telepon</th>
-                            <th class="text-center" scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $no = 1;
-                        foreach ($users as $user) {
-                        ?>
+                <div class="overflow-x-scroll table-responsive">
+                    <table id="example" class="table table-sm table-bordered">
+                        <thead>
                             <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $user['nama'] ?></td>
-                                <td><?= $user['email']; ?></td>
-                                <td class="text-center"><?= $user['tempat_lahir'] ?>, <?= $user['tgl_lahir']; ?></td>
-                                <td class="text-center"><?= $user['telp']; ?></td>
-                                <td class="text-center">
-                                    <a button class="text-white btn btn-sm btn-info" href="profile.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-edit'></i></a>
-                                    <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
-                                    <a button class="btn btn-delete btn-sm btn-danger" href="user_proses.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-trash'></i></a>
-                                </td>
+                                <th scope="col">No</th>
+                                <th class="text-center" scope="col">Nama</th>
+                                <th class="text-center" scope="col">Email</th>
+                                <th class="text-center" scope="col">Tempat, Tanggal Lahir</th>
+                                <th class="text-center" scope="col">No. Telepon</th>
+                                <th class="text-center" scope="col">Aksi</th>
                             </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            foreach ($users as $user) {
+                            ?>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= $user['nama'] ?></td>
+                                    <td><?= $user['email']; ?></td>
+                                    <td class="text-center"><?= $user['tempat_lahir'] ?>, <?= $user['tgl_lahir']; ?></td>
+                                    <td class="text-center"><?= $user['telp']; ?></td>
+                                    <td class="text-center">
+                                        <a button class="text-white btn btn-sm btn-info" href="profile.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-edit'></i></a>
+                                        <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                        <a button class="btn btn-delete btn-sm btn-danger" href="user_proses.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-trash'></i></a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php endif ?>
         </div>
     </div>

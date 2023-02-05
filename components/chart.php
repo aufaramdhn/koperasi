@@ -18,12 +18,12 @@ foreach ($chart_pinjaman as $data_pinjaman) {
 
 
 ?>
-<div class="mb-3 d-flex justify-content-between">
-    <div class="p-2 shadow-sm card">
-        <canvas style="height: 315px;" id="chartSimpanan"></canvas>
+<div class="mb-3 d-flex">
+    <div class="p-2 shadow-sm w-100 card">
+        <canvas style="height: 400px;" id="chartSimpanan"></canvas>
     </div>
-    <div class="p-2 shadow-sm card">
-        <canvas style="height: 315px;" id="chartPinjaman"></canvas>
+    <div class="p-2 shadow-sm w-100 card">
+        <canvas style="height: 400px;" id="chartPinjaman"></canvas>
     </div>
 </div>
 <script>

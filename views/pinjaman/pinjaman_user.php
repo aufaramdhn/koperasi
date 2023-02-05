@@ -12,7 +12,6 @@ $id_user = $_SESSION['id_user'];
 // Cek pinjam
 $tbl_pinjaman_u = mysqli_query($koneksi, "SELECT nama, jumlah_pinjam, status_pinjam, bulan, tbl_pinjam.id_pinjam, tgl_pinjam FROM tbl_pinjam JOIN tbl_user USING(id_user) JOIN tbl_bunga USING(id_bunga) WHERE tbl_pinjam.id_user = '$id_user' GROUP BY tbl_pinjam.id_pinjam");
 
-
 $cek_pinjam = mysqli_num_rows($tbl_pinjaman_u);
 
 // Query Simpanan
@@ -47,9 +46,18 @@ while ($total_simpan = mysqli_fetch_array($querySimpan)) {
 
 // Perulangan limit pinjam
 $queryPinjaman = mysqli_query($koneksi, "SELECT jumlah_pinjam, status_pinjam, riba FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) WHERE tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.status_pinjam = 'pengembalian' AND tbl_pinjam.status_pinjam = 'selesai' OR tbl_pinjam.id_user = '$id_user'");
-$total_1 = 0;
+$total_bunga = 0;
 while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
-    $total_1 += $total_tampil['riba'];
+    $total_bunga += $total_tampil['riba'];
+}
+
+// Cek ambil simpanan
+$tbl_ambil_simpanan = $koneksi->query("SELECT jumlah_ambil FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user WHERE status_ambil = 'konfirmasi' AND tbl_ambil_simpan.id_user = '$id_user'");
+$cek_ambil = mysqli_num_rows($tbl_ambil_simpanan);
+
+$total_ambil = 0;
+while ($total_ambil_simpan = mysqli_fetch_array($tbl_ambil_simpanan)) {
+    $total_ambil += $total_ambil_simpan['jumlah_ambil'];
 }
 
 // Limit Pengembalian
@@ -61,7 +69,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
 ?>
 <div class="py-3 container-fluid">
     <div class="shadow card">
-        <div class="p-4 card-header d-flex justify-content-between align-items-center">
+        <div class="p-4 card-header">
             <?php if (isset($_POST['btambah'])) : ?>
                 <span class="fs-2 fw-bold">
                     Tambah Pinjaman
@@ -77,12 +85,14 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                     <button type="submit" name="bkembali" class="btn btn-danger">Kembali</button>
                 </form>
             <?php else : ?>
-                <span class="fs-2 fw-bold">
-                    Pinjaman
-                </span>
-                <form method="POST">
-                    <button type="submit" name="btambah" class="btn btn-success">Tambah Pinjaman</button>
-                </form>
+                <div class="d-md-flex justify-content-md-between align-items-md-center">
+                    <span class="fs-2 fw-bold">
+                        Pinjaman
+                    </span>
+                    <form method="POST">
+                        <button type="submit" name="btambah" class="mt-2 mt-md-0 btn btn-success">Tambah Pinjaman</button>
+                    </form>
+                </div>
             <?php endif ?>
         </div>
         <div class="card-body">
@@ -95,11 +105,18 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                 <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
                             </div>
                             <div class="mb-2">
-                                <?php if ($cek_pinjam > 0) : ?>
-                                    <label for="jumlah" class="form-label">Jumlah Pinjaman <small class="form-text fst-italic">* (Maks Pinjaman <?= $grand_total + $total_1 ?>)</small></label>
-                                    <input type="number" min="0" max="<?= $grand_total + $total_1 ?>" class="form-control" id="jumlah" name="jumlah" required>
+                                <?php if ($cek_pinjam > 0 and $cek_ambil > 0) : ?>
+                                    <label for="jumlah" class="form-label">Jumlah Pinjaman
+                                        <small class="form-text fst-italic">* (Maks Pinjaman Rp. <?= number_format($grand_total - $total_ambil + $total_bunga, '0', '.', '.') ?>)</small>
+                                    </label>
+                                    <input type="number" min="0" max="<?= $grand_total + $total_bunga ?>" class="form-control" id="jumlah" name="jumlah" required>
+                                <?php elseif ($cek_pinjam > 0) : ?>
+                                    <label for="jumlah" class="form-label">Jumlah Pinjaman
+                                        <small class="form-text fst-italic">* (Maks Pinjaman Rp. <?= number_format($grand_total + $total_bunga, '0', '.', '.') ?>)</small>
+                                    </label>
+                                    <input type="number" min="0" max="<?= $grand_total + $total_bunga ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php else : ?>
-                                    <label for="jumlah" class="form-label">Jumlah Pinjaman <small class="form-text fst-italic">* (Maks Pinjaman <?= $grand_total ?>)</small></label>
+                                    <label for="jumlah" class="form-label">Jumlah Pinjaman <small class="form-text fst-italic">* (Maks Pinjaman Rp. <?= number_format($grand_total, '0', '.', '.') ?>)</small></label>
                                     <input type="number" min="0" max="<?= $grand_total ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php endif ?>
                                 <small class="form-text fst-italic">* Harap masukan nominal terlebih dahulu, setelah itu pilih tempo bulan yang anda inginkan</small>

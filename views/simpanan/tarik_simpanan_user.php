@@ -8,12 +8,18 @@ date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-i H:i:s");
 
 
-$id_simpanan = $_SESSION['id_user'];
+$id = $_SESSION['id_user'];
 
-$tbl_user = $koneksi->query("SELECT * FROM tbl_user Where id_user = '$id_simpanan'");
-$tbl_simpanan_u = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id_simpanan'");
-$data_u = mysqli_fetch_array($tbl_user);
-$cek = mysqli_num_rows($tbl_simpanan_u);
+$tbl_user = $koneksi->query("SELECT * FROM tbl_user Where id_user = '$id'");
+
+$tbl_simpanan = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id'");
+$data = mysqli_fetch_array($tbl_simpanan);
+$cek = mysqli_num_rows($tbl_simpanan);
+
+$tbl_ambil_simpanan = $koneksi->query("SELECT * FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where tbl_ambil_simpan.id_user = '$id'");
+$data_ambil = mysqli_fetch_array($tbl_ambil_simpanan);
+$cek_ambil = mysqli_num_rows($tbl_ambil_simpanan);
+
 ?>
 
 <div class="py-3 container-fluid">
@@ -21,31 +27,23 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
         <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <?php if (isset($_POST['btambah'])) : ?>
                 <span class="fs-2 fw-bold">
-                    Tambah Simpanan
+                    Tarik Simpanan
                 </span>
                 <form method="POST">
                     <button href="" class="btn btn-danger" name="bkembali">Kembali</button>
                 </form>
             <?php else : ?>
                 <span class="fs-2 fw-bold">
-                    Simpanan
+                    Tarik Simpanan
                 </span>
                 <form method="POST">
-                    <button href="" class="btn btn-success" name="btambah">Tambah Simpanan</button>
+                    <button href="" class="btn btn-success" name="btambah">Tarik Simpanan</button>
                 </form>
             <?php endif ?>
         </div>
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
-                <?php
-                if (empty($data_u['tempat_lahir'])) :
-                ?>
-                    <div class="text-center">
-                        <span class="fw-bold text-uppercase fs-3">Maaf Data Diri Anda Belum Lengkap, harap isi data diri anda <a href="../profile/profile.php">disini</a></span>
-                    </div>
-                <?php
-                else :
-                ?>
+                <?php if ($cek > 0) : ?>
                     <form action="simpanan_proses.php" method="POST" enctype="multipart/form-data">
                         <div class="container">
                             <div class="mb-3">
@@ -53,21 +51,28 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                                 <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
                             </div>
                             <div class="mb-3">
-                                <label for="jumlah-pinjaman" class="form-label">Jumlah Sinjaman</label>
+                                <label for="jumlah-pinjaman" class="form-label">Jumlah Tarik Sinjaman</label>
                                 <input type="number" min="0" max="10000000" class="form-control" name="jumlah" id="jumlah-pinjaman">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Bukti Pembayaran</label>
-                                <input class="form-control" name="bukti" type="file" id="formFile">
+                                <?php
+                                if ($cek_ambil > 0) {
+                                    $total = 0;
+                                    $total = +$data_ambil['jumlah_ambil'];
+                                ?>
+                                    <span class="form-text">Saldo Simpanan Anda (Rp. <?= number_format($data['jumlah_simpan'] - $total, '0', '.', '.') ?>)</span>
+                                <?php } else { ?>
+                                    <span class="form-text">Saldo Simpanan Anda (Rp. <?= number_format($data['jumlah_simpan'], '0', '.', '.') ?>)</span>
+                                <?php } ?>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button id="btn-tambah" type="submit" class="btn btn-primary" name="bUser">Simpan</button>
+                                <button id="btn-tambah" type="submit" class="btn btn-primary" name="tarik_simpanan">Tarik</button>
                             </div>
                         </div>
                     </form>
-                <?php
-                endif
-                ?>
+                <?php else : ?>
+                    <div class="text-center">
+                        <span class="fw-bold text-uppercase fs-3">Maaf anda belum memiliki saldo simpanan, silahkan menabung terlebih dahulu <a href="simpanan_user.php">disini</a></span>
+                    </div>
+                <?php endif ?>
             <?php else : ?>
                 <div class="overflow-x-scroll table-responsive">
                     <table id="example" class="table table-sm table-bordered">
@@ -83,19 +88,19 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                         <tbody>
                             <?php
                             $no = 1;
-                            foreach ($tbl_simpanan_u as $simpan) {
+                            foreach ($tbl_ambil_simpanan as $simpan) {
                             ?>
                                 <tr>
                                     <td class="text-end"><?= $no++ ?></td>
                                     <td><?= $simpan['nama'] ?></td>
-                                    <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
-                                    <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
+                                    <td class="text-center">Rp. <?= number_format($simpan['jumlah_ambil'], '0', '.', '.') ?></td>
+                                    <td class="text-center"><?= $simpan['tgl_ambil'] ?></td>
                                     <td class="text-center">
-                                        <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
+                                        <?php if ($simpan['status_ambil'] == 'konfirmasi') { ?>
                                             <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
-                                        <?php } else if ($simpan['status_simpan'] == 'tolak') { ?>
+                                        <?php } else if ($simpan['status_ambil'] == 'tolak') { ?>
                                             <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
-                                        <?php } else if ($simpan['status_simpan'] == 'pending') { ?>
+                                        <?php } else if ($simpan['status_ambil'] == 'pending') { ?>
                                             <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
                                         <?php } ?>
                                     </td>

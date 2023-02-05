@@ -6,7 +6,7 @@ include "../../layout/header.php";
 
 $id_user = $_GET['id_user'];
 
-$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_simpan, nama, jumlah_simpan, status_simpan, DATE_FORMAT(tgl_simpan, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = '$id_user'");
+$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_ambil_simpan, nama, ambil_simpan, status_ambil, DATE_FORMAT(tgl_ambil, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_ambil_simpan JOIN tbl_user ON tbl_user.id_user = tbl_ambil_simpan.id_user WHERE tbl_ambil_simpan.id_user = '$id_user'");
 $data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 ?>
@@ -37,7 +37,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                         $no = 1;
                         foreach ($tbl_simpanan_a as $simpan) {
                             $total = 0;
-                            $total += $simpan['jumlah_simpan'];
+                            $total += $simpan['jumlah_ambil'];
                         ?>
                             <tr>
                                 <td><?= $no++ ?></td>
@@ -45,21 +45,21 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                                 <td class="text-center">Rp. <?= number_format($total, '0', '.', '.') ?></td>
                                 <td class="text-center"><?= $simpan['tgl'] ?></td>
                                 <td class="text-center">
-                                    <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
+                                    <?php if ($simpan['status_ambil'] == 'konfirmasi') { ?>
                                         <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
-                                    <?php } else if ($simpan['status_simpan'] == 'tolak') { ?>
+                                    <?php } else if ($simpan['status_ambil'] == 'tolak') { ?>
                                         <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
-                                    <?php } else if ($simpan['status_simpan'] == 'pending') { ?>
+                                    <?php } else if ($simpan['status_ambil'] == 'pending') { ?>
                                         <form action="simpanan_proses.php" method="POST">
-                                            <input type="hidden" name="id_simpan" value="<?= $simpan['id_simpan'] ?>">
-                                            <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
-                                            <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
+                                            <input type="hidden" name="id_ambil" value="<?= $simpan['id_ambil_simpan'] ?>">
+                                            <input class="btn btn-sm btn-success" type="submit" name="konfirmasi_tarik" value="Konfirmasi">
+                                            <input class="btn btn-sm btn-danger" type="submit" name="tolak_tarik" value="Tolak">
                                         </form>
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
                                     <a button class="btn btn-sm btn-success me-1" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
-                                    <a button class="btn btn-delete btn-sm btn-danger" href="simpanan_proses.php?id_simpan=<?= $simpan['id_simpan'] ?>"><i class='bx bx-trash'></i></a>
+                                    <a button class="btn btn-delete btn-sm btn-danger" href="simpanan_proses.php?id_simpan=<?= $simpan['id_ambil_simpan'] ?>"><i class='bx bx-trash'></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

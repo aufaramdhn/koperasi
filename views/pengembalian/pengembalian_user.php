@@ -19,7 +19,7 @@ $pengembalianQuery = mysqli_query($koneksi, "SELECT id_user, tbl_pinjam.id_pinja
             </span>
         </div>
         <div class="card-body">
-            <table id="example" class="table table-sm table-bordered">
+            <table id="example" class="table table-responsive table-sm table-bordered ">
                 <thead>
                     <tr>
                         <th style="width: 4%;" scope="col">No</th>
