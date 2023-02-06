@@ -85,39 +85,41 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
             </span>
         </div>
         <div class="card-body">
-            <table id="example" class="table table-sm table-responsive table-bordered">
-                <thead>
-                    <tr>
-                        <th style="width: 4%;" scope="col">No</th>
-                        <th class="text-center" scope="col">Nama</th>
-                        <th class="text-center" scope="col">Jumlah</th>
-                        <th class="text-center" scope="col">Hari dan Tanggal</th>
-                        <th class="text-center" scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($query_simpanan as $simpan) {
-                    ?>
+            <div class="overflow-x-scroll table-responsive">
+                <table id="example" class="table table-sm table-responsive table-bordered">
+                    <thead>
                         <tr>
-                            <td class="text-end"><?= $no++ ?></td>
-                            <td><?= $simpan['nama'] ?></td>
-                            <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
-                            <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
-                            <td class="text-center">
-                                <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
-                                    <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
-                                <?php } else if ($simpan['status_simpan'] == 'tolak') { ?>
-                                    <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
-                                <?php } else if ($simpan['status_simpan'] == 'pending') { ?>
-                                    <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
-                                <?php } ?>
-                            </td>
+                            <th style="width: 4%;" scope="col">No</th>
+                            <th class="text-center" scope="col">Nama</th>
+                            <th class="text-center" scope="col">Jumlah</th>
+                            <th class="text-center" scope="col">Hari dan Tanggal</th>
+                            <th class="text-center" scope="col">Status</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($query_simpanan as $simpan) {
+                        ?>
+                            <tr>
+                                <td class="text-end"><?= $no++ ?></td>
+                                <td><?= $simpan['nama'] ?></td>
+                                <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
+                                <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
+                                <td class="text-center">
+                                    <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
+                                    <?php } else if ($simpan['status_simpan'] == 'tolak') { ?>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
+                                    <?php } else if ($simpan['status_simpan'] == 'pending') { ?>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

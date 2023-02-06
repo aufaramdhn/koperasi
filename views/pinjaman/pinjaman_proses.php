@@ -102,9 +102,8 @@ if (isset($_POST['bpinjamuser'])) {
 
     $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bunga', '$grand_total', '$total', '$tgl_pinjam', 'pending');");
     if ($sql == true) {
-
         $_SESSION['info'] = 'Disimpan';
-        header("Location: pinjaman_user.php");
+        header("Location: print_pinjaman.php?id_pinjam={$_POST['id_pinjam']}");
     } else {
         $_SESSION['info'] = 'Gagal';
         header("Location: pinjaman_user.php");

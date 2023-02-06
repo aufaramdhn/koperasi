@@ -1,22 +1,21 @@
 <?php
-$active = "pinjaman";
+$active = "pengembalian";
 $title = "Print | Koperasi";
 include "../../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
 
-$id_pinjam = $_GET['id_pinjam'];
+$id_pinjam = $_GET['id_pengembalian'];
 
-$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT nama, jumlah_pinjam, status_pinjam, tbl_pinjam.id_pinjam, riba, DATE_FORMAT(tgl_pinjam, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_pinjam JOIN tbl_user USING(id_user) WHERE tbl_pinjam.id_pinjam = '$id_pinjam'");
+$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT *, DATE_FORMAT(tgl_pengembalian, '%d %M %Y - %H:%i:%s') as tgl FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam) WHERE tbl_pengembalian.id_pengembalian = '$id_pinjam'");
 
 foreach ($tbl_pinjaman_u as $pinjam) {
-    $id = $pinjam['id_pinjam'];
+    $id = $pinjam['id_pengembalian'];
     $nama = $pinjam['nama'];
-    $jumlah = $pinjam['jumlah_pinjam'];
-    $status = $pinjam['status_pinjam'];
+    $jumlah = $pinjam['jumlah_pengembalian'];
     $tgl = $pinjam['tgl'];
-    $bunga = $pinjam['riba'];
+    $pengembalian_ke = $pinjam['pengembalian_ke'];
 }
 ?>
 
@@ -38,29 +37,27 @@ foreach ($tbl_pinjaman_u as $pinjam) {
                     </div>
                 </div>
                 <div class="container" style="margin-top:20;">
-                    <span>No. Pinjaman : P-0<?= $id ?></span><br>
+                    <span>No. Pengembalian : P-0<?= $id ?></span><br>
                     <span>Nama : <?= $nama ?> </span>
                     <span style="float:right;">Tanggal : <?= $tgl ?></span>
                     <h2 class="pb-4 border-bottom"></h2>
-                    <h2 class="mt-4">PINJAMAN</h2>
+                    <h2 class="mt-4">PENGEMBALIAN</h2>
                     <div class="container-fluid">
                         <div class="d-flex justify-content-between">
                             <span class="mt-1">JENIS TRANSAKSI :</span>
-                            <span>PINJAMAN</span>
+                            <span>PENGEMBALIAN</span>
                         </div>
-                        <!-- <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between">
+                            <span class="mt-1">Pengembalian Ke</span>
+                            <span><?= $pengembalian_ke ?></span>
+                        </div>
+                        <div class="d-flex justify-content-between">
                             <span class="mt-1"></span>
-                            <h2></h2>
-                            <span>Rp.50.000 </span>
-                        </div> -->
-                        <!-- <div class="d-flex justify-content-between">
-                            <span class="mt-1">
-                            </span>
-                            <span>Rp.50.000 </span>
-                        </div> -->
+                            <!-- <span>Rp.50.000 </span> -->
+                        </div>
                         <!-- total tagihan -->
                         <h2 class="pb-4 border-bottom"></h2>
-                        <div class="d-flex justify-content-between ">
+                        <!-- <div class="d-flex justify-content-between ">
                             <span class="fs-5">Jumlah Pinjaman</span><br>
                             <h2></h2>
                             <b><span class="fs-5">Rp. <?= number_format($jumlah, '0', '.', '.') ?> </span></b>
@@ -69,18 +66,18 @@ foreach ($tbl_pinjaman_u as $pinjam) {
                             <span class="fs-5">Bunga Pinjaman</span><br>
                             <h2></h2>
                             <b><span class="fs-5">Rp. <?= number_format($bunga, '0', '.', '.') ?> </span></b>
-                        </div>
+                        </div> -->
                         <div class="mb-4 d-flex justify-content-between">
-                            <span class="fs-5">Total Pinjaman</span><br>
+                            <span class="fs-5">Total Pengembalian</span><br>
                             <h2></h2>
-                            <b><span class="fs-5">Rp. <?= number_format($jumlah + $bunga, '0', '.', '.') ?> </span></b>
+                            <b><span class="fs-5">Rp. <?= number_format($jumlah, '0', '.', '.') ?> </span></b>
                         </div>
                         <span style="float:right;" class="mt-4 fs-5">Bogor, <?= $tgl ?></span><br><br><br><br><br>
                         <center>
                             <h2>** Terima Kasih **</h2>
                         </center>
                         <a href="" class="btn btn-success btn-fill pull-rightfloat-right ms-2 d-print-none" style="float:right ;" onclick="window.print()">CETAK STRUK</a>
-                        <a href="pinjaman_user.php" button type="button" class="mb-5 btn btn-danger d-print-none">Kembali</a><br>
+                        <a href="pengembalian_user.php" button type="button" class="mb-5 btn btn-danger d-print-none">Kembali</a><br>
                     </div>
                 </div>
             </form>

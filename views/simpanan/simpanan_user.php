@@ -18,21 +18,25 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
 
 <div class="py-3 container-fluid">
     <div class="shadow card">
-        <div class="p-4 card-header d-flex justify-content-between align-items-center">
+        <div class="p-4 card-header">
             <?php if (isset($_POST['btambah'])) : ?>
-                <span class="fs-2 fw-bold">
-                    Tambah Simpanan
-                </span>
-                <form method="POST">
-                    <button href="" class="btn btn-danger" name="bkembali">Kembali</button>
-                </form>
+                <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+                    <span class="fs-2 fw-bold">
+                        Tambah Simpanan
+                    </span>
+                    <form method="POST">
+                        <button href="" class="btn btn-danger" name="bkembali">Kembali</button>
+                    </form>
+                </div>
             <?php else : ?>
-                <span class="fs-2 fw-bold">
-                    Simpanan
-                </span>
-                <form method="POST">
-                    <button href="" class="btn btn-success" name="btambah">Tambah Simpanan</button>
-                </form>
+                <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+                    <span class="fs-2 fw-bold">
+                        Simpanan
+                    </span>
+                    <form method="POST">
+                        <button href="" class="btn btn-success" name="btambah">Tambah Simpanan</button>
+                    </form>
+                </div>
             <?php endif ?>
         </div>
         <div class="card-body">
@@ -78,6 +82,7 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                                 <th class="text-center" scope="col">Jumlah</th>
                                 <th class="text-center" scope="col">Hari dan Tanggal</th>
                                 <th class="text-center" scope="col">Status</th>
+                                <th class="text-center" scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,6 +103,11 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                                         <?php } else if ($simpan['status_simpan'] == 'pending') { ?>
                                             <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
                                         <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <a type="submit" href="print_simpanan.php?id_simpan=<?= $simpan['id_simpan'] ?>" class="text-white btn btn-sm btn-info">
+                                            <i class='bx bx-printer'></i>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php } ?>

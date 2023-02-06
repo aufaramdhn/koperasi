@@ -1,6 +1,6 @@
 <?php
 
-$active = "simpanan";
+$active = "tarik_simpanan";
 $title = "Simpanan | Koperasi";
 include "../../layout/header.php";
 
@@ -83,6 +83,7 @@ $cek_ambil = mysqli_num_rows($tbl_ambil_simpanan);
                                 <th class="text-center" scope="col">Jumlah</th>
                                 <th class="text-center" scope="col">Hari dan Tanggal</th>
                                 <th class="text-center" scope="col">Status</th>
+                                <th class="text-center" scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,6 +104,11 @@ $cek_ambil = mysqli_num_rows($tbl_ambil_simpanan);
                                         <?php } else if ($simpan['status_ambil'] == 'pending') { ?>
                                             <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
                                         <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <a type="submit" href="print_tarik.php?id_ambil_simpan=<?= $simpan['id_ambil_simpan'] ?>" class="text-white btn btn-sm btn-info">
+                                            <i class='bx bx-printer'></i>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php } ?>

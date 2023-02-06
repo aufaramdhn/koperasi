@@ -70,30 +70,30 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
 <div class="py-3 container-fluid">
     <div class="shadow card">
         <div class="p-4 card-header">
-            <?php if (isset($_POST['btambah'])) : ?>
-                <span class="fs-2 fw-bold">
-                    Tambah Pinjaman
-                </span>
-                <form method="POST">
-                    <button type="submit" name="bkembali" class="btn btn-danger">Kembali</button>
-                </form>
-            <?php elseif (isset($_POST['bpengembalian'])) : ?>
-                <span class="fs-2 fw-bold">
-                    Pengembalian
-                </span>
-                <form method="POST">
-                    <button type="submit" name="bkembali" class="btn btn-danger">Kembali</button>
-                </form>
-            <?php else : ?>
-                <div class="d-md-flex justify-content-md-between align-items-md-center">
+            <div class="d-md-flex justify-content-md-between align-items-md-center">
+                <?php if (isset($_POST['btambah'])) : ?>
+                    <span class="fs-2 fw-bold">
+                        Tambah Pinjaman
+                    </span>
+                    <form method="POST">
+                        <button type="submit" name="bkembali" class="btn btn-danger">Kembali</button>
+                    </form>
+                <?php elseif (isset($_POST['bpengembalian'])) : ?>
+                    <span class="fs-2 fw-bold">
+                        Pengembalian
+                    </span>
+                    <form method="POST">
+                        <button type="submit" name="bkembali" class="btn btn-danger">Kembali</button>
+                    </form>
+                <?php else : ?>
                     <span class="fs-2 fw-bold">
                         Pinjaman
                     </span>
                     <form method="POST">
                         <button type="submit" name="btambah" class="mt-2 mt-md-0 btn btn-success">Tambah Pinjaman</button>
                     </form>
-                </div>
-            <?php endif ?>
+                <?php endif ?>
+            </div>
         </div>
         <div class="card-body">
             <?php if (isset($_POST['btambah'])) : ?>
@@ -210,13 +210,17 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                     <td class="text-center">
                                         <?php if ($confirmArray['tgl_konfirmasi'] >= $expired) : ?>
                                             <div class="d-flex justify-content-center">
-                                                <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2"><i class='bx bxs-edit'></i></a>
+                                                <a type="submit" href="print_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2">
+                                                    <i class='bx bx-printer fs-5'></i>
+                                                </a>
                                                 <form method="POST">
                                                     <a type="submit" href="../pengembalian/pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-success">Pengembalian</a>
                                                 </form>
                                             </div>
                                         <?php else : ?>
-                                            <a type="submit" href="" class="text-white btn btn-sm btn-info"><i class='bx bxs-edit'></i></a>
+                                            <a type="submit" href="print_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info">
+                                                <i class='bx bx-printer'></i>
+                                            </a>
                                         <?php endif ?>
                                     </td>
                                 </tr>

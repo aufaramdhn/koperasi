@@ -28,6 +28,7 @@ $confirmQuery = mysqli_query($koneksi, "SELECT *, DATE_FORMAT(tgl_pengembalian, 
                             <th class="text-center" scope="col">Pengembalian Ke</th>
                             <th class="text-center" scope="col">Tanggal Pengembalian</th>
                             <th class="text-center" scope="col">Status</th>
+                            <th class="text-center" scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +48,11 @@ $confirmQuery = mysqli_query($koneksi, "SELECT *, DATE_FORMAT(tgl_pengembalian, 
                                     <?php } else if ($kembali['status_pengembalian'] == 'pending') { ?>
                                         <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
                                     <?php } ?>
+                                </td>
+                                <td class="text-center">
+                                    <a type="submit" href="print_pengembalian.php?id_pengembalian=<?= $kembali['id_pengembalian'] ?>" class="text-white btn btn-sm btn-info">
+                                        <i class='bx bx-printer'></i>
+                                    </a>
                                 </td>
                             </tr>
                         <?php } ?>

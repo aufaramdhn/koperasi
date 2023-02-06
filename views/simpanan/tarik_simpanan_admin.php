@@ -1,5 +1,5 @@
 <?php
-$active = 'simpanan';
+$active = "tarik_simpanan";
 $title = "Simpanan | Koperasi";
 include "../../layout/header.php";
 
