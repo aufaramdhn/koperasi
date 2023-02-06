@@ -6,7 +6,7 @@ include "../../layout/header.php";
 
 $id_simpanan = $_SESSION['id_user'];
 
-$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(ambil_simpan) AS total_ambil FROM tbl_ambil_simpan LEFT JOIN tbl_user USING(id_user) GROUP BY id_user");
+$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_ambil) AS total_ambil FROM tbl_ambil_simpan LEFT JOIN tbl_user USING(id_user) GROUP BY id_user");
 // $data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 ?>
@@ -37,7 +37,7 @@ $tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(ambil_simpan
                             <tr>
                                 <td class="text-end"><?= $no++ ?></td>
                                 <td><?= $simpan['nama'] ?></td>
-                                <td class="text-center">Rp. <?= number_format($simpan['jumlah_ambil'], '0', '.', '.') ?></td>
+                                <td class="text-center">Rp. <?= number_format($simpan['total_ambil'], '0', '.', '.') ?></td>
                                 <td class="text-center">
                                     <a class="rounded btn-sm btn fw-bold text-uppercase btn-outline-primary view_more" href="detail_tarik_simpanan.php?id_user=<?= $simpan['id_user'] ?>">Lihat Selengkapnya</a>
                                 </td>

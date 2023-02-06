@@ -22,70 +22,72 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
             <a href="pinjaman_admin.php" class="btn btn-danger">Kembali</a>
         </div>
         <div class="card-body">
-            <table id="example" class="table table-sm table-bordered table-responsive">
-                <thead>
-                    <tr>
-                        <th style="width: 4%;" scope="col">No</th>
-                        <th class="text-center" scope="col">Nama</th>
-                        <th class="text-center" scope="col">Pinjaman</th>
-                        <th class="text-center" scope="col">Tenor Bulan</th>
-                        <th class="text-center" scope="col">Tanggal Pinjam</th>
-                        <th class="text-center" style="width: 20%;" scope="col">Status</th>
-                        <th class="text-center" scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($tbl_pinjaman_a as $pinjam) {
-                    ?>
+            <div class="overflow-x-scroll table-responsive">
+                <table id="example" class="table table-sm table-bordered">
+                    <thead>
                         <tr>
-                            <td class="text-end"><?= $no++ ?></td>
-                            <td><?= $pinjam['nama'] ?></td>
-                            <td class="text-center">Rp. <?= number_format($pinjam['jumlah_pinjam'], '0', '.', '.') ?></td>
-                            <td class="text-center"><?= $pinjam['bulan'] ?> Bulan</td>
-                            <td class="text-center"><?= $pinjam['tgl'] ?></td>
-                            <td class="text-center">
-                                <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
+                            <th style="width: 4%;" scope="col">No</th>
+                            <th class="text-center" scope="col">Nama</th>
+                            <th class="text-center" scope="col">Pinjaman</th>
+                            <th class="text-center" scope="col">Tenor Bulan</th>
+                            <th class="text-center" scope="col">Tanggal Pinjam</th>
+                            <th class="text-center" style="width: 20%;" scope="col">Status</th>
+                            <th class="text-center" scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($tbl_pinjaman_a as $pinjam) {
+                        ?>
+                            <tr>
+                                <td class="text-end"><?= $no++ ?></td>
+                                <td><?= $pinjam['nama'] ?></td>
+                                <td class="text-center">Rp. <?= number_format($pinjam['jumlah_pinjam'], '0', '.', '.') ?></td>
+                                <td class="text-center"><?= $pinjam['bulan'] ?> Bulan</td>
+                                <td class="text-center"><?= $pinjam['tgl'] ?></td>
+                                <td class="text-center">
+                                    <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
+                                            <form action="pinjaman_proses.php" method="POST">
+                                                <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
+                                                <input class="btn btn-sm btn-success ms-2" type="submit" name="selesai" value="selesai">
+                                            </form>
+                                        </div>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
+                                        <div class="me-1">
+                                            <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">pengembalian</span>
+                                        </div>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Selesai</span>
+                                    <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
                                         <form action="pinjaman_proses.php" method="POST">
                                             <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
-                                            <input class="btn btn-sm btn-success ms-2" type="submit" name="selesai" value="selesai">
+                                            <input type="hidden" name="id_bunga" value="<?= $pinjam['bulan'] ?>">
+                                            <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
+                                            <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
                                         </form>
-                                    </div>
-                                <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
-                                    <div class="me-1">
-                                        <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">pengembalian</span>
-                                    </div>
-                                <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
-                                    <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
-                                <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
-                                    <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Selesai</span>
-                                <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
-                                    <form action="pinjaman_proses.php" method="POST">
-                                        <input type="hidden" name="id_pinjam" value="<?= $pinjam['id_pinjam'] ?>">
-                                        <input type="hidden" name="id_bunga" value="<?= $pinjam['bulan'] ?>">
-                                        <input class="btn btn-sm btn-success" type="submit" name="konfirmasi" value="Konfirmasi">
-                                        <input class="btn btn-sm btn-danger" type="submit" name="tolak" value="Tolak">
-                                    </form>
-                                <?php } ?>
-                            </td>
-                            <td class="text-center">
-                                <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
-                                <?php
-                                // if ($pinjam['tgl_konfirmasi'] >= $expired) : 
-                                ?>
-                                <!-- <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a> -->
-                                <?php
-                                // endif 
-                                ?>
-                                <a button class="btn btn-delete btn-sm btn-danger" href="pinjaman_proses.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>"><i class='bx bx-trash'></i></a>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                                    <?php } ?>
+                                </td>
+                                <td class="text-center">
+                                    <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                    <?php
+                                    // if ($pinjam['tgl_konfirmasi'] >= $expired) : 
+                                    ?>
+                                    <!-- <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a> -->
+                                    <?php
+                                    // endif 
+                                    ?>
+                                    <a button class="btn btn-delete btn-sm btn-danger" href="pinjaman_proses.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>"><i class='bx bx-trash'></i></a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

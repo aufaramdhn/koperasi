@@ -23,20 +23,6 @@ $user = mysqli_fetch_array($queryUser);
     <link rel="stylesheet" href="<?php echo $config; ?>assets/boxicons/css/boxicons.css">
     <script src="<?php echo $config; ?>assets/script/chart.js"></script>
     <script src="<?php echo $config; ?>assets/boxicons/dist/boxicons.js"></script>
-    <style>
-        @media print {
-
-            .header,
-            .print {
-                display: none;
-            }
-        }
-
-        .view_more:hover {
-            transform: scale(1.05);
-            transition: all 0.3s ease-in-out;
-        }
-    </style>
 </head>
 
 

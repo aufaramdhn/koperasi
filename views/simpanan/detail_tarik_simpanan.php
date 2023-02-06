@@ -6,7 +6,7 @@ include "../../layout/header.php";
 
 $id_user = $_GET['id_user'];
 
-$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_ambil_simpan, nama, ambil_simpan, status_ambil, DATE_FORMAT(tgl_ambil, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_ambil_simpan JOIN tbl_user ON tbl_user.id_user = tbl_ambil_simpan.id_user WHERE tbl_ambil_simpan.id_user = '$id_user'");
+$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_ambil_simpan, nama, jumlah_ambil, status_ambil, DATE_FORMAT(tgl_ambil, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_ambil_simpan JOIN tbl_user ON tbl_user.id_user = tbl_ambil_simpan.id_user WHERE tbl_ambil_simpan.id_user = '$id_user'");
 $data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 ?>

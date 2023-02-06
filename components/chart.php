@@ -18,7 +18,7 @@ foreach ($chart_pinjaman as $data_pinjaman) {
 
 
 ?>
-<div class="mb-3 d-flex">
+<div class="gap-1 mb-2 d-flex flex-md-row flex-column">
     <div class="p-2 shadow-sm w-100 card">
         <canvas style="height: 400px;" id="chartSimpanan"></canvas>
     </div>

@@ -18,39 +18,41 @@ $confirmQuery = mysqli_query($koneksi, "SELECT *, DATE_FORMAT(tgl_pengembalian, 
             <a href="pengembalian_user.php" class="btn btn-danger">Kembali</a>
         </div>
         <div class="card-body">
-            <table id="example" class="table table-sm table-bordered">
-                <thead>
-                    <tr>
-                        <th style="width: 4%;" scope="col">No</th>
-                        <th class="text-center" scope="col">Nama</th>
-                        <th class="text-center" scope="col">Jumlah Pengembalian</th>
-                        <th class="text-center" scope="col">Pengembalian Ke</th>
-                        <th class="text-center" scope="col">Tanggal Pengembalian</th>
-                        <th class="text-center" scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($confirmQuery as $kembali) {
-                    ?>
+            <div class="overflow-x-scroll table-responsive">
+                <table id="example" class="table table-sm table-bordered">
+                    <thead>
                         <tr>
-                            <td class="text-end"><?= $no++ ?></td>
-                            <td><?= $kembali['nama'] ?></td>
-                            <td class="text-center">Rp. <?= number_format($kembali['jumlah_pengembalian'], '0', '.', '.') ?></td>
-                            <td class="text-center"><?= $kembali['pengembalian_ke'] ?></td>
-                            <td class="text-center"><?= $kembali['tgl'] ?></td>
-                            <td class="text-center">
-                                <?php if ($kembali['status_pengembalian'] == 'konfirmasi') { ?>
-                                    <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Lunas</span>
-                                <?php } else if ($kembali['status_pengembalian'] == 'pending') { ?>
-                                    <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
-                                <?php } ?>
-                            </td>
+                            <th style="width: 4%;" scope="col">No</th>
+                            <th class="text-center" scope="col">Nama</th>
+                            <th class="text-center" scope="col">Jumlah Pengembalian</th>
+                            <th class="text-center" scope="col">Pengembalian Ke</th>
+                            <th class="text-center" scope="col">Tanggal Pengembalian</th>
+                            <th class="text-center" scope="col">Status</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($confirmQuery as $kembali) {
+                        ?>
+                            <tr>
+                                <td class="text-end"><?= $no++ ?></td>
+                                <td><?= $kembali['nama'] ?></td>
+                                <td class="text-center">Rp. <?= number_format($kembali['jumlah_pengembalian'], '0', '.', '.') ?></td>
+                                <td class="text-center"><?= $kembali['pengembalian_ke'] ?></td>
+                                <td class="text-center"><?= $kembali['tgl'] ?></td>
+                                <td class="text-center">
+                                    <?php if ($kembali['status_pengembalian'] == 'konfirmasi') { ?>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Lunas</span>
+                                    <?php } else if ($kembali['status_pengembalian'] == 'pending') { ?>
+                                        <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">Pending</span>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

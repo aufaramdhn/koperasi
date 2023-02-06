@@ -16,7 +16,7 @@ $saldo_simpanan = mysqli_query($koneksi, "SELECT jumlah_simpan FROM tbl_simpan J
 
 $query_simpanan = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id'");
 
-$query_ambil = $koneksi->query("SELECT * FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where tbl_ambil_simpan.id_user = '$id'");
+$query_ambil = $koneksi->query("SELECT * FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where status_ambil = 'konfirmasi' and tbl_ambil_simpan.id_user = '$id'");
 
 $cek_ambil = mysqli_num_rows($query_ambil);
 
@@ -28,33 +28,7 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
 ?>
 
 <style>
-    .fz-1 {
-        font-size: 16px;
-    }
 
-    .fz-2 {
-        font-size: 12px;
-    }
-
-    .icon-i {
-        font-size: 4rem;
-        color: white;
-    }
-
-    @media screen and (min-width: 600px) {
-        .fz-1 {
-            font-size: 28px;
-        }
-
-        .fz-2 {
-            font-size: 22px;
-        }
-
-        .icon-i {
-            font-size: 8rem;
-            color: white;
-        }
-    }
 </style>
 
 <div class="pt-3 container-fluid">

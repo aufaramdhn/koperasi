@@ -169,59 +169,61 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                     </div>
                 <?php endif ?>
             <?php else : ?>
-                <table id="example" class="table table-sm table-responsive table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="width: 4%;" scope="col">No</th>
-                            <th class="text-center" scope="col">Nama</th>
-                            <th class="text-center" scope="col">Pinjaman</th>
-                            <th class="text-center" scope="col">Tenor Bulan</th>
-                            <th class="text-center" scope="col">Tanggal</th>
-                            <th class="text-center" scope="col">Status</th>
-                            <th class="text-center" scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $no = 1;
-                        foreach ($tbl_pinjaman_u as $pinjam) {
-                            // $sisa_tenor = $pinjam['bulan'] -;
-                        ?>
+                <div class="overflow-x-scroll table-responsive">
+                    <table id="example" class="table table-sm table-bordered">
+                        <thead>
                             <tr>
-                                <td class="text-end"><?= $no++ ?></td>
-                                <td><?= $pinjam['nama'] ?></td>
-                                <td class="text-center">Rp. <?= number_format($pinjam['jumlah_pinjam'], '0', '.', '.') ?></td>
-                                <td class="text-center"><?= $pinjam['bulan'] ?> Bulan</td>
-                                <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
-                                <td class="text-center">
-                                    <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
-                                        <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
-                                    <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
-                                        <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
-                                    <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
-                                        <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">pengembalian</span>
-                                    <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
-                                        <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Selesai</span>
-                                    <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
-                                        <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">pending</span>
-                                    <?php } ?>
-                                </td>
-                                <td class="text-center">
-                                    <?php if ($confirmArray['tgl_konfirmasi'] >= $expired) : ?>
-                                        <div class="d-flex justify-content-center">
-                                            <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2"><i class='bx bxs-edit'></i></a>
-                                            <form method="POST">
-                                                <a type="submit" href="../pengembalian/pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-success">Pengembalian</a>
-                                            </form>
-                                        </div>
-                                    <?php else : ?>
-                                        <a type="submit" href="" class="text-white btn btn-sm btn-info"><i class='bx bxs-edit'></i></a>
-                                    <?php endif ?>
-                                </td>
+                                <th style="width: 4%;" scope="col">No</th>
+                                <th class="text-center" scope="col">Nama</th>
+                                <th class="text-center" scope="col">Pinjaman</th>
+                                <th class="text-center" scope="col">Tenor Bulan</th>
+                                <th class="text-center" scope="col">Tanggal</th>
+                                <th class="text-center" scope="col">Status</th>
+                                <th class="text-center" scope="col">Aksi</th>
                             </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            foreach ($tbl_pinjaman_u as $pinjam) {
+                                // $sisa_tenor = $pinjam['bulan'] -;
+                            ?>
+                                <tr>
+                                    <td class="text-end"><?= $no++ ?></td>
+                                    <td><?= $pinjam['nama'] ?></td>
+                                    <td class="text-center">Rp. <?= number_format($pinjam['jumlah_pinjam'], '0', '.', '.') ?></td>
+                                    <td class="text-center"><?= $pinjam['bulan'] ?> Bulan</td>
+                                    <td class="text-center"><?= $pinjam['tgl_pinjam'] ?></td>
+                                    <td class="text-center">
+                                        <?php if ($pinjam['status_pinjam'] == 'konfirmasi') { ?>
+                                            <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
+                                        <?php } else if ($pinjam['status_pinjam'] == 'tolak') { ?>
+                                            <span class="px-2 border rounded text-uppercase fw-bold border-danger text-danger fs-6">Tolak</span>
+                                        <?php } else if ($pinjam['status_pinjam'] == 'pengembalian') { ?>
+                                            <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">pengembalian</span>
+                                        <?php } else if ($pinjam['status_pinjam'] == 'selesai') { ?>
+                                            <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Selesai</span>
+                                        <?php } else if ($pinjam['status_pinjam'] == 'pending') { ?>
+                                            <span class="px-2 border rounded text-uppercase fw-bold border-warning text-warning fs-6">pending</span>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php if ($confirmArray['tgl_konfirmasi'] >= $expired) : ?>
+                                            <div class="d-flex justify-content-center">
+                                                <a type="submit" href="detail_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2"><i class='bx bxs-edit'></i></a>
+                                                <form method="POST">
+                                                    <a type="submit" href="../pengembalian/pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-success">Pengembalian</a>
+                                                </form>
+                                            </div>
+                                        <?php else : ?>
+                                            <a type="submit" href="" class="text-white btn btn-sm btn-info"><i class='bx bxs-edit'></i></a>
+                                        <?php endif ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php endif ?>
         </div>
     </div>
