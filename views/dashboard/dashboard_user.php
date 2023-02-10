@@ -50,8 +50,8 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
                             <span class="mb-2 text-white fz-2">Rp. <?= number_format($total_simpanan) ?></span>
                         <?php } ?>
                         <div class="">
-                            <a href="" class="text-white btn btn-sm btn-info">Tambah</a>
-                            <a href="" class="btn btn-sm btn-danger">Tarik</a>
+                            <a href="../simpanan/simpanan_user.php" class="text-white btn btn-sm btn-info">Tambah</a>
+                            <a href="../simpanan/tarik_simpanan_user.php" class="btn btn-sm btn-danger">Tarik</a>
                         </div>
                     </div>
                 </div>
@@ -70,8 +70,8 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
                         } ?>
                         <span class="mb-2 text-white fz-2">Rp. <?= number_format($tota_pinjaman) ?> </span>
                         <div class="d-flex d-md-block flex-column align-items-end">
-                            <a href="" class="mb-1 btn mb-md-0 btn-sm btn-success">Pinjam</a>
-                            <a href="" class="btn btn-sm btn-danger">Pengembalian</a>
+                            <a href="../pinjaman/pinjaman_user.php" class="mb-1 btn mb-md-0 btn-sm btn-success">Pinjam</a>
+                            <a href="../pengembalian/pengembalian_user.php" class="btn btn-sm btn-danger">Pengembalian</a>
                         </div>
                     </div>
                 </div>

@@ -38,12 +38,12 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
         <div class="mb-2 bg-opacity-75 shadow-sm card w-100 mb-md-0 bg-success">
             <div class="card-body text-end">
                 <div class="d-flex justify-content-between align-items-center">
-                    <i class="bx bx-wallet icon-i"></i>
+                    <i class="bx bx-user icon-i"></i>
                     <div class="mb-3 d-flex flex-column">
                         <span class="mb-1 text-white fz-1">User</span>
                         <span class="mb-2 text-white fz-2"><?= $user ?></span>
                         <div class="">
-                            <a href="" class="text-white btn btn-sm btn-info">Lihat</a>
+                            <a href="../user/user.php" class="text-white btn btn-sm btn-info">Lihat</a>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
                             <span class="mb-2 text-white fz-2">Rp. <?= number_format($total_simpanan) ?></span>
                         <?php } ?>
                         <div class="">
-                            <a href="" class="text-white btn btn-sm btn-info">Lihat</a>
+                            <a href="../simpanan/simpanan_admin.php" class="text-white btn btn-sm btn-info">Lihat</a>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
         <div class="mb-3 bg-opacity-75 shadow-sm card w-100 mb-md-0 bg-primary d-inline-block">
             <div class=" card-body text-end">
                 <div class="d-flex justify-content-between align-items-center">
-                    <i class="bx bx-wallet icon-i"></i>
+                    <i class="bx bx-money-withdraw icon-i"></i>
                     <div class="mb-3 d-flex flex-column">
                         <span class="mb-1 text-white fz-1">Saldo Pinjaman</span>
                         <?php
@@ -87,7 +87,7 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
                         ?>
                         <span class="mb-2 text-white fz-2">Rp. <?= number_format($total_pinjaman) ?></span>
                         <div class="">
-                            <a href="" class="text-white btn btn-sm btn-info">Lihat</a>
+                            <a href="../pinjaman/pinjaman_admin.php" class="text-white btn btn-sm btn-info">Lihat</a>
                         </div>
                     </div>
                 </div>

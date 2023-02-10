@@ -101,9 +101,10 @@ if (isset($_POST['bpinjamuser'])) {
     $grand_total = $jumlah + $total;
 
     $sql = mysqli_query($koneksi, "INSERT INTO tbl_pinjam VALUES (NULL, '$id', '$id_bunga', '$grand_total', '$total', '$tgl_pinjam', 'pending');");
+    $id_baru = $koneksi->insert_id;
     if ($sql == true) {
         $_SESSION['info'] = 'Disimpan';
-        header("Location: print_pinjaman.php?id_pinjam={$_POST['id_pinjam']}");
+        header("Location: print_pinjaman.php?id_pinjam=$id_baru");
     } else {
         $_SESSION['info'] = 'Gagal';
         header("Location: pinjaman_user.php");

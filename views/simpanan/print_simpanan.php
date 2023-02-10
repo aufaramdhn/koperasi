@@ -8,7 +8,7 @@ $today = date("Y-m-d H:i:s");
 
 $id_simpan = $_GET['id_simpan'];
 
-$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id_simpan'");
+$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_simpan = '$id_simpan'");
 
 foreach ($tbl_pinjaman_u as $pinjam) {
     $id = $pinjam['id_simpan'];

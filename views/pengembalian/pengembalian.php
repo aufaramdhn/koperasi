@@ -64,7 +64,17 @@ $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
                             <input type="number" class="form-control" id="pengembalian_ke" name="pengembalian_ke" value="1" readonly>
                         <?php endif ?>
                     </div>
-
+                    <div class="mb-3">
+                        <label for="pembayaran" class="form-label">Metode Pembayaran</label>
+                        <select class="form-select" aria-label="Default select example" required name="id_pembayaran">
+                            <option value="" hidden>-- Pilih Pembayaran --</option>
+                            <?php
+                            $query_pembayaran = mysqli_query($koneksi, "SELECT * FROM tbl_pembayaran");
+                            foreach ($query_pembayaran as $pembayaran) { ?>
+                                <option value="<?= $pembayaran['id_pembayaran'] ?>"><?= $pembayaran['no_pembayaran'] ?> (<?= $pembayaran['method_pembayaran'] ?>)</option>
+                            <?php } ?>
+                        </select>
+                    </div>
                     <?php
                     if ($expired1  >= $expired) :
                     ?>

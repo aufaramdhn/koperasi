@@ -15,7 +15,7 @@ $tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_user, nama, SUM(jumlah_ambil
     <div class="shadow card">
         <div class="p-4 card-header d-flex justify-content-between align-items-center">
             <span class="fs-2 fw-bold">
-                Simpanan
+                Tarik Simpanan
             </span>
         </div>
         <div class="card-body">

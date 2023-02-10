@@ -14,7 +14,7 @@ if (isset($_GET['id_simpan'])) {
 if (isset($_POST['bUser'])) {
 
     $id = $_SESSION['id_user'];
-    $id_pembayaran = $_SESSION['id_pembayaran'];
+    $id_pembayaran = $_POST['id_pembayaran'];
     $jumlah = $_POST['jumlah'];
 
     $ekstensi_diperbolehkan = array('png', 'jpg');
@@ -37,9 +37,10 @@ if (isset($_POST['bUser'])) {
 
             //simpan data ke dalam database
             $sql = mysqli_query($koneksi, "INSERT INTO tbl_simpan VALUES (NULL, '$id', '$id_pembayaran', '$jumlah', '$bukti', current_timestamp(), 'pending');");
+            $id_simpan = $koneksi->insert_id;
             if ($sql) {
                 $_SESSION['info'] = 'Disimpan';
-                echo "<script>document.location='simpanan_user.php'</script>";
+                echo "<script>document.location='print_simpanan.php?id_simpan=$id_simpan'</script>";
             } else {
                 $_SESSION['info'] = 'Gagal';
                 echo "<script>document.location='simpanan_user.php'</script>";
@@ -62,9 +63,10 @@ if (isset($_POST['tarik_simpanan'])) {
     $jumlah = $_POST['jumlah'];
 
     $sql = mysqli_query($koneksi, "INSERT INTO tbl_ambil_simpan VALUES (NULL, '$id', '$jumlah', 'pending', current_timestamp());");
+    $id_tarik = $koneksi->insert_id;
     if ($sql) {
         $_SESSION['info'] = 'Disimpan';
-        echo "<script>document.location='tarik_simpanan_user.php'</script>";
+        echo "<script>document.location='print_tarik.php?id_ambil_simpan=$id_tarik'</script>";
     } else {
         $_SESSION['info'] = 'Gagal';
         echo "<script>document.location='tarik_simpanan_user.php'</script>";

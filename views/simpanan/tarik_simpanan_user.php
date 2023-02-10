@@ -20,6 +20,11 @@ $tbl_ambil_simpanan = $koneksi->query("SELECT * FROM tbl_ambil_simpan JOIN tbl_u
 $data_ambil = mysqli_fetch_array($tbl_ambil_simpanan);
 $cek_ambil = mysqli_num_rows($tbl_ambil_simpanan);
 
+$jumlah = 0;
+foreach ($tbl_simpanan as $simpan) {
+    $jumlah += $simpan['jumlah_simpan'];
+}
+
 ?>
 
 <div class="py-3 container-fluid">
@@ -56,11 +61,12 @@ $cek_ambil = mysqli_num_rows($tbl_ambil_simpanan);
                                 <?php
                                 if ($cek_ambil > 0) {
                                     $total = 0;
-                                    $total = +$data_ambil['jumlah_ambil'];
+                                    $total += $data_ambil['jumlah_ambil'];
+
                                 ?>
                                     <span class="form-text">Saldo Simpanan Anda (Rp. <?= number_format($data['jumlah_simpan'] - $total, '0', '.', '.') ?>)</span>
                                 <?php } else { ?>
-                                    <span class="form-text">Saldo Simpanan Anda (Rp. <?= number_format($data['jumlah_simpan'], '0', '.', '.') ?>)</span>
+                                    <span class="form-text">Saldo Simpanan Anda (Rp. <?= number_format($jumlah, '0', '.', '.') ?>)</span>
                                 <?php } ?>
                             </div>
                             <div class="d-flex justify-content-end">

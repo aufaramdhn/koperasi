@@ -61,6 +61,17 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                                 <input type="number" min="0" max="10000000" class="form-control" name="jumlah" id="jumlah-pinjaman">
                             </div>
                             <div class="mb-3">
+                                <label for="pembayaran" class="form-label">Metode Pembayaran</label>
+                                <select class="form-select" aria-label="Default select example" required name="id_pembayaran">
+                                    <option value="" hidden>-- Pilih Pembayaran --</option>
+                                    <?php
+                                    $query_pembayaran = mysqli_query($koneksi, "SELECT * FROM tbl_pembayaran");
+                                    foreach ($query_pembayaran as $pembayaran) { ?>
+                                        <option value="<?= $pembayaran['id_pembayaran'] ?>"><?= $pembayaran['no_pembayaran'] ?> (<?= $pembayaran['method_pembayaran'] ?>)</option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="formFile" class="form-label">Bukti Pembayaran</label>
                                 <input class="form-control" name="bukti" type="file" id="formFile">
                             </div>

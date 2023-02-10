@@ -67,7 +67,7 @@ if (isset($_POST['bpengembalian'])) {
     } else {
         $id = $_POST['id_pinjam'];
         $id_konfirmasi = $_POST['id_konfirmasi_pinjam'];
-        // $id_pembayaran = $_POST['id_pembayaran'];
+        $id_pembayaran = $_POST['id_pembayaran'];
         $jumlah = $_POST['jumlah'];
         $pengembalian_ke = $_POST['pengembalian_ke'];
 
@@ -92,10 +92,11 @@ if (isset($_POST['bpengembalian'])) {
                 //simpan data ke dalam database
                 $select = "UPDATE tbl_pinjam SET status_pinjam = 'pengembalian' WHERE id_pinjam = '$id'";
                 $result = mysqli_query($koneksi, $select);
-                $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '', '$jumlah', '$pengembalian_ke', '$bukti', '$today', 'pending');");
+                $sql = mysqli_query($koneksi, "INSERT INTO tbl_pengembalian VALUES (NULL, '$id_konfirmasi', '$id_pembayaran', '$jumlah', '$pengembalian_ke', '$bukti', '$today', 'pending');");
+                $id_baru = $koneksi->insert_id;
                 if ($sql) {
                     $_SESSION['info'] = 'Disimpan';
-                    echo "<script>document.location='pengembalian_user.php'</script>";
+                    echo "<script>document.location='print_pengembalian.php?id_pengembalian=$id_baru'</script>";
                 } else {
                     $_SESSION['info'] = 'Gagal';
                     echo "<script>document.location='pengembalian_user.php'</script>";
