@@ -36,7 +36,7 @@ $user = mysqli_fetch_array($queryUser);
                 Welcome <?= $user['nama'] ?>
             </span>
             <div class="header_img">
-                <?php if (empty($data['img'])) { ?>
+                <?php if (empty($user['img'])) { ?>
                     <img src="<?php echo $config; ?>assets/profile/person-circle.svg" alt="">
                 <?php } else { ?>
                     <img src="<?php echo $config; ?>assets/profile/<?= $user['img'] ?>" alt="">
@@ -105,7 +105,7 @@ $user = mysqli_fetch_array($queryUser);
                     <?php endif ?>
                 </div>
             </div>
-            <a href="<?php echo $config; ?>auth/logout_proses.php" class="nav_link btn-logout">
+            <a href="<?php echo $config; ?>views/auth/logout_proses.php" class="nav_link btn-logout">
                 <i class='bx bx-log-out nav_icon'></i>
                 <span class="nav_name">SignOut</span>
             </a>

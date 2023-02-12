@@ -18,6 +18,7 @@ foreach ($tbl_pinjaman_u as $pinjam) {
     $tgl = $pinjam['tgl'];
     $bunga = $pinjam['riba'];
 }
+$jumlah_pinjam = $jumlah - $bunga;
 ?>
 
 <div class="pt-2 text-black">
@@ -30,9 +31,8 @@ foreach ($tbl_pinjaman_u as $pinjam) {
                         <img src="../../assets/images/koperasi.png" alt="" width="90px" style="margin-bottom:10px;">
                         <center>
                             <h4 class="mt-4 ">KOPERASI SIMPAN PINJAM</h4>
-                            <span> Jl. Resident I Kav Perumahan, Curugmekar, Kec. Cileungsi, Jawa Barat 16113</span><br>
-                            <span>fax. (123) 456789.
-                            </span>
+                            <span>Jl. Cicadas, Curugmekar, Kec. Bekasi, Jawa Barat 16234</span><br>
+                            <span>fax. (123) 412356.</span>
                         </center>
                         <br>
                     </div>
@@ -63,7 +63,7 @@ foreach ($tbl_pinjaman_u as $pinjam) {
                         <div class="d-flex justify-content-between ">
                             <span class="fs-5">Jumlah Pinjaman</span><br>
                             <h2></h2>
-                            <b><span class="fs-5">Rp. <?= number_format($jumlah, '0', '.', '.') ?> </span></b>
+                            <b><span class="fs-5">Rp. <?= number_format($jumlah_pinjam, '0', '.', '.') ?> </span></b>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span class="fs-5">Bunga Pinjaman</span><br>
@@ -73,7 +73,7 @@ foreach ($tbl_pinjaman_u as $pinjam) {
                         <div class="mb-4 d-flex justify-content-between">
                             <span class="fs-5">Total Pinjaman</span><br>
                             <h2></h2>
-                            <b><span class="fs-5">Rp. <?= number_format($jumlah + $bunga, '0', '.', '.') ?> </span></b>
+                            <b><span class="fs-5">Rp. <?= number_format($jumlah, '0', '.', '.') ?> </span></b>
                         </div>
                         <span style="float:right;" class="mt-4 fs-5">Bogor, <?= $tgl ?></span><br><br><br><br><br>
                         <center>

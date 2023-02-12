@@ -144,7 +144,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                             <input type="hidden" id="valueBunga" name="valueBunga">
                             <span name="bulan" id="bulan" class="d-none"></span>
                             <div class="mb-3">
-                                <label for="riba" class="form-label">Riba</label>
+                                <label for="riba" class="form-label">Bunga Uang</label>
                                 <span name="riba" id="subtotal" class="form-control input">0</span>
                             </div>
                             <div class="mb-3">

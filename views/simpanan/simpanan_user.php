@@ -11,7 +11,7 @@ $today = date("Y-m-i H:i:s");
 $id_simpanan = $_SESSION['id_user'];
 
 $tbl_user = $koneksi->query("SELECT * FROM tbl_user Where id_user = '$id_simpanan'");
-$tbl_simpanan_u = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id_simpanan'");
+$tbl_simpanan_u = $koneksi->query("SELECT *, DATE_FORMAT(tgl_simpan, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id_simpanan'");
 $data_u = mysqli_fetch_array($tbl_user);
 $cek = mysqli_num_rows($tbl_simpanan_u);
 ?>
@@ -105,7 +105,7 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                                     <td class="text-end"><?= $no++ ?></td>
                                     <td><?= $simpan['nama'] ?></td>
                                     <td class="text-center">Rp. <?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?></td>
-                                    <td class="text-center"><?= $simpan['tgl_simpan'] ?></td>
+                                    <td class="text-center"><?= $simpan['tgl'] ?></td>
                                     <td class="text-center">
                                         <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
                                             <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>

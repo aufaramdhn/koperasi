@@ -29,9 +29,8 @@ foreach ($tbl_pinjaman_u as $pinjam) {
                         <img src="../../assets/images/koperasi.png" alt="" width="90px" style="margin-bottom:10px;">
                         <center>
                             <h4 class="mt-4 ">KOPERASI SIMPAN PINJAM</h4>
-                            <span> Jl. Resident I Kav Perumahan, Curugmekar, Kec. Cileungsi, Jawa Barat 16113</span><br>
-                            <span>fax. (123) 456789.
-                            </span>
+                            <span>Jl. Cicadas, Curugmekar, Kec. Bekasi, Jawa Barat 16234</span><br>
+                            <span>fax. (123) 412356.</span>
                         </center>
                         <br>
                     </div>
