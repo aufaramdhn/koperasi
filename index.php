@@ -32,7 +32,7 @@
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="p-2 navbar-header">
-          <a href="index.html" class="navbar-brand"><img class="img-fulid" src="assets/landing-page/img/koperasi.png" alt="" /></a>
+          <a href="index.html" class="navbar-brand"><img class="img-fulid" src="assets/landing-page/img/logo-2.png" alt="" /></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
             <i class="lnr lnr-menu"></i>
           </button>
@@ -442,7 +442,7 @@
           <div class="pricing-table">
             <div class="pricing-details">
               <h2>Simpanan</h2>
-              <span class="form-text">Siapapun dapat mendaftar sebagai anggota koperasi *, koperasi kami tentunya aman dan terpecaya sudah banyak yang menyimpan di koperasi kami.</span>
+              <span>Siapapun dapat mendaftar sebagai anggota koperasi Makmur Mandiri, koperasi kami tentunya aman dan terpecaya sudah banyak yang menyimpan di koperasi kami.</span>
             </div>
             <div class="plan-button">
               <a href="views/auth/register.php" class="btn btn-common">Daftar Sekarang</a>
@@ -454,7 +454,7 @@
           <div class="pricing-table">
             <div class="pricing-details">
               <h2>Pinjaman</h2>
-              <span>Siapapun dapat meminjam di koperasi *, koperasi kami menyediakan pinjaman berjangka panjang dengan bunga yang terjangkau.</span>
+              <span>Siapapun dapat meminjam di koperasi Makmur Mandiri, koperasi kami menyediakan pinjaman berjangka panjang dengan bunga yang terjangkau.</span>
             </div>
             <div class="plan-button">
               <a href="views/auth/register.php" class="btn btn-common">Daftar Sekarang</a>

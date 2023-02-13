@@ -13,16 +13,22 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
             <span class="fs-2 fw-bold">
                 Users
             </span>
-            <?php if (isset($_POST['btambah'])) : ?>
-                <form method="POST">
-                    <button href="" class="text-white btn btn-danger" type="submit" name="bbatal">Kembali</button>
-                    <!-- <button href="" class="text-white btn btn-warning" type="submit" name="btambah" disabled>Tambah Data</button> -->
-                </form>
-            <?php else : ?>
-                <form method="POST">
+            <?php
+            // if (isset($_POST['btambah'])) : 
+            ?>
+            <!-- <form method="POST">
+                <button href="" class="text-white btn btn-danger" type="submit" name="bbatal">Kembali</button>
+                <button href="" class="text-white btn btn-warning" type="submit" name="btambah" disabled>Tambah Data</button>
+            </form> -->
+            <?php
+            // else : 
+            ?>
+            <!-- <form method="POST">
                     <button href="" class="text-white btn btn-success" type="submit" name="btambah">Tambah Data</button>
-                </form>
-            <?php endif ?>
+                </form> -->
+            <?php
+            // endif 
+            ?>
         </div>
         <div class="px-3 pt-3 card-body">
             <?php if (isset($_POST['btambah'])) : ?>
@@ -117,7 +123,7 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                                     <td class="text-center"><?= $user['tempat_lahir'] ?>, <?= $user['tgl_lahir']; ?></td>
                                     <td class="text-center"><?= $user['telp']; ?></td>
                                     <td class="text-center">
-                                        <a button class="text-white btn btn-sm btn-info" href="profile.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-edit'></i></a>
+                                        <!-- <a button class="text-white btn btn-sm btn-info" href="profile.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-edit'></i></a> -->
                                         <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
                                         <a button class="btn btn-delete btn-sm btn-danger" href="user_proses.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-trash'></i></a>
                                     </td>

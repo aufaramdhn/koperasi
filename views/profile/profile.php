@@ -20,16 +20,16 @@ $data    = mysqli_fetch_array($profile);
                 <div class="p-3 mb-2 overflow-auto shadow card col-md-3 align-items-center h-50 mb-md-0">
                     <?php if (empty($data['img'])) { ?>
                         <div class="mb-3">
-                            <img src="../../assets/images/person-circle.svg" width="200" alt="">
+                            <img id="pict" src="../../assets/images/person-circle.svg" width="200" alt="">
                         </div>
                     <?php } else { ?>
                         <div class="mb-3">
-                            <img src="../../assets/profile/<?= $data['img'] ?>" width="200" alt="">
+                            <img id="pict" class="rounded-circle" src="../../assets/profile/<?= $data['img'] ?>" width="200" alt="">
                         </div>
                     <?php } ?>
                     <div class="mb-3">
-                        <input class="form-control d-none" name="img_new" type="file" id="img">
-                        <input class="form-control d-none" name="img_old" type="text" value="<?= $data['img'] ?>">
+                        <input class="form-control d-none" onchange="readURL(this)" name="img_new" type="file" id="img">
+                        <input class="form-control d-none" onchange="readURL(this)" name="img_old" type="text" value="<?= $data['img'] ?>">
                         <label class="btn btn-primary" for="img">Upload Foto</label>
                     </div>
                 </div>
@@ -104,11 +104,11 @@ $data    = mysqli_fetch_array($profile);
             <div class="p-4 mb-2 overflow-auto shadow card col-md-3 align-items-center mb-md-0" style="height: 60%;">
                 <?php if (empty($data['img'])) { ?>
                     <div class="mb-3">
-                        <img src="../../assets/images/person-circle.svg" width="250" alt="">
+                        <img class="rounded-circle" src="../../assets/images/person-circle.svg" width="250" alt="">
                     </div>
                 <?php } else { ?>
                     <div class="mb-3">
-                        <img src="../../assets/profile/<?= $data['img'] ?>" width="250" alt="">
+                        <img class="rounded-circle" src="../../assets/profile/<?= $data['img'] ?>" width="250" alt="">
                     </div>
                 <?php } ?>
             </div>
@@ -179,4 +179,15 @@ $data    = mysqli_fetch_array($profile);
         </div>
     <?php endif ?>
 </div>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#pict').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 <?php include "../../layout/footer.php" ?>

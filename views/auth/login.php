@@ -75,7 +75,7 @@ session_start();
                             Login
                         </button>
                         <span href="">Belum mempunyai akun?
-                            <a href="<?php echo $config; ?>register.php" class="text-[#5D69BE]">Register disini</a></span>
+                            <a href="register.php" class="text-[#5D69BE]">Register disini</a></span>
                     </div>
                 </form>
             </div>

@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
                 $_SESSION['img'] = $row['img'];
                 $_SESSION['info'] = "Berhasil";
                 //berfungsi mengalihkan ke halaman admin
-                header("Location: ../views/dashboard/dashboard_admin.php");
+                header("Location: ../dashboard/dashboard_admin.php");
                 // berfungsi mengecek jika user login sebagai moderator
             } else if ($row['level'] == "user") {
                 // berfungsi membuat session

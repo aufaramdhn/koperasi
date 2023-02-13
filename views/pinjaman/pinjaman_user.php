@@ -21,6 +21,7 @@ $cek = mysqli_num_rows($querySimpan);
 // Query konfirmasi
 $confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_user.id_user = '$id_user'");
 $confirmArray = mysqli_fetch_array($confirmQuery);
+$cekConfirm = mysqli_num_rows($confirmQuery);
 
 // bunga
 $id_bunga = 0;
@@ -58,6 +59,7 @@ $cek_ambil = mysqli_num_rows($tbl_ambil_simpanan);
 $total_ambil = 0;
 while ($total_ambil_simpan = mysqli_fetch_array($tbl_ambil_simpanan)) {
     $total_ambil += $total_ambil_simpan['jumlah_ambil'];
+    $grand_ambil = $total_ambil * 25 / 100;
 }
 
 // Limit Pengembalian
@@ -107,7 +109,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                             <div class="mb-2">
                                 <?php if ($cek_pinjam > 0 and $cek_ambil > 0) : ?>
                                     <label for="jumlah" class="form-label">Jumlah Pinjaman
-                                        <small class="form-text fst-italic">* (Maks Pinjaman Rp. <?= number_format($grand_total - $total_ambil + $total_bunga, '0', '.', '.') ?>)</small>
+                                        <small class="form-text fst-italic">* (Maks Pinjaman Rp. <?= number_format($grand_total + $total_bunga - $grand_ambil, '0', '.', '.') ?>)</small>
                                     </label>
                                     <input type="number" min="0" max="<?= $grand_total + $total_bunga ?>" class="form-control" id="jumlah" name="jumlah" required>
                                 <?php elseif ($cek_pinjam > 0) : ?>
@@ -208,15 +210,21 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                         <?php } ?>
                                     </td>
                                     <td class="text-center">
-                                        <?php if ($confirmArray['tgl_konfirmasi'] >= $expired) : ?>
-                                            <div class="d-flex justify-content-center">
-                                                <a type="submit" href="print_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2">
-                                                    <i class='bx bx-printer fs-5'></i>
+                                        <?php if ($cekConfirm > 0) : ?>
+                                            <?php if ($confirmArray['tgl_konfirmasi'] >= $expired) : ?>
+                                                <div class="d-flex justify-content-center">
+                                                    <a type="submit" href="print_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2">
+                                                        <i class='bx bx-printer fs-5'></i>
+                                                    </a>
+                                                    <form method="POST">
+                                                        <a type="submit" href="../pengembalian/pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-success">Pengembalian</a>
+                                                    </form>
+                                                </div>
+                                            <?php else : ?>
+                                                <a type="submit" href="print_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info">
+                                                    <i class='bx bx-printer'></i>
                                                 </a>
-                                                <form method="POST">
-                                                    <a type="submit" href="../pengembalian/pengembalian.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-success">Pengembalian</a>
-                                                </form>
-                                            </div>
+                                            <?php endif ?>
                                         <?php else : ?>
                                             <a type="submit" href="print_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info">
                                                 <i class='bx bx-printer'></i>

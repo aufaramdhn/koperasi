@@ -61,13 +61,13 @@ $user = mysqli_fetch_array($queryUser);
                             <i class='bx bx-user nav_icon'></i>
                             <span class="nav_name">Users</span>
                         </a>
-                        <a href="<?php echo $config; ?>views/simpanan/tarik_simpanan_admin.php" class="nav_link <?= $active == 'tarik_simpanan' ? 'l-active' : '' ?>">
-                            <i class='bx bx-credit-card-alt nav_icon'></i>
-                            <span class="nav_name">Tarik Simpanan</span>
-                        </a>
                         <a href="<?php echo $config; ?>views/simpanan/simpanan_admin.php" class="nav_link <?= $active == 'simpanan' ? 'l-active' : '' ?>">
                             <i class='bx bx-wallet nav_icon'></i>
                             <span class="nav_name">Simpanan</span>
+                        </a>
+                        <a href="<?php echo $config; ?>views/simpanan/tarik_simpanan_admin.php" class="nav_link <?= $active == 'tarik_simpanan' ? 'l-active' : '' ?>">
+                            <i class='bx bx-credit-card-alt nav_icon'></i>
+                            <span class="nav_name">Tarik Simpanan</span>
                         </a>
                         <a href="<?php echo $config; ?>views/pinjaman/pinjaman_admin.php" class="nav_link <?= $active == 'pinjaman' ? 'l-active' : '' ?>">
                             <i class='bx bx-money-withdraw nav_icon'></i>
