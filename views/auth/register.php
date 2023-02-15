@@ -30,43 +30,6 @@ $today = date("Y-m-d H:i:s");
     endif;
     ?>
 
-    <!-- <div class="row">
-        <div class="col-6" style="background-color: #FFCAD4; height: 100vh;">
-            <div class="d-flex justify-content-center align-items-center h-100">
-                <img src="../assets/images/undraw_online_collaboration_re_bkpm.svg" width="600">
-            </div>
-        </div>
-        <div class="col-6 d-flex align-items-center">
-            <div class="container w-75">
-                <form action="register-process.php" method="POST">
-                    <h2 class="text-center fw-bold">Register</h2>
-                    <small class="mb-3 d-flex justify-content-center">Create an Account</small>
-                    <div class="mb-3">
-                        <label for="inputNama" class="form-label">Nama Lengkap</label>
-                        <input type="text" name="nama" class="form-control" id="inputNama" placeholder="Masukan Nama Lengkap Anda" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Masukan Email Anda" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputPassword" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Masukan Password Anda" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputNotelp" class="form-label">No Telepon</label>
-                        <input type="text" name="notelp" class="form-control" id="inputNotelp" placeholder="Masukan No Telepon Anda" required>
-                    </div>
-                    <input type="datetime" class="d-none" name="created_at" value="<?= $today ?>">
-                    <div class="mb-2">
-                        <button type="submit" name="submit" class="pt-2 pb-2 text-white btn w-100" style="background-color: #1B1C30;">Create An Account</button>
-                    </div>
-                    <small class="font-weight-bold">Anda Sudah Mempunyai akun? <a class="mt-2" style="color: #6A5BE2;" href="../index.php">Masuk disini</a></small>
-                </form>
-            </div>
-        </div>
-    </div> -->
-
     <section class="flex items-center justify-center min-h-screen bg-gradient-to-tl from-[#5D69BE] to-[#C89FEB]">
         <!-- Login Container -->
         <div class="flex items-center w-10/12 bg-white shadow-lg rounded-2xl">
