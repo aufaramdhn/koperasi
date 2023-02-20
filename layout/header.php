@@ -47,7 +47,7 @@ $user = mysqli_fetch_array($queryUser);
     <div class="l-navbar d-print-none" id="nav-bar">
         <nav class="nav">
             <div>
-                <a href="#" class="nav_logo">
+                <a href="<?php echo $config; ?>views/home/index.php" class="nav_logo">
                     <img src="<?php echo $config; ?>assets/images/koperasi.png" alt="" width="25px" height="25px">
                     <span class="nav_logo-name">Koperasi</span>
                 </a>

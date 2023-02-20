@@ -37,6 +37,11 @@ $today = date("Y-m-d H:i:s");
   }
 
   p {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  span {
     font-size: 14px;
     line-height: 26px;
   }
@@ -57,8 +62,8 @@ $today = date("Y-m-d H:i:s");
   }
 </style>
 
-<div class="mt-3 container-fluid">
-  <section class="mt-3">
+<div class="container-fluid">
+  <section class="mb-3">
     <div class="container">
       <div class="text-center section-header">
         <h2 class="section-title">Tentang Kami</h2>
@@ -67,26 +72,50 @@ $today = date("Y-m-d H:i:s");
       <div class="row">
         <div class="order-2 order-md-1 col-12 col-md-6" style="text-align: justify;">
           <p class="">Dengan semangat perubahan dan visi menjadi koperasi terkini dan inovatif di Indonesia, Koperasi Namastra bertekad untuk menjadi koperasi yang modern, profesional dan antusias dalam membangun perekonomian rakyat. Perwujudan keseriusan para pendiri terlihat dalam penempatan pengelola yang sudah memiliki banyak pengalaman di Perbankan dan Koperasi.</p>
-          <a href="#" class="btn btn-common">Daftar Sekarang</a>
+          <a href="<?php echo $config ?>views/simpanan/simpanan_user.php" class="btn btn-common">Simpan Sekarang</a>
         </div>
         <div class="order-1 mb-2 order-md-2 col-12 col-md-6">
-          <img src="../../assets/landing-page/img/tentang-kami.jpg" width="100%">
+          <img src="../../assets/landing-page/img/tentang-kami.jpg" width="100%" class="shadow">
         </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="row">
-      <div class="mt-2 mb-2 text-center section-header">
-        <h2 class="section-title">Visi & Misi</h2>
-        <hr class="mb-3 lines" />
-      </div>
-      <div class="mb-3 col-12 col-md-6">
-        <div class="card">test</div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="card">test</div>
+  <section class="mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="mt-2 mb-2 text-center section-header">
+          <h2 class="section-title">Visi & Misi</h2>
+          <hr class="mb-3 lines" />
+        </div>
+        <div class="mb-3 col-12">
+          <div class="shadow-sm card">
+            <div class="card-header">
+              <h4>VISI</h4>
+            </div>
+            <div class="card-body">
+              <span>Meningkatkan peran serta anggota dalam berkoperasi untuk mendukung terbentunya dunia usaha yang produktif sehingga dapat mewujudkan kesejahteraan dan keadilan Ekonomi serta Kemandirian Usaha bagi Anggota Koperasi “Makmur Mandiri”.</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="shadow-sm card">
+            <div class="card-header">
+              <h4>MISI</h4>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Mengoptimalkan dan memberdayakan aset-aset ekonomi para anggota koperasi untuk disinergikan dalam suatu pemberdayaan ekonomi Koperasi sehingga membentuk sistem perekonomian yang kuat dan tangguh dalam memenangi persaingan dunia usaha.</li>
+                <li>Meningkatkan kesadaran seluruh anggota akan manfaat bersama pentingnya koperasi melalui pendidikan perkoperasian.</li>
+                <li>Membentuk unit – unit usaha produktif yangsehat dan mandiri dalam upaya meningkatkan kesejahteraan bagi seluruh anggota Koperasi “Makmur Mandiri”.</li>
+                <li>Meningkatkan pruduktivitas dan daya saing yang tinggi dengan mengembangkan sinergi dan partisipasi seluruh anggota dalam mengelola unit -unit usaha Koperasi “Makmur Mandiri”.</li>
+                <li>Membuktikan bahwa sistem perekonomian koperasi adalah sistem ekonomi pemberdayaan masyarakat yang terbaik sehingga koperasi dapat memberikan citra yang positif bagi kendala keterbatasan multidimensi untuk meningkatkan pendapatan yang pada akhirnya dapat memperbaiki kesejahteraan anggota koperasi yang lebih baik.</li>
+                <li>Memantapkan Koperasi “Makmur Mandiri” sebagai sebuah perusahaan dengan jati diri koperasi melalui penyelenggaraan sistem ekonomi kerakyatan.</li>
+                <li>Berperan serta membantu Pemerintah untuk menjalankan program – program pemberdayaan sehingga koperasi berperan aktif dalam meningkatkan kesejahteraan masyarakat.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
