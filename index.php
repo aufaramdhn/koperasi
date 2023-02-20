@@ -27,7 +27,6 @@
 <body>
   <!-- Header Section Start -->
   <header id="hero-area" data-stellar-background-ratio="0.5">
-    <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar indigo">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -84,7 +83,6 @@
       </ul>
       <!-- Mobile Menu End -->
     </nav>
-    <!-- Navbar End -->
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-md-10">
@@ -100,7 +98,7 @@
         </div>
       </div>
     </div>
-  </header>
+  </header> -->
   <!-- Header Section End -->
 
   <!-- Services Section Start -->

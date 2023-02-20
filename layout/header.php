@@ -105,7 +105,7 @@ $user = mysqli_fetch_array($queryUser);
                     <?php endif ?>
                 </div>
             </div>
-            <a href="<?php echo $config; ?>views/auth/logout_proses.php" class="nav_link btn-logout">
+            <a href="<?php echo $config; ?>views/auth/logout_proses.php?level=<?= $user['level'] ?>" class="nav_link btn-logout">
                 <i class='bx bx-log-out nav_icon'></i>
                 <span class="nav_name">SignOut</span>
             </a>

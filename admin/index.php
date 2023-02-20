@@ -1,6 +1,6 @@
 <?php
-require_once("../../apps/config.php");
-require_once("../../apps/koneksi.php");
+require_once("../apps/config.php");
+require_once("../apps/koneksi.php");
 session_start();
 ?>
 
