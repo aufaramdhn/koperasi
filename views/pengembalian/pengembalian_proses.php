@@ -125,3 +125,11 @@ if (isset($_POST['konfirmasi'])) {
     $_SESSION['info'] = 'Konfirmasi';
     header("Location: ../pengembalian/pengembalian_admin.php");
 }
+
+if (isset($_POST['tolak'])) {
+    $id = $_POST['id_pinjam'];
+    $select_pengembalian = "UPDATE tbl_pengembalian SET status_pengembalian = 'tolak' WHERE id_pengembalian = '$_POST[id_pengembalian]'";
+    $result_select = mysqli_query($koneksi, $select_pengembalian);
+    $_SESSION['info'] = 'Tolak';
+    header("Location: ../pengembalian/pengembalian_admin.php");
+}

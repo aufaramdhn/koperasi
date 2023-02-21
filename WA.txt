@@ -1,5 +1,5 @@
 1. Simpanan Konfirmasi
-kami admin dari Koperasi Makmur Mandiri
+Hai, kami admin dari Koperasi Makmur Mandiri
 
 Pinjaman anda dengan data berikut 
 1. Nama : NAMA
@@ -10,7 +10,27 @@ Simpanan anda telah kami *Konfirmasi*, Saldo sudah masuk dan disimpan dalam kope
 Terimakasih.
 
 2. Simpanan Tolak
-kami admin dari Koperasi Makmur Mandiri
+Hai, kami admin dari Koperasi Makmur Mandiri
+
+Pinjaman anda dengan data berikut 
+1. Nama : NAMA
+2. Jumlah Simpanan : SIMPANAN
+
+Simpanan anda telah kami *Tolak*, Mohon cek kembali apakah data sudah benar dan sesuai dengan no rekening kami.
+
+3. Tarik Simpanan Konfirmasi
+Hai, kami admin dari Koperasi Makmur Mandiri
+
+Pinjaman anda dengan data berikut 
+1. Nama : NAMA
+2. Jumlah Simpanan : SIMPANAN
+
+Simpanan anda telah kami *Konfirmasi*, Saldo sudah masuk dan disimpan dalam koperasi kami.
+
+Terimakasih.
+
+4. Tarik Simpanan Tolak
+Hai, kami admin dari Koperasi Makmur Mandiri
 
 Pinjaman anda dengan data berikut 
 1. Nama : NAMA
@@ -20,8 +40,8 @@ Simpanan anda telah kami *Tolak*, Mohon cek kembali apakah data sudah benar dan 
 
 Terimakasih.
 
-3. Pinjaman Konfirmasi
-kami admin dari Koperasi Makmur Mandiri
+5. Pinjaman Konfirmasi
+Hai, kami admin dari Koperasi Makmur Mandiri
 
 Pinjaman anda dengan data berikut 
 1. Nama : NAMA
@@ -32,8 +52,8 @@ Pinjaman anda telah kami *Konfirmasi*, Mohon cek saldo apakah sudah masuk ke dal
 
 Terimakasih.
 
-4. Pinjaman Tolak
-kami admin dari Koperasi Makmur Mandiri
+6. Pinjaman Tolak
+Hai, kami admin dari Koperasi Makmur Mandiri
 
 Pinjaman anda dengan data berikut 
 1. Nama : NAMA
@@ -44,8 +64,8 @@ Pinjaman anda telah kami *Tolak*, Mohon cek saldo apakah sudah masuk ke dalam re
 
 Terimakasih.
 
-5. Pengembalian Konfirmasi
-kami admin dari Koperasi Makmur Mandiri
+7. Pengembalian Konfirmasi
+Hai, kami admin dari Koperasi Makmur Mandiri
 
 Pinjaman anda dengan data berikut 
 1. Nama : NAMA
@@ -55,8 +75,8 @@ Pengembalian anda telah kami *Konfirmasi*, Saldo sudah masuk ke dalam rekening k
 
 Terimakasih.
 
-6. Pengembalian Tolak
-kami admin dari Koperasi Makmur Mandiri
+8. Pengembalian Tolak
+Hai, kami admin dari Koperasi Makmur Mandiri
 
 Pinjaman anda dengan data berikut 
 1. Nama : NAMA

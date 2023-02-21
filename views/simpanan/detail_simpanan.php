@@ -6,7 +6,7 @@ include "../../layout/header.php";
 
 $id_user = $_GET['id_user'];
 
-$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_simpan, nama, jumlah_simpan, status_simpan, DATE_FORMAT(tgl_simpan, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = '$id_user'");
+$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_simpan, telp, nama, jumlah_simpan, status_simpan, DATE_FORMAT(tgl_simpan, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = '$id_user'");
 $data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 ?>
@@ -58,7 +58,11 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
-                                    <a button class="btn btn-sm btn-success me-1" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                    <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
+                                        <a button class="btn btn-sm btn-success me-1" href="https://api.whatsapp.com/send?phone=62<?= $simpan['telp'] ?>&text=Hai%2C%20kami%20admin%20dari%20Koperasi%20Makmur%20Mandiri%0A%0ASimpanan%20anda%20dengan%20data%20berikut%20%0A1.%20Nama%20%3A%20<?= $simpan['nama'] ?>%0A2.%20Jumlah%20Simpanan%20%3A%20Rp.%20<?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?>%0A%0ASimpanan%20anda%20telah%20kami%20*Konfirmasi*%2C%20Saldo%20sudah%20masuk%20dan%20disimpan%20dalam%20koperasi%20kami.%0A%0ATerimakasih."><i class='bx bxl-whatsapp'></i></a>
+                                    <?php } else if ($simpan['status_simpan'] == 'tolak') { ?>
+                                        <a button class="btn btn-sm btn-success me-1" href="https://api.whatsapp.com/send?phone=62<?= $simpan['telp'] ?>&text=Hai%2C%20kami%20admin%20dari%20Koperasi%20Makmur%20Mandiri%0A%0ASimpanan%20anda%20dengan%20data%20berikut%20%0A1.%20Nama%20%3A%20<?= $simpan['nama'] ?>%0A2.%20Jumlah%20Simpanan%20%3A%20Rp.%20<?= number_format($simpan['jumlah_simpan'], '0', '.', '.') ?>%0A%0ASimpanan%20anda%20telah%20kami%20*Tolak*%2C%20Mohon%20cek%20kembali%20apakah%20data%20sudah%20benar%20dan%20sesuai%20dengan%20no%20rekening%20kami."><i class='bx bxl-whatsapp'></i></a>
+                                    <?php } ?>
                                     <a button class="btn btn-delete btn-sm btn-danger" href="simpanan_proses.php?id_simpan=<?= $simpan['id_simpan'] ?>"><i class='bx bx-trash'></i></a>
                                 </td>
                             </tr>

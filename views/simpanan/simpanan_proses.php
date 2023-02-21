@@ -11,6 +11,13 @@ if (isset($_GET['id_simpan'])) {
     header("Location: simpanan_admin.php");
 }
 
+if (isset($_GET['id_ambil_simpan'])) {
+    $id = $_GET['id_ambil_simpan'];
+    $sql = mysqli_query($koneksi, "DELETE FROM tbl_ambil_simpan WHERE id_ambil_simpan= '$id'");
+
+    header("Location: tarik_simpanan_admin.php");
+}
+
 if (isset($_POST['bUser'])) {
 
     $id = $_SESSION['id_user'];

@@ -57,7 +57,7 @@ $cek = mysqli_num_rows($tbl_simpanan_u);
                                 <input type="text" class="form-control" id="nama-lengkap" value="<?= $_SESSION['nama'] ?>" disabled>
                             </div>
                             <div class="mb-3">
-                                <label for="jumlah-pinjaman" class="form-label">Jumlah Sinjaman</label>
+                                <label for="jumlah-pinjaman" class="form-label">Jumlah Simpanan</label>
                                 <input type="number" min="0" max="10000000" class="form-control" name="jumlah" id="jumlah-pinjaman">
                             </div>
                             <div class="mb-3">

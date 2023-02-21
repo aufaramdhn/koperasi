@@ -23,18 +23,17 @@ foreach ($tbl_pinjaman_u as $pinjam) {
         <div class="row">
             <form method="POST" action="" enctype="multipart/form-data">
                 <!-- desain struk -->
-                <div class="container">
-                    <div class="d-flex justify-content-between">
-                        <img src="../../assets/images/koperasi.png" alt="" width="90px" style="margin-bottom:10px;">
-                        <center>
-                            <h4 class="mt-4 ">KOPERASI SIMPAN PINJAM</h4>
-                            <span>Jl. Cicadas, Curugmekar, Kec. Bekasi, Jawa Barat 16234</span><br>
-                            <span>fax. (123) 412356.</span>
-                        </center>
-                        <br>
-                    </div>
+
+                <div class="d-flex justify-content-between">
+                    <img src="../../assets/images/koperasi.png" alt="" width="90px" style="margin-bottom:10px;">
+                    <center>
+                        <h4 class="mt-4 ">KOPERASI SIMPAN PINJAM <br /> MAKMUR MANDIRI</h4>
+                        <span>Jl. Cicadas, Curugmekar, Kec. Bekasi, Jawa Barat 16234</span><br>
+                        <span>fax. (123) 412356.</span>
+                    </center>
+                    <br>
                 </div>
-                <div class="container" style="margin-top:20;">
+                <div style="margin-top:20;">
                     <span>No. Simpanan : S-0<?= $id ?></span><br>
                     <span>Nama : <?= $nama ?> </span>
                     <span style="float:right;">Tanggal : <?= $tgl ?></span>
