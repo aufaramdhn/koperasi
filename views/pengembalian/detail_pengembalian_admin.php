@@ -61,7 +61,11 @@ $confirmQuery = mysqli_query($koneksi, "SELECT *, DATE_FORMAT(tgl_pengembalian, 
                                     <?php endif  ?>
                                 </td>
                                 <td class="text-center">
-                                    <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                    <?php if ($kembali['status_pengembalian'] == "konfirmasi") : ?>
+                                        <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone=<?= $kembali['telp'] ?>&text=kami%20admin%20dari%20Koperasi%20Makmur%20Mandiri%0A%0APinjaman%20anda%20dengan%20data%20berikut%20%0A1.%20Nama%20%3A%20<?= $kembali['nama'] ?>%0A2.%20Jumlah%20Pengembalian%20%3A%20PINJAMAN%0A%0APengembalian%20anda%20telah%20kami%20*Konfirmasi*%2C%20Saldo%20sudah%20masuk%20ke%20dalam%20rekening%20kami.%0A%0ATerimakasih."><i class='bx bxl-whatsapp'></i></a>
+                                    <?php elseif ($kembali['status_pengembalian'] == "tolak") : ?>
+                                        <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone=<?= $kembali['telp'] ?>&=kami%20admin%20dari%20Koperasi%20Makmur%20Mandiri%0A%0APinjaman%20anda%20dengan%20data%20berikut%20%0A1.%20Nama%20%3A%20<?= $kembali['nama'] ?>%0A2.%20Jumlah%20Pengembalian%20%3A%20<?= $kembali['jumlah_pengembalian'] ?>%0A%0APengembalian%20anda%20telah%20kami%20*Tolak*%2C%20Mohon%20dicek%20kembali%20data%20yang%20anda%20masukan%20seperti%20rekening%20dan%20bukti%20pembayaran.%0A%0ATerimakasih."><i class='bx bxl-whatsapp'></i></a>
+                                    <?php endif  ?>
                                     <a button class="btn btn-delete btn-sm btn-danger" href="pengembalian_proses.php?id_pengembalian=<?= $kembali['id_pengembalian'] ?>"><i class='bx bx-trash'></i></a>
                                 </td>
                             </tr>

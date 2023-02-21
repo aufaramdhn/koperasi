@@ -64,7 +64,7 @@ $today = date("Y-m-d H:i:s");
 
 <div class="container-fluid">
   <section class="mb-3">
-    <div class="container">
+    <div class="">
       <div class="text-center section-header">
         <h2 class="section-title">Tentang Kami</h2>
         <hr class="mb-3 lines" />
@@ -82,7 +82,7 @@ $today = date("Y-m-d H:i:s");
   </section>
 
   <section class="mb-5">
-    <div class="container">
+    <div class="">
       <div class="row">
         <div class="mt-2 mb-2 text-center section-header">
           <h2 class="section-title">Visi & Misi</h2>

@@ -1,0 +1,68 @@
+1. Simpanan Konfirmasi
+kami admin dari Koperasi Makmur Mandiri
+
+Pinjaman anda dengan data berikut 
+1. Nama : NAMA
+2. Jumlah Simpanan : SIMPANAN
+
+Simpanan anda telah kami *Konfirmasi*, Saldo sudah masuk dan disimpan dalam koperasi kami.
+
+Terimakasih.
+
+2. Simpanan Tolak
+kami admin dari Koperasi Makmur Mandiri
+
+Pinjaman anda dengan data berikut 
+1. Nama : NAMA
+2. Jumlah Simpanan : SIMPANAN
+
+Simpanan anda telah kami *Tolak*, Mohon cek kembali apakah data sudah benar dan sesuai dengan no rekening kami.
+
+Terimakasih.
+
+3. Pinjaman Konfirmasi
+kami admin dari Koperasi Makmur Mandiri
+
+Pinjaman anda dengan data berikut 
+1. Nama : NAMA
+2. Jumlah Pinjaman : PINJAMAN
+3. Tenor Waktu : TENOR
+
+Pinjaman anda telah kami *Konfirmasi*, Mohon cek saldo apakah sudah masuk ke dalam rekening anda.
+
+Terimakasih.
+
+4. Pinjaman Tolak
+kami admin dari Koperasi Makmur Mandiri
+
+Pinjaman anda dengan data berikut 
+1. Nama : NAMA
+2. Jumlah Pinjaman : PINJAMAN
+3. Tenor Waktu : TENOR
+
+Pinjaman anda telah kami *Tolak*, Mohon cek saldo apakah sudah masuk ke dalam rekening anda.
+
+Terimakasih.
+
+5. Pengembalian Konfirmasi
+kami admin dari Koperasi Makmur Mandiri
+
+Pinjaman anda dengan data berikut 
+1. Nama : NAMA
+2. Jumlah Pengembalian : PINJAMAN
+
+Pengembalian anda telah kami *Konfirmasi*, Saldo sudah masuk ke dalam rekening kami.
+
+Terimakasih.
+
+6. Pengembalian Tolak
+kami admin dari Koperasi Makmur Mandiri
+
+Pinjaman anda dengan data berikut 
+1. Nama : NAMA
+2. Jumlah Pengembalian : PINJAMAN
+3. Sisa Waktu : TENOR
+
+Pengembalian anda telah kami *Tolak*, Mohon dicek kembali data yang anda masukan seperti rekening dan bukti pembayaran.
+
+Terimakasih.
