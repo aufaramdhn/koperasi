@@ -5,7 +5,7 @@ include "../../layout/header.php";
 
 date_default_timezone_set('Asia/jakarta');
 $today = date("Y-m-d H:i:s");
-$expires = date("2022-10-30 12:42:00");
+// $expires = date("Y-m-d H:i:s");
 
 $id_user = $_SESSION['id_user'];
 
@@ -64,9 +64,15 @@ while ($total_ambil_simpan = mysqli_fetch_array($tbl_ambil_simpanan)) {
 
 // Limit Pengembalian
 if (isset($confirmArray['tgl_konfirmasi'])) {
-    $expires = strtotime('+0 days', strtotime($confirmArray['tgl_konfirmasi']));
+    $expires = strtotime('+30 days', strtotime($confirmArray['tgl_konfirmasi']));
     $expired = date('Y-m-d H:i:s', $expires);
 }
+
+var_dump($today >= $expired);
+echo "<br/>";
+var_dump($today);
+echo "<br/>";
+var_dump($expired);
 
 ?>
 <div class="py-3 container-fluid">
@@ -211,7 +217,7 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                     </td>
                                     <td class="text-center">
                                         <?php if ($cekConfirm > 0) : ?>
-                                            <?php if ($confirmArray['tgl_konfirmasi'] >= $expired) : ?>
+                                            <?php if ($today >= $expired) : ?>
                                                 <div class="d-flex justify-content-center">
                                                     <a type="submit" href="print_pinjaman.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>" class="text-white btn btn-sm btn-info me-2">
                                                         <i class='bx bx-printer fs-5'></i>
