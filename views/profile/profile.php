@@ -4,9 +4,16 @@ $active = "profile";
 $title = "Profile | Koperasi";
 include "../../layout/header.php";
 
-$id = $_SESSION['id_user'];
-$profile = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE id_user = '$id'");
-$data    = mysqli_fetch_array($profile);
+if ($_SESSION['level'] == 'admin') {
+    $id_admin = $_GET['id_user'];
+    $profile = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE id_user = '$id_admin'");
+    $data    = mysqli_fetch_array($profile);
+} else {
+    $id_user = $_SESSION['id_user'];
+    $profile = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE id_user = '$id_user'");
+    $data    = mysqli_fetch_array($profile);
+}
+
 ?>
 <div class="py-2 container-fluid">
     <div class="p-4 d-flex justify-content-center align-items-center">
@@ -14,7 +21,7 @@ $data    = mysqli_fetch_array($profile);
             Profile
         </span>
     </div>
-    <?php if (isset($_POST['bedit'])) : ?>
+    <?php if (isset($_POST['bedituser']) or isset($_POST['beditadmin'])) : ?>
         <form action="profile_proses.php" method="post" enctype="multipart/form-data">
             <div class="gap-1 mb-3 d-block d-md-flex">
                 <div class="p-3 mb-2 overflow-auto shadow card col-md-3 align-items-center h-50 mb-md-0">
@@ -93,7 +100,11 @@ $data    = mysqli_fetch_array($profile);
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="text-white btn btn-danger me-2" name="bkembali">Kembali</button>
+                        <?php if ($_SESSION['level'] == 'admin') { ?>
+                            <button type="submit" class="text-white btn btn-danger me-1" name="bkembaliadmin">Kembali</button>
+                        <?php } else if ($_SESSION['level'] == 'user') { ?>
+                            <button type="submit" class="text-white btn btn-danger" name="bkembaliuser">Kembali</button>
+                        <?php } ?>
                         <button type="submit" class="btn btn-success" name="bsimpan">Simpan</button>
                     </div>
                 </div>
@@ -172,7 +183,12 @@ $data    = mysqli_fetch_array($profile);
                 </div>
                 <div class="d-flex justify-content-end">
                     <form action="" method="post">
-                        <button type="submit" class="text-white btn btn-warning" name="bedit">Edit</button>
+                        <?php if ($_SESSION['level'] == 'admin') { ?>
+                            <a class="text-white btn btn-danger" href="../user/user.php">Kembali</a>
+                            <button type="submit" class="text-white btn btn-warning" name="beditadmin">Edit</button>
+                        <?php } else { ?>
+                            <button type="submit" class="text-white btn btn-warning" name="beditadmin">Edit</button>
+                        <?php } ?>
                     </form>
                 </div>
             </div>

@@ -123,8 +123,8 @@ $users = mysqli_query($koneksi, "SELECT * FROM tbl_user");
                                     <td class="text-center"><?= $user['tempat_lahir'] ?>, <?= $user['tgl_lahir']; ?></td>
                                     <td class="text-center"><?= $user['telp']; ?></td>
                                     <td class="text-center">
-                                        <!-- <a button class="text-white btn btn-sm btn-info" href="profile.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-edit'></i></a> -->
-                                        <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a>
+                                        <a button class="text-white btn btn-sm btn-info" href="../profile/profile.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-edit'></i></a>
+                                        <!-- <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone="><i class='bx bxl-whatsapp'></i></a> -->
                                         <a button class="btn btn-delete btn-sm btn-danger" href="user_proses.php?id_user=<?= $user['id_user'] ?>"><i class='bx bx-trash'></i></a>
                                     </td>
                                 </tr>

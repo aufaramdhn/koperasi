@@ -23,7 +23,7 @@ $queryPembayaran = mysqli_query($koneksi, "SELECT * FROM tbl_pembayaran");
 // User
 $user = mysqli_num_rows($koneksi->query("SELECT nama FROM tbl_user"));
 
-$query_ambil = $koneksi->query("SELECT * FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where status_ambil = 'konfirmasi'");
+$query_ambil = $koneksi->query("SELECT jumlah_ambil FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where status_ambil = 'konfirmasi'");
 
 $cek_ambil = mysqli_num_rows($query_ambil);
 
