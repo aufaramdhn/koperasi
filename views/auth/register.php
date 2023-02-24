@@ -65,7 +65,7 @@ $today = date("Y-m-d H:i:s");
                             Login
                         </button>
                         <span>Sudah mempunyai akun?
-                            <a href="<?php echo $config; ?>login.php" class="text-[#5D69BE]">Masuk Disini</a></span>
+                            <a href="<?php echo $config; ?>views/auth/login.php" class="text-[#5D69BE]">Masuk Disini</a></span>
                     </div>
                 </form>
             </div>

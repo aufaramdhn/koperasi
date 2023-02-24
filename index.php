@@ -120,7 +120,7 @@ include "apps/config.php";
                     <div class="row">
                         <div class="order-2 order-md-1 col-12 col-md-6" style="text-align: justify;">
                             <p class="">Dengan semangat perubahan dan visi menjadi koperasi terkini dan inovatif di Indonesia, Koperasi Namastra bertekad untuk menjadi koperasi yang modern, profesional dan antusias dalam membangun perekonomian rakyat. Perwujudan keseriusan para pendiri terlihat dalam penempatan pengelola yang sudah memiliki banyak pengalaman di Perbankan dan Koperasi.</p>
-                            <a href="<?php echo $config ?>views/simpanan/simpanan_user.php" class="btn btn-common">Simpan Sekarang</a>
+                            <a href="<?php echo $config ?>views/auth/register.php" class="btn btn-common">Daftar Sekarang</a>
                         </div>
                         <div class="order-1 mb-2 order-md-2 col-12 col-md-6">
                             <img src="assets/landing-page/img/tentang-kami.jpg" width="100%" class="shadow">

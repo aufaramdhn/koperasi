@@ -68,12 +68,6 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
     $expired = date('Y-m-d H:i:s', $expires);
 }
 
-var_dump($today >= $expired);
-echo "<br/>";
-var_dump($today);
-echo "<br/>";
-var_dump($expired);
-
 ?>
 <div class="py-3 container-fluid">
     <div class="shadow card">

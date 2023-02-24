@@ -13,10 +13,10 @@ if (isset($_POST['submit'])) {
 
     if ($cek_email > 0) {
         $_SESSION['info'] = 'email sudah di gunakan';
-        header("Location: ../register.php");
+        header("Location: register.php");
     } else {
-        $result = mysqli_query($koneksi, "INSERT INTO tbl_user VALUES('','$nama','$email','$password','','','','','','$telp','','user','current_timestamp()')");
+        $result = mysqli_query($koneksi, "INSERT INTO tbl_user VALUES('','','$nama','$email','$password','','','','','','','$telp','','','user','current_timestamp()')");
         $_SESSION['info'] = 'berhasil di buat';
-        header("Location: ../login.php");
+        header("Location: login.php");
     }
 }
