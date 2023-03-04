@@ -16,7 +16,7 @@ $tbl_simpanan = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_s
 $data = mysqli_fetch_array($tbl_simpanan);
 $cek = mysqli_num_rows($tbl_simpanan);
 
-$tbl_ambil_simpanan = $koneksi->query("SELECT * FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where tbl_ambil_simpan.id_user = '$id'");
+$tbl_ambil_simpanan = $koneksi->query("SELECT *,DATE_FORMAT(tgl_ambil, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where tbl_ambil_simpan.id_user = '$id'");
 $data_ambil = mysqli_fetch_array($tbl_ambil_simpanan);
 $cek_ambil = mysqli_num_rows($tbl_ambil_simpanan);
 
@@ -101,7 +101,7 @@ foreach ($tbl_simpanan as $simpan) {
                                     <td class="text-end"><?= $no++ ?></td>
                                     <td><?= $simpan['nama'] ?></td>
                                     <td class="text-center">Rp. <?= number_format($simpan['jumlah_ambil'], '0', '.', '.') ?></td>
-                                    <td class="text-center"><?= $simpan['tgl_ambil'] ?></td>
+                                    <td class="text-center"><?= $simpan['tgl'] ?></td>
                                     <td class="text-center">
                                         <?php if ($simpan['status_ambil'] == 'konfirmasi') { ?>
                                             <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>

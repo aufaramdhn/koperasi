@@ -132,7 +132,7 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
                                             <a button class="btn btn-delete btn-sm btn-danger" href="dashboard_proses.php?id_pembayaran=<?= $pembayaran['id_pembayaran'] ?>"><i class='bx bx-trash'></i></a>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="modalEditPembayaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="modalEditPembayaran<?= $no ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -143,12 +143,12 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
                                                     <input type="hidden" name="id_pembayaran" value="<?= $pembayaran['id_pembayaran'] ?>">
                                                     <div class="modal-body">
                                                         <div class="mb-3">
-                                                            <label for="exampleInputEmail1" class="form-label">No Pembayaran</label>
-                                                            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $pembayaran['no_pembayaran'] ?>">
+                                                            <label for="no" class="form-label">No Pembayaran</label>
+                                                            <input type="number" class="form-control" id="no" aria-describedby="emailHelp" name="no_pembayaran" value="<?= $pembayaran['no_pembayaran'] ?>">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="exampleInputPassword1" class="form-label">Methode Pembayaran</label>
-                                                            <input type="text" class="form-control" id="exampleInputPassword1" value="<?= $pembayaran['method_pembyaran'] ?>">
+                                                            <label for="metode" class="form-label">Methode Pembayaran</label>
+                                                            <input type="text" class="form-control" name="metode_pembayaran" id="metode" value="<?= $pembayaran['method_pembayaran'] ?>">
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -208,15 +208,15 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <form action="dashboard_proses.php" method="POST">
-                                                    <input type="hidden" name="id_bunga" value="<?= $bunga['id_bunga'] ?>">
+                                                    <input type="hidden" name="id_bunga" value="<?= $bulan['id_bunga'] ?>">
                                                     <div class="modal-body">
                                                         <div class="mb-3">
-                                                            <label class="form-label">Bunga (%)</label>
-                                                            <input type="number" class="form-control" name="bunga" value="<?= $bulan['bunga'] ?>">
+                                                            <label for="bunga" class="form-label">Bunga (%)</label>
+                                                            <input type="number" id="bunga" class="form-control" name="bunga" value="<?= $bulan['bunga'] ?>">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label class="form-label">Bulan</label>
-                                                            <input type="number" max="12" class="form-control" name="bulan" value="<?= $bulan['bulan'] ?>">
+                                                            <label for="bulan" class="form-label">Bulan</label>
+                                                            <input type="number" max="24" id="bulan" class="form-control" name="bulan" value="<?= $bulan['bulan'] ?>">
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2023 at 03:04 PM
+-- Generation Time: Mar 04, 2023 at 01:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -81,10 +81,12 @@ CREATE TABLE `tbl_bunga` (
 --
 
 INSERT INTO `tbl_bunga` (`id_bunga`, `bunga`, `bulan`) VALUES
-(1, 1, 1),
-(2, 3, 3),
-(3, 8, 6),
-(4, 14, 12);
+(1, 2, 3),
+(2, 4, 6),
+(3, 7, 9),
+(4, 14, 12),
+(5, 24, 16),
+(6, 28, 24);
 
 -- --------------------------------------------------------
 
@@ -106,7 +108,8 @@ INSERT INTO `tbl_pembayaran` (`id_pembayaran`, `no_pembayaran`, `method_pembayar
 (1, 809865479, 'BCA'),
 (2, 890238523, 'MANDIRI'),
 (4, 987347234, 'DANA'),
-(5, 984234123, 'OVO');
+(5, 984234123, 'OVO'),
+(6, 918237747, 'BNI');
 
 -- --------------------------------------------------------
 
@@ -202,6 +205,7 @@ CREATE TABLE `tbl_user` (
   `telp` bigint(15) NOT NULL,
   `alamat` longtext NOT NULL,
   `img` longtext NOT NULL,
+  `img_ktp` longtext NOT NULL,
   `level` varchar(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -210,11 +214,11 @@ CREATE TABLE `tbl_user` (
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`id_user`, `nik`, `nama`, `email`, `password`, `rekening`, `tempat_lahir`, `tgl_lahir`, `jk`, `agama`, `pekerjaan`, `telp`, `alamat`, `img`, `level`, `created_at`) VALUES
-(1, 321341255123, 'Aufa Ramadhan', 'aufa@gmail.com', '123', 89238423, '', '0000-00-00', '', '', '', 9, '', '', 'admin', '2023-02-21 12:40:20'),
-(2, 123443134534, 'Aninda Fitri Litasni', 'aninda@gmail.com', '123', 91237417, 'Bogor', '2005-08-09', 'Perempuan', 'Islam', 'CEO', 81398057408, 'GBJ', 'team-4.jpg', 'user', '2023-02-23 01:03:26'),
-(3, 432456436535, 'Adi Saputra', 'adi@gmail.com', '123', 12312511, 'Bogor', '2005-01-09', 'Laki-laki', 'Islam', 'CEO', 82112594075, 'GBJ', '', 'user', '2023-02-21 12:42:41'),
-(4, 645645464234, 'Albert Enstein', 'albert@gmail.com', '123', 12312315, 'Bogor', '5005-02-08', 'Laki-laki', 'Islam', 'CEO', 89687167886, 'GBJ', '', 'user', '2023-02-21 12:42:50');
+INSERT INTO `tbl_user` (`id_user`, `nik`, `nama`, `email`, `password`, `rekening`, `tempat_lahir`, `tgl_lahir`, `jk`, `agama`, `pekerjaan`, `telp`, `alamat`, `img`, `img_ktp`, `level`, `created_at`) VALUES
+(1, 321341255123, 'Aufa Ramadhan', 'aufa@gmail.com', '123', 89238423, '', '0000-00-00', '', '', '', 9, '', '', '', 'admin', '2023-02-21 12:40:20'),
+(2, 3823172382747, 'Aninda Fitri Litasni', 'aninda@gmail.com', '123', 862389462, 'Bogor', '2005-08-09', 'Perempuan', 'Islam', 'CEO', 82297020445, 'Cicadas', 'team-4.jpg', 'Desain KTP png.PNG', 'user', '2023-03-03 06:50:14'),
+(3, 432456436535, 'Adi Saputra', 'adi@gmail.com', '123', 12312511, 'Bogor', '2005-01-09', 'Laki-laki', 'Islam', 'CEO', 82112594075, 'GBJ', '', '', 'user', '2023-02-21 12:42:41'),
+(4, 645645464234, 'Albert Enstein', 'albert@gmail.com', '123', 12312315, 'Bogor', '5005-02-08', 'Laki-laki', 'Islam', 'CEO', 89687167886, 'GBJ', '', '', 'user', '2023-02-21 12:42:50');
 
 --
 -- Indexes for dumped tables
@@ -296,13 +300,13 @@ ALTER TABLE `tbl_ambil_simpan`
 -- AUTO_INCREMENT for table `tbl_bunga`
 --
 ALTER TABLE `tbl_bunga`
-  MODIFY `id_bunga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_bunga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_pembayaran`
 --
 ALTER TABLE `tbl_pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengembalian`

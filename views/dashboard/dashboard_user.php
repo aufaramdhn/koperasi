@@ -5,6 +5,7 @@ include "../../layout/header.php";
 
 // Session ID
 $id = $_SESSION['id_user'];
+$today = date("Y-m-d H:i:s");
 
 // Saldo Pinjaman
 $saldo_pinjaman = mysqli_query($koneksi, "SELECT jumlah_pinjam FROM tbl_pinjam JOIN tbl_user ON tbl_user.id_user = tbl_pinjam.id_user WHERE (tbl_pinjam.id_user = '$id' OR tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.status_pinjam = 'pengembalian' AND tbl_pinjam.status_pinjam = 'selesai')");
@@ -14,7 +15,7 @@ $saldo_pinjaman = mysqli_query($koneksi, "SELECT jumlah_pinjam FROM tbl_pinjam J
 $saldo_simpanan = mysqli_query($koneksi, "SELECT jumlah_simpan FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.status_simpan = 'konfirmasi'  AND tbl_simpan.id_user = '$id'");
 // Akhir Saldo Simpanan
 
-$query_simpanan = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id'");
+$query_simpanan = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id' AND tgl_simpan = '" . $today . "'");
 
 $query_ambil = $koneksi->query("SELECT * FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where status_ambil = 'konfirmasi' and tbl_ambil_simpan.id_user = '$id'");
 
@@ -81,7 +82,7 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
     <div class="shadow-sm card">
         <div class="card-header">
             <span class="fs-4 fw-bold">
-                Aktivitas Bulanan
+                Aktivitas Harian
             </span>
         </div>
         <div class="card-body">

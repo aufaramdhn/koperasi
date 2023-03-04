@@ -37,13 +37,13 @@ if (isset($_POST['tambah_bunga'])) {
     }
 }
 
-if (isset($_POST['simpan_pembayaran'])) {
+if (isset($_POST['simpan_bunga'])) {
 
     $id_bunga = $_POST['id_bunga'];
     $bunga = $_POST['bunga'];
     $bulan = $_POST['bulan'];
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_bunga VALUES (NULL, '$bunga', '$bulan')");
+    $sql = mysqli_query($koneksi, "UPDATE tbl_bunga SET bunga='$bunga', bulan='$bulan' WHERE id_bunga='" . $id_bunga . "'");
     if ($sql == true) {
         $_SESSION['info'] = 'Disimpan';
         header("Location: dashboard_admin.php");
@@ -59,7 +59,7 @@ if (isset($_POST['simpan_pembayaran'])) {
     $no = $_POST['no_pembayaran'];
     $metode = $_POST['metode_pembayaran'];
 
-    $sql = mysqli_query($koneksi, "INSERT INTO tbl_pembayaran VALUES (NULL, '$no', '$metode')");
+    $sql = mysqli_query($koneksi, "UPDATE tbl_pembayaran SET no_pembayaran='$no', method_pembayaran='$metode' WHERE id_pembayaran='" . $id_pembayaran . "'");
     if ($sql == true) {
         $_SESSION['info'] = 'Disimpan';
         header("Location: dashboard_admin.php");

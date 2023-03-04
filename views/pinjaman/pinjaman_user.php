@@ -64,7 +64,7 @@ while ($total_ambil_simpan = mysqli_fetch_array($tbl_ambil_simpanan)) {
 
 // Limit Pengembalian
 if (isset($confirmArray['tgl_konfirmasi'])) {
-    $expires = strtotime('+30 days', strtotime($confirmArray['tgl_konfirmasi']));
+    $expires = strtotime('+20 days', strtotime($confirmArray['tgl_konfirmasi']));
     $expired = date('Y-m-d H:i:s', $expires);
 }
 

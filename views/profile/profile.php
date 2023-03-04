@@ -24,28 +24,60 @@ if ($_SESSION['level'] == 'admin') {
     <?php if (isset($_POST['bedituser']) or isset($_POST['beditadmin'])) : ?>
         <form action="profile_proses.php" method="post" enctype="multipart/form-data">
             <div class="gap-1 mb-3 d-block d-md-flex">
-                <div class="p-3 mb-2 overflow-auto shadow card col-md-3 align-items-center h-50 mb-md-0">
-                    <?php if (empty($data['img'])) { ?>
+                <div class="d-flex flex-column col-md-3">
+                    <div class="p-3 mb-2 overflow-auto shadow card align-items-center h-50 mb-md-1">
+                        <h4>FOTO PROFILE</h4>
+                        <?php if (empty($data['img'])) { ?>
+                            <div class="mb-3">
+                                <img id="pict_profile" src="../../assets/images/person-circle.svg" width="200" alt="">
+                            </div>
+                        <?php } else { ?>
+                            <div class="mb-3">
+                                <img id="pict_profile" class="rounded-circle" src="../../assets/profile/<?= $data['img'] ?>" width="200" alt="">
+                            </div>
+                        <?php } ?>
                         <div class="mb-3">
-                            <img id="pict" src="../../assets/images/person-circle.svg" width="200" alt="">
+                            <input class="form-control d-none" onchange="readURLFoto(this)" name="img" type="file" id="img_foto">
+                            <input class="form-control d-none" onchange="readURLFoto(this)" name="img" type="text" value="<?= $data['img'] ?>">
+                            <label class="btn btn-primary" for="img_foto">Upload Foto</label>
                         </div>
-                    <?php } else { ?>
+                    </div>
+                    <div class="p-3 mb-2 overflow-auto shadow card justify-content-center align-items-center h-50 mb-md-0">
+                        <h4>FOTO KTP</h4>
+                        <?php if (empty($data['img_ktp'])) { ?>
+                            <div class="mb-3">
+                                <span>Tidak ada foto ktp</span>
+                            </div>
+                        <?php } else { ?>
+                            <div class="mb-3">
+                                <img id="pict_ktp" src="../../assets/img-ktp/<?= $data['img_ktp'] ?>" width="200" alt="">
+                            </div>
+                        <?php } ?>
                         <div class="mb-3">
-                            <img id="pict" class="rounded-circle" src="../../assets/profile/<?= $data['img'] ?>" width="200" alt="">
+                            <input class="form-control d-none" onchange="readURLKtp(this)" name="img_ktp" type="file" id="img_ktp">
+                            <input class="form-control d-none" onchange="readURLKtp(this)" name="img_ktp" type="text" value="<?= $data['img'] ?>">
+                            <label class="btn btn-primary" for="img_ktp">Upload ktp</label>
                         </div>
-                    <?php } ?>
-                    <div class="mb-3">
-                        <input class="form-control d-none" onchange="readURL(this)" name="img_new" type="file" id="img">
-                        <input class="form-control d-none" onchange="readURL(this)" name="img_old" type="text" value="<?= $data['img'] ?>">
-                        <label class="btn btn-primary" for="img">Upload Foto</label>
                     </div>
                 </div>
                 <div class="p-3 shadow card col-md-9">
                     <input type="hidden" name="id_user" value="<?= $data['id_user']; ?>">
                     <div class="mb-3 row">
+                        <label for="nik" class="col-sm-2 col-form-label">NIK</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="nik" name="nik" value="<?= $data['nik'] ?>">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
                         <label for="nama-lengkap" class="col-sm-2 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="nama-lengkap" name="nama" value="<?= $data['nama'] ?>">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="rekening" class="col-sm-2 col-form-label">Rekning Pribadi</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="rekening" name="rekening" value="<?= $data['rekening'] ?>">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -102,32 +134,60 @@ if ($_SESSION['level'] == 'admin') {
                     <div class="d-flex justify-content-end">
                         <?php if ($_SESSION['level'] == 'admin') { ?>
                             <button type="submit" class="text-white btn btn-danger me-1" name="bkembaliadmin">Kembali</button>
+                            <button type="submit" class="btn btn-success" name="bsimpanadmin">Simpan</button>
                         <?php } else if ($_SESSION['level'] == 'user') { ?>
-                            <button type="submit" class="text-white btn btn-danger" name="bkembaliuser">Kembali</button>
+                            <button type="submit" class="text-white btn btn-danger me-1" name="bkembaliuser">Kembali</button>
+                            <button type="submit" class="btn btn-success" name="bsimpanuser">Simpan</button>
                         <?php } ?>
-                        <button type="submit" class="btn btn-success" name="bsimpan">Simpan</button>
                     </div>
                 </div>
             </div>
         </form>
     <?php else : ?>
         <div class="gap-1 mb-4 d-block d-md-flex flex-md-row">
-            <div class="p-4 mb-2 overflow-auto shadow card col-md-3 align-items-center mb-md-0" style="height: 60%;">
-                <?php if (empty($data['img'])) { ?>
-                    <div class="mb-3">
-                        <img class="rounded-circle" src="../../assets/images/person-circle.svg" width="250" alt="">
-                    </div>
-                <?php } else { ?>
-                    <div class="mb-3">
-                        <img class="rounded-circle" src="../../assets/profile/<?= $data['img'] ?>" width="250" alt="">
-                    </div>
-                <?php } ?>
+            <div class="d-flex flex-column col-md-3">
+                <div class="p-4 mb-2 shadow overfloe card align-items-center mb-md-1" style="height: 70%;">
+                    <h4>Foto Profile</h4>
+                    <?php if (empty($data['img'])) { ?>
+                        <div class="mb-3">
+                            <img class="rounded-circle" src="../../assets/images/person-circle.svg" width="250" alt="">
+                        </div>
+                    <?php } else { ?>
+                        <div class="mb-3">
+                            <img class="rounded-circle" src="../../assets/profile/<?= $data['img'] ?>" width="250" alt="">
+                        </div>
+                    <?php } ?>
+                </div>
+                <div class="p-4 mb-2 overflow-auto shadow card align-items-center mb-md-0" style="height: 70%;">
+                    <h4>FOTO KTP</h4>
+                    <?php if (empty($data['img_ktp'])) { ?>
+                        <div class="mb-3">
+                            <span>Tidak Ada Ktp</span>
+                        </div>
+                    <?php } else { ?>
+                        <div class="mb-3">
+                            <img src="../../assets/img-ktp/<?= $data['img_ktp'] ?>" width="250" alt="">
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
             <div class="p-3 shadow card col-md-9">
+                <div class="mb-3 row">
+                    <label for="nik" class="col-sm-2 col-form-label">NIK</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="nik" name="nik" value="<?= $data['nik'] ?>" disabled>
+                    </div>
+                </div>
                 <div class="mb-3 row">
                     <label for="nama-lengkap" class="col-sm-2 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="nama-lengkap" value="<?= $data['nama'] ?>" disabled>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="rekening" class="col-sm-2 col-form-label">Rekning Pribadi</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="rekening" name="rekening" value="<?= $data['rekening'] ?>" disabled>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -196,11 +256,21 @@ if ($_SESSION['level'] == 'admin') {
     <?php endif ?>
 </div>
 <script>
-    function readURL(input) {
+    function readURLFoto(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#pict').attr('src', e.target.result);
+                $('#pict_profile').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURLKtp(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#pict_ktp').attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }
