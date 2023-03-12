@@ -46,10 +46,10 @@ while ($total_simpan = mysqli_fetch_array($querySimpan)) {
 }
 
 // Perulangan limit pinjam
-$queryPinjaman = mysqli_query($koneksi, "SELECT jumlah_pinjam, status_pinjam, riba FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) WHERE tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.status_pinjam = 'pengembalian' AND tbl_pinjam.status_pinjam = 'selesai' OR tbl_pinjam.id_user = '$id_user'");
+$queryPinjaman = mysqli_query($koneksi, "SELECT jumlah_pinjam, status_pinjam, jumlah_bunga FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) WHERE tbl_pinjam.status_pinjam = 'konfirmasi' AND tbl_pinjam.status_pinjam = 'pengembalian' AND tbl_pinjam.status_pinjam = 'selesai' OR tbl_pinjam.id_user = '$id_user'");
 $total_bunga = 0;
 while ($total_tampil = mysqli_fetch_array($queryPinjaman)) {
-    $total_bunga += $total_tampil['riba'];
+    $total_bunga += $total_tampil['jumlah_bunga'];
 }
 
 // Cek ambil simpanan
@@ -64,7 +64,7 @@ while ($total_ambil_simpan = mysqli_fetch_array($tbl_ambil_simpanan)) {
 
 // Limit Pengembalian
 if (isset($confirmArray['tgl_konfirmasi'])) {
-    $expires = strtotime('+20 days', strtotime($confirmArray['tgl_konfirmasi']));
+    $expires = strtotime('+0 days', strtotime($confirmArray['tgl_konfirmasi']));
     $expired = date('Y-m-d H:i:s', $expires);
 }
 
@@ -157,8 +157,9 @@ if (isset($confirmArray['tgl_konfirmasi'])) {
                                 <label for="perbulan" class="form-label">Bayar per bulan</label>
                                 <input type="number" class="form-control" id="perbulan" value="0" readonly>
                             </div>
-                            <div class="mb-3 d-none">
-                                <input type="datetime" class="form-control" name="tgl_pinjam" value="<?= $today ?>">
+                            <div class="mb-3">
+                                <label for="perbulan" class="form-label">Tanggal Peminjaman</label>
+                                <input type="datetime" class="form-control" name="tgl_pinjam" value="<?= $today ?>" readonly>
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary" name="bpinjamuser">Pinjam</button>

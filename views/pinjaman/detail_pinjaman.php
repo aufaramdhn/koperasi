@@ -9,7 +9,7 @@ $expires = date("2022-10-30 12:42:00");
 
 $id_user = $_GET['id_user'];
 
-$tbl_pinjaman_a = mysqli_query($koneksi, "SELECT id_pinjam, telp, nama, jumlah_pinjam, riba, bulan, status_pinjam, DATE_FORMAT(tgl_pinjam, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_user = '$id_user' ORDER BY tgl_pinjam DESC");
+$tbl_pinjaman_a = mysqli_query($koneksi, "SELECT id_pinjam, telp, nama, jumlah_pinjam, jumlah_bunga, bulan, status_pinjam, DATE_FORMAT(tgl_pinjam, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_pinjam JOIN tbl_user ON (tbl_user.id_user = tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_user = '$id_user' ORDER BY tgl_pinjam DESC");
 $data_a = mysqli_fetch_array($tbl_pinjaman_a);
 ?>
 
@@ -30,7 +30,7 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                             <th class="text-center" scope="col">Nama</th>
                             <th class="text-center" scope="col">Pinjaman</th>
                             <th class="text-center" scope="col">Tenor Bulan</th>
-                            <th class="text-center" scope="col">Tanggal Pinjam</th>
+                            <th class="text-center" scope="col">Tanggal Pinjaman</th>
                             <th class="text-center" style="width: 20%;" scope="col">Status</th>
                             <th class="text-center" scope="col">Aksi</th>
                         </tr>
@@ -74,9 +74,9 @@ $data_a = mysqli_fetch_array($tbl_pinjaman_a);
                                 </td>
                                 <td class="text-center">
                                     <?php if ($pinjam['status_pinjam'] == "konfirmasi") : ?>
-                                        <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone=62<?= $pinjam['telp'] ?>&text=Hai%2C%20kami%20admin%20dari%20Koperasi%20Makmur%20Mandiri%0A%0APinjaman%20anda%20dengan%20data%20berikut%20%0A1.%20Nama%20%3A%20<?= $pinjam['nama'] ?>%0A2.%20Jumlah%20Pinjaman%20%3A%20Rp.%20<?= number_format($pinjam['jumlah_pinjam'] - $pinjam['riba'], '0', '.', '.') ?>%0A3.%20Tenor%20Waktu%20%3A%20<?= $pinjam['bulan'] ?>%20Bulan%0A%0APinjaman%20anda%20telah%20kami%20*Konfirmasi*%2C%20Mohon%20cek%20saldo%20apakah%20sudah%20masuk%20ke%20dalam%20rekening%20anda.%0A%0ATerimakasih."><i class='bx bxl-whatsapp'></i></a>
+                                        <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone=62<?= $pinjam['telp'] ?>&text=Hai%2C%20kami%20admin%20dari%20Koperasi%20Makmur%20Mandiri%0A%0APinjaman%20anda%20dengan%20data%20berikut%20%0A1.%20Nama%20%3A%20<?= $pinjam['nama'] ?>%0A2.%20Jumlah%20Pinjaman%20%3A%20Rp.%20<?= number_format($pinjam['jumlah_pinjam'] - $pinjam['jumlah_bunga'], '0', '.', '.') ?>%0A3.%20Tenor%20Waktu%20%3A%20<?= $pinjam['bulan'] ?>%20Bulan%0A%0APinjaman%20anda%20telah%20kami%20*Konfirmasi*%2C%20Mohon%20cek%20saldo%20apakah%20sudah%20masuk%20ke%20dalam%20rekening%20anda.%0A%0ATerimakasih."><i class='bx bxl-whatsapp'></i></a>
                                     <?php elseif ($pinjam['status_pinjam'] == "tolak") : ?>
-                                        <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone=62<?= $pinjam['telp'] ?>&text=Hai%2C%20kami%20admin%20dari%20Koperasi%20Makmur%20Mandiri%0A%0APinjaman%20anda%20dengan%20data%20berikut%20%0A1.%20Nama%20%3A%20<?= $pinjam['nama'] ?>%0A2.%20Jumlah%20Pinjaman%20%3A%20Rp.%20<?= number_format($pinjam['jumlah_pinjam'] - $pinjam['riba'], '0', '.', '.') ?>%0A3.%20Tenor%20Waktu%20%3A%20<?= $pinjam['bulan'] ?>%20Bulan%0A%0APinjaman%20anda%20telah%20kami%20*Tolak*%2C%20Mohon%20cek%20saldo%20apakah%20sudah%20masuk%20ke%20dalam%20rekening%20anda.%0A%0ATerimakasih."><i class='bx bxl-whatsapp'></i></a>
+                                        <a button class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone=62<?= $pinjam['telp'] ?>&text=Hai%2C%20kami%20admin%20dari%20Koperasi%20Makmur%20Mandiri%0A%0APinjaman%20anda%20dengan%20data%20berikut%20%0A1.%20Nama%20%3A%20<?= $pinjam['nama'] ?>%0A2.%20Jumlah%20Pinjaman%20%3A%20Rp.%20<?= number_format($pinjam['jumlah_pinjam'] - $pinjam['jumlah_bunga'], '0', '.', '.') ?>%0A3.%20Tenor%20Waktu%20%3A%20<?= $pinjam['bulan'] ?>%20Bulan%0A%0APinjaman%20anda%20telah%20kami%20*Tolak*%2C%20Mohon%20cek%20saldo%20apakah%20sudah%20masuk%20ke%20dalam%20rekening%20anda.%0A%0ATerimakasih."><i class='bx bxl-whatsapp'></i></a>
                                     <?php endif ?>
                                     <a button class="btn btn-delete btn-sm btn-danger" href="pinjaman_proses.php?id_pinjam=<?= $pinjam['id_pinjam'] ?>"><i class='bx bx-trash'></i></a>
                                 </td>

@@ -123,7 +123,7 @@ include "apps/config.php";
                             <a href="<?php echo $config ?>views/auth/register.php" class="btn btn-common">Daftar Sekarang</a>
                         </div>
                         <div class="order-1 mb-2 order-md-2 col-12 col-md-6">
-                            <img src="assets/landing-page/img/tentang-kami.jpg" width="100%" class="shadow">
+                            <img src="assets/images/tentang-kami.jpg" width="100%" class="shadow">
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ $today = date("Y-m-d H:i:s");
 
 $id_pinjam = $_GET['id_pinjam'];
 
-$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT nama, jumlah_pinjam, status_pinjam, tbl_pinjam.id_pinjam, riba, DATE_FORMAT(tgl_pinjam, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_pinjam JOIN tbl_user USING(id_user) WHERE tbl_pinjam.id_pinjam = '$id_pinjam'");
+$tbl_pinjaman_u = mysqli_query($koneksi, "SELECT nama, jumlah_pinjam, status_pinjam, tbl_pinjam.id_pinjam, jumlah_bunga, DATE_FORMAT(tgl_pinjam, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_pinjam JOIN tbl_user USING(id_user) WHERE tbl_pinjam.id_pinjam = '$id_pinjam'");
 
 foreach ($tbl_pinjaman_u as $pinjam) {
     $id = $pinjam['id_pinjam'];
@@ -16,7 +16,7 @@ foreach ($tbl_pinjaman_u as $pinjam) {
     $jumlah = $pinjam['jumlah_pinjam'];
     $status = $pinjam['status_pinjam'];
     $tgl = $pinjam['tgl'];
-    $bunga = $pinjam['riba'];
+    $bunga = $pinjam['jumlah_bunga'];
 }
 $jumlah_pinjam = $jumlah - $bunga;
 ?>
@@ -48,17 +48,6 @@ $jumlah_pinjam = $jumlah - $bunga;
                             <span class="mt-1">JENIS TRANSAKSI :</span>
                             <span>PINJAMAN</span>
                         </div>
-                        <!-- <div class="d-flex justify-content-between">
-                            <span class="mt-1"></span>
-                            <h2></h2>
-                            <span>Rp.50.000 </span>
-                        </div> -->
-                        <!-- <div class="d-flex justify-content-between">
-                            <span class="mt-1">
-                            </span>
-                            <span>Rp.50.000 </span>
-                        </div> -->
-                        <!-- total tagihan -->
                         <h2 class="pb-4 border-bottom"></h2>
                         <div class="d-flex justify-content-between ">
                             <span class="fs-5">Jumlah Pinjaman</span><br>

@@ -75,7 +75,7 @@ $today = date("Y-m-d H:i:s");
           <a href="<?php echo $config ?>views/simpanan/simpanan_user.php" class="btn btn-common">Simpan Sekarang</a>
         </div>
         <div class="order-1 mb-2 order-md-2 col-12 col-md-6">
-          <img src="../../assets/landing-page/img/tentang-kami.jpg" width="100%" class="shadow">
+          <img src="../../assets/images/tentang-kami.jpg" width="100%" class="shadow">
         </div>
       </div>
     </div>

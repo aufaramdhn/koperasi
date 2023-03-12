@@ -8,10 +8,10 @@ date_default_timezone_set('Asia/jakarta');
 $id = $_GET['id_pinjam'];
 $id_user = $_SESSION['id_user'];
 
-$confirmQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_pinjam='$id'");
+$confirmQuery = mysqli_query($koneksi, "SELECT tbl_pinjam.id_pinjam, id_konfirmasi_pinjam, tgl_konfirmasi, jumlah_pinjam, bulan  FROM konfirmasi_pinjam JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) WHERE tbl_pinjam.id_pinjam='$id'");
 $confirmArray = mysqli_fetch_array($confirmQuery);
 
-$pQuery = mysqli_query($koneksi, "SELECT * FROM konfirmasi_pinjam JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam) JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_pinjam.id_pinjam = '$id' ORDER BY tgl_pengembalian DESC LIMIT 1");
+$pQuery = mysqli_query($koneksi, "SELECT pengembalian_ke FROM konfirmasi_pinjam JOIN tbl_pengembalian ON (konfirmasi_pinjam.id_konfirmasi_pinjam = tbl_pengembalian.id_konfirmasi_pinjam) JOIN tbl_pinjam ON (tbl_pinjam.id_pinjam = konfirmasi_pinjam.id_pinjam) JOIN tbl_bunga ON (tbl_bunga.id_bunga = tbl_pinjam.id_bunga) JOIN tbl_user ON (tbl_user.id_user=tbl_pinjam.id_user) WHERE tbl_pinjam.id_pinjam = '$id' ORDER BY tgl_pengembalian DESC LIMIT 1");
 $pArray = mysqli_fetch_array($pQuery);
 $pRows = mysqli_num_rows($pQuery);
 
@@ -30,6 +30,7 @@ $expires3 = strtotime('+21 days', strtotime($today));
 $expired3 = date('Y-m-d H:i:s', $expires3);
 
 $total_bayar = $confirmArray['jumlah_pinjam'] / $confirmArray['bulan'];
+
 ?>
 <div class="pt-3 container-fluid">
     <div class="shadow card">

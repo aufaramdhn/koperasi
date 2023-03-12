@@ -16,7 +16,7 @@ $tbl_simpanan = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_s
 $data = mysqli_fetch_array($tbl_simpanan);
 $cek = mysqli_num_rows($tbl_simpanan);
 
-$tbl_ambil_simpanan = $koneksi->query("SELECT *,DATE_FORMAT(tgl_ambil, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where tbl_ambil_simpan.id_user = '$id'");
+$tbl_ambil_simpanan = $koneksi->query("SELECT *, SUM(jumlah_ambil) as total ,DATE_FORMAT(tgl_ambil, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where tbl_ambil_simpan.id_user = '$id'");
 $data_ambil = mysqli_fetch_array($tbl_ambil_simpanan);
 $cek_ambil = mysqli_num_rows($tbl_ambil_simpanan);
 
@@ -24,6 +24,7 @@ $jumlah = 0;
 foreach ($tbl_simpanan as $simpan) {
     $jumlah += $simpan['jumlah_simpan'];
 }
+
 
 ?>
 
@@ -60,11 +61,8 @@ foreach ($tbl_simpanan as $simpan) {
                                 <input type="number" min="0" max="10000000" class="form-control" name="jumlah" id="jumlah-pinjaman">
                                 <?php
                                 if ($cek_ambil > 0) {
-                                    $total = 0;
-                                    $total += $data_ambil['jumlah_ambil'];
-
                                 ?>
-                                    <span class="form-text">Saldo Simpanan Anda (Rp. <?= number_format($data['jumlah_simpan'] - $total, '0', '.', '.') ?>)</span>
+                                    <span class="form-text">Saldo Simpanan Anda (Rp. <?= number_format($jumlah - (int) $data_ambil['total'], '0', '.', '.') ?>)</span>
                                 <?php } else { ?>
                                     <span class="form-text">Saldo Simpanan Anda (Rp. <?= number_format($jumlah, '0', '.', '.') ?>)</span>
                                 <?php } ?>

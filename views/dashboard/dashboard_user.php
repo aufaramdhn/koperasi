@@ -15,7 +15,7 @@ $saldo_pinjaman = mysqli_query($koneksi, "SELECT jumlah_pinjam FROM tbl_pinjam J
 $saldo_simpanan = mysqli_query($koneksi, "SELECT jumlah_simpan FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.status_simpan = 'konfirmasi'  AND tbl_simpan.id_user = '$id'");
 // Akhir Saldo Simpanan
 
-$query_simpanan = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id' AND tgl_simpan = '" . $today . "'");
+$query_simpanan = $koneksi->query("SELECT * FROM tbl_simpan JOIN tbl_user ON tbl_simpan.id_user = tbl_user.id_user Where tbl_simpan.id_user = '$id'");
 
 $query_ambil = $koneksi->query("SELECT * FROM tbl_ambil_simpan JOIN tbl_user ON tbl_ambil_simpan.id_user = tbl_user.id_user Where status_ambil = 'konfirmasi' and tbl_ambil_simpan.id_user = '$id'");
 
@@ -27,10 +27,6 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
 }
 
 ?>
-
-<style>
-
-</style>
 
 <div class="pt-3 container-fluid">
     <div class="gap-3 mb-3 d-md-flex align-items-center">
@@ -82,7 +78,7 @@ while ($ambil_simpan = mysqli_fetch_array($query_ambil)) {
     <div class="shadow-sm card">
         <div class="card-header">
             <span class="fs-4 fw-bold">
-                Aktivitas Harian
+                Aktivitas Bulanan
             </span>
         </div>
         <div class="card-body">

@@ -27,7 +27,7 @@ if ($_SESSION['level'] == 'admin') {
                 <div class="d-flex flex-column col-md-3">
                     <div class="p-3 mb-2 overflow-auto shadow card align-items-center h-50 mb-md-1">
                         <h4>FOTO PROFILE</h4>
-                        <?php if (empty($data['img'])) { ?>
+                        <?php if (empty($data['img_ktp'])) { ?>
                             <div class="mb-3">
                                 <img id="pict_profile" src="../../assets/images/person-circle.svg" width="200" alt="">
                             </div>

@@ -6,7 +6,7 @@ include "../../layout/header.php";
 
 $id_user = $_GET['id_user'];
 
-$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_simpan, telp, nama, jumlah_simpan, status_simpan, DATE_FORMAT(tgl_simpan, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = '$id_user'");
+$tbl_simpanan_a = mysqli_query($koneksi, "SELECT id_simpan, telp, nama, jumlah_simpan, status_simpan, bukti_simpan, DATE_FORMAT(tgl_simpan, '%d %M %Y - %H:%i:%s') as tgl FROM tbl_simpan JOIN tbl_user ON tbl_user.id_user = tbl_simpan.id_user WHERE tbl_simpan.id_user = '$id_user'");
 $data_a = mysqli_fetch_array($tbl_simpanan_a);
 
 ?>
@@ -28,6 +28,7 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                             <th class="text-center" scope="col">Nama</th>
                             <th class="text-center" scope="col">Jumlah</th>
                             <th class="text-center" scope="col">Tanggal Simpan</th>
+                            <th class="text-center" scope="col">bukti</th>
                             <th class="text-center" scope="col">Status</th>
                             <th class="text-center" scope="col">Aksi</th>
                         </tr>
@@ -44,6 +45,11 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                                 <td><?= $simpan['nama'] ?></td>
                                 <td class="text-center">Rp. <?= number_format($total, '0', '.', '.') ?></td>
                                 <td class="text-center"><?= $simpan['tgl'] ?></td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#bimg<?= $no ?>">
+                                        <i class='bx bx-show'></i>
+                                    </button>
+                                </td>
                                 <td class="text-center">
                                     <?php if ($simpan['status_simpan'] == 'konfirmasi') { ?>
                                         <span class="px-2 border rounded text-uppercase fw-bold border-success text-success fs-6">Konfirmasi</span>
@@ -66,6 +72,19 @@ $data_a = mysqli_fetch_array($tbl_simpanan_a);
                                     <a button class="btn btn-delete btn-sm btn-danger" href="simpanan_proses.php?id_simpan=<?= $simpan['id_simpan'] ?>"><i class='bx bx-trash'></i></a>
                                 </td>
                             </tr>
+                            <div class="modal fade" id="bimg<?= $no ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Bukti Simpanan</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="../../assets/bukti_simpan/<?= $simpan['bukti_simpan'] ?>" class="w-100" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <?php } ?>
                     </tbody>
                 </table>
